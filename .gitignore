@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+## Playwright traces
+test-results
+
 # next.js
 /.next/
 /out/
