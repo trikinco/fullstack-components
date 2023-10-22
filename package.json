@@ -1,52 +1,53 @@
 {
-  "name": "fullstack-components",
-  "version": "1.0.1",
-  "description": "AI powered fullstack components",
-  "private": true,
-  "type": "module",
-  "license": "UNLICENSED",
-  "packageManager": "pnpm@8.7.1",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/larsmagnus/fullstack-components.git"
-  },
-  "author": "Fullstack components",
-  "engines": {
-    "node": ">=v18.17.1",
-    "pnpm": ">=8.7.1"
-  },
-  "scripts": {
-    "clean": "rm -Rf ./dist/",
-    "build": "pnpm run -r --parallel build",
-    "test": "pnpm run -r --parallel test",
-    "lint": "pnpm run -r --parallel lint",
-    "prettier": "prettier --write src/*",
-    "husky:init": "husky install && chmod ug+x .husky/*",
-    "release": "npx semantic-release",
-    "semantic-release": "semantic-release"
-  },
-  "dependencies": {
-    "@commitlint/cli": "17.7.1",
-    "@commitlint/config-conventional": "17.7.0",
-    "@semantic-release/exec": "6.0.3",
-    "husky": "8.0.3",
-    "lint-staged": "14.0.1",
-    "semantic-release": "21.1.2",
-    "typescript": "5.2.2"
-  },
-  "release": {
-    "branches": [
-      "main"
-    ],
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      [
-        "@semantic-release/github",
-        {
-          "assets": []
-        }
-      ]
-    ]
-  }
+	"name": "fullstack-components",
+	"version": "1.0.1",
+	"description": "AI powered fullstack components",
+	"private": true,
+	"type": "module",
+	"license": "UNLICENSED",
+	"packageManager": "pnpm@8.7.1",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/larsmagnus/fullstack-components.git"
+	},
+	"author": "Fullstack components",
+	"engines": {
+		"node": ">=v18.17.1",
+		"pnpm": ">=8.7.1"
+	},
+	"scripts": {
+		"clean": "rm -Rf ./dist/",
+		"build": "pnpm run -r --parallel build",
+		"test": "pnpm run -r --parallel test",
+		"lint": "pnpm run -r --parallel lint",
+		"prettier": "prettier --write src/*",
+		"husky:init": "husky install && chmod ug+x .husky/*",
+		"prepare": "npm run husky:init",
+		"release": "npx semantic-release",
+		"semantic-release": "semantic-release"
+	},
+	"dependencies": {
+		"@commitlint/cli": "17.7.1",
+		"@commitlint/config-conventional": "17.7.0",
+		"@semantic-release/exec": "6.0.3",
+		"husky": "8.0.3",
+		"lint-staged": "14.0.1",
+		"semantic-release": "21.1.2",
+		"typescript": "5.2.2"
+	},
+	"release": {
+		"branches": [
+			"main"
+		],
+		"plugins": [
+			"@semantic-release/commit-analyzer",
+			"@semantic-release/release-notes-generator",
+			[
+				"@semantic-release/github",
+				{
+					"assets": []
+				}
+			]
+		]
+	}
 }

@@ -10,8 +10,7 @@
 		"test:e2e": "playwright test",
 		"test:ui": "playwright test --ui --ui-port=0",
 		"storybook": "storybook dev -p 6006",
-		"build-storybook": "storybook build",
-		"prepare": "husky install"
+		"build-storybook": "storybook build"
 	},
 	"dependencies": {
 		"clsx": "2.0.0",
