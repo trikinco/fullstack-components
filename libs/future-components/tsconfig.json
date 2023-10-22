@@ -22,7 +22,8 @@
         "inlineSources": false,
         "target": "ES2022",
         "lib": [
-            "es2022"
+            "es2022",
+            "DOM",
         ],
         "sourceMap": true,
         "outDir": "./dist"

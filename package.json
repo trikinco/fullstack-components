@@ -27,12 +27,12 @@
 		"semantic-release": "semantic-release"
 	},
 	"dependencies": {
-		"@commitlint/cli": "17.7.1",
-		"@commitlint/config-conventional": "17.7.0",
+		"@commitlint/cli": "18.0.0",
+		"@commitlint/config-conventional": "18.0.0",
 		"@semantic-release/exec": "6.0.3",
 		"husky": "8.0.3",
-		"lint-staged": "14.0.1",
-		"semantic-release": "21.1.2",
+		"lint-staged": "15.0.2",
+		"semantic-release": "22.0.5",
 		"typescript": "5.2.2"
 	},
 	"release": {
