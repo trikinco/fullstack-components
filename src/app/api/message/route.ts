@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
 
 const openai = new OpenAI({
-	apiKey: process.env.OPENAI_API_KEY,
+	apiKey: process.env.OPENAI_API_KEY || '',
 })
 
 /**
@@ -20,11 +20,13 @@ function generateErrorMessagePrompt(message: string, stack: string) {
 
     Format the user-friendly error message based on these best practices:
     - Title: Say what happened.
-    - Body (not bullet points): If possible provide reassurance by letting the user know what was not affected by the error, say why the error happened, help them fix it, give them a way out
-	
+    - Body (not bullet points): If possible provide reassurance by letting the user know what was not affected by the error, say why the error happened, help them fix it, give them a way out.
+
+	Avoid: Whoops!, Oops!, Resource loading error, Something went wrong, try again later, the requested resource, sorry for the inconvenience, technical jargon, generic response.
+
 	Simplify the error message to be readable at an 8th-grade level.
 
-	Avoid: Whoops!, Oops!, Resource loading error, Something went wrong, try again later, the requested resource, sorry for the inconvenience, technical jargon, generic response
+	Return the response as JSON using the property names "title" and "message".
     `
 }
 
@@ -72,7 +74,7 @@ export async function POST(req: NextRequest) {
 
 		return NextResponse.json(
 			{
-				result: chatCompletion.choices,
+				result: chatCompletion.choices[0].message.content,
 			},
 			{
 				status: 200,
