@@ -15,6 +15,10 @@ export type ErrorParserOptions = {
 export class ErrorRequestBody {
 	errorString!: string
 }
+export type ErrorParseResponse = {
+	message: string
+	title: string
+}
 export class ErrorParserError extends Error {
 	public rootCause: string
 
@@ -73,7 +77,10 @@ const appRouteHandlerFactory: (
 				options.appContext
 			)
 			console.log('Returning next response parsedError', parsedError)
-			return NextResponse.json(parsedError, res)
+			// this is weird but we ask chatgpt for json so we parse it
+			// and then pass the object, which next expects
+			// same below
+			return NextResponse.json(JSON.parse(parsedError.responseText), res)
 		} catch (e) {
 			throw new ErrorParserError(e)
 		}
@@ -104,7 +111,7 @@ const pageRouteHandlerFactory: (
 				requestBody.errorString,
 				options.appContext
 			)
-			res.json(parsedError)
+			res.json(JSON.parse(parsedError.responseText))
 		} catch (e) {
 			throw new ErrorParserError(e)
 		}

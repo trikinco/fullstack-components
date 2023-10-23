@@ -1,4 +1,5 @@
 import errorParserHandler, {
+	ErrorParseResponse,
 	ErrorRequestBody,
 	HandleErrorParser,
 } from './handlers/errorParser'
@@ -37,6 +38,7 @@ const handleFSComponents = handlerFactory({
 export {
 	ErrorRequestBody,
 	FutureComponentsServer,
+	ErrorParseResponse,
 	getInstance,
 	handleErrorRequest,
 	handleFSComponents,

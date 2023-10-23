@@ -1,6 +1,6 @@
 'use client'
 
-import { ErrorRequestBody } from '@darraghor/ai-components'
+import { ErrorParseResponse, ErrorRequestBody } from '@darraghor/ai-components'
 import { useState } from 'react'
 
 /**
@@ -80,13 +80,9 @@ export default function Home() {
 				throw new Error(`Request failed with status ${response.status}`)
 			}
 
-			const body = JSON.parse(text || '{}') as {
-				tokensUsed: number
-				finishReason: string
-				responseText: string
-			}
-			console.log(body)
-			setContent({ title: 'Error message', message: body.responseText })
+			const body = JSON.parse(text || '{}') as ErrorParseResponse
+
+			setContent(body)
 		} catch (error) {
 			console.log('catching top level error', error)
 			/**
@@ -133,8 +129,14 @@ export default function Home() {
 			)}
 
 			<div className="grid gap-12 grid-cols-2">
+				{content?.message && (
+					<div className="mb-32 max-w-lg col-span-2">
+						<h2 className="text-2xl font-bold mb-3 block">{content?.title}</h2>
+						<p>{content?.message}</p>
+					</div>
+				)}
 				{error && (
-					<div className="mb-32 max-w-lg">
+					<div className="mb-32 max-w-lg col-span-2">
 						<p className="font-bold mb-2">Error message:</p>
 						<code className="bg-white/10 mb-4 block p-4 rounded-md border-2 border-white/50">
 							{error?.message}
@@ -144,13 +146,6 @@ export default function Home() {
 						<code className="bg-white/10 mb-4 block p-4 rounded-md border-2 border-white/50">
 							{error?.stack}
 						</code>
-					</div>
-				)}
-
-				{content && (
-					<div className="mb-32 max-w-lg">
-						<h2 className="text-2xl font-bold mb-3 block">{content?.title}</h2>
-						<p>{content?.message}</p>
 					</div>
 				)}
 			</div>

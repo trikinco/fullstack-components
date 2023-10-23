@@ -1,5 +1,6 @@
 import { NextApiResponse } from 'next'
 import { ErrorClient } from '../../../future-components/dist/errorClient'
+import { ErrorParseResponse } from '@darraghor/ai-components'
 
 const errorClient = new ErrorClient()
 
@@ -18,8 +19,7 @@ function Error({
 				<h3 className="text-lg">{title}</h3>
 			</div>
 			<div className="px-4 py-5 sm:p-6">
-				{' '}
-				<p className="text-base">{title}</p>
+				<p className="text-base">{message}</p>
 			</div>
 		</div>
 	)
