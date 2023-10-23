@@ -1,5 +1,8 @@
 import { type NextRequest, NextResponse } from 'next/server'
 
+/**
+ * Mock service for generating errors to test
+ */
 export async function POST(req: NextRequest) {
 	let error = 'Internal Server Error'
 

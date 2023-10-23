@@ -8,28 +8,37 @@ const openai = new OpenAI({
 /**
  * Get a prompt for generating a user-friendly error message
  *
- * @see https://wix-ux.com/when-life-gives-you-lemons-write-better-error-messages-46c5223e1a2f
- * @see https://www.linkedin.com/pulse/designing-better-error-messages-ux-vitaly-friedman/
- * @see https://www.nngroup.com/articles/error-message-guidelines/
+ * Error message research:
+ * @see {@link https://wix-ux.com/when-life-gives-you-lemons-write-better-error-messages-46c5223e1a2f Error message copywrighting}
+ * @see {@link https://www.nngroup.com/articles/error-message-guidelines/ Error message guidelines}
+ * @see {@link https://www.linkedin.com/pulse/designing-better-error-messages-ux-vitaly-friedman/ Error message UX/UI}
  */
-function generateErrorMessagePrompt(message: string, stack: string) {
-	return `Suggest a concise and user-friendly error message based on the following details.
+function getUserPrompt(message: string, stack: string) {
+	return `
+	# Suggest a concise and user-friendly error message based on the following details.
 
+	## Input
     Error message: ${message}
     Error stack trace: ${stack}
 
-    Format the user-friendly error message based on these best practices:
-    - Title: Say what happened.
-    - Body (not bullet points): If possible provide reassurance by letting the user know what was not affected by the error, say why the error happened, help them fix it, give them a way out.
+    ## Desired output
+    Title (approx. 40-60 characters): Say what happened in simple and friendly terms, if possible use subject-verb-object, include keywords, if possible ensure the title can be understood out of context.
+    Message (approx. 80-300 characters, not bullet points): First, if possible provide reassurance by letting the user know what was not affected by the error, don't start with 'Sorry', say why the error happened, help them fix it, give them a way out.
 
-	Avoid: Whoops!, Oops!, Resource loading error, Something went wrong, try again later, the requested resource, sorry for the inconvenience, technical jargon, generic response.
-
-	Simplify the error message to be readable at an 8th-grade level.
-
-	Return the response as JSON using the property names "title" and "message".
+	### Output formatting conditions
+	Tone: Friendly, helpful, reassuring, positive, humble, empathetic without being overly apologetic.
+	Inappropriate language: 'Whoops!', 'Oops!', 'Error:', 'We're sorry', 'Internal server error', 'Unknown error', 'Something went wrong', 'the requested resource', 'We apologize', '[apologize|sorry] for [the|any] inconvenience', '[appreciate|thank you for] your understanding', starting with sorry, technical jargon, generic language, negative tone.
+	Appropriate language examples: Unable to*, Failed to*, Can't*, positive tone.
+	Text refinement: Simplify title and message to be readable at an 8th-grade level.
+	
+	## Output
+	Return the response directly as JSON using the property names "title" and "message".
     `
 }
 
+/**
+ * POC service for generating nicely formatted error messages with OpenAI
+ */
 export async function POST(req: NextRequest) {
 	let error = 'Internal Server Error'
 
@@ -66,9 +75,7 @@ export async function POST(req: NextRequest) {
 
 	try {
 		const chatCompletion = await openai.chat.completions.create({
-			messages: [
-				{ role: 'user', content: generateErrorMessagePrompt(message, stack) },
-			],
+			messages: [{ role: 'user', content: getUserPrompt(message, stack) }],
 			model: 'gpt-3.5-turbo',
 		})
 
