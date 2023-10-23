@@ -1,0 +1,51 @@
+{
+	"name": "@fullstack-components/playground",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"test:e2e": "playwright test",
+		"test:ui": "playwright test --ui --ui-port=0",
+		"storybook": "storybook dev -p 6006",
+		"build-storybook": "storybook build"
+	},
+	"dependencies": {
+		"@darraghor/ai-components": "workspace:*",
+		"clsx": "2.0.0",
+		"next": "13.5.6",
+		"openai": "4.12.4",
+		"react": "18",
+		"react-dom": "18",
+		"tailwind-merge": "1.14.0"
+	},
+	"devDependencies": {
+		"@playwright/test": "1.39.0",
+		"@storybook/addon-a11y": "7.5.1",
+		"@storybook/addon-essentials": "7.5.1",
+		"@storybook/addon-interactions": "7.5.1",
+		"@storybook/addon-links": "7.5.1",
+		"@storybook/addon-onboarding": "1.0.8",
+		"@storybook/addon-themes": "7.5.1",
+		"@storybook/blocks": "7.5.1",
+		"@storybook/nextjs": "7.5.1",
+		"@storybook/react": "7.5.1",
+		"@storybook/testing-library": "0.2.2",
+		"@types/node": "20",
+		"@types/react": "18.2.31",
+		"@types/react-dom": "18",
+		"autoprefixer": "10",
+		"eslint": "8.52.0",
+		"eslint-config-next": "13.5.6",
+		"eslint-config-prettier": "9.0.0",
+		"eslint-plugin-storybook": "0.6.15",
+		"husky": "8.0.3",
+		"postcss": "8",
+		"prettier": "3.0.3",
+		"storybook": "7.5.1",
+		"tailwindcss": "3",
+		"typescript": "5"
+	}
+}

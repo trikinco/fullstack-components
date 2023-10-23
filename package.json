@@ -1,53 +1,55 @@
 {
 	"name": "fullstack-components",
-	"version": "0.1.0",
+	"version": "1.0.1",
+	"description": "AI powered fullstack components",
 	"private": true,
+	"type": "module",
+	"license": "UNLICENSED",
+	"packageManager": "pnpm@8.7.1",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/larsmagnus/fullstack-components.git"
+	},
+	"author": "Fullstack components",
+	"engines": {
+		"node": ">=v18.17.1",
+		"pnpm": ">=8.7.1"
+	},
 	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint",
-		"test:e2e": "playwright test",
-		"test:ui": "playwright test --ui --ui-port=0",
-		"storybook": "storybook dev -p 6006",
-		"build-storybook": "storybook build",
-		"prepare": "husky install"
+		"clean": "rm -Rf ./dist/",
+		"build": "pnpm run -r --parallel build",
+		"dev": "cd ./libs/playground && pnpm run dev",
+		"start": "cd ./libs/playground && pnpm run start",
+		"test": "pnpm run -r --parallel test",
+		"lint": "pnpm run -r --parallel lint",
+		"prettier": "prettier --write src/*",
+		"husky:init": "husky install && chmod ug+x .husky/*",
+		"prepare": "npm run husky:init",
+		"release": "npx semantic-release",
+		"semantic-release": "semantic-release"
 	},
 	"dependencies": {
-		"clsx": "^2.0.0",
-		"next": "13.5.6",
-		"openai": "^4.12.4",
-		"react": "^18",
-		"react-dom": "^18",
-		"tailwind-merge": "^1.14.0"
+		"@commitlint/cli": "18.0.0",
+		"@commitlint/config-conventional": "18.0.0",
+		"@semantic-release/exec": "6.0.3",
+		"husky": "8.0.3",
+		"lint-staged": "15.0.2",
+		"semantic-release": "22.0.5",
+		"typescript": "5.2.2"
 	},
-	"devDependencies": {
-		"@commitlint/cli": "^17.8.0",
-		"@commitlint/config-conventional": "^17.8.0",
-		"@playwright/test": "^1.39.0",
-		"@storybook/addon-a11y": "^7.5.1",
-		"@storybook/addon-essentials": "^7.5.1",
-		"@storybook/addon-interactions": "^7.5.1",
-		"@storybook/addon-links": "^7.5.1",
-		"@storybook/addon-onboarding": "^1.0.8",
-		"@storybook/addon-themes": "^7.5.1",
-		"@storybook/blocks": "^7.5.1",
-		"@storybook/nextjs": "^7.5.1",
-		"@storybook/react": "^7.5.1",
-		"@storybook/testing-library": "^0.2.2",
-		"@types/node": "^20",
-		"@types/react": "^18",
-		"@types/react-dom": "^18",
-		"autoprefixer": "^10",
-		"eslint": "^8",
-		"eslint-config-next": "13.5.6",
-		"eslint-config-prettier": "^9.0.0",
-		"eslint-plugin-storybook": "^0.6.15",
-		"husky": "^8.0.0",
-		"postcss": "^8",
-		"prettier": "^3.0.3",
-		"storybook": "^7.5.1",
-		"tailwindcss": "^3",
-		"typescript": "^5"
+	"release": {
+		"branches": [
+			"main"
+		],
+		"plugins": [
+			"@semantic-release/commit-analyzer",
+			"@semantic-release/release-notes-generator",
+			[
+				"@semantic-release/github",
+				{
+					"assets": []
+				}
+			]
+		]
 	}
 }
