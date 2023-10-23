@@ -1,4 +1,6 @@
 'use client'
+
+import { ErrorRequestBody } from '@darraghor/ai-components'
 import { useState } from 'react'
 
 /**
@@ -25,19 +27,28 @@ export default function Home() {
 		setIsLoading(true)
 
 		try {
-			const response = await fetch('/api/error', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ status }),
-			})
-
-			if (!response.ok) {
-				throw new Error(
-					`Failed to load resource: the server responded with a status of ${response.status} (${response.statusText})`
-				)
+			switch (status) {
+				case 400:
+					throw new Error('Page not found - profile.tsx')
+				case 500:
+					throw new Error("This is server error. Couldn't find the file")
+				default:
+					throw new Error('This is a generic error')
 			}
+
+			// const response = await fetch('/api/fsutils/parseError', {
+			// 	method: 'POST',
+			// 	headers: {
+			// 		'Content-Type': 'application/json',
+			// 	},
+			// 	body: JSON.stringify({ errorString: status }),
+			// })
+
+			// if (!response.ok) {
+			// 	throw new Error(
+			// 		`Failed to load resource: the server responded with a status of ${response.status} (${response.statusText})`
+			// 	)
+			// }
 		} catch (error) {
 			return await fetchErrorMessage(error as Error)
 		}
@@ -50,27 +61,34 @@ export default function Home() {
 		setError(error)
 
 		try {
-			const response = await fetch('/api/message', {
+			const response = await fetch('/api/fsutils/parseError', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ message: error.message, stack: error.stack }),
+				body: JSON.stringify({
+					errorString: error.toString(),
+				} as ErrorRequestBody),
+			})
+			const text = await response.text()
+			console.log('parsing response', {
+				response: text,
+				status: response.status,
 			})
 
-			const data = await response.json()
-
 			if (response.status !== 200) {
-				throw (
-					data.error ||
-					new Error(`Request failed with status ${response.status}`)
-				)
+				throw new Error(`Request failed with status ${response.status}`)
 			}
 
-			const body = JSON.parse(data.result || {})
-
-			setContent(body)
+			const body = JSON.parse(text || '{}') as {
+				tokensUsed: number
+				finishReason: string
+				responseText: string
+			}
+			console.log(body)
+			setContent({ title: 'Error message', message: body.responseText })
 		} catch (error) {
+			console.log('catching top level error', error)
 			/**
 			 * Continue handling other/fallback cases here
 			 * @consideration flag for turning on navigator.onLine check when applicable for the application

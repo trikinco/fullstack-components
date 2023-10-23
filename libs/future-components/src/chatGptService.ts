@@ -22,7 +22,7 @@ export async function runChatCompletion(
 		apiKey: options.openAIApiKey,
 	})
 
-	console.log('Running chat completion')
+	console.log('Running chat completion', messages)
 	try {
 		const completion = await openai.chat.completions.create({
 			model: 'gpt-3.5-turbo',
@@ -33,7 +33,7 @@ export async function runChatCompletion(
 		if (extractedText === undefined) {
 			throw new Error('Could not extract text from completion')
 		}
-
+		console.log('chat completion response', extractedText)
 		return {
 			tokensUsed: completion.usage?.total_tokens || 0,
 			finishReason: completion.choices[0].finish_reason,
