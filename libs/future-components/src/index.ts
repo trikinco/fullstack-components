@@ -1,5 +1,6 @@
 import errorParserHandler, { HandleErrorParser } from './handlers/errorParser'
 import { ErrorClient } from './errorClient'
+import handlerFactory from './next-routing'
 
 export type FutureComponentsServer = {
 	// some simple cache of requests to openai here?
@@ -26,3 +27,7 @@ export function getInstance(): FutureComponentsServer {
 export const handleErrorRequest: HandleErrorParser = ((
 	...args: Parameters<HandleErrorParser>
 ) => getInstance().handleErrorRequest(...args)) as HandleErrorParser
+
+export const handleFSComponents = handlerFactory({
+	handleErrorParser: handleErrorRequest,
+})

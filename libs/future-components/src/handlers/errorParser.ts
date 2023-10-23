@@ -57,7 +57,12 @@ const appRouteHandlerFactory: (
 	async (req, _ctx, options = {}) => {
 		try {
 			const res = new NextResponse()
-
+			console.log('Error Parser appRouteHandlerFactory')
+			if (req.method !== 'POST') {
+				throw new ErrorParserError(
+					new Error('Only POST requests are supported')
+				)
+			}
 			res.headers.set('Cache-Control', 'no-store')
 			let requestBody = (await req.json()) as ErrorRequestBody
 			const parsedError = client.handleErrorRequest(

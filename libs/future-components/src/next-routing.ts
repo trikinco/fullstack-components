@@ -10,7 +10,7 @@ import {
 import { HandleErrorParser } from './handlers/errorParser'
 
 // taken from auth0 nextjs
-// to use - create a route in /api/future-components/[futc].ts
+// to use - create a route in /api/fscomponents/[futc].ts
 export type Handlers = ApiHandlers | ErrorHandlers
 
 /**
@@ -27,31 +27,10 @@ type ErrorHandlers = {
 	onError?: PageRouterOnError | AppRouterOnError
 }
 
-export type HandleAuth = (
+export type HandleFSComponents = (
 	userHandlers?: Handlers
 ) => NextApiHandler | AppRouteHandlerFn | any
 
-/**
- * Error handler for the default auth routes.
- *
- * Use this to define an error handler for all the default routes in a single place. For example:
- *
- * ```js
- * export default handleAuth({
- *   onError(req, res, error) {
- *     errorLogger(error);
- *     // You can finish the response yourself if you want to customize
- *     // the status code or redirect the user
- *     // res.writeHead(302, {
- *     //     Location: '/custom-error-page'
- *     // });
- *     // res.end();
- *   }
- * });
- * ```
- *
- * @category Server
- */
 export type PageRouterOnError = (
 	req: NextApiRequest,
 	res: NextApiResponse,
@@ -84,7 +63,7 @@ export default function handlerFactory({
 	handleErrorParser,
 }: {
 	handleErrorParser: HandleErrorParser
-}): HandleAuth {
+}): HandleFSComponents {
 	return ({ onError, ...handlers }: Handlers = {}):
 		| NextApiHandler<void>
 		| AppRouteHandlerFn => {
@@ -129,7 +108,7 @@ const appRouteHandlerFactory: (
 ) => AppRouteHandlerFn =
 	(customHandlers, onError) => async (req: NextRequest, ctx) => {
 		const { params } = ctx
-		let route = params.auth0
+		let route = params.fscomponents
 
 		if (Array.isArray(route)) {
 			let otherRoutes
@@ -163,12 +142,12 @@ const pageRouteHandlerFactory: (
 	(customHandlers, onError) =>
 	async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
 		let {
-			query: { auth0: route },
+			query: { fscomponents: components },
 		} = req
 
-		if (Array.isArray(route)) {
+		if (Array.isArray(components)) {
 			let otherRoutes
-			;[route, ...otherRoutes] = route
+			;[components, ...otherRoutes] = components
 			if (otherRoutes.length) {
 				res.status(404).end()
 				return
@@ -177,7 +156,9 @@ const pageRouteHandlerFactory: (
 
 		try {
 			const handler =
-				route && customHandlers.hasOwnProperty(route) && customHandlers[route]
+				components &&
+				customHandlers.hasOwnProperty(components) &&
+				customHandlers[components]
 			if (handler) {
 				await (handler as NextApiHandler)(req, res)
 			} else {
