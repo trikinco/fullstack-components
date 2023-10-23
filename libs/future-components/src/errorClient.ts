@@ -39,10 +39,10 @@ export class ErrorClient {
 				content: `Here is an error to analyse: ${errorString}`,
 			}
 		)
-		const openaiResponse = await runChatCompletion(messages, {
+		const openAiResponse = await runChatCompletion(messages, {
 			openAIApiKey: openAiKey,
 		})
 
-		return openaiResponse
+		return openAiResponse
 	}
 }

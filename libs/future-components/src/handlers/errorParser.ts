@@ -12,7 +12,9 @@ import { ErrorClient } from '../errorClient'
 export type ErrorParserOptions = {
 	appContext?: 'http web app' | 'mobile app' | 'desktop app'
 }
-export type ErrorRequestBody = { errorString: string }
+export class ErrorRequestBody {
+	errorString!: string
+}
 export class ErrorParserError extends Error {
 	public rootCause: string
 
@@ -57,7 +59,7 @@ const appRouteHandlerFactory: (
 	async (req, _ctx, options = {}) => {
 		try {
 			const res = new NextResponse()
-			console.log('Error Parser appRouteHandlerFactory')
+			console.log('Error Parser APP RouteHandlerFactory')
 			if (req.method !== 'POST') {
 				throw new ErrorParserError(
 					new Error('Only POST requests are supported')
@@ -65,11 +67,12 @@ const appRouteHandlerFactory: (
 			}
 			res.headers.set('Cache-Control', 'no-store')
 			let requestBody = (await req.json()) as ErrorRequestBody
-			const parsedError = client.handleErrorRequest(
+			console.log('requestBody', requestBody)
+			const parsedError = await client.handleErrorRequest(
 				requestBody.errorString,
 				options.appContext
 			)
-
+			console.log('Returning next response parsedError', parsedError)
 			return NextResponse.json(parsedError, res)
 		} catch (e) {
 			throw new ErrorParserError(e)
@@ -94,9 +97,10 @@ const pageRouteHandlerFactory: (
 	): Promise<void> => {
 		try {
 			assertReqRes(req, res)
+			console.log('Error Parser PAGES RouteHandlerFactory')
 			res.setHeader('Cache-Control', 'no-store')
 			let requestBody = req.body as ErrorRequestBody
-			const parsedError = client.handleErrorRequest(
+			const parsedError = await client.handleErrorRequest(
 				requestBody.errorString,
 				options.appContext
 			)

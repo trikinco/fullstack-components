@@ -1,8 +1,11 @@
-import errorParserHandler, { HandleErrorParser } from './handlers/errorParser'
+import errorParserHandler, {
+	ErrorRequestBody,
+	HandleErrorParser,
+} from './handlers/errorParser'
 import { ErrorClient } from './errorClient'
 import handlerFactory from './next-routing'
 
-export type FutureComponentsServer = {
+type FutureComponentsServer = {
 	// some simple cache of requests to openai here?
 	requestCache: Map<string, string>
 	handleErrorRequest: HandleErrorParser
@@ -14,8 +17,7 @@ function init(): FutureComponentsServer {
 		handleErrorRequest: errorParserHandler(new ErrorClient()),
 	}
 }
-
-export function getInstance(): FutureComponentsServer {
+function getInstance(): FutureComponentsServer {
 	if (instance) {
 		return instance
 	}
@@ -24,10 +26,18 @@ export function getInstance(): FutureComponentsServer {
 	return instance
 }
 
-export const handleErrorRequest: HandleErrorParser = ((
+const handleErrorRequest: HandleErrorParser = ((
 	...args: Parameters<HandleErrorParser>
 ) => getInstance().handleErrorRequest(...args)) as HandleErrorParser
 
-export const handleFSComponents = handlerFactory({
+const handleFSComponents = handlerFactory({
 	handleErrorParser: handleErrorRequest,
 })
+
+export {
+	ErrorRequestBody,
+	FutureComponentsServer,
+	getInstance,
+	handleErrorRequest,
+	handleFSComponents,
+}
