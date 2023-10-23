@@ -69,6 +69,9 @@ importers:
       next:
         specifier: 13.5.6
         version: 13.5.6(@babel/core@7.23.2)(react-dom@18.2.0)(react@18.2.0)
+      openai:
+        specifier: 4.12.4
+        version: 4.12.4
       react:
         specifier: '18'
         version: 18.2.0

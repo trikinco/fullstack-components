@@ -16,6 +16,7 @@
 		"@darraghor/ai-components": "workspace:*",
 		"clsx": "2.0.0",
 		"next": "13.5.6",
+		"openai": "4.12.4",
 		"react": "18",
 		"react-dom": "18",
 		"tailwind-merge": "1.14.0"
