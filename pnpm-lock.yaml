@@ -115,6 +115,9 @@ importers:
       '@storybook/testing-library':
         specifier: 0.2.2
         version: 0.2.2
+      '@storybook/theming':
+        specifier: 7.5.1
+        version: 7.5.1(react-dom@18.2.0)(react@18.2.0)
       '@types/node':
         specifier: '20'
         version: 20.8.7
