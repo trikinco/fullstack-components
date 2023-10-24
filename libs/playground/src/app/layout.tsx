@@ -11,12 +11,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
 	children,
+	error,
 }: {
 	children: React.ReactNode
+	/**
+	 * Error page slot - see `app/@error`
+	 * @see {@link https://nextjs.org/docs/app/building-your-application/routing/parallel-routes Parallel routes}
+	 */
+	error: React.ReactNode
 }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>{children}</body>
+			<body className={inter.className}>
+				{children}
+				{error}
+			</body>
 		</html>
 	)
 }
