@@ -22,13 +22,16 @@ export async function POST(req: NextRequest) {
 		)
 	}
 
-	return NextResponse.json(
-		{
-			error,
-		},
-		{
-			status: 500,
-			statusText: error,
-		}
-	)
+	// Redirect to a parallel route which can overlay the index
+	return NextResponse.redirect(new URL('/error', req.url))
+
+	// return NextResponse.json(
+	// 	{
+	// 		error,
+	// 	},
+	// 	{
+	// 		status: 500,
+	// 		statusText: error,
+	// 	}
+	// )
 }
