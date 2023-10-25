@@ -1,5 +1,5 @@
 'use client'
-import { Children } from 'react'
+import { Children, forwardRef, useImperativeHandle } from 'react'
 import type { HTMLAttributes, ElementType } from 'react'
 import { merge } from '../utils/styles'
 import { useText } from '../hooks/useText'
@@ -11,40 +11,47 @@ export interface TextRewriteProps
 	component?: ElementType
 	/** The active version. Default 0 */
 	value?: number
+	/** refetches text */
+	refetch?: () => void
 }
 
 /**
  * A smart component that rewrites the text within.
  */
-export const TextRewrite = ({
-	value = 0,
-	children,
-	component,
-	className,
-	// Rewrite options
-	count = 1,
-	tone,
-	strength,
-	grade,
-	max,
-	min,
-	// HTML props and rest
-	...rest
-}: TextRewriteProps) => {
-	const WrapperComponent = component || 'div'
-	const { content } = useText({
+export const TextRewrite = forwardRef(function TextRewrite(
+	{
+		refetch,
+		value = 0,
 		children,
-		count,
+		component,
+		className,
+		// Rewrite options
+		count = 1,
 		tone,
 		strength,
 		grade,
 		max,
 		min,
-	})
+		// HTML props and rest
+		...rest
+	}: TextRewriteProps,
+	ref
+) {
+	const WrapperComponent = component || 'div'
+	const options = { children, count, tone, strength, grade, max, min }
+	const { isLoading, content, fetchText } = useText(options)
 
-	if (content?.content) {
+	// Expose a handle to its parent
+	useImperativeHandle(ref, () => ({
+		refetch() {
+			fetchText(options)
+		},
+	}))
+
+	if (!isLoading && content?.content) {
 		return (
 			<WrapperComponent
+				ref={ref}
 				dangerouslySetInnerHTML={{
 					__html: content ? content.content[value] : null,
 				}}
@@ -56,6 +63,7 @@ export const TextRewrite = ({
 		// Show a loading state up-front and during processing
 		return (
 			<WrapperComponent
+				ref={ref}
 				className={merge('w-full animate-pulse', className)}
 				{...rest}
 			>
@@ -69,4 +77,4 @@ export const TextRewrite = ({
 			</WrapperComponent>
 		)
 	}
-}
+})

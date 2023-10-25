@@ -1,4 +1,4 @@
-import { TextSlide } from '@/src/components/TextSlide'
+import { TextRewriteControls } from '@/src/components/TextRewriteControls'
 
 export default function Page() {
 	return (
@@ -28,7 +28,7 @@ export default function Page() {
 			</div>
 
 			<div className="max-w-prose md:min-w-[65ch]">
-				<TextSlide
+				<TextRewriteControls
 					count={3}
 					grade={5}
 					max={150}
@@ -48,7 +48,7 @@ export default function Page() {
 						momentum operator P do not commute, but rather satisfy the canonical
 						commutation relation.
 					</p>
-				</TextSlide>
+				</TextRewriteControls>
 			</div>
 		</main>
 	)

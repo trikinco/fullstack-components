@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
 				? `Increase the full text to ${min} characters or more! RETURN MORE THAN ${min} CHARACTERS TOTAL.`
 				: '',
 			count > 1
-				? `Return an array of ${count} versions of the text where each item is increasingly affected by the rules mentioned above.`
+				? `Return an array of ${count} DIFFERENT versions of the text. Each item must be affected MORE than the last by the rules mentioned above.`
 				: '',
 		]
 			.filter((x) => x)
