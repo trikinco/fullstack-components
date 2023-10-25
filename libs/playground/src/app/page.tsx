@@ -8,22 +8,28 @@ export default function Home() {
 				AI-powered fullstack components
 			</h1>
 			<div className="grid gap-4 grid-cols-2">
-				<Link href="/errors">
+				<Link href="/errors" className="flex">
 					<Card title="Errors">
 						AI-Powered Error Helper. Makes sense of complex technical errors.
 						Turn confusion into clarity.
 					</Card>
 				</Link>
-				<Link href="/some-account">
+				<Link href="/some-account" className="flex">
 					<Card title="Not Found">
 						AI-Powered Page Not Found. Get help finding the page you were
 						looking for. Don&apos;t get lost, get found!
 					</Card>
 				</Link>
-				<Link href="/text">
+				<Link href="/text" className="flex">
 					<Card title="Text">
 						AI-Powered Text Simplification. Transform any text into
 						easy-to-understand information.
+					</Card>
+				</Link>
+				<Link href="/select" className="flex">
+					<Card title="Select">
+						AI-Powered Select Options Generator. Create options for your
+						dropdowns.
 					</Card>
 				</Link>
 			</div>

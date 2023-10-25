@@ -13,7 +13,7 @@ export const Card = ({
 	component: TitleComponent = 'p',
 }: CardProps) => {
 	return (
-		<div className="w-full max-w-sm p-4 bg-white border-2 border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+		<div className="w-full grow max-w-sm p-4 bg-white border-2 border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
 			<TitleComponent className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
 				{title}
 			</TitleComponent>
