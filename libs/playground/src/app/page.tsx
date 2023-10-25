@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 /**
  * The formatted user-friendly error message
@@ -12,6 +13,7 @@ export interface UserErrorMessageContent {
 }
 
 export default function Home() {
+	const router = useRouter()
 	const [isLoading, setIsLoading] = useState(false)
 	/** Formatted error message */
 	const [content, setContent] = useState<UserErrorMessageContent | null>()
@@ -32,6 +34,15 @@ export default function Home() {
 				},
 				body: JSON.stringify({ status }),
 			})
+
+			/**
+			 * 'redirect' to /error, but continue processing
+			 * since /error is a parallel route (handled by `app/@error`) which is always rendered
+			 * by `app/layout`, it will now appear
+			 */
+			if (response.redirected && response.url) {
+				router.push('/error')
+			}
 
 			if (!response.ok) {
 				throw new Error(
@@ -89,8 +100,8 @@ export default function Home() {
 	}
 
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
-			<h1 className="text-4xl font-bold">Error messages</h1>
+		<main className="flex flex-col items-center justify-between p-24">
+			<h1 className="text-4xl font-bold mb-8">Error messages</h1>
 
 			{isLoading && (
 				<div role="status">
