@@ -10,23 +10,20 @@ export default function Home() {
 			<div className="grid gap-4 grid-cols-2">
 				<Link href="/errors">
 					<Card title="Errors">
-						Navigate the tech maze effortlessly with this AI-powered error
-						decoder. Turn confusion into clarity and master the art of
-						problem-solving.
+						AI-Powered Error Helper. Makes sense of complex technical errors.
+						Turn confusion into clarity.
 					</Card>
 				</Link>
 				<Link href="/some-account">
 					<Card title="Not Found">
-						Don&apos;t get lost, get found! This AI-powered &apos;Not
-						Found&apos; wizard is your map to missing web treasures. Discover
-						what you were searching for in no time.
+						AI-Powered Page Not Found. Get help finding the page you were
+						looking for. Don&apos;t get lost, get found!
 					</Card>
 				</Link>
 				<Link href="/text">
 					<Card title="Text">
-						Unleash the magic of simplicity with this AI-powered Text
-						Transformer! Turn complex jargon into a breeze of understanding.
-						Simplify and amplify your message with ease.
+						AI-Powered Text Simplification. Transform any text into
+						easy-to-understand information.
 					</Card>
 				</Link>
 			</div>
