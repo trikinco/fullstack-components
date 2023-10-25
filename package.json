@@ -17,7 +17,7 @@
 	},
 	"scripts": {
 		"clean": "rm -Rf ./dist/",
-		"build": "pnpm run -r --parallel build",
+		"build": " pnpm run -r --parallel --filter=!*playground* build && pnpm i -r && pnpm run --filter=!*ai-components* build",
 		"dev": "cd ./libs/playground && pnpm run dev",
 		"start": "cd ./libs/playground && pnpm run start",
 		"test": "pnpm run -r --parallel test",

@@ -1,18 +1,21 @@
-name: "Lint PR Title"
+name: 'Lint PR Title'
 
 on:
-    pull_request_target:
-        types:
-            - opened
-            - edited
-            - synchronize
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
 
 jobs:
-    main:
-        runs-on: ubuntu-latest
-        steps:
-            # Please look up the latest version from
-            # https://github.com/amannn/action-semantic-pull-request/releases
-            - uses: amannn/action-semantic-pull-request@v5
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  main:
+    if: false # doesnt seem to work on private repos. can renable when public
+    permissions: write-all
+
+    runs-on: ubuntu-latest
+    steps:
+      # Please look up the latest version from
+      # https://github.com/amannn/action-semantic-pull-request/releases
+      - uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
