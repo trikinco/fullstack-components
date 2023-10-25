@@ -1,19 +1,34 @@
 {
 	"name": "@fullstack-components/ai-components",
-	"version": "1.0.0",
+	"version": "1.0.4",
 	"description": "A collection of AI components",
 	"exports": {
-		".": "./dist/index.js"
+		".": "./dist/index.js",
+		"./client": "./dist/client/index.js"
+	},
+	"author": "Ambient Co",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ambient-co/fullstack-components/issues"
+	},
+	"homepage": "https://github.com/ambient-co/fullstack-components#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ambient-co/fullstack-components.git"
 	},
 	"scripts": {
-		"build": "tsc"
+		"build": "tsc -p tsconfig.build.json"
 	},
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"browser": "dist/client/index.js",
 	"files": [
 		"dist",
-		"src"
+		"src",
+		"package.json",
+		"README.md",
+		"client.js",
+		"client.d.ts"
 	],
 	"engines": {
 		"node": ">=18"

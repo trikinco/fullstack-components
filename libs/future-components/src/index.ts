@@ -11,7 +11,6 @@ import notFoundEnhancementHandler, {
 	NotFoundEnhancerResponse,
 } from './handlers/notFoundEnhancer/notFoundEnhancer'
 import { NotFoundEnhancerClient } from './handlers/notFoundEnhancer/notFoundEnhancerClient'
-import { useNotFoundEnhancement } from './handlers/notFoundEnhancer/useNotFoundEnhancement'
 
 type FutureComponentsServer = {
 	// some simple cache of requests to openai here?
@@ -63,5 +62,4 @@ export {
 	handleErrorRequest,
 	handleNotFoundEnhancement,
 	handleFSComponents,
-	useNotFoundEnhancement,
 }
