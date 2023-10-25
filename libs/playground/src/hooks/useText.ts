@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect, type ReactElement } from 'react'
-import { renderToStaticMarkup } from 'react-dom/server'
 import type { RewriteOptions } from '../models/Text'
+import { createRoot } from 'react-dom/client'
+import { flushSync } from 'react-dom'
+import { renderToStaticMarkup } from 'react-dom/server'
 
 export interface UseTextProps extends RewriteOptions {
 	enabled?: boolean
@@ -20,8 +22,8 @@ export const useText = ({ enabled, ...options }: UseTextProps) => {
 		setIsLoading(true)
 
 		try {
-			console.log('fetchText', options)
 			const content = renderToStaticMarkup(options.children as ReactElement)
+
 			const response = await fetch('/api/text', {
 				method: 'POST',
 				headers: {
@@ -40,8 +42,6 @@ export const useText = ({ enabled, ...options }: UseTextProps) => {
 			}
 
 			const body = JSON.parse(data.result || {})
-
-			console.log('body', body)
 
 			setContent(body)
 		} catch (error) {

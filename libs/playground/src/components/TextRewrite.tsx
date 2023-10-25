@@ -86,7 +86,7 @@ export const TextRewrite = ({
 				// 	__html: versions ? versions[level].content.join('') : null,
 				// }}
 				dangerouslySetInnerHTML={{
-					__html: content ? content.content.join('') : null,
+					__html: content ? content.content : null,
 				}}
 				className={merge('w-full', className)}
 				{...rest}

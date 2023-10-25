@@ -4,10 +4,12 @@ export default function Page() {
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
 			Text page
-			<TextRewrite grade="5th-grade" max={150}>
-				<h3 className="text-4xl mb-3">
-					Quantum formalism and the uncertainty principle
-				</h3>
+			<TextRewrite
+				grade="5th-grade"
+				max={150}
+				className="prose dark:prose-invert"
+			>
+				<h3>Quantum formalism and the uncertainty principle</h3>
 				<p>
 					One consequence of the basic quantum formalism is the uncertainty
 					principle. In its most familiar form, this states that no preparation
