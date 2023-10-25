@@ -30,7 +30,7 @@ export default function Page() {
 			<div className="max-w-prose md:min-w-[65ch]">
 				<TextSlide
 					count={3}
-					grade="5th-grade"
+					grade={5}
 					max={150}
 					className="prose dark:prose-invert"
 				>

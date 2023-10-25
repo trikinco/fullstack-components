@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, type ReactElement } from 'react'
 import type { RewriteOptions } from '../models/Text'
 import { renderToStaticMarkup } from 'react-dom/server'
+import { ordinal } from '../utils/lang'
 
 export const useText = (options: RewriteOptions) => {
 	const [content, setContent] = useState<{
@@ -16,6 +17,10 @@ export const useText = (options: RewriteOptions) => {
 		setIsLoading(true)
 
 		try {
+			const grade =
+				typeof options.grade === 'number'
+					? `${ordinal(options.grade)}-grade`
+					: options.grade
 			const content = renderToStaticMarkup(options.children as ReactElement)
 
 			const response = await fetch('/api/text', {
@@ -23,7 +28,7 @@ export const useText = (options: RewriteOptions) => {
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ ...options, content }),
+				body: JSON.stringify({ ...options, grade, content }),
 			})
 
 			const data = await response.json()
