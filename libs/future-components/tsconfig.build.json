@@ -7,6 +7,8 @@
         "node_modules",
         "test",
         "dist",
+        "client.js",
+        "client.d.ts",
         "**/*spec.ts"
     ]
 }

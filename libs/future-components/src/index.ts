@@ -1,15 +1,11 @@
-import errorParserHandler, {
-	ErrorParseResponse,
-	ErrorRequestBody,
-	HandleErrorParser,
-} from './handlers/errorParser'
-import { ErrorClient } from './errorClient'
+/* eslint-disable unicorn/prevent-abbreviations */
+import errorParserHandler, { HandleErrorParser } from './handlers/errorParser'
+
 import handlerFactory from './next-routing'
 import notFoundEnhancementHandler, {
 	HandleNotFoundEnhancement,
-	NotFoundEnhancerRequestBody,
-	NotFoundEnhancerResponse,
 } from './handlers/notFoundEnhancer/notFoundEnhancer'
+import { ErrorClient } from './errorClient'
 import { NotFoundEnhancerClient } from './handlers/notFoundEnhancer/notFoundEnhancerClient'
 
 type FutureComponentsServer = {
@@ -18,7 +14,7 @@ type FutureComponentsServer = {
 	handleErrorRequest: HandleErrorParser
 	handleNotFoundEnhancement: HandleNotFoundEnhancement
 }
-let instance: FutureComponentsServer | undefined = undefined
+let instance: FutureComponentsServer | undefined
 function init(): FutureComponentsServer {
 	return {
 		requestCache: new Map(), // this isnt really used, just thinking about caching
@@ -49,15 +45,16 @@ const handleFSComponents = handlerFactory({
 	handleErrorParser: handleErrorRequest,
 	handleNotFoundEnhancement: handleNotFoundEnhancement,
 })
-
+// public library api for server
+export { NotFoundEnhancerClient } from './handlers/notFoundEnhancer/notFoundEnhancerClient'
+export { ErrorClient } from './errorClient'
+export { ErrorParseResponse, ErrorRequestBody } from './handlers/errorParser'
 export {
-	ErrorRequestBody,
-	FutureComponentsServer,
-	ErrorParseResponse,
 	NotFoundEnhancerRequestBody,
 	NotFoundEnhancerResponse,
-	NotFoundEnhancerClient,
-	ErrorClient,
+} from './handlers/notFoundEnhancer/notFoundEnhancer'
+export {
+	FutureComponentsServer,
 	getInstance,
 	handleErrorRequest,
 	handleNotFoundEnhancement,

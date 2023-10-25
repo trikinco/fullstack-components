@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable unicorn/prevent-abbreviations */
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import { NextRequest } from 'next/server'
 import {
@@ -31,6 +33,7 @@ type ErrorHandlers = {
 
 export type HandleFSComponents = (
 	userHandlers?: Handlers
+	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 ) => NextApiHandler | AppRouteHandlerFn | any
 
 export type PageRouterOnError = (
@@ -48,6 +51,7 @@ export type AppRouterOnError = (
  */
 const defaultPageRouterOnError: PageRouterOnError = (_req, res, error) => {
 	console.error(error)
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
 	res.status(error.status || 500).end()
 }
 
@@ -118,21 +122,25 @@ const appRouteHandlerFactory: (
 		if (Array.isArray(route)) {
 			let otherRoutes
 			;[route, ...otherRoutes] = route
-			if (otherRoutes.length) {
+			if (otherRoutes.length > 0) {
+				// eslint-disable-next-line unicorn/no-null
 				return new Response(null, { status: 404 })
 			}
 		}
 
 		const handler =
+			// eslint-disable-next-line no-prototype-builtins
 			route && customHandlers.hasOwnProperty(route) && customHandlers[route]
 		try {
 			if (handler) {
 				return await (handler as AppRouteHandlerFn)(req, ctx)
 			} else {
+				// eslint-disable-next-line unicorn/no-null
 				return new Response(null, { status: 404 })
 			}
 		} catch (error) {
 			const res = await (onError || defaultAppRouterOnError)(req, error)
+			// eslint-disable-next-line unicorn/no-null, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 			return res || new Response(null, { status: (error as any).status || 500 })
 		}
 	}
@@ -153,7 +161,7 @@ const pageRouteHandlerFactory: (
 		if (Array.isArray(components)) {
 			let otherRoutes
 			;[components, ...otherRoutes] = components
-			if (otherRoutes.length) {
+			if (otherRoutes.length > 0) {
 				res.status(404).end()
 				return
 			}
@@ -162,6 +170,7 @@ const pageRouteHandlerFactory: (
 		try {
 			const handler =
 				components &&
+				// eslint-disable-next-line no-prototype-builtins
 				customHandlers.hasOwnProperty(components) &&
 				customHandlers[components]
 			if (handler) {

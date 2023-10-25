@@ -2,16 +2,16 @@ import { runChatCompletion } from '../../chatGptService'
 import { NotFoundEnhancerRequestBody } from './notFoundEnhancer'
 import { sitemapFromCache } from './sitemapParser'
 
-
-
 export type ChatMessage = {
 	role: 'system' | 'user' | 'assistant'
 	content: string
 }
 export class NotFoundEnhancerClient {
 	public handle = async (request: NotFoundEnhancerRequestBody) => {
-        console.log("handling not found enhancer request", request)
-        const possibleUrls = await sitemapFromCache(process.env.NEXT_PUBLIC_HOST || "http://localhost:3000")
+		console.log('handling not found enhancer request', request)
+		const possibleUrls = await sitemapFromCache(
+			process.env.NEXT_PUBLIC_HOST || 'http://localhost:3000'
+		)
 		const openAiKey = process.env.OPENAI_API_KEY || 'sk-1234'
 		const messages: ChatMessage[] = []
 		messages.push(
@@ -57,10 +57,8 @@ export class NotFoundEnhancerClient {
 				}`,
 			}
 		)
-		const openAiResponse = await runChatCompletion(messages, {
+		return await runChatCompletion(messages, {
 			openAIApiKey: openAiKey,
 		})
-
-		return openAiResponse
 	}
 }
