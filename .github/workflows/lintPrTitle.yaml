@@ -9,6 +9,7 @@ on:
 
 jobs:
   main:
+    if: false # doesnt seem to work on private repos. can renable when public
     permissions: write-all
 
     runs-on: ubuntu-latest
