@@ -1,6 +1,6 @@
 import { NextApiResponse } from 'next'
 import { ErrorClient } from '../../../future-components/dist/errorClient'
-import { ErrorParseResponse } from '@darraghor/ai-components'
+import { ErrorParseResponse } from '@fullstack-components/ai-components'
 
 const errorClient = new ErrorClient()
 

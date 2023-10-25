@@ -1,4 +1,4 @@
-import { handleFSComponents } from '@darraghor/ai-components'
+import { handleFSComponents } from '@fullstack-components/ai-components'
 
 export const GET = handleFSComponents()
 export const POST = handleFSComponents()

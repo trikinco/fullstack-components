@@ -61,30 +61,27 @@ export default function Home() {
 		setError(error)
 
 		try {
-			const response = await fetch('/api/fsutils/parseError', {
+			const response = await fetch('/api/message', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({
-					errorString: error.toString(),
-				} as ErrorRequestBody),
+				body: JSON.stringify({ message: error.message, stack: error.stack }),
 			})
-			const text = await response.text()
-			console.log('parsing response', {
-				response: text,
-				status: response.status,
-			})
+
+			const data = await response.json()
 
 			if (response.status !== 200) {
-				throw new Error(`Request failed with status ${response.status}`)
+				throw (
+					data.error ||
+					new Error(`Request failed with status ${response.status}`)
+				)
 			}
 
-			const body = JSON.parse(text || '{}') as ErrorParseResponse
+			const body = JSON.parse(data.result || {})
 
 			setContent(body)
 		} catch (error) {
-			console.log('catching top level error', error)
 			/**
 			 * Continue handling other/fallback cases here
 			 * @consideration flag for turning on navigator.onLine check when applicable for the application
@@ -129,14 +126,8 @@ export default function Home() {
 			)}
 
 			<div className="grid gap-12 grid-cols-2">
-				{content?.message && (
-					<div className="mb-32 max-w-lg col-span-2">
-						<h2 className="text-2xl font-bold mb-3 block">{content?.title}</h2>
-						<p>{content?.message}</p>
-					</div>
-				)}
 				{error && (
-					<div className="mb-32 max-w-lg col-span-2">
+					<div className="mb-32 max-w-lg">
 						<p className="font-bold mb-2">Error message:</p>
 						<code className="bg-white/10 mb-4 block p-4 rounded-md border-2 border-white/50">
 							{error?.message}
@@ -146,6 +137,13 @@ export default function Home() {
 						<code className="bg-white/10 mb-4 block p-4 rounded-md border-2 border-white/50">
 							{error?.stack}
 						</code>
+					</div>
+				)}
+
+				{content && (
+					<div className="mb-32 max-w-lg">
+						<h2 className="text-2xl font-bold mb-3 block">{content?.title}</h2>
+						<p>{content?.message}</p>
 					</div>
 				)}
 			</div>

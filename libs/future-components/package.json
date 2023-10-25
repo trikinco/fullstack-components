@@ -1,5 +1,5 @@
 {
-	"name": "@darraghor/ai-components",
+	"name": "@fullstack-components/ai-components",
 	"version": "1.0.0",
 	"description": "A collection of AI components",
 	"exports": {
