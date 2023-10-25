@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { NextApiResponse, NextApiRequest } from 'next'
 import { NextRequest, NextResponse } from 'next/server'
 import {
+	// eslint-disable-next-line unicorn/prevent-abbreviations
 	AppRouteHandlerFnContext,
 	FutureCompHandler,
 	Handler,
@@ -25,7 +27,9 @@ export class ErrorParserError extends Error {
 	constructor(error: any) {
 		super('Error parsing your error text and context with ML')
 		this.name = 'ErrorParserError'
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 		this.rootCause = error.message
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 		this.stack = error.stack
 	}
 }
@@ -70,7 +74,7 @@ const appRouteHandlerFactory: (
 				)
 			}
 			res.headers.set('Cache-Control', 'no-store')
-			let requestBody = (await req.json()) as ErrorRequestBody
+			const requestBody = (await req.json()) as ErrorRequestBody
 			console.log('requestBody', requestBody)
 			const parsedError = await client.handleErrorRequest(
 				requestBody.errorString,
@@ -81,8 +85,8 @@ const appRouteHandlerFactory: (
 			// and then pass the object, which next expects
 			// same below
 			return NextResponse.json(JSON.parse(parsedError.responseText), res)
-		} catch (e) {
-			throw new ErrorParserError(e)
+		} catch (error) {
+			throw new ErrorParserError(error)
 		}
 	}
 
@@ -106,13 +110,13 @@ const pageRouteHandlerFactory: (
 			assertReqRes(req, res)
 			console.log('Error Parser PAGES RouteHandlerFactory')
 			res.setHeader('Cache-Control', 'no-store')
-			let requestBody = req.body as ErrorRequestBody
+			const requestBody = req.body as ErrorRequestBody
 			const parsedError = await client.handleErrorRequest(
 				requestBody.errorString,
 				options.appContext
 			)
 			res.json(JSON.parse(parsedError.responseText))
-		} catch (e) {
-			throw new ErrorParserError(e)
+		} catch (error) {
+			throw new ErrorParserError(error)
 		}
 	}

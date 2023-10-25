@@ -3,6 +3,7 @@ let sitemapCache: string = ''
 
 export async function sitemapFromCache(currentHost: string) {
 	if (sitemapCache.length === 0) {
+		// eslint-disable-next-line unicorn/no-await-expression-member
 		sitemapCache = (await loadAndParseSitemapToListOfUrls(currentHost)).join(
 			',\n'
 		)
@@ -17,7 +18,7 @@ async function loadAndParseSitemapToListOfUrls(
 	// load sitemap
 	const localSitemap = new sitemapper({
 		url: currentHost + '/sitemap.xml',
-		timeout: 15000,
+		timeout: 15_000,
 	})
 	const contents = await localSitemap.fetch()
 	console.log('currentHost', currentHost)

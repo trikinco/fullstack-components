@@ -60,8 +60,8 @@ export async function runChatCompletion(
 
 function selectBestModel(chatMessages: ChatMessage[]) {
 	let model = 'gpt-3.5-turbo'
-	const length = encode(chatMessages.map((c) => c.content).join()).length
-	if (length > 15750) {
+	const length = encode(chatMessages.map((c) => c.content).join('')).length
+	if (length > 15_750) {
 		throw new Error(
 			'Too many tokens! Too much happened during this period for the LLM to make sense of it.'
 		)

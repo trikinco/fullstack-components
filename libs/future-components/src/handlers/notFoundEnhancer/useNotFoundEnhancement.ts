@@ -6,12 +6,13 @@ import {
 
 export const useNotFoundEnhancement = () => {
 	const [isLoading, setIsLoading] = useState(true)
-	const [content, setContent] = useState<NotFoundEnhancerResponse | null>(null)
+	const [content, setContent] = useState<NotFoundEnhancerResponse | undefined>()
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch('/api/fsutils/not-found-enhancer', {
 				method: 'POST',
 				headers: {
+					// eslint-disable-next-line @typescript-eslint/naming-convention
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
@@ -24,7 +25,7 @@ export const useNotFoundEnhancement = () => {
 			setIsLoading(false)
 		}
 
-		fetchData()
+		void fetchData()
 	}, [])
 
 	return { isLoading, content }

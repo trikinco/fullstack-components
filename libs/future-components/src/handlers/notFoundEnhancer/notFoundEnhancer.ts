@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/naming-convention */
 import { NextApiResponse, NextApiRequest } from 'next'
 import { NextRequest, NextResponse } from 'next/server'
 import {
+	// eslint-disable-next-line unicorn/prevent-abbreviations
 	AppRouteHandlerFnContext,
 	FutureCompHandler,
 	Handler,
@@ -10,7 +13,6 @@ import {
 import { NotFoundEnhancerClient } from './notFoundEnhancerClient'
 
 export class NotFoundEnhancerRequestBody {
-
 	requestedUrl?: string
 }
 export type NotFoundEnhancerResponse = {
@@ -23,7 +25,9 @@ export class NotFoundEnhancerError extends Error {
 	constructor(error: any) {
 		super('Error running 404 enhancer')
 		this.name = 'NotFoundEnhancerError'
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 		this.rootCause = error.message
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 		this.stack = error.stack
 	}
 }
@@ -41,7 +45,7 @@ export default function notFoundEnhancementHandler(
 	const appRouteHandler = appRouteHandlerFactory(client)
 	const pageRouteHandler = pageRouteHandlerFactory(client)
 
-	return getHandler<{}>(
+	return getHandler<object>(
 		appRouteHandler,
 		pageRouteHandler
 	) as HandleNotFoundEnhancement
@@ -55,7 +59,7 @@ const appRouteHandlerFactory: (
 ) => (
 	req: NextRequest,
 	ctx: AppRouteHandlerFnContext,
-	options?: {}
+	options?: object
 ) => Promise<Response> | Response =
 	(client) =>
 	async (req, _ctx, options = {}) => {
@@ -68,7 +72,7 @@ const appRouteHandlerFactory: (
 				)
 			}
 			res.headers.set('Cache-Control', 'no-store')
-			let requestBody = (await req.json()) as NotFoundEnhancerRequestBody
+			const requestBody = (await req.json()) as NotFoundEnhancerRequestBody
 			console.log('requestBody', requestBody)
 			const gptResponse = await client.handle(requestBody)
 
@@ -76,8 +80,8 @@ const appRouteHandlerFactory: (
 			// and then pass the object, which next expects
 			// same below
 			return NextResponse.json(JSON.parse(gptResponse.responseText), res)
-		} catch (e) {
-			throw new NotFoundEnhancerError(e)
+		} catch (error) {
+			throw new NotFoundEnhancerError(error)
 		}
 	}
 
@@ -89,7 +93,7 @@ const pageRouteHandlerFactory: (
 ) => (
 	req: NextApiRequest,
 	res: NextApiResponse,
-	options?: {}
+	options?: object
 ) => Promise<void> =
 	(client) =>
 	async (
@@ -101,10 +105,10 @@ const pageRouteHandlerFactory: (
 			assertReqRes(req, res)
 			console.log('Not Found PAGES RouteHandlerFactory')
 			res.setHeader('Cache-Control', 'no-store')
-			let requestBody = req.body as NotFoundEnhancerRequestBody
+			const requestBody = req.body as NotFoundEnhancerRequestBody
 			const parsedError = await client.handle(requestBody)
 			res.json(JSON.parse(parsedError.responseText))
-		} catch (e) {
-			throw new NotFoundEnhancerError(e)
+		} catch (error) {
+			throw new NotFoundEnhancerError(error)
 		}
 	}

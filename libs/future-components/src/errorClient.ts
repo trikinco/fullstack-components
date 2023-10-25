@@ -1,4 +1,3 @@
-
 import { runChatCompletion } from './chatGptService'
 
 export type ChatMessage = {
@@ -10,7 +9,7 @@ export class ErrorClient {
 		errorString: string,
 		additionalAppContext?: string
 	) => {
-        console.log("handling error request", errorString)
+		console.log('handling error request', errorString)
 		const openAiKey = process.env.OPENAI_API_KEY || 'sk-1234'
 		const messages: ChatMessage[] = []
 		messages.push(
@@ -47,10 +46,8 @@ export class ErrorClient {
 				}`,
 			}
 		)
-		const openAiResponse = await runChatCompletion(messages, {
+		return await runChatCompletion(messages, {
 			openAIApiKey: openAiKey,
 		})
-
-		return openAiResponse
 	}
 }

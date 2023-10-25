@@ -1,3 +1,5 @@
+/* eslint-disable unicorn/prevent-abbreviations */
+/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 // This is all borrowed from auth0 nextjs
 
 import { NextApiRequest, NextApiResponse } from 'next'
