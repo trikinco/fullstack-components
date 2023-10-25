@@ -32,6 +32,9 @@ importers:
 
   libs/future-components:
     dependencies:
+      encoding:
+        specifier: 0.1.13
+        version: 0.1.13
       gpt-3-encoder:
         specifier: 1.1.4
         version: 1.1.4
