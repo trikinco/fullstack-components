@@ -63,6 +63,9 @@ export async function POST(req: NextRequest) {
 			min
 				? `Increase the full text to ${min} characters or more! RETURN MORE THAN ${min} CHARACTERS TOTAL.`
 				: '',
+			count > 1
+				? `Return an array of ${count} versions of the text where each item is increasingly affected by the rules mentioned above.`
+				: '',
 		]
 			.filter((x) => x)
 			.join('\n')
@@ -82,7 +85,7 @@ export async function POST(req: NextRequest) {
 
 		            ## Output
                     - If the text has headings your response must include headings.
-		            - Return the output as stringified HTML in JSON. The property name is 'content'.
+		            - Return the output as stringified HTML in JSON in an array. The array property name is 'content'.
 		            - Do not include the reasoning
 		            `,
 				},

@@ -1,7 +1,6 @@
 'use client'
-import { useState } from 'react'
-import type { HTMLAttributes, ElementType, FormEvent } from 'react'
-import { Slider, type SliderProps } from './Slider'
+import { Children } from 'react'
+import type { HTMLAttributes, ElementType } from 'react'
 import { merge } from '../utils/styles'
 import { useText } from '../hooks/useText'
 import type { RewriteOptions } from '../models/Text'
@@ -10,34 +9,20 @@ export interface TextRewriteProps
 	extends RewriteOptions,
 		Omit<HTMLAttributes<HTMLElement>, 'children'> {
 	component?: ElementType
-	/** shows the rewrite strength range slider */
-	showSlider?: boolean
-	/** The default rewrite strength level */
-	defaultValue?: number
-	/** The fixed rewrite strength level */
+	/** The active version. Default 0 */
 	value?: number
-	/** Props to pass to the range slider if `showSlider` is true */
-	sliderProps?: Partial<SliderProps>
 }
 
 /**
- * A smart component that simplifies, summarises or completely rewrites the text within.
- *
- * @consideration option for pre-processing information into multiple 'rewrite strength levels' that
- * the user can swap between on the fly.
- * @consideration allow the user to regenerate a rewrite step.
- * @consideration design a `controls` "API" - setting some standards for what the user may want to control
+ * A smart component that rewrites the text within.
  */
 export const TextRewrite = ({
-	value,
-	defaultValue,
-	sliderProps,
+	value = 0,
 	children,
 	component,
 	className,
-	showSlider,
 	// Rewrite options
-	count,
+	count = 1,
 	tone,
 	strength,
 	grade,
@@ -55,42 +40,33 @@ export const TextRewrite = ({
 		grade,
 		max,
 		min,
-		enabled: true,
 	})
-	const [level, setLevel] = useState(value ?? defaultValue ?? 0)
 
-	const handleSlide = (e: FormEvent<HTMLInputElement>) => {
-		const target = e.target as HTMLInputElement | null
-
-		if (target) {
-			setLevel(parseInt(target.value) ?? 0)
-		}
-	}
-
-	return (
-		<>
-			{showSlider && (
-				<Slider
-					min={0}
-					max={4}
-					step={1}
-					label="Rewrite strength"
-					className="mb-6"
-					defaultValue={level}
-					onChange={handleSlide}
-					{...sliderProps}
-				/>
-			)}
+	if (content?.content) {
+		return (
 			<WrapperComponent
-				// dangerouslySetInnerHTML={{
-				// 	__html: versions ? versions[level].content.join('') : null,
-				// }}
 				dangerouslySetInnerHTML={{
-					__html: content ? content.content : null,
+					__html: content ? content.content[value] : null,
 				}}
 				className={merge('w-full', className)}
 				{...rest}
 			/>
-		</>
-	)
+		)
+	} else {
+		// Show a loading state up-front and during processing
+		return (
+			<WrapperComponent
+				className={merge('w-full animate-pulse', className)}
+				{...rest}
+			>
+				{Children.map(children, (_child, i) => (
+					<div
+						className={`${
+							i % 2 ? 'w-10/12' : 'w-11/12'
+						} h-4 mb-3 bg-gray-200 rounded-md dark:bg-gray-700`}
+					/>
+				))}
+			</WrapperComponent>
+		)
+	}
 }

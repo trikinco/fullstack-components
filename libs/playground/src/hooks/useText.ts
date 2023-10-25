@@ -1,14 +1,8 @@
 import { useState, useRef, useEffect, type ReactElement } from 'react'
 import type { RewriteOptions } from '../models/Text'
-import { createRoot } from 'react-dom/client'
-import { flushSync } from 'react-dom'
 import { renderToStaticMarkup } from 'react-dom/server'
 
-export interface UseTextProps extends RewriteOptions {
-	enabled?: boolean
-}
-
-export const useText = ({ enabled, ...options }: UseTextProps) => {
+export const useText = (options: RewriteOptions) => {
 	const [content, setContent] = useState<{
 		content: string[]
 	} | null>(null)
@@ -42,7 +36,6 @@ export const useText = ({ enabled, ...options }: UseTextProps) => {
 			}
 
 			const body = JSON.parse(data.result || {})
-
 			setContent(body)
 		} catch (error) {
 			/**
