@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import OpenAI from 'openai'
-import { encode } from 'gpt-3-encoder'
+// NOTE: With the nextjs build system, in the config for this library,
+// we can't use the encoder. So just doing a super basic count letters / NuMBER
+// instead
+//import { encode } from 'gpt-3-encoder'
 
 export type ChatMessage = {
 	role: 'system' | 'user' | 'assistant'
@@ -60,7 +63,7 @@ export async function runChatCompletion(
 
 function selectBestModel(chatMessages: ChatMessage[]) {
 	let model = 'gpt-3.5-turbo'
-	const length = encode(chatMessages.map((c) => c.content).join('')).length
+	const length = chatMessages.map((c) => c.content).join('').length / 3
 	if (length > 15_750) {
 		throw new Error(
 			'Too many tokens! Too much happened during this period for the LLM to make sense of it.'
