@@ -15,12 +15,23 @@ Smart web components with built in AI
 
 Create a new handler for all the api endpoints in your nextjs app. These api routes are used to serve the components and their data on the frontend.
 
-Note there's no auth on these endpoints.
+The location of the file should be:
+
+`app/api/fsutils/[fscomponents]/route.ts`
+
+or if using pages
+`pages/api/fsutils/[fscomponents].ts`
+
+And the contents should be:
 
 ```ts
-;`app/api/fsutils/[fscomponents]/route.ts` // or if using pages
-`pages/api/fsutils/[fscomponents].ts`
+import { handleFSComponents } from '@fullstack-components/ai-components'
+
+export const GET = handleFSComponents()
+export const POST = handleFSComponents()
 ```
+
+Note there's no auth on these endpoints but you can wrap them to add auth. [[TODO]] Add notes about this.
 
 ## Components
 
@@ -38,7 +49,7 @@ The key here is to use the `useNotFoundEnhancement` hook to get the data from th
 // components/NotFoundEnhancment.tsx
 'use client'
 
-import { useNotFoundEnhancement } from '@fullstack-components/ai-components'
+import { useNotFoundEnhancement } from '@fullstack-components/ai-components/client'
 import Link from 'next/link'
 
 export function NotFoundEnhancer() {
