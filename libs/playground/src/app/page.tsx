@@ -1,7 +1,6 @@
 'use client'
-
-import { ErrorParseResponse, ErrorRequestBody } from '@darraghor/ai-components'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 /**
  * The formatted user-friendly error message
@@ -14,6 +13,7 @@ export interface UserErrorMessageContent {
 }
 
 export default function Home() {
+	const router = useRouter()
 	const [isLoading, setIsLoading] = useState(false)
 	/** Formatted error message */
 	const [content, setContent] = useState<UserErrorMessageContent | null>()
@@ -27,28 +27,28 @@ export default function Home() {
 		setIsLoading(true)
 
 		try {
-			switch (status) {
-				case 400:
-					throw new Error('Page not found - profile.tsx')
-				case 500:
-					throw new Error("This is server error. Couldn't find the file")
-				default:
-					throw new Error('This is a generic error')
+			const response = await fetch('/api/error', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ status }),
+			})
+
+			/**
+			 * 'redirect' to /error, but continue processing
+			 * since /error is a parallel route (handled by `app/@error`) which is always rendered
+			 * by `app/layout`, it will now appear
+			 */
+			if (response.redirected && response.url) {
+				router.push('/error')
 			}
 
-			// const response = await fetch('/api/fsutils/parseError', {
-			// 	method: 'POST',
-			// 	headers: {
-			// 		'Content-Type': 'application/json',
-			// 	},
-			// 	body: JSON.stringify({ errorString: status }),
-			// })
-
-			// if (!response.ok) {
-			// 	throw new Error(
-			// 		`Failed to load resource: the server responded with a status of ${response.status} (${response.statusText})`
-			// 	)
-			// }
+			if (!response.ok) {
+				throw new Error(
+					`Failed to load resource: the server responded with a status of ${response.status} (${response.statusText})`
+				)
+			}
 		} catch (error) {
 			return await fetchErrorMessage(error as Error)
 		}
@@ -103,8 +103,8 @@ export default function Home() {
 	}
 
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
-			<h1 className="text-4xl font-bold">Error messages</h1>
+		<main className="flex flex-col items-center justify-between p-24">
+			<h1 className="text-4xl font-bold mb-8">Error messages</h1>
 
 			{isLoading && (
 				<div role="status">
