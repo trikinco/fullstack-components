@@ -34,6 +34,7 @@
 		"node": ">=18"
 	},
 	"dependencies": {
+		"gpt-3-encoder": "1.1.4",
 		"next": "13.5.6",
 		"openai": "4.12.4",
 		"react": "18.2.0",
@@ -47,8 +48,8 @@
 		"typescript": "5.2.2"
 	},
 	"peerDependencies": {
+		"next": ">=13",
 		"react": ">=18",
-		"react-dom": ">=18",
-		"next": ">=13"
+		"react-dom": ">=18"
 	}
 }

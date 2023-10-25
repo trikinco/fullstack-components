@@ -22,5 +22,5 @@ async function loadAndParseSitemapToListOfUrls(
 	const contents = await localSitemap.fetch()
 	console.log('currentHost', currentHost)
 	console.log('contents', contents)
-	return contents.sites
+	return contents.sites.map((site) => new URL(site).pathname)
 }
