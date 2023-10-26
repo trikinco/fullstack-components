@@ -11,7 +11,7 @@ export function NotFoundEnhancer() {
 		return <p>Checking for alternate solution...</p>
 	}
 	return (
-		<div>
+		<div className="mt-6">
 			<p>{data?.generatedContent}</p>
 			<p>Try this url instead:</p>
 			<div>
