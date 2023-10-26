@@ -12,7 +12,7 @@ export const useNotFoundEnhancement = (
 		{
 			...config,
 			body: {
-				requestedUrl: window && window.location.href,
+				requestedUrl: typeof window !== 'undefined' && window.location.href,
 			},
 		}
 	)
