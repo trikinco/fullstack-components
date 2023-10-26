@@ -1,13 +1,16 @@
 import { URL_HOST } from './constants'
 
-export interface APIConfig<TBody = unknown> extends Omit<RequestInit, 'body'> {
+export interface RequestConfig<TBody = unknown>
+	extends Omit<RequestInit, 'body'> {
 	baseUrl?: string
 	body?: TBody
 }
 
-export const request = async <TResponse, Tbody = unknown>(
+export const request = async <TResponse = unknown, Tbody = unknown>(
+	/** Relative API url */
 	url: string,
-	config: APIConfig<Tbody>
+	/** Fetch request config initialiser in addition to the `baseUrl` */
+	config?: RequestConfig<Tbody>
 ): Promise<TResponse> => {
 	const {
 		baseUrl = URL_HOST,
@@ -18,12 +21,12 @@ export const request = async <TResponse, Tbody = unknown>(
 			'Content-Type': 'application/json',
 		},
 		...rest
-	} = config
+	} = config || {}
 
 	const response = await fetch(`${baseUrl}${url}`, {
 		method,
 		headers,
-		body: JSON.stringify(body),
+		body: body ? JSON.stringify(body) : undefined,
 		...rest,
 	})
 

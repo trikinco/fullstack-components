@@ -5,18 +5,18 @@ import Link from 'next/link'
 
 export function NotFoundEnhancer() {
 	// load all possible pages (for this segment?)
-	const { content, isLoading } = useNotFoundEnhancement()
+	const { data, isLoading } = useNotFoundEnhancement()
 
-	if (!content || isLoading) {
+	if (!data || isLoading) {
 		return <p>Checking for alternate solution...</p>
 	}
 	return (
 		<div>
-			<p>{content?.generatedContent}</p>
+			<p>{data?.generatedContent}</p>
 			<p>Try this url instead:</p>
 			<div>
-				<Link href={content?.bestAlternateUrl || '#'}>
-					{content?.bestAlternateUrl || 'No alternate url found'}
+				<Link href={data?.bestAlternateUrl || '#'}>
+					{data?.bestAlternateUrl || 'No alternate url found'}
 				</Link>
 			</div>
 		</div>
