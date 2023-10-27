@@ -4,12 +4,14 @@ export const openai = new OpenAI({
 	apiKey: process.env.OPENAI_API_KEY || '',
 })
 
-export const getChatCompletion = (
-	options: Omit<
-		OpenAI.Chat.Completions.ChatCompletionCreateParamsNonStreaming,
-		'model'
-	>
-) => {
+type ChatCompletionOptions = Omit<
+	OpenAI.Chat.Completions.ChatCompletionCreateParamsNonStreaming,
+	'model'
+> & {
+	model?: OpenAI.Chat.Completions.ChatCompletionCreateParamsNonStreaming['model']
+}
+
+export const getChatCompletion = (options: ChatCompletionOptions) => {
 	return openai.chat.completions.create({
 		model: 'gpt-3.5-turbo',
 		...options,
