@@ -38,6 +38,12 @@ export default function Home() {
 						dropdowns.
 					</Card>
 				</Link>
+				<Link href="/image" className="flex">
+					<Card title="Image">
+						AI-Powered Image Tools. Craft visuals effortlessly and reveal their
+						secrets with instant image descriptions
+					</Card>
+				</Link>
 			</div>
 		</main>
 	)
