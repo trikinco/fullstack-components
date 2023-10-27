@@ -21,6 +21,10 @@ export type NotFoundEnhancerResponse = {
 	generatedContent: string
 	bestAlternateUrls: string[]
 }
+export type NotFoundEnhancerOptions = {
+	siteUrl: string
+	openAiApiKey: string
+}
 export class NotFoundEnhancerError extends Error {
 	public rootCause: string
 
@@ -36,8 +40,9 @@ export class NotFoundEnhancerError extends Error {
 /**
  * The handler for the `/api/future-components/not-found-enhancer` API route.
  */
-export type NotFoundEnhancerHandler = Handler<never>
-export type HandleNotFoundEnhancement = FutureCompHandler<never>
+export type NotFoundEnhancerHandler = Handler<NotFoundEnhancerOptions>
+export type HandleNotFoundEnhancement =
+	FutureCompHandler<NotFoundEnhancerOptions>
 /**
  * @ignore
  */
@@ -54,7 +59,7 @@ export default function notFoundEnhancementHandler(
 		contentGenerator
 	)
 
-	return getHandler<object>(
+	return getHandler<NotFoundEnhancerOptions>(
 		appRouteHandler,
 		pageRouteHandler
 	) as HandleNotFoundEnhancement
@@ -69,10 +74,9 @@ const appRouteHandlerFactory: (
 ) => (
 	req: NextRequest,
 	ctx: AppRouteHandlerFnContext,
-	options?: object
+	options?: NotFoundEnhancerOptions
 ) => Promise<Response> | Response =
-	(sitemapSelector, contentGenerator) =>
-	async (req, _ctx, options = {}) => {
+	(sitemapSelector, contentGenerator) => async (req, _ctx, options) => {
 		try {
 			const res = new NextResponse()
 			console.log('Not found enhancer APP RouteHandlerFactory')
@@ -81,12 +85,15 @@ const appRouteHandlerFactory: (
 					new Error('Only POST requests are supported')
 				)
 			}
+			if (!options) {
+				throw new NotFoundEnhancerError(new Error('No options provided'))
+			}
 			res.headers.set('Cache-Control', 'no-store')
 			const requestBody = (await req.json()) as NotFoundEnhancerRequestBody
 			console.log('requestBody', requestBody)
 			const [bestAlternateUrls, generatedContent] = await Promise.allSettled([
-				sitemapSelector.handle(requestBody),
-				contentGenerator.handle(requestBody),
+				sitemapSelector.handle(requestBody, options),
+				contentGenerator.handle(requestBody, options),
 			])
 			const response = mapPromiseResults(bestAlternateUrls, generatedContent)
 
@@ -105,22 +112,30 @@ const pageRouteHandlerFactory: (
 ) => (
 	req: NextApiRequest,
 	res: NextApiResponse,
-	options?: object
+	options?: NotFoundEnhancerOptions
 ) => Promise<void> =
 	(sitemapSelector, contentGenerator) =>
 	async (
 		req: NextApiRequest,
 		res: NextApiResponse,
-		options = {}
+		options?: NotFoundEnhancerOptions
 	): Promise<void> => {
 		try {
 			assertReqRes(req, res)
 			console.log('Not Found PAGES RouteHandlerFactory')
+			if (req.method !== 'POST') {
+				throw new NotFoundEnhancerError(
+					new Error('Only POST requests are supported')
+				)
+			}
+			if (!options) {
+				throw new NotFoundEnhancerError(new Error('No options provided'))
+			}
 			res.setHeader('Cache-Control', 'no-store')
 			const requestBody = req.body as NotFoundEnhancerRequestBody
 			const [bestAlternateUrls, generatedContent] = await Promise.allSettled([
-				sitemapSelector.handle(requestBody),
-				contentGenerator.handle(requestBody),
+				sitemapSelector.handle(requestBody, options),
+				contentGenerator.handle(requestBody, options),
 			])
 			const response = mapPromiseResults(bestAlternateUrls, generatedContent)
 

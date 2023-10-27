@@ -1,6 +1,8 @@
 import { runChatCompletion } from '../../chatGptService'
-import { OPENAI_API_KEY, URL_HOST } from '../../utils/constants'
-import { NotFoundEnhancerRequestBody } from './notFoundEnhancer'
+import {
+	NotFoundEnhancerOptions,
+	NotFoundEnhancerRequestBody,
+} from './notFoundEnhancer'
 import { sitemapFromCache } from './sitemapParser'
 
 export type ChatMessage = {
@@ -9,9 +11,12 @@ export type ChatMessage = {
 }
 
 export class NotFoundEnhancerContentGenerator {
-	public handle = async (request: NotFoundEnhancerRequestBody) => {
+	public handle = async (
+		request: NotFoundEnhancerRequestBody,
+		options: NotFoundEnhancerOptions
+	) => {
 		console.log('handling not found content generation request', request)
-		const possibleUrls = await sitemapFromCache(URL_HOST)
+		const possibleUrls = await sitemapFromCache(options.siteUrl)
 		const messages: ChatMessage[] = []
 		messages.push(
 			{
@@ -54,7 +59,7 @@ export class NotFoundEnhancerContentGenerator {
 			}
 		)
 		return await runChatCompletion(messages, {
-			openAIApiKey: OPENAI_API_KEY,
+			openAIApiKey: options.openAiApiKey,
 		})
 	}
 }

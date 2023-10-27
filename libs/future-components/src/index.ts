@@ -56,6 +56,8 @@ export {
 	NotFoundEnhancerRequestBody,
 	NotFoundEnhancerResponse,
 } from './handlers/notFoundEnhancer/notFoundEnhancer'
+export { AppRouteHandlerFnContext } from './nextjs-handlers'
+export { NotFoundEnhancerOptions } from './handlers/notFoundEnhancer/notFoundEnhancer'
 export {
 	FutureComponentsServer,
 	getInstance,
