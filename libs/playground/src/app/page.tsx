@@ -8,6 +8,12 @@ export default function Home() {
 				AI-Powered Fullstack Components
 			</h1>
 			<div className="grid gap-6 grid-cols-2">
+				<Link href="/use-prompt" className="flex">
+					<Card title="usePrompt">
+						AI-Powered Prompt hook. Easily integrate prompts into any part of
+						your application. Unlock the magic of words.
+					</Card>
+				</Link>
 				<Link href="/errors" className="flex">
 					<Card title="Errors">
 						AI-Powered Error Helper. Makes sense of complex technical errors.

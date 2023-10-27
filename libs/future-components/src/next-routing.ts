@@ -12,6 +12,7 @@ import {
 import { HandleErrorParser } from './handlers/errorParser'
 
 import { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
+import { HandlePrompt } from './handlers/prompt/promptHandler'
 
 // taken from auth0 nextjs
 // to use - create a route in /api/fscomponents/[futc].ts
@@ -66,9 +67,11 @@ const defaultAppRouterOnError: AppRouterOnError = (_req, error) => {
  * @ignore
  */
 export default function handlerFactory({
+	handlePrompt,
 	handleErrorParser,
 	handleNotFoundEnhancement,
 }: {
+	handlePrompt: HandlePrompt
 	handleErrorParser: HandleErrorParser
 	handleNotFoundEnhancement: HandleNotFoundEnhancement
 }): HandleFSComponents {
@@ -76,6 +79,7 @@ export default function handlerFactory({
 		| NextApiHandler<void>
 		| AppRouteHandlerFn => {
 		const customHandlers: ApiHandlers = {
+			prompt: handlePrompt,
 			parseError: handleErrorParser,
 			['not-found-enhancer']: handleNotFoundEnhancement,
 			...handlers,

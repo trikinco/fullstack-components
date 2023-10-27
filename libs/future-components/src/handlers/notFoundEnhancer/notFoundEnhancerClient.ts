@@ -2,11 +2,7 @@ import { runChatCompletion } from '../../chatGptService'
 import { OPENAI_API_KEY, URL_HOST } from '../../utils/constants'
 import { NotFoundEnhancerRequestBody } from './notFoundEnhancer'
 import { sitemapFromCache } from './sitemapParser'
-
-export type ChatMessage = {
-	role: 'system' | 'user' | 'assistant'
-	content: string
-}
+import type { ChatMessage } from '../../models/ChatMessage'
 
 export class NotFoundEnhancerClient {
 	public handle = async (request: NotFoundEnhancerRequestBody) => {
