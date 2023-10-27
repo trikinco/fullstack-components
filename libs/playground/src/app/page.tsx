@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { Card } from '../components/Card'
+import { Chip } from '../components/Chip'
 
 export default function Home() {
 	return (
@@ -9,14 +9,15 @@ export default function Home() {
 				<h1 className="text-5xl font-bold mb-16">
 					AI-Powered Fullstack Components
 				</h1>
-				<div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+				<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 					<Link href="/use-prompt" className="flex">
 						<Card
 							title="usePrompt"
 							image={{
-								src: '/images/DiamondSlim.png',
-								alt: 'Diamond',
+								src: '/images/InfinityStrip.png',
+								alt: 'Infinity',
 							}}
+							footer={<Chip>Hook</Chip>}
 						>
 							AI-Powered Prompt hook. Easily integrate prompts into any part of
 							your application. Unlock the magic of words.
@@ -24,11 +25,12 @@ export default function Home() {
 					</Link>
 					<Link href="/errors" className="flex">
 						<Card
-							title="Errors"
+							title="Error"
 							image={{
 								src: '/images/Cone.png',
 								alt: 'Cone',
 							}}
+							footer={<Chip>Tools</Chip>}
 						>
 							AI-Powered Error Helper. Makes sense of complex technical errors.
 							Turn confusion into clarity.
@@ -41,6 +43,7 @@ export default function Home() {
 								src: '/images/Disc.png',
 								alt: 'Disc',
 							}}
+							footer={<Chip>Component</Chip>}
 						>
 							AI-Powered <i>Page Not Found</i>. Get help finding the page you
 							were looking for. Don&apos;t get lost, get found!
@@ -53,6 +56,7 @@ export default function Home() {
 								src: '/images/Cube.png',
 								alt: 'Cube',
 							}}
+							footer={<Chip>Component</Chip>}
 						>
 							AI-Powered Text Simplification. Transform any text into
 							easy-to-understand information.
@@ -62,9 +66,10 @@ export default function Home() {
 						<Card
 							title="Select"
 							image={{
-								src: '/images/MobiusStrip.png',
-								alt: 'MobiusStrip',
+								src: '/images/DiamondSlim.png',
+								alt: 'Diamond',
 							}}
+							footer={<Chip>Component</Chip>}
 						>
 							AI-Powered Select Options Generator. Create options for your
 							dropdowns.
@@ -77,45 +82,14 @@ export default function Home() {
 								src: '/images/Asterisk.png',
 								alt: 'Asterisk',
 							}}
+							footer={<Chip>Component</Chip>}
 						>
 							AI-Powered Image Tools. Craft visuals effortlessly and reveal
-							their secrets with instant image descriptions
+							their secrets with instant image descriptions.
 						</Card>
 					</Link>
 				</div>
 			</main>
-			<footer className="flex py-3 px-6 bg-slate-100 dark:bg-slate-800 items-center">
-				<div className="ml-auto flex gap-3">
-					<span className="my-auto">Created by</span>
-					<Link href="https://www.darraghoriordan.com">
-						<Image
-							className="w-10 h-10 rounded-full border-2 border-slate-300 bg-slate-300 dark:bg-slate-600 dark:border-slate-600"
-							src="/images/darragh.png"
-							alt="Darragh ORiordan"
-							width={40}
-							height={40}
-						/>
-					</Link>
-					<Link href="https://larsmagnus.co">
-						<Image
-							className="w-10 h-10 rounded-full border-2 border-slate-300 bg-slate-200 dark:bg-slate-300 dark:border-slate-600"
-							src="/images/lars.png"
-							alt="Lars Klavenes"
-							width={40}
-							height={40}
-						/>
-					</Link>
-					<Link href="https://www.connorthomsen.com">
-						<Image
-							className="w-10 h-10 rounded-full border-2 border-slate-300 bg-slate-300 dark:bg-slate-600 dark:border-slate-600"
-							src="/images/connor.png"
-							alt="Connor Thomsen"
-							width={40}
-							height={40}
-						/>
-					</Link>
-				</div>
-			</footer>
 		</>
 	)
 }

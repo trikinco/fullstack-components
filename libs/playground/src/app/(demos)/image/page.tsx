@@ -1,10 +1,12 @@
 'use client'
+import Image from 'next/image'
 import { useRequest } from '@fullstack-components/ai-components/client'
 
-export default function Image() {
-	const imageURL =
-		'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Felis_catus-cat_on_snow.jpg/179px-Felis_catus-cat_on_snow.jpg'
+const imageURL =
+	'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Felis_catus-cat_on_snow.jpg/179px-Felis_catus-cat_on_snow.jpg'
+const prompt = 'A horse in outer space'
 
+export default function ImagePage() {
 	const { data, isLoading } = useRequest<{ result: string }>(
 		'/api/image/describe',
 		{
@@ -15,7 +17,7 @@ export default function Image() {
 	const { data: image, isLoading: isImageLoading } = useRequest<{
 		result: string
 	}>('/api/image/create', {
-		body: { prompt: 'A horse in outer space' },
+		body: { prompt },
 	})
 
 	return (
@@ -32,11 +34,12 @@ export default function Image() {
 						<h2 className="text-2xl mb-6">Image description</h2>
 
 						{data ? (
-							<img
+							<Image
 								className="mb-3"
 								src={imageURL}
 								alt={data.result}
 								width={256}
+								height={170}
 							/>
 						) : null}
 
@@ -56,8 +59,8 @@ export default function Image() {
 					<div className="flex flex-col items-center">
 						<h2 className="text-2xl mb-6">Image generation</h2>
 
-						<p className="mb-3">A horse in outer space</p>
-						{image ? <img src={image.result} alt="" /> : null}
+						<p className="mb-3">{prompt}</p>
+						{image ? <Image src={image.result} alt={prompt} /> : null}
 					</div>
 				)}
 			</div>
