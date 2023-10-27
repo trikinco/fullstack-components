@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server'
-import { openai, getChatCompletion } from '../_lib/openai'
+import { openai, getChatCompletion } from '../../_lib/openai'
 
 /**
  * POC service for generating image alt text from an image URL with OpenAI

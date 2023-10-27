@@ -17,3 +17,10 @@ export const getChatCompletion = (options: ChatCompletionOptions) => {
 		...options,
 	})
 }
+
+export const getImageGeneration = (options: OpenAI.ImageGenerateParams) => {
+	return openai.images.generate({
+		size: '256x256', // Default to small images to save $
+		...options,
+	})
+}
