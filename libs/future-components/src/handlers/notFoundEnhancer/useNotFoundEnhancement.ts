@@ -1,32 +1,19 @@
-import { useEffect, useState } from 'react'
-import {
-	NotFoundEnhancerRequestBody,
+import type {
 	NotFoundEnhancerResponse,
+	NotFoundEnhancerRequestBody,
 } from './notFoundEnhancer'
+import { useRequest, type UseRequestConfig } from '../../hooks/useRequest'
 
-export const useNotFoundEnhancement = () => {
-	const [isLoading, setIsLoading] = useState(true)
-	const [content, setContent] = useState<NotFoundEnhancerResponse | undefined>()
-	useEffect(() => {
-		const fetchData = async () => {
-			const response = await fetch('/api/fsutils/not-found-enhancer', {
-				method: 'POST',
-				headers: {
-					// eslint-disable-next-line @typescript-eslint/naming-convention
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					requestedUrl: window && window.location.href,
-				} as NotFoundEnhancerRequestBody),
-			})
-			const parsedResponse = (await response.json()) as NotFoundEnhancerResponse
-
-			setContent(parsedResponse)
-			setIsLoading(false)
+export const useNotFoundEnhancement = (
+	config?: UseRequestConfig<NotFoundEnhancerRequestBody>
+) => {
+	return useRequest<NotFoundEnhancerResponse>(
+		'/api/fsutils/not-found-enhancer',
+		{
+			...config,
+			body: {
+				requestedUrl: typeof window !== 'undefined' && window.location.href,
+			},
 		}
-
-		void fetchData()
-	}, [])
-
-	return { isLoading, content }
+	)
 }
