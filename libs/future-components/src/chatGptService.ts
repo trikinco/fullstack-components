@@ -1,15 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import OpenAI from 'openai'
+import type { ChatMessage } from './models/ChatMessage'
 // NOTE: With the nextjs build system, in the config for this library,
 // we can't use the encoder. So just doing a super basic count letters / NuMBER
 // instead
 //import { encode } from 'gpt-3-encoder'
-
-export type ChatMessage = {
-	role: 'system' | 'user' | 'assistant'
-	content: string
-}
 
 export type ChatGptCompletionResponse = {
 	responseText: string

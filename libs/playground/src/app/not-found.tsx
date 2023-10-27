@@ -1,7 +1,7 @@
-import { Inter } from 'next/font/google'
+import { Space_Grotesk } from 'next/font/google'
 import '../styles/globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const font = Space_Grotesk({ subsets: ['latin'] })
 
 /**
  * Uses parallel routing to only render @error/error/page,
@@ -22,7 +22,7 @@ export default function RootNotFound({
 }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>{error}</body>
+			<body className={font.className}>{error}</body>
 		</html>
 	)
 }

@@ -100,7 +100,7 @@ export default function Home() {
 	}
 
 	return (
-		<main className="flex flex-col items-center justify-between p-24">
+		<div className="flex flex-col items-center justify-between p-24">
 			<h1 className="text-3xl mb-16">
 				<code>Error messages</code> demo
 			</h1>
@@ -175,6 +175,6 @@ export default function Home() {
 					</h2>
 				</button>
 			</div>
-		</main>
+		</div>
 	)
 }

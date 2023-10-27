@@ -2,7 +2,7 @@ import { Select } from '@/src/components/Select'
 
 export default function Page() {
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
+		<div className="flex min-h-screen flex-col items-center justify-between p-24">
 			<h1 className="text-3xl mb-6">
 				<code>Select</code> demo
 			</h1>
@@ -21,6 +21,6 @@ export default function Page() {
 					context="our users are in Sydney"
 				/>
 			</div>
-		</main>
+		</div>
 	)
 }
