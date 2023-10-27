@@ -1,6 +1,7 @@
 {
 	"name": "@fullstack-components/ai-components",
 	"version": "1.0.5",
+	"version": "1.0.9",
 	"description": "A collection of AI components",
 	"exports": {
 		".": "./dist/index.js",
