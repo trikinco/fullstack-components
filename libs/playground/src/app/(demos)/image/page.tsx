@@ -21,7 +21,7 @@ export default function ImagePage() {
 	})
 
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
+		<div className="flex min-h-screen flex-col items-center justify-between p-24">
 			<h1 className="text-3xl mb-6">
 				<code>Image</code> demo
 			</h1>
@@ -64,6 +64,6 @@ export default function ImagePage() {
 					</div>
 				)}
 			</div>
-		</main>
+		</div>
 	)
 }
