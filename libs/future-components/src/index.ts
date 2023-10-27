@@ -6,7 +6,8 @@ import notFoundEnhancementHandler, {
 	HandleNotFoundEnhancement,
 } from './handlers/notFoundEnhancer/notFoundEnhancer'
 import { ErrorClient } from './errorClient'
-import { NotFoundEnhancerClient } from './handlers/notFoundEnhancer/notFoundEnhancerClient'
+import { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
+import { NotFoundEnhancerContentGenerator } from './handlers/notFoundEnhancer/notFoundEnhancerContentGenerator'
 
 type FutureComponentsServer = {
 	// some simple cache of requests to openai here?
@@ -20,7 +21,8 @@ function init(): FutureComponentsServer {
 		requestCache: new Map(), // this isnt really used, just thinking about caching
 		handleErrorRequest: errorParserHandler(new ErrorClient()),
 		handleNotFoundEnhancement: notFoundEnhancementHandler(
-			new NotFoundEnhancerClient()
+			new NotFoundEnhancerSitemapSelector(),
+			new NotFoundEnhancerContentGenerator()
 		),
 	}
 }
@@ -46,7 +48,8 @@ const handleFSComponents = handlerFactory({
 	handleNotFoundEnhancement: handleNotFoundEnhancement,
 })
 // public library api for server
-export { NotFoundEnhancerClient } from './handlers/notFoundEnhancer/notFoundEnhancerClient'
+export { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
+export { NotFoundEnhancerContentGenerator } from './handlers/notFoundEnhancer/notFoundEnhancerContentGenerator'
 export { ErrorClient } from './errorClient'
 export { ErrorParseResponse, ErrorRequestBody } from './handlers/errorParser'
 export {

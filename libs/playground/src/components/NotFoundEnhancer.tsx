@@ -8,17 +8,27 @@ export function NotFoundEnhancer() {
 	const { data, isLoading } = useNotFoundEnhancement()
 
 	if (!data || isLoading) {
-		return <p>Checking for alternate solution...</p>
+		return <p>Checking for alternate solutions...</p>
 	}
+	const hasUrls = data?.bestAlternateUrls && data.bestAlternateUrls.length > 0
 	return (
 		<div className="mt-6">
 			<p>{data?.generatedContent}</p>
-			<p>Try this url instead:</p>
-			<div>
-				<Link href={data?.bestAlternateUrl || '#'}>
-					{data?.bestAlternateUrl || 'No alternate url found'}
-				</Link>
-			</div>
+			{hasUrls && (
+				<>
+					<p>Try one of these pages instead:</p>
+					{data?.bestAlternateUrls.map((url, i) => (
+						<div key={i}>
+							<Link href={url}>{url}</Link>
+						</div>
+					))}
+				</>
+			)}
+			{!hasUrls && (
+				<p>
+					Sorry we couldn&amp;t find additional pages for you to try this time.
+				</p>
+			)}
 		</div>
 	)
 }

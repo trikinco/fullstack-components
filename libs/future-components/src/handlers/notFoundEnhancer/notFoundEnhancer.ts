@@ -10,14 +10,16 @@ import {
 	assertReqRes,
 	getHandler,
 } from '../../nextjs-handlers'
-import { NotFoundEnhancerClient } from './notFoundEnhancerClient'
+import { NotFoundEnhancerSitemapSelector } from './notFoundEnhancerSitemapSelector'
+import { NotFoundEnhancerContentGenerator } from './notFoundEnhancerContentGenerator'
+import { ChatGptCompletionResponse } from '../../chatGptService'
 
 export class NotFoundEnhancerRequestBody {
 	requestedUrl?: string
 }
 export type NotFoundEnhancerResponse = {
 	generatedContent: string
-	bestAlternateUrl: string
+	bestAlternateUrls: string[]
 }
 export class NotFoundEnhancerError extends Error {
 	public rootCause: string
@@ -40,10 +42,17 @@ export type HandleNotFoundEnhancement = FutureCompHandler<never>
  * @ignore
  */
 export default function notFoundEnhancementHandler(
-	client: NotFoundEnhancerClient
+	sitemapSelector: NotFoundEnhancerSitemapSelector,
+	contentGenerator: NotFoundEnhancerContentGenerator
 ): HandleNotFoundEnhancement {
-	const appRouteHandler = appRouteHandlerFactory(client)
-	const pageRouteHandler = pageRouteHandlerFactory(client)
+	const appRouteHandler = appRouteHandlerFactory(
+		sitemapSelector,
+		contentGenerator
+	)
+	const pageRouteHandler = pageRouteHandlerFactory(
+		sitemapSelector,
+		contentGenerator
+	)
 
 	return getHandler<object>(
 		appRouteHandler,
@@ -55,13 +64,14 @@ export default function notFoundEnhancementHandler(
  * @ignore
  */
 const appRouteHandlerFactory: (
-	client: NotFoundEnhancerClient
+	sitemapSelector: NotFoundEnhancerSitemapSelector,
+	contentGenerator: NotFoundEnhancerContentGenerator
 ) => (
 	req: NextRequest,
 	ctx: AppRouteHandlerFnContext,
 	options?: object
 ) => Promise<Response> | Response =
-	(client) =>
+	(sitemapSelector, contentGenerator) =>
 	async (req, _ctx, options = {}) => {
 		try {
 			const res = new NextResponse()
@@ -74,12 +84,13 @@ const appRouteHandlerFactory: (
 			res.headers.set('Cache-Control', 'no-store')
 			const requestBody = (await req.json()) as NotFoundEnhancerRequestBody
 			console.log('requestBody', requestBody)
-			const gptResponse = await client.handle(requestBody)
+			const [bestAlternateUrls, generatedContent] = await Promise.allSettled([
+				sitemapSelector.handle(requestBody),
+				contentGenerator.handle(requestBody),
+			])
+			const response = mapPromiseResults(bestAlternateUrls, generatedContent)
 
-			// this is weird but we ask chatgpt for json so we parse it
-			// and then pass the object, which next expects
-			// same below
-			return NextResponse.json(JSON.parse(gptResponse.responseText), res)
+			return NextResponse.json(response, res)
 		} catch (error) {
 			throw new NotFoundEnhancerError(error)
 		}
@@ -89,13 +100,14 @@ const appRouteHandlerFactory: (
  * @ignore
  */
 const pageRouteHandlerFactory: (
-	client: NotFoundEnhancerClient
+	sitemapSelector: NotFoundEnhancerSitemapSelector,
+	contentGenerator: NotFoundEnhancerContentGenerator
 ) => (
 	req: NextApiRequest,
 	res: NextApiResponse,
 	options?: object
 ) => Promise<void> =
-	(client) =>
+	(sitemapSelector, contentGenerator) =>
 	async (
 		req: NextApiRequest,
 		res: NextApiResponse,
@@ -106,9 +118,52 @@ const pageRouteHandlerFactory: (
 			console.log('Not Found PAGES RouteHandlerFactory')
 			res.setHeader('Cache-Control', 'no-store')
 			const requestBody = req.body as NotFoundEnhancerRequestBody
-			const parsedError = await client.handle(requestBody)
-			res.json(JSON.parse(parsedError.responseText))
+			const [bestAlternateUrls, generatedContent] = await Promise.allSettled([
+				sitemapSelector.handle(requestBody),
+				contentGenerator.handle(requestBody),
+			])
+			const response = mapPromiseResults(bestAlternateUrls, generatedContent)
+
+			res.json(response)
 		} catch (error) {
 			throw new NotFoundEnhancerError(error)
 		}
 	}
+
+function mapPromiseResults(
+	bestAlternateUrls: PromiseSettledResult<ChatGptCompletionResponse>,
+	generatedContent: PromiseSettledResult<ChatGptCompletionResponse>
+) {
+	const response: NotFoundEnhancerResponse = {
+		generatedContent: '',
+		bestAlternateUrls: [],
+	}
+	try {
+		if (generatedContent.status === 'fulfilled') {
+			response.generatedContent =
+				(
+					JSON.parse(generatedContent.value.responseText) as {
+						generatedContent: undefined | string
+					}
+				).generatedContent || ''
+		}
+	} catch (error) {
+		// just log the error and continue
+		console.error(error)
+	}
+	try {
+		if (bestAlternateUrls.status === 'fulfilled') {
+			response.bestAlternateUrls =
+				(
+					JSON.parse(bestAlternateUrls.value.responseText) as {
+						bestAlternateUrls: string[] | undefined
+					}
+				).bestAlternateUrls || []
+		}
+	} catch (error) {
+		// just log the error and continue
+		console.error(error)
+	}
+
+	return response
+}
