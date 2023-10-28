@@ -1,7 +1,7 @@
 {
 	"name": "fullstack-components",
 	"version": "1.0.1",
-	"description": "AI powered fullstack components",
+	"description": "AI-powered fullstack components",
 	"private": true,
 	"type": "module",
 	"license": "UNLICENSED",

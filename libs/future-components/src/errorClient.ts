@@ -1,10 +1,7 @@
 import { runChatCompletion } from './chatGptService'
 import { OPENAI_API_KEY } from './utils/constants'
+import type { ChatMessage } from './models/ChatMessage'
 
-export type ChatMessage = {
-	role: 'system' | 'user' | 'assistant'
-	content: string
-}
 export class ErrorClient {
 	public handleErrorRequest = async (
 		errorString: string,

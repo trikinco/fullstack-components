@@ -3,6 +3,7 @@ import { HandleErrorParser } from './handlers/errorParser'
 import handlerFactory from './next-routing'
 import { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
 import { FutureComponentsServer, _init } from './init'
+import { HandlePrompt } from './handlers/prompt/promptHandler'
 
 // Because we use a cache and use clients,
 // we may want to create a singleton for the library
@@ -20,15 +21,21 @@ function getInstance(): FutureComponentsServer {
 }
 
 // export the handler instances rather than the handler functions
+const handlePromptRequest: HandlePrompt = ((
+	...args: Parameters<HandlePrompt>
+) => getInstance().handlePromptRequest(...args)) as HandlePrompt
+
 const handleErrorRequest: HandleErrorParser = ((
 	...args: Parameters<HandleErrorParser>
 ) => getInstance().handleErrorRequest(...args)) as HandleErrorParser
+
 const handleNotFoundEnhancement: HandleNotFoundEnhancement = ((
 	...args: Parameters<HandleNotFoundEnhancement>
 ) =>
 	getInstance().handleNotFoundEnhancement(...args)) as HandleNotFoundEnhancement
 
 const handleFSComponents = handlerFactory({
+	handlePrompt: handlePromptRequest,
 	handleErrorParser: handleErrorRequest,
 	handleNotFoundEnhancement: handleNotFoundEnhancement,
 })
