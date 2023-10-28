@@ -27,8 +27,10 @@ And the contents should be:
 ```ts
 import { handleFSComponents } from '@fullstack-components/ai-components'
 
-export const GET = handleFSComponents()
-export const POST = handleFSComponents()
+export const GET =
+	handleFSComponents(/* various options. see each component below */)
+export const POST =
+	handleFSComponents(/* various options. see each component below */)
 ```
 
 Note there's no auth on these endpoints but you can wrap them to add auth. [[TODO]] Add notes about this.
@@ -41,7 +43,22 @@ There are many components available. Here are some examples.
 
 This components uses your site map to find the closest matching page to the not found url. It also uses the contents of your website urls to create a helpful message for your customer.
 
-Step 1: Create a new client component in your nextjs app
+Step 1: Configure the handler
+
+In the api handler file, you should add the following configuration
+to use this component. Note that not all of them
+require configuration, read the documentation for eachß. Not Found Enhancer DOES require configuration.
+
+```ts
+export const POST = handleFSComponents({
+	['not-found-enhancer']: handleNotFoundEnhancement({
+		siteUrl: process.env.SITE_URL || '', // used to inspect the sitemap
+		openAiApiKey: process.env.OPENAI_API_KEY || '', // used to generate the contents
+	}),
+})
+```
+
+Step 2: Create a new client component in your nextjs app
 
 The key here is to use the `useNotFoundEnhancement` hook to get the data from the api endpoint.
 

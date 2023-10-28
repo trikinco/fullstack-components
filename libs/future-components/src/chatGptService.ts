@@ -16,7 +16,7 @@ export type ChatGptCompletionResponse = {
 
 export async function runChatCompletion(
 	messages: ChatMessage[],
-	options: { openAIApiKey: string }
+	options: { openAIApiKey: string; temperature?: number }
 ): Promise<ChatGptCompletionResponse> {
 	const openai = new OpenAI({
 		apiKey: options.openAIApiKey,
@@ -26,6 +26,7 @@ export async function runChatCompletion(
 	try {
 		const completion = await openai.chat.completions.create({
 			model: model,
+			temperature: options.temperature || 0.9,
 			messages,
 		})
 

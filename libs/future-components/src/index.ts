@@ -1,45 +1,26 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import errorParserHandler, { HandleErrorParser } from './handlers/errorParser'
-
+import { HandleErrorParser } from './handlers/errorParser'
 import handlerFactory from './next-routing'
-import notFoundEnhancementHandler, {
-	HandleNotFoundEnhancement,
-} from './handlers/notFoundEnhancer/notFoundEnhancer'
-import { ErrorClient } from './errorClient'
-import { NotFoundEnhancerClient } from './handlers/notFoundEnhancer/notFoundEnhancerClient'
-import promptHandler, { HandlePrompt } from './handlers/prompt/promptHandler'
-import { PromptClient } from './handlers/prompt/promptClient'
+import { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
+import { FutureComponentsServer, _init } from './init'
+import { HandlePrompt } from './handlers/prompt/promptHandler'
 
-type FutureComponentsServer = {
-	// some simple cache of requests to openai here?
-	requestCache: Map<string, string>
-	handlePromptRequest: HandlePrompt
-	handleErrorRequest: HandleErrorParser
-	handleNotFoundEnhancement: HandleNotFoundEnhancement
-}
+// Because we use a cache and use clients,
+// we may want to create a singleton for the library
+// this does that
 
 let instance: FutureComponentsServer | undefined
-
-function init(): FutureComponentsServer {
-	return {
-		requestCache: new Map(), // this isnt really used, just thinking about caching
-		handlePromptRequest: promptHandler(new PromptClient()),
-		handleErrorRequest: errorParserHandler(new ErrorClient()),
-		handleNotFoundEnhancement: notFoundEnhancementHandler(
-			new NotFoundEnhancerClient()
-		),
-	}
-}
 
 function getInstance(): FutureComponentsServer {
 	if (instance) {
 		return instance
 	}
 
-	instance = init()
+	instance = _init()
 	return instance
 }
 
+// export the handler instances rather than the handler functions
 const handlePromptRequest: HandlePrompt = ((
 	...args: Parameters<HandlePrompt>
 ) => getInstance().handlePromptRequest(...args)) as HandlePrompt
@@ -58,19 +39,22 @@ const handleFSComponents = handlerFactory({
 	handleErrorParser: handleErrorRequest,
 	handleNotFoundEnhancement: handleNotFoundEnhancement,
 })
-
 // public library api for server
-export { NotFoundEnhancerClient } from './handlers/notFoundEnhancer/notFoundEnhancerClient'
+export { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
+export { NotFoundEnhancerContentGenerator } from './handlers/notFoundEnhancer/notFoundEnhancerContentGenerator'
 export { ErrorClient } from './errorClient'
 export { ErrorParseResponse, ErrorRequestBody } from './handlers/errorParser'
 export {
 	NotFoundEnhancerRequestBody,
 	NotFoundEnhancerResponse,
 } from './handlers/notFoundEnhancer/notFoundEnhancer'
+export { AppRouteHandlerFnContext } from './nextjs-handlers'
+export { NotFoundEnhancerOptions } from './handlers/notFoundEnhancer/notFoundEnhancer'
 export {
-	FutureComponentsServer,
 	getInstance,
 	handleErrorRequest,
 	handleNotFoundEnhancement,
 	handleFSComponents,
 }
+
+export { FutureComponentsServer } from './init'
