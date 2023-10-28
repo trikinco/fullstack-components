@@ -35,7 +35,7 @@ export class NotFoundEnhancerSitemapSelector {
                      4. There is a spelling mistake
                      5. Or any reason you think makes them relevant, be inventive.
                 3. Return a maximum of 5 urls, order them by your confidence that they are relevant to the user's intent.
-                4. Only use URLS that exist in the sitemap, this is very important.
+                4. Do not invent urls. Only use URLS that exist in the provided sitemap list, this is very important.
                 5. Only return JSON in the format:
                 
                 {"bestAlternateUrls": string[]} 
@@ -60,6 +60,7 @@ export class NotFoundEnhancerSitemapSelector {
 		)
 		return await runChatCompletion(messages, {
 			openAIApiKey: options.openAiApiKey,
+			temperature: 0,
 		})
 	}
 }

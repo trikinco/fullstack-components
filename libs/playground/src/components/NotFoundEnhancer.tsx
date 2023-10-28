@@ -10,6 +10,7 @@ export function NotFoundEnhancer() {
 	if (!data || isLoading) {
 		return <p>Checking for alternate solutions...</p>
 	}
+	console.log('Enhanced not found data', data)
 	const hasUrls = data?.bestAlternateUrls && data.bestAlternateUrls.length > 0
 	return (
 		<div className="mt-6">

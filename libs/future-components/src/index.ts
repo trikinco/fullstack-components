@@ -1,40 +1,25 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import errorParserHandler, { HandleErrorParser } from './handlers/errorParser'
-
+import { HandleErrorParser } from './handlers/errorParser'
 import handlerFactory from './next-routing'
-import notFoundEnhancementHandler, {
-	HandleNotFoundEnhancement,
-} from './handlers/notFoundEnhancer/notFoundEnhancer'
-import { ErrorClient } from './errorClient'
-import { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
-import { NotFoundEnhancerContentGenerator } from './handlers/notFoundEnhancer/notFoundEnhancerContentGenerator'
+import { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
+import { FutureComponentsServer, _init } from './init'
 
-type FutureComponentsServer = {
-	// some simple cache of requests to openai here?
-	requestCache: Map<string, string>
-	handleErrorRequest: HandleErrorParser
-	handleNotFoundEnhancement: HandleNotFoundEnhancement
-}
+// Because we use a cache and use clients,
+// we may want to create a singleton for the library
+// this does that
+
 let instance: FutureComponentsServer | undefined
-function init(): FutureComponentsServer {
-	return {
-		requestCache: new Map(), // this isnt really used, just thinking about caching
-		handleErrorRequest: errorParserHandler(new ErrorClient()),
-		handleNotFoundEnhancement: notFoundEnhancementHandler(
-			new NotFoundEnhancerSitemapSelector(),
-			new NotFoundEnhancerContentGenerator()
-		),
-	}
-}
+
 function getInstance(): FutureComponentsServer {
 	if (instance) {
 		return instance
 	}
 
-	instance = init()
+	instance = _init()
 	return instance
 }
 
+// export the handler instances rather than the handler functions
 const handleErrorRequest: HandleErrorParser = ((
 	...args: Parameters<HandleErrorParser>
 ) => getInstance().handleErrorRequest(...args)) as HandleErrorParser
@@ -59,9 +44,10 @@ export {
 export { AppRouteHandlerFnContext } from './nextjs-handlers'
 export { NotFoundEnhancerOptions } from './handlers/notFoundEnhancer/notFoundEnhancer'
 export {
-	FutureComponentsServer,
 	getInstance,
 	handleErrorRequest,
 	handleNotFoundEnhancement,
 	handleFSComponents,
 }
+
+export { FutureComponentsServer } from './init'

@@ -59,10 +59,13 @@ export default function notFoundEnhancementHandler(
 		contentGenerator
 	)
 
-	return getHandler<NotFoundEnhancerOptions>(
+	// eslint-disable-next-line sonarjs/prefer-immediate-return
+	const foundHandler = getHandler<NotFoundEnhancerOptions>(
 		appRouteHandler,
 		pageRouteHandler
 	) as HandleNotFoundEnhancement
+	console.log('foundHandler', foundHandler)
+	return foundHandler
 }
 
 /**
@@ -77,6 +80,7 @@ const appRouteHandlerFactory: (
 	options?: NotFoundEnhancerOptions
 ) => Promise<Response> | Response =
 	(sitemapSelector, contentGenerator) => async (req, _ctx, options) => {
+		console.log('Running handler')
 		try {
 			const res = new NextResponse()
 			console.log('Not found enhancer APP RouteHandlerFactory')
@@ -99,6 +103,7 @@ const appRouteHandlerFactory: (
 
 			return NextResponse.json(response, res)
 		} catch (error) {
+			console.error(error, 'handler error')
 			throw new NotFoundEnhancerError(error)
 		}
 	}

@@ -109,7 +109,9 @@ export const getHandler =
 		resOrCtx: NextApiResponse | AppRouteHandlerFnContext,
 		options?: Opts
 	) => {
+		console.log('GET HANDLER', appRouteHandler)
 		if (isRequest(reqOrOptions)) {
+			console.log('isRequest - returning appRouteHandler')
 			return appRouteHandler(
 				reqOrOptions as NextRequest,
 				resOrCtx as AppRouteHandlerFnContext,
@@ -117,16 +119,19 @@ export const getHandler =
 			)
 		}
 		if ('socket' in reqOrOptions) {
+			console.log('isSocket - returning pageRouteHandler')
 			return pageRouteHandler(
 				reqOrOptions as NextApiRequest,
 				resOrCtx as NextApiResponse,
 				options
 			)
 		}
+		console.log('returning inner handler')
 		return (
 			req: NextApiRequest | NextRequest,
 			resOrCtxInner: NextApiResponse | AppRouteHandlerFnContext
 		) => {
+			console.log('GET HANDLER - inner')
 			const opts = (
 				typeof reqOrOptions === 'function'
 					? (reqOrOptions as OptionsProvider<Opts>)(req)
@@ -134,12 +139,14 @@ export const getHandler =
 			) as Opts
 
 			if (isRequest(req)) {
+				console.log('returning appRouteHandler')
 				return appRouteHandler(
 					req as NextRequest,
 					resOrCtxInner as AppRouteHandlerFnContext,
 					opts
 				)
 			}
+			console.log('returning pageRouteHandler')
 			return pageRouteHandler(
 				req as NextApiRequest,
 				resOrCtxInner as NextApiResponse,
