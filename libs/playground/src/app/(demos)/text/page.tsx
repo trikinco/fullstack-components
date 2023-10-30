@@ -1,11 +1,10 @@
+import { PageHeader } from '@/src/components/PageHeader'
 import { TextRewriteControls } from '@/src/components/TextRewriteControls'
 
 export default function Page() {
 	return (
-		<div className="flex min-h-screen flex-col items-center justify-between p-24">
-			<h1 className="text-3xl mb-6">
-				<code>TextRewrite</code> demo
-			</h1>
+		<>
+			<PageHeader title="Text" />
 
 			<div className="bg-white/10 mb-4 block p-4 rounded-md border-2 border-white/50">
 				<code className="mb-3 block">Original text</code>
@@ -50,6 +49,6 @@ export default function Page() {
 					</p>
 				</TextRewriteControls>
 			</div>
-		</div>
+		</>
 	)
 }
