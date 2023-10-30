@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image'
 import { useRequest } from '@fullstack-components/ai-components/client'
+import { PageHeader } from '@/src/components/PageHeader'
 
 const imageURL =
 	'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Felis_catus-cat_on_snow.jpg/179px-Felis_catus-cat_on_snow.jpg'
@@ -21,10 +22,8 @@ export default function ImagePage() {
 	})
 
 	return (
-		<div className="flex min-h-screen flex-col items-center justify-between p-24">
-			<h1 className="text-3xl mb-6">
-				<code>Image</code> demo
-			</h1>
+		<>
+			<PageHeader title="Image" />
 
 			<div>
 				{isLoading && !data ? (
@@ -60,10 +59,12 @@ export default function ImagePage() {
 						<h2 className="text-2xl mb-6">Image generation</h2>
 
 						<p className="mb-3">{prompt}</p>
-						{image ? <Image src={image.result} alt={prompt} /> : null}
+						{image ? (
+							<Image src={image.result} alt={prompt} width={256} height={256} />
+						) : null}
 					</div>
 				)}
 			</div>
-		</div>
+		</>
 	)
 }
