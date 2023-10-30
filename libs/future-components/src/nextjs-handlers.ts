@@ -6,7 +6,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { NextRequest } from 'next/server'
 import type { IncomingMessage } from 'http'
 
-export type AppRouteHandlerFnContext = {
+export type AppRouteHandlerContext = {
 	params: Record<string, string | string[]>
 }
 export type FutureCompHandler<Opts> = Handler<Opts> & {
@@ -14,7 +14,7 @@ export type FutureCompHandler<Opts> = Handler<Opts> & {
 }
 export type NextAppRouterHandler = (
 	req: NextRequest,
-	ctx: AppRouteHandlerFnContext
+	ctx: AppRouteHandlerContext
 ) => Promise<Response> | Response
 export type NextPageRouterHandler = (
 	req: NextApiRequest,
@@ -25,7 +25,7 @@ export type OptionsProvider<Opts> = (req: NextApiRequest | NextRequest) => Opts
 export type Handler<Opts = any> = {
 	(
 		req: NextRequest,
-		ctx: AppRouteHandlerFnContext,
+		ctx: AppRouteHandlerContext,
 		options?: Opts
 	): Promise<Response> | Response
 	(
@@ -35,14 +35,14 @@ export type Handler<Opts = any> = {
 	): Promise<unknown> | unknown
 	(
 		req: NextApiRequest | NextRequest,
-		resOrOpts: NextApiResponse | AppRouteHandlerFnContext,
+		resOrOpts: NextApiResponse | AppRouteHandlerContext,
 		options?: Opts
 	): Promise<Response | unknown> | Response | unknown
 }
 /**
  * Handler function for app routes.
  */
-export type AppRouteHandlerFn<Options = any> = (
+export type AppRouteHandler<Options = any> = (
 	/**
 	 * Incoming request object.
 	 */
@@ -51,7 +51,7 @@ export type AppRouteHandlerFn<Options = any> = (
 	 * Context properties on the request (including the parameters if this was a
 	 * dynamic route).
 	 */
-	ctx: AppRouteHandlerFnContext,
+	ctx: AppRouteHandlerContext,
 
 	opts?: Options
 ) => Promise<Response> | Response
@@ -101,12 +101,12 @@ export const isNextApiRequest = (req: Req) => {
 
 export const getHandler =
 	<Opts extends Record<string, any>>(
-		appRouteHandler: AppRouteHandlerFn<Opts>,
+		appRouteHandler: AppRouteHandler<Opts>,
 		pageRouteHandler: PageRouteHandlerFn<Opts>
 	) =>
 	(
 		reqOrOptions: NextApiRequest | NextRequest | Opts,
-		resOrCtx: NextApiResponse | AppRouteHandlerFnContext,
+		resOrCtx: NextApiResponse | AppRouteHandlerContext,
 		options?: Opts
 	) => {
 		console.log('GET HANDLER', appRouteHandler)
@@ -114,7 +114,7 @@ export const getHandler =
 			console.log('isRequest - returning appRouteHandler')
 			return appRouteHandler(
 				reqOrOptions as NextRequest,
-				resOrCtx as AppRouteHandlerFnContext,
+				resOrCtx as AppRouteHandlerContext,
 				options
 			)
 		}
@@ -129,7 +129,7 @@ export const getHandler =
 		console.log('returning inner handler')
 		return (
 			req: NextApiRequest | NextRequest,
-			resOrCtxInner: NextApiResponse | AppRouteHandlerFnContext
+			resOrCtxInner: NextApiResponse | AppRouteHandlerContext
 		) => {
 			console.log('GET HANDLER - inner')
 			const opts = (
@@ -142,7 +142,7 @@ export const getHandler =
 				console.log('returning appRouteHandler')
 				return appRouteHandler(
 					req as NextRequest,
-					resOrCtxInner as AppRouteHandlerFnContext,
+					resOrCtxInner as AppRouteHandlerContext,
 					opts
 				)
 			}

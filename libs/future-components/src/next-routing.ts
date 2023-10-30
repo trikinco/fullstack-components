@@ -1,51 +1,15 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable unicorn/prevent-abbreviations */
-import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
-import { NextRequest } from 'next/server'
-import {
-	AppRouteHandlerFn,
-	AppRouteHandlerFnContext,
-	NextAppRouterHandler,
-	NextPageRouterHandler,
-	isRequest,
-} from './nextjs-handlers'
-import { HandleErrorParser } from './handlers/errorParser'
+import { isRequest } from './nextjs-handlers'
 
-import { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
-import { HandlePrompt } from './handlers/prompt/promptHandler'
-
-// taken from auth0 nextjs
-// to use - create a route in /api/fscomponents/[futc].ts
-export type Handlers = ApiHandlers | ErrorHandlers
-
-/**
- * @ignore
- */
-type ApiHandlers = {
-	[key: string]: NextPageRouterHandler | NextAppRouterHandler
-}
-
-/**
- * @ignore
- */
-type ErrorHandlers = {
-	onError?: PageRouterOnError | AppRouterOnError
-}
-
-export type HandleFSComponents = (
-	userHandlers?: Handlers
-	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-) => NextApiHandler | AppRouteHandlerFn | any
-
-export type PageRouterOnError = (
-	req: NextApiRequest,
-	res: NextApiResponse,
-	error: any
-) => Promise<void> | void
-export type AppRouterOnError = (
-	req: NextRequest,
-	error: any
-) => Promise<Response | void> | Response | void
+import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
+import type { NextRequest } from 'next/server'
+import type { AppRouteHandler, AppRouteHandlerContext } from './nextjs-handlers'
+import type { HandleErrorParser } from './handlers/errorParser'
+import type { PageRouterOnError, AppRouterOnError } from './types/routers'
+import type { FSCApiHandler, FSCOptions, ApiHandlers } from './types/handlers'
+import type { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
+import type { HandlePrompt } from './handlers/prompt/promptHandler'
 
 /**
  * @ignore
@@ -74,10 +38,10 @@ export default function handlerFactory({
 	handlePrompt: HandlePrompt
 	handleErrorParser: HandleErrorParser
 	handleNotFoundEnhancement: HandleNotFoundEnhancement
-}): HandleFSComponents {
-	return ({ onError, ...handlers }: Handlers = {}):
+}): FSCApiHandler {
+	return ({ onError, ...handlers }: FSCOptions = {}):
 		| NextApiHandler<void>
-		| AppRouteHandlerFn => {
+		| AppRouteHandler => {
 		const customHandlers: ApiHandlers = {
 			prompt: handlePrompt,
 			parseError: handleErrorParser,
@@ -96,12 +60,12 @@ export default function handlerFactory({
 
 		return (
 			req: NextRequest | NextApiRequest,
-			resOrCtx: NextApiResponse | AppRouteHandlerFnContext
+			resOrCtx: NextApiResponse | AppRouteHandlerContext
 		) => {
 			if (isRequest(req)) {
 				return appRouteHandler(
 					req as NextRequest,
-					resOrCtx as AppRouteHandlerFnContext
+					resOrCtx as AppRouteHandlerContext
 				)
 			}
 			return pageRouteHandler(
@@ -118,7 +82,7 @@ export default function handlerFactory({
 const appRouteHandlerFactory: (
 	customHandlers: ApiHandlers,
 	onError?: AppRouterOnError
-) => AppRouteHandlerFn =
+) => AppRouteHandler =
 	(customHandlers, onError) => async (req: NextRequest, ctx) => {
 		const { params } = ctx
 		let route = params.fscomponents
@@ -137,7 +101,7 @@ const appRouteHandlerFactory: (
 			route && customHandlers.hasOwnProperty(route) && customHandlers[route]
 		try {
 			if (handler) {
-				return await (handler as AppRouteHandlerFn)(req, ctx)
+				return await (handler as AppRouteHandler)(req, ctx)
 			} else {
 				// eslint-disable-next-line unicorn/no-null
 				return new Response(null, { status: 404 })

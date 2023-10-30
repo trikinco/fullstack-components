@@ -4,7 +4,7 @@ import { NextApiResponse, NextApiRequest } from 'next'
 import { NextRequest, NextResponse } from 'next/server'
 import {
 	// eslint-disable-next-line unicorn/prevent-abbreviations
-	AppRouteHandlerFnContext,
+	AppRouteHandlerContext,
 	FutureCompHandler,
 	Handler,
 	assertReqRes,
@@ -76,7 +76,7 @@ const appRouteHandlerFactory: (
 	contentGenerator: NotFoundEnhancerContentGenerator
 ) => (
 	req: NextRequest,
-	ctx: AppRouteHandlerFnContext,
+	ctx: AppRouteHandlerContext,
 	options?: NotFoundEnhancerOptions
 ) => Promise<Response> | Response =
 	(sitemapSelector, contentGenerator) => async (req, _ctx, options) => {
