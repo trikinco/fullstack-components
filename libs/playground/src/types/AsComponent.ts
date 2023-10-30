@@ -1,9 +1,4 @@
-import type {
-	ComponentProps,
-	ComponentPropsWithoutRef,
-	ElementType,
-	ReactNode,
-} from 'react'
+import type { ComponentProps, ElementType, ReactNode } from 'react'
 
 /**
  * Basic setup for a polymorphic component,
