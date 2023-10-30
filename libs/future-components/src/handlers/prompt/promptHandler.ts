@@ -4,7 +4,7 @@ import { NextApiResponse, NextApiRequest } from 'next'
 import { NextRequest, NextResponse } from 'next/server'
 import {
 	// eslint-disable-next-line unicorn/prevent-abbreviations
-	AppRouteHandlerFnContext,
+	AppRouteHandlerContext,
 	FutureCompHandler,
 	Handler,
 	assertReqRes,
@@ -54,7 +54,7 @@ const appRouteHandlerFactory: (
 	client: PromptClient
 ) => (
 	req: NextRequest,
-	ctx: AppRouteHandlerFnContext,
+	ctx: AppRouteHandlerContext,
 	options?: object
 ) => Promise<Response> | Response =
 	(client) =>

@@ -1,9 +1,11 @@
 /* eslint-disable unicorn/prevent-abbreviations */
-import { HandleErrorParser } from './handlers/errorParser'
 import handlerFactory from './next-routing'
-import { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
-import { FutureComponentsServer, _init } from './init'
-import { HandlePrompt } from './handlers/prompt/promptHandler'
+import { _init } from './init'
+
+import type { HandleErrorParser } from './handlers/errorParser'
+import type { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
+import type { FutureComponentsServer } from './init'
+import type { HandlePrompt } from './handlers/prompt/promptHandler'
 
 // Because we use a cache and use clients,
 // we may want to create a singleton for the library
@@ -39,6 +41,7 @@ const handleFSComponents = handlerFactory({
 	handleErrorParser: handleErrorRequest,
 	handleNotFoundEnhancement: handleNotFoundEnhancement,
 })
+
 // public library api for server
 export { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
 export { NotFoundEnhancerContentGenerator } from './handlers/notFoundEnhancer/notFoundEnhancerContentGenerator'
@@ -48,7 +51,7 @@ export {
 	NotFoundEnhancerRequestBody,
 	NotFoundEnhancerResponse,
 } from './handlers/notFoundEnhancer/notFoundEnhancer'
-export { AppRouteHandlerFnContext } from './nextjs-handlers'
+export { AppRouteHandlerContext } from './nextjs-handlers'
 export { NotFoundEnhancerOptions } from './handlers/notFoundEnhancer/notFoundEnhancer'
 export {
 	getInstance,
@@ -58,3 +61,4 @@ export {
 }
 
 export { FutureComponentsServer } from './init'
+export * from './types'

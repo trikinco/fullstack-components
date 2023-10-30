@@ -1,5 +1,4 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import { Nav } from '@/src/components/Nav'
 
 export default function DemoLayout({
 	children,
@@ -8,17 +7,8 @@ export default function DemoLayout({
 }) {
 	return (
 		<>
-			<nav className="p-6">
-				<Link href="/">
-					<Image
-						src="/images/MobiusStrip.png"
-						alt="Logo"
-						width={30}
-						height={30}
-					/>
-				</Link>
-			</nav>
-			<main>{children}</main>
+			<Nav />
+			<main className="min-h-screen">{children}</main>
 		</>
 	)
 }
