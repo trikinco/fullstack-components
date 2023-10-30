@@ -6,6 +6,7 @@ import type {
 } from 'react'
 import Image from 'next/image'
 import { merge } from '../utils/styles'
+import type { AsComponent } from '../types/AsComponent'
 
 export interface CardProps
 	extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
@@ -15,21 +16,39 @@ export interface CardProps
 	footer?: ReactNode
 	component?: ElementType
 }
+export const defaultElement = 'div'
 
-export const Card = ({
+export const Card = <C extends ElementType = typeof defaultElement>({
+	as,
+	className,
 	image,
 	title,
 	children,
 	footer,
 	component: TitleComponent = 'p',
-}: CardProps) => {
-	const { src, className, alt, width = 300, height = 300 } = image || {}
+	...rest
+}: AsComponent<C, CardProps>) => {
+	const Component = as || defaultElement
+	const {
+		src,
+		className: imgClassName,
+		alt,
+		width = 300,
+		height = 300,
+	} = image || {}
+
 	return (
-		<div className="w-full flex flex-col grow max-w-sm p-4 bg-white border-2 border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+		<Component
+			className={merge(
+				'w-full flex flex-col grow max-w-sm p-4 bg-white border-2 border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50',
+				className
+			)}
+			{...rest}
+		>
 			<div className="flex grow flex-col relative">
 				{src && (
 					<Image
-						className={merge('hover:mix-blend-hard-light', className)}
+						className={merge('hover:mix-blend-hard-light', imgClassName)}
 						src={src}
 						alt={alt || ''}
 						width={width as number}
@@ -47,6 +66,6 @@ export const Card = ({
 
 				{footer && <div className="mt-auto pt-2">{footer}</div>}
 			</div>
-		</div>
+		</Component>
 	)
 }

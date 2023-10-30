@@ -1,5 +1,6 @@
 export const NAME_LONG = 'AI-Powered Fullstack Components'
 export const NAME_SHORT = 'Fullstack Components'
+export const NAME_LIB = '@fullstack-components'
 export const URL_GITHUB = 'https://github.com/ambient-co/fullstack-components'
 
 export const DEPLOYMENT_URL =
