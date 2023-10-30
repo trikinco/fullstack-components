@@ -2,20 +2,9 @@ import Link from 'next/link'
 import { Card } from '../components/Card'
 import { Chip } from '../components/Chip'
 import { PageHeader } from '../components/PageHeader'
-import { NAME_LONG, NAME_SHORT, URL_GITHUB } from '../utils/constants'
+import { NAME_SHORT, URL_GITHUB } from '../utils/constants'
 import { Button } from '../components/Button'
 import { IconGitHub } from '../components/Icons/IconGitHub'
-
-// .typewriter h1 {
-// 	overflow: hidden; /* Ensures the content is not revealed until the animation */
-// 	border-right: .15em solid orange; /* The typwriter cursor */
-// 	white-space: nowrap; /* Keeps the content on a single line */
-// 	margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-// 	letter-spacing: .15em; /* Adjust as needed */
-// 	animation:
-// 	  typing 3.5s steps(40, end),
-// 	  blink-caret .75s step-end infinite;
-//   }
 
 export default function Home() {
 	return (
