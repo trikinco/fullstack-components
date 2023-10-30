@@ -11,7 +11,13 @@ export interface NavProps extends HTMLAttributes<HTMLDivElement> {
 
 export const Nav = ({ children, className, ...rest }: NavProps) => {
 	return (
-		<nav className={merge('flex items-center p-6', className)} {...rest}>
+		<nav
+			className={merge(
+				'flex sticky top-0 left-0 backdrop-blur-md items-center p-6',
+				className
+			)}
+			{...rest}
+		>
 			<Link href="/">
 				<Image
 					src="/images/MobiusStrip.png"
