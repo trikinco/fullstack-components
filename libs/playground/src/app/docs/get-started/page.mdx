@@ -1,4 +1,4 @@
-import { NAME_LIB, NAME_SHORT } from '@/src/utils/constants'
+import { NAME_LIB, NAME_SHORT, NAME_LONG } from '@/src/utils/constants'
 
 # Get started with {NAME_SHORT}
 
@@ -52,6 +52,6 @@ export function NotFoundEnhancer() {
 ```
 
 export const metadata = {
-	title: 'Page title',
-	description: 'Page description',
+	title: `Get started with ${NAME_SHORT}`,
+	description: `Get started with ${NAME_LONG} to build websites by writing prompts`,
 }
