@@ -21,7 +21,7 @@ export const useText = (options: RewriteOptions) => {
 				typeof options.grade === 'number'
 					? `${ordinal(options.grade)}-grade`
 					: options.grade
-			const content = renderToStaticMarkup(options.children as ReactElement)
+			const content = renderToStaticMarkup(options.children as any)
 
 			const response = await fetch('/api/text', {
 				method: 'POST',

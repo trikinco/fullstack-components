@@ -45,7 +45,7 @@
 		"@tailwindcss/typography": "0.5.10",
 		"@types/mdx": "2.0.9",
 		"@types/node": "20",
-		"@types/react": "18.2.33",
+		"@types/react": "18.2.31",
 		"@types/react-dom": "18",
 		"@types/xml2json": "0.11.5",
 		"autoprefixer": "10",
