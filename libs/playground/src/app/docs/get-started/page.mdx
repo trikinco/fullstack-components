@@ -1,0 +1,57 @@
+import { NAME_LIB, NAME_SHORT } from '@/src/utils/constants'
+
+# Get started with {NAME_SHORT}
+
+## Installation
+
+```sh
+npm install @fullstack-components
+```
+
+```tsx title="app/api/future/route.ts"
+import {
+	handleFSComponents,
+	handleNotFoundEnhancement,
+	type FSCOptions,
+} from '@fullstack-components/ai-components'
+
+const fscOptions: FSCOptions = {
+	// Your options...
+}
+
+const fscHandler = handleFSComponents(fscOptions)
+
+export { fscHandler as GET, fscHandler as POST }
+```
+
+```tsx title="components/NotFoundEnhancment.tsx"
+'use client'
+
+import { useNotFoundEnhancement } from '@fullstack-components/ai-components/client'
+import Link from 'next/link'
+
+export function NotFoundEnhancer() {
+	const { content, isLoading } = useNotFoundEnhancement()
+
+	if (!content || isLoading) {
+		return <p>Checking for alternate solution...</p>
+	}
+
+	return (
+		<div>
+			<p>{content?.generatedContent}</p>
+			<p>Try this url instead:</p>
+			<div>
+				<Link href={content?.bestAlternateUrl || '#'}>
+					{content?.bestAlternateUrl || 'No alternate url found'}
+				</Link>
+			</div>
+		</div>
+	)
+}
+```
+
+export const metadata = {
+	title: 'Page title',
+	description: 'Page description',
+}

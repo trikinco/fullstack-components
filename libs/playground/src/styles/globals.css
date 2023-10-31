@@ -6,6 +6,20 @@
 	--foreground-rgb: 0, 0, 0;
 	--background-start-rgb: 214, 219, 220;
 	--background-end-rgb: 255, 255, 255;
+
+	/* mdx code syntax highlighting theme */
+	/* github dark */
+	--shiki-color-text: #9ecbff;
+	--shiki-color-background: #24292e;
+	--shiki-token-constant: #79b8ff;
+	--shiki-token-string: #9ecbff;
+	--shiki-token-comment: #6a737d;
+	--shiki-token-keyword: #f97583;
+	--shiki-token-parameter: #e1e4e8;
+	--shiki-token-function: #e1e4e8;
+	--shiki-token-string-expression: #79b8ff;
+	--shiki-token-punctuation: #6a737d;
+	--shiki-token-link: #dbedff;
 }
 
 @media (prefers-color-scheme: dark) {

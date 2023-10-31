@@ -33,7 +33,7 @@ export default function Home() {
 						Responsible, customizable and open source.
 					</p>
 					<div className="mt-8 flex grow items-center gap-6">
-						<Button as={Link} href="/get-started">
+						<Button as={Link} href="/docs/get-started">
 							Get started
 						</Button>
 						<Button
