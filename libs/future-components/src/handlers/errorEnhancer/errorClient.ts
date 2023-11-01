@@ -1,13 +1,14 @@
-import { runChatCompletion } from './chatGptService'
-import { OPENAI_API_KEY } from './utils/constants'
-import type { ChatMessage } from './types/ChatMessage'
+import { runChatCompletion } from '../../chatGptService'
+import { OPENAI_API_KEY } from '../../utils/constants'
+import type { ChatMessage } from '../../types/ChatMessage'
+import { ErrorEnhancementRequestBody, ErrorParserOptions } from './models'
 
 export class ErrorClient {
-	public handleErrorRequest = async (
-		errorString: string,
-		additionalAppContext?: string
+	public handle = async (
+		errorEnhancementRequest: ErrorEnhancementRequestBody,
+		options?: ErrorParserOptions
 	) => {
-		console.log('handling error request', errorString)
+		console.log('handling error request', errorEnhancementRequest)
 		const messages: ChatMessage[] = []
 		messages.push(
 			{
@@ -36,15 +37,13 @@ export class ErrorClient {
 			},
 			{
 				role: 'user',
-				content: `Here is an error to analyse: ${errorString}. ${
-					additionalAppContext
-						? `Here is some additional context: ${additionalAppContext}`
-						: ''
-				}`,
+				content: `Here is an error to analyse: ${JSON.stringify(
+					errorEnhancementRequest
+				)}.`,
 			}
 		)
 		return await runChatCompletion(messages, {
-			openAIApiKey: OPENAI_API_KEY,
+			openAIApiKey: options?.openAiApiKey || OPENAI_API_KEY,
 		})
 	}
 }

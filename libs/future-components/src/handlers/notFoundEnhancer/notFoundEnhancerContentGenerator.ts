@@ -1,8 +1,6 @@
 import { runChatCompletion } from '../../chatGptService'
-import {
-	NotFoundEnhancerOptions,
-	NotFoundEnhancerRequestBody,
-} from './notFoundEnhancer'
+import { OPENAI_API_KEY } from '../../utils/constants'
+import { NotFoundEnhancerOptions, NotFoundEnhancerRequestBody } from './models'
 import { sitemapFromCache } from './sitemapParser'
 
 export type ChatMessage = {
@@ -59,7 +57,7 @@ export class NotFoundEnhancerContentGenerator {
 			}
 		)
 		return await runChatCompletion(messages, {
-			openAIApiKey: options.openAiApiKey,
+			openAIApiKey: options.openAiApiKey || OPENAI_API_KEY,
 		})
 	}
 }

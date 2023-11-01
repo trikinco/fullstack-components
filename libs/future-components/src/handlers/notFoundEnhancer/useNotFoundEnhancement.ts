@@ -1,7 +1,7 @@
 import type {
 	NotFoundEnhancerResponse,
 	NotFoundEnhancerRequestBody,
-} from './notFoundEnhancer'
+} from './models'
 import { useRequest, type UseRequestConfig } from '../../hooks/useRequest'
 
 export const useNotFoundEnhancement = (

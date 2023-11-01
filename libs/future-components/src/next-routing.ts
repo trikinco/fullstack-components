@@ -5,7 +5,7 @@ import { isRequest } from './nextjs-handlers'
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import type { NextRequest } from 'next/server'
 import type { AppRouteHandler, AppRouteHandlerContext } from './nextjs-handlers'
-import type { HandleErrorParser } from './handlers/errorParser'
+import type { HandleErrorParser } from './handlers/errorEnhancer/errorParser'
 import type { PageRouterOnError, AppRouterOnError } from './types/routers'
 import type { FSCApiHandler, FSCOptions, ApiHandlers } from './types/handlers'
 import type { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
@@ -44,7 +44,7 @@ export default function handlerFactory({
 		| AppRouteHandler => {
 		const customHandlers: ApiHandlers = {
 			prompt: handlePrompt,
-			parseError: handleErrorParser,
+			errorEnhancer: handleErrorParser,
 			['not-found-enhancer']: handleNotFoundEnhancement,
 			...handlers,
 		}

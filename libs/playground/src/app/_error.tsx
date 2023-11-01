@@ -1,6 +1,8 @@
 import { NextApiResponse } from 'next'
-import { ErrorClient } from '../../../future-components/dist/errorClient'
-import { ErrorParseResponse } from '@fullstack-components/ai-components'
+import {
+	ErrorClient,
+	ErrorEnhancementResponse,
+} from '@fullstack-components/ai-components'
 
 const errorClient = new ErrorClient()
 
@@ -38,11 +40,13 @@ Error.getInitialProps = async ({
 	} else if (err) {
 		statusCode = err.statusCode
 	}
-	const errorResponse = await errorClient.handleErrorRequest(
-		`${err.message} ${err.stack}`,
-		'http web app'
+	const errorResponse = await errorClient.handle(
+		{ errorMessage: err.message, errorContext: err.stack },
+		{ appContext: 'http web app' }
 	)
-	const parsed = JSON.parse(errorResponse.responseText) as ErrorParseResponse
+	const parsed = JSON.parse(
+		errorResponse.responseText
+	) as ErrorEnhancementResponse
 	return { statusCode, message: parsed.message, title: parsed.title }
 }
 
