@@ -1,6 +1,6 @@
 export type ErrorParserOptions = {
 	appContext?: 'http web app' | 'mobile app' | 'desktop app'
-	openAiApiKey: string
+	openAiApiKey?: string
 }
 export class ErrorEnhancementRequestBody {
 	errorMessage?: string
