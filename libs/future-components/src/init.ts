@@ -1,5 +1,7 @@
-import { ErrorClient } from './errorClient'
-import errorParserHandler, { HandleErrorParser } from './handlers/errorParser'
+import { ErrorClient } from './handlers/errorEnhancer/errorClient'
+import errorParserHandler, {
+	HandleErrorParser,
+} from './handlers/errorEnhancer/errorParser'
 import notFoundEnhancementHandler, {
 	HandleNotFoundEnhancement,
 } from './handlers/notFoundEnhancer/notFoundEnhancer'
