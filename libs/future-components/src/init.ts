@@ -1,4 +1,8 @@
 import { ErrorClient } from './errorClient'
+import { DetectPiiClient } from './handlers/detectPii/detectPiiClient'
+import detectPiiHandler, {
+	HandleDetectPii,
+} from './handlers/detectPii/detectPiiHandlers'
 import errorParserHandler, { HandleErrorParser } from './handlers/errorParser'
 import notFoundEnhancementHandler, {
 	HandleNotFoundEnhancement,
@@ -15,12 +19,14 @@ const handleNotFoundEnhancement = notFoundEnhancementHandler(
 	new NotFoundEnhancerContentGenerator()
 )
 const handlePromptRequest = promptHandler(new PromptClient())
+const handlePiiDetection = detectPiiHandler(new DetectPiiClient())
 
 export type FutureComponentsServer = {
 	requestCache: Map<string, string>
 	handleErrorRequest: HandleErrorParser
 	handlePromptRequest: HandlePrompt
 	handleNotFoundEnhancement: HandleNotFoundEnhancement
+	handlePiiDetection: HandleDetectPii
 }
 // Creates the instance of the library. We don't allow a custom one yet
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -30,5 +36,6 @@ export function _init(): FutureComponentsServer {
 		handleErrorRequest,
 		handlePromptRequest,
 		handleNotFoundEnhancement,
+		handlePiiDetection,
 	}
 }

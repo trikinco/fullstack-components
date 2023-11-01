@@ -1,14 +1,10 @@
 import { runChatCompletion } from '../../chatGptService'
+import { ChatMessage } from '../../types'
 import {
 	NotFoundEnhancerOptions,
 	NotFoundEnhancerRequestBody,
 } from './notFoundEnhancer'
 import { sitemapFromCache } from './sitemapParser'
-
-export type ChatMessage = {
-	role: 'system' | 'user' | 'assistant'
-	content: string
-}
 
 export class NotFoundEnhancerSitemapSelector {
 	public handle = async (
@@ -17,6 +13,9 @@ export class NotFoundEnhancerSitemapSelector {
 	) => {
 		console.log('handling not found sitemap selector request', request)
 		const possibleUrls = await sitemapFromCache(options.siteUrl)
+		if (!possibleUrls || possibleUrls.length === 0) {
+			throw new Error('No urls found in the sitemap')
+		}
 		const messages: ChatMessage[] = []
 		messages.push(
 			{

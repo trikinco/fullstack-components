@@ -1,14 +1,10 @@
 import { runChatCompletion } from '../../chatGptService'
+import { ChatMessage } from '../../types'
 import {
 	NotFoundEnhancerOptions,
 	NotFoundEnhancerRequestBody,
 } from './notFoundEnhancer'
 import { sitemapFromCache } from './sitemapParser'
-
-export type ChatMessage = {
-	role: 'system' | 'user' | 'assistant'
-	content: string
-}
 
 export class NotFoundEnhancerContentGenerator {
 	public handle = async (
@@ -17,6 +13,7 @@ export class NotFoundEnhancerContentGenerator {
 	) => {
 		console.log('handling not found content generation request', request)
 		const possibleUrls = await sitemapFromCache(options.siteUrl)
+
 		const messages: ChatMessage[] = []
 		messages.push(
 			{

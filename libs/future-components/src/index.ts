@@ -6,6 +6,7 @@ import type { HandleErrorParser } from './handlers/errorParser'
 import type { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
 import type { FutureComponentsServer } from './init'
 import type { HandlePrompt } from './handlers/prompt/promptHandler'
+import { HandleDetectPii } from './handlers/detectPii/detectPiiHandlers'
 
 // Because we use a cache and use clients,
 // we may want to create a singleton for the library
@@ -36,10 +37,15 @@ const handleNotFoundEnhancement: HandleNotFoundEnhancement = ((
 ) =>
 	getInstance().handleNotFoundEnhancement(...args)) as HandleNotFoundEnhancement
 
+const handleDetectPii: HandleDetectPii = ((
+	...args: Parameters<HandleDetectPii>
+) => getInstance().handlePiiDetection(...args)) as HandleDetectPii
+
 const handleFSComponents = handlerFactory({
 	handlePrompt: handlePromptRequest,
 	handleErrorParser: handleErrorRequest,
 	handleNotFoundEnhancement: handleNotFoundEnhancement,
+	handleDetectPii: handleDetectPii,
 })
 
 // public library api for server
@@ -58,6 +64,7 @@ export {
 	handleErrorRequest,
 	handleNotFoundEnhancement,
 	handleFSComponents,
+	handleDetectPii,
 }
 
 export { FutureComponentsServer } from './init'

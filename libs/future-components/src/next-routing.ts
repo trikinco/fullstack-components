@@ -7,9 +7,10 @@ import type { NextRequest } from 'next/server'
 import type { AppRouteHandler, AppRouteHandlerContext } from './nextjs-handlers'
 import type { HandleErrorParser } from './handlers/errorParser'
 import type { PageRouterOnError, AppRouterOnError } from './types/routers'
-import type { FSCApiHandler, FSCOptions, ApiHandlers } from './types/handlers'
+import type { FSCApiHandler, ApiHandlers, FSCOptions } from './types/handlers'
 import type { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
 import type { HandlePrompt } from './handlers/prompt/promptHandler'
+import { HandleDetectPii } from './handlers/detectPii/detectPiiHandlers'
 
 /**
  * @ignore
@@ -34,19 +35,22 @@ export default function handlerFactory({
 	handlePrompt,
 	handleErrorParser,
 	handleNotFoundEnhancement,
+	handleDetectPii,
 }: {
 	handlePrompt: HandlePrompt
 	handleErrorParser: HandleErrorParser
 	handleNotFoundEnhancement: HandleNotFoundEnhancement
+	handleDetectPii: HandleDetectPii
 }): FSCApiHandler {
-	return ({ onError, ...handlers }: FSCOptions = {}):
-		| NextApiHandler<void>
-		| AppRouteHandler => {
+	return (options: FSCOptions = {}): NextApiHandler<void> | AppRouteHandler => {
+		const { onError, ...otherHandlers } = options.handlers || {}
+
 		const customHandlers: ApiHandlers = {
 			prompt: handlePrompt,
 			parseError: handleErrorParser,
 			['not-found-enhancer']: handleNotFoundEnhancement,
-			...handlers,
+			detectPii: handleDetectPii,
+			...otherHandlers,
 		}
 
 		const appRouteHandler = appRouteHandlerFactory(
