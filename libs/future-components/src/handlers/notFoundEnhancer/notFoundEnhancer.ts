@@ -21,7 +21,7 @@ import {
 } from './models'
 
 /**
- * The handler for the `/api/future-components/not-found-enhancer` API route.
+ * The handler for the `/api/future-components/notFoundEnhancer` API route.
  */
 export type NotFoundEnhancerHandler = Handler<NotFoundEnhancerOptions>
 export type HandleNotFoundEnhancement =

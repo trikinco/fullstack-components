@@ -45,7 +45,7 @@ export default function handlerFactory({
 		const customHandlers: ApiHandlers = {
 			prompt: handlePrompt,
 			errorEnhancer: handleErrorParser,
-			['not-found-enhancer']: handleNotFoundEnhancement,
+			notFoundEnhancer: handleNotFoundEnhancement,
 			...handlers,
 		}
 

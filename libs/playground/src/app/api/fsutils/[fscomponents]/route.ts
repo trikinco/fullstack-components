@@ -5,9 +5,7 @@ import {
 } from '@fullstack-components/ai-components'
 
 const fscOptions: FSCOptions = {
-	// was this a really bad name for this? i think so :D
-	// maybe change before public release notFoundEnhancer
-	['not-found-enhancer']: handleNotFoundEnhancement({
+	notFoundEnhancer: handleNotFoundEnhancement({
 		siteUrl: process.env.SITE_URL || '',
 		openAiApiKey: process.env.OPENAI_API_KEY || '',
 	}),

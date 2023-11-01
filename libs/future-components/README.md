@@ -51,7 +51,7 @@ require configuration, read the documentation for eachß. Not Found Enhancer DOE
 
 ```ts
 export const POST = handleFSComponents({
-	['not-found-enhancer']: handleNotFoundEnhancement({
+	notFoundEnhancer: handleNotFoundEnhancement({
 		siteUrl: process.env.SITE_URL || '', // used to inspect the sitemap
 		openAiApiKey: process.env.OPENAI_API_KEY || '', // used to generate the contents
 	}),
