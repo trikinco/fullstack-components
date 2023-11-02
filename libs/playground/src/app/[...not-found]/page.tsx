@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { NotFoundEnhancer } from '@/src/components/NotFoundEnhancer'
 import { PageHeader } from '@/src/components/PageHeader'
+import { Button } from '@/src/components/Button'
 
 export default function NotFound() {
 	return (
@@ -8,12 +9,10 @@ export default function NotFound() {
 			<div className="prose dark:prose-invert mx-auto">
 				<PageHeader title="Not Found" />
 				<p>Could not find requested resource</p>
-				<Link
-					className="mt-3 bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg inline-flex no-underline items-center justify-center sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400"
-					href="/"
-				>
+
+				<Button as={Link} href="/" className="inline-flex w-auto">
 					Return Home
-				</Link>
+				</Button>
 
 				<NotFoundEnhancer />
 			</div>
