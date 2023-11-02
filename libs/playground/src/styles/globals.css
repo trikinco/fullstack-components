@@ -23,6 +23,7 @@
 
 @media (prefers-color-scheme: dark) {
 	:root {
+		color-scheme: dark; /* ensures scrollbars are dark */
 		--foreground-rgb: 255, 255, 255;
 		--background-start-rgb: 0, 0, 0;
 		--background-end-rgb: 0, 0, 0;
@@ -44,12 +45,19 @@
 
 /* outer code blocks */
 [data-rehype-pretty-code-fragment] {
-	@apply my-10 font-mono;
+	font-variant-ligatures: none;
+	/* background-color: var(--shiki-color-background); */
+	@apply relative overflow-hidden my-10 font-mono rounded-lg border border-slate-300 dark:border-white/20;
 }
 
-/* inner code blocks */
-.css-variables {
-	@apply border border-slate-300 dark:border-white/20 p-5;
+/* hide copy button for code blocks with a `title` including `:nocopy` */
+[data-rehype-pretty-code-fragment]:has([data-copy='false']) [data-copy] {
+	@apply hidden;
+}
+
+/* code block `title` (usually the file name) */
+[data-rehype-pretty-code-title] {
+	@apply ml-5 mt-4 text-slate-400;
 }
 
 body {
