@@ -1,7 +1,27 @@
-import { useState, useRef, useEffect, type ReactElement } from 'react'
-import type { RewriteOptions } from '../models/Text'
-import { renderToStaticMarkup } from 'react-dom/server'
+import { useState, useRef, useEffect } from 'react'
+import { createRoot } from 'react-dom/client'
+import { flushSync } from 'react-dom'
 import { ordinal } from '../utils/lang'
+import type { RewriteOptions } from '../models/Text'
+
+/**
+ * Renders a react tree to an HTML string
+ * @see {@link https://react.dev/reference/react-dom/server/renderToString#removing-rendertostring-from-the-client-code}
+ */
+async function renderToString(element: React.ReactElement) {
+	return new Promise((resolve) => {
+		const div = document.createElement('div')
+		const root = createRoot(div)
+
+		setTimeout(() => {
+			flushSync(() => {
+				root.render(element)
+			})
+
+			resolve(div.innerHTML)
+		})
+	})
+}
 
 export const useText = (options: RewriteOptions) => {
 	const [content, setContent] = useState<{
@@ -21,7 +41,7 @@ export const useText = (options: RewriteOptions) => {
 				typeof options.grade === 'number'
 					? `${ordinal(options.grade)}-grade`
 					: options.grade
-			const content = renderToStaticMarkup(options.children as any)
+			const content = await renderToString(options.children as any)
 
 			const response = await fetch('/api/text', {
 				method: 'POST',
