@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, type ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { flushSync } from 'react-dom'
 import { ordinal } from '../utils/lang'
@@ -8,7 +8,7 @@ import type { RewriteOptions } from '../models/Text'
  * Renders a react tree to an HTML string
  * @see {@link https://react.dev/reference/react-dom/server/renderToString#removing-rendertostring-from-the-client-code}
  */
-async function renderToString(element: React.ReactElement) {
+async function renderToString(element: ReactNode) {
 	return new Promise((resolve) => {
 		const div = document.createElement('div')
 		const root = createRoot(div)
@@ -41,7 +41,7 @@ export const useText = (options: RewriteOptions) => {
 				typeof options.grade === 'number'
 					? `${ordinal(options.grade)}-grade`
 					: options.grade
-			const content = await renderToString(options.children as any)
+			const content = await renderToString(options.children)
 
 			const response = await fetch('/api/text', {
 				method: 'POST',
