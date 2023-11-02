@@ -2,7 +2,7 @@
 import handlerFactory from './next-routing'
 import { _init } from './init'
 
-import type { HandleErrorParser } from './handlers/errorParser'
+import type { HandleErrorParser } from './handlers/errorEnhancer/errorParser'
 import type { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
 import type { FutureComponentsServer } from './init'
 import type { HandlePrompt } from './handlers/prompt/promptHandler'
@@ -45,14 +45,19 @@ const handleFSComponents = handlerFactory({
 // public library api for server
 export { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
 export { NotFoundEnhancerContentGenerator } from './handlers/notFoundEnhancer/notFoundEnhancerContentGenerator'
-export { ErrorClient } from './errorClient'
-export { ErrorParseResponse, ErrorRequestBody } from './handlers/errorParser'
+export { ErrorClient } from './handlers/errorEnhancer/errorClient'
+export {
+	ErrorEnhancementResponse,
+	ErrorEnhancementRequestBody,
+	ErrorParserOptions,
+} from './handlers/errorEnhancer/models'
 export {
 	NotFoundEnhancerRequestBody,
 	NotFoundEnhancerResponse,
-} from './handlers/notFoundEnhancer/notFoundEnhancer'
+	NotFoundEnhancerOptions,
+} from './handlers/notFoundEnhancer/models'
 export { AppRouteHandlerContext } from './nextjs-handlers'
-export { NotFoundEnhancerOptions } from './handlers/notFoundEnhancer/notFoundEnhancer'
+
 export {
 	getInstance,
 	handleErrorRequest,
