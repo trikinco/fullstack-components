@@ -46,7 +46,7 @@
 /* outer code blocks */
 [data-rehype-pretty-code-fragment] {
 	font-variant-ligatures: none;
-	/* background-color: var(--shiki-color-background); */
+	background-color: var(--shiki-color-background);
 	@apply relative overflow-hidden my-10 font-mono rounded-lg border border-slate-300 dark:border-white/20;
 }
 
