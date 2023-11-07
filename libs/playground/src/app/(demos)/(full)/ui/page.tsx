@@ -23,6 +23,13 @@ export default function Page() {
 					<iframe
 						id="preview"
 						title={prompt}
+						/**
+						 * This is just a POC.
+						 * To truly be sandboxed, the iframe should likely
+						 * consume an `src` doc from another domain, otherwise
+						 * `allow-same-origin` and `allow-scripts` may still
+						 * allow for breaking out of the sandbox
+						 */
 						sandbox="allow-same-origin allow-scripts allow-modals allow-popups allow-presentation allow-downloads allow-pointer-lock"
 						className="w-full h-full border-0 min-h-0 overflow-auto opacity-100 z-10 select-auto pointer-events-auto"
 						srcDoc={content}
