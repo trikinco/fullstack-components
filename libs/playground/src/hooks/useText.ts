@@ -8,7 +8,7 @@ import type { RewriteOptions } from '../models/Text'
  * Renders a react tree to an HTML string
  * @see {@link https://react.dev/reference/react-dom/server/renderToString#removing-rendertostring-from-the-client-code}
  */
-async function renderToString(element: ReactNode) {
+export async function renderToString(element: ReactNode) {
 	return new Promise((resolve) => {
 		const div = document.createElement('div')
 		const root = createRoot(div)

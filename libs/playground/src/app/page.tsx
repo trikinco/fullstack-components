@@ -94,6 +94,42 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
+					href="/ui"
+					title="Generate UI"
+					image={{
+						src: '/images/MobiusStrip.png',
+						alt: 'MobiusStrip',
+					}}
+					footer={
+						<>
+							<Chip>Component</Chip>
+							<Chip>Hook</Chip>
+						</>
+					}
+				>
+					AI-Powered Generative UI. Design, create, and innovate. Transform code
+					into stunning user interfaces easily.
+				</Card>
+				<Card
+					as={Link}
+					href="/chat"
+					title="Chat toolkit"
+					image={{
+						src: '/images/Wedge.png',
+						alt: 'Wedge',
+					}}
+					footer={
+						<>
+							<Chip>Component</Chip>
+							<Chip>Hook</Chip>
+						</>
+					}
+				>
+					AI-Powered Chat Interface Toolkit. Everything you need to create fully
+					integrated, custom chat experiences.
+				</Card>
+				<Card
+					as={Link}
 					href="/text"
 					title="Text"
 					image={{

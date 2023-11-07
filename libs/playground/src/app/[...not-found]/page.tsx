@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { NotFoundEnhancer } from '@/src/components/NotFoundEnhancer'
+import { NotFoundEnhancer } from '@/src/modules/NotFoundEnhancer'
 import { PageHeader } from '@/src/components/PageHeader'
 import { Button } from '@/src/components/Button'
 

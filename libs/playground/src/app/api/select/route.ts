@@ -1,13 +1,15 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import { openai, getChatCompletion } from '../_lib/openai'
 
+export const runtime = 'edge'
+
 /**
  * POC service for generating select options with OpenAI
  */
 export async function POST(req: NextRequest) {
 	let error = 'Internal Server Error'
 
-	if (!openai.apiKey) {
+	if (!openai) {
 		error =
 			'OpenAI API key not configured, please follow the instructions in README.md'
 
