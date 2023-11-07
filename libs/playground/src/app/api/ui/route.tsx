@@ -67,21 +67,28 @@ const getHTMLTemplate = ({
 					</div>
 				</div>
 				<script type='module'>
-				import { esm } from 'https://esm.sh/build';
+					import { esm } from 'https://esm.sh/build';
 
-				await esm\`
-				/* @jsx */
-				import React from 'https://esm.sh/react@18.2.0';
-				import ReactDOM from 'https://esm.sh/react-dom@18.2.0';
-
-				${content}
-
-				ReactDOM.createRoot(document.getElementById('root')).render(
-					<React.StrictMode>
-						<div className='w-full min-h-screen grid place-items-center'>${usage}</div>
-					</React.StrictMode>
-				)
-				\`
+					try {
+						await esm\`
+						/* @jsx */
+						import React from 'https://esm.sh/react';
+						import { createRoot } from 'https://esm.sh/react-dom?exports=createRoot';
+						
+						${content}
+						
+						createRoot(document.getElementById('root')).render(
+							<React.StrictMode>
+								<div className='w-full min-h-screen grid place-items-center'>
+									${usage}
+								</div>
+							</React.StrictMode>
+						)
+						\`
+					} catch (error) {
+						document.getElementById('root').innerHTML = '<div class="grid min-h-screen place-items-center text-center">Error generating UI for "${prompt}"</div>'
+						throw error
+					}
 				</script>
 				<script>
 					tailwind.config = {
