@@ -50,6 +50,7 @@ export const useUi = (prompt: string) => {
 			}
 		} finally {
 			setIsLoading(false)
+			didFetch.current = false
 		}
 	}
 
@@ -59,7 +60,7 @@ export const useUi = (prompt: string) => {
 			fetchUi(prompt)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [prompt])
 
 	return {
 		fetchUi,

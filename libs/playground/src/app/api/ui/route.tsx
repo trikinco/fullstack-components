@@ -78,7 +78,7 @@ const getHTMLTemplate = ({
 
 				ReactDOM.createRoot(document.getElementById('root')).render(
 					<React.StrictMode>
-						<div className='p-5 min-h-screen grid place-items-center'>${usage}</div>
+						<div className='w-full min-h-screen grid place-items-center'>${usage}</div>
 					</React.StrictMode>
 				)
 				\`
@@ -154,7 +154,7 @@ export async function POST(req: NextRequest) {
 					You write all React components in Javascript
 
 					## Rules
-					DO NOT IMPORT ANY THIRD-PARTY DEPENDENCIES
+					DO NOT IMPORT ANY THIRD-PARTY DEPENDENCIES or LIBRARIES
 					Any React components you create must be self-contained
 					ALWAYS USE THE DEFAULT React IMPORT WHEN CALLING REACT APIs, e.g React.useState (NO NAMED IMPORTS)
 					You ONLY RETURN JSON WITH THE FOLLOWING STRUCTURE {content:string,usage:string}
@@ -163,8 +163,8 @@ export async function POST(req: NextRequest) {
 					USE TAILWINDCSS CLASS NAMES
 
 					## Return JSON
-					the 'content' property is a JSON property with a string value of the React components and any declarations needed for data that may not be passed in as props (NO IMPORT OR EXPORT STATEMENTS)
-					the 'usage' property is a JSON property with a string value that implements the React components with default props (NO IMPORT STATEMENTS, NO DECLARATIONS)
+					the 'content' property is a JSON property with a string value of the React components and any declarations needed for data that may not be passed in as props. NO IMPORT OR EXPORT STATEMENTS
+					the 'usage' property is a JSON property with a string value that implements the React components with default props. NO IMPORT STATEMENTS, NO DECLARATIONS
 					example:
 					{
 						content: "const Wrapper = ({children,id}) => <div id={id} className='p-5'>{children}</div>\\nconst List = ({data}) => <ul>{data?.map(item => (<li key={item.id} className='text-sm'>{item.text}</li>))}</ul>",

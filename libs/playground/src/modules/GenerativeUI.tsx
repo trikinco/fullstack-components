@@ -41,7 +41,7 @@ export function GenerativeUI({
 				{isLoading && !isError ? (
 					<div className="h-full grid place-items-center text-slate-900">
 						<Spinner classNameSpinner="mx-auto">
-							Handling UI prompt for &quot;{prompt}&quot;
+							Handling UI generation prompt for &quot;{prompt}&quot;
 						</Spinner>
 					</div>
 				) : (
