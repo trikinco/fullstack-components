@@ -1,13 +1,12 @@
 'use client'
 import Image from 'next/image'
 import { useRequest } from '@fullstack-components/ai-components/client'
-import { PageHeader } from '@/src/components/PageHeader'
 
 const imageURL =
 	'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Felis_catus-cat_on_snow.jpg/179px-Felis_catus-cat_on_snow.jpg'
 const prompt = 'A horse in outer space'
 
-export default function ImagePage() {
+export function ImagePage() {
 	const { data, isLoading } = useRequest<{ result: string }>(
 		'/api/image/describe',
 		{
@@ -23,8 +22,6 @@ export default function ImagePage() {
 
 	return (
 		<>
-			<PageHeader title="Image" />
-
 			<div>
 				{isLoading && !data ? (
 					'Loading image description...'
