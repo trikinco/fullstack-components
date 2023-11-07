@@ -1,10 +1,11 @@
 import { type NextRequest, NextResponse } from 'next/server'
-import { openai, getImageGeneration } from '../../_lib/openai'
+import { OpenAIStream, StreamingTextResponse } from 'ai'
+import { openai, getChatCompletion } from '../_lib/openai'
 
 export const runtime = 'edge'
 
 /**
- * POC service for generating an image with OpenAI
+ * POC service for a chat session with OpenAI
  */
 export async function POST(req: NextRequest) {
 	let error = 'Internal Server Error'
@@ -24,10 +25,10 @@ export async function POST(req: NextRequest) {
 		)
 	}
 
-	const { prompt } = await req.json()
+	const { messages } = await req.json()
 
-	if (!prompt) {
-		error = 'Please provide an image prompt'
+	if (!messages) {
+		error = 'Please provide the `messages`'
 
 		return NextResponse.json(
 			{
@@ -41,18 +42,13 @@ export async function POST(req: NextRequest) {
 	}
 
 	try {
-		const imageGeneration = await getImageGeneration({
-			prompt,
+		const chatCompletion = await getChatCompletion({
+			stream: true,
+			messages,
 		})
 
-		return NextResponse.json(
-			{
-				result: imageGeneration?.data?.[0]?.url,
-			},
-			{
-				status: 200,
-			}
-		)
+		const stream = OpenAIStream(chatCompletion)
+		return new StreamingTextResponse(stream)
 	} catch (e) {
 		return NextResponse.json(
 			{
