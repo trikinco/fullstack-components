@@ -141,7 +141,7 @@ export async function POST(req: NextRequest) {
 	}
 
 	try {
-		console.log('trying to generate', prompt)
+		console.log('Generating UI for', prompt)
 
 		const chatCompletion = await getChatCompletion({
 			messages: [
@@ -201,7 +201,8 @@ export async function POST(req: NextRequest) {
 			}
 		)
 	} catch (e) {
-		console.log('errorR', e)
+		console.error(`Error when generating "${prompt}"`, e)
+
 		return NextResponse.json(
 			{
 				error,

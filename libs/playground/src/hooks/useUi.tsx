@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from 'react'
 export const useUi = (prompt: string) => {
 	const [content, setContent] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
+	const [isError, setIsError] = useState(false)
 	const didFetch = useRef(false)
 
 	/**
@@ -12,6 +13,7 @@ export const useUi = (prompt: string) => {
 	 */
 	async function fetchUi(prompt: string) {
 		setIsLoading(true)
+		setIsError(false)
 
 		try {
 			const response = await fetch('/api/ui', {
@@ -33,6 +35,7 @@ export const useUi = (prompt: string) => {
 
 			setContent(data.result || '')
 		} catch (error) {
+			setIsError(true)
 			/**
 			 * Continue handling other/fallback cases here
 			 * @consideration flag for turning on navigator.onLine check when applicable for the application
@@ -62,5 +65,6 @@ export const useUi = (prompt: string) => {
 		fetchUi,
 		content,
 		isLoading,
+		isError,
 	}
 }

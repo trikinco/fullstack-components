@@ -9,7 +9,7 @@ import { useUi } from '@/src/hooks/useUi'
 const prompt = 'an FAQ accordion'
 
 export default function Page() {
-	const { fetchUi, content, isLoading } = useUi(prompt)
+	const { fetchUi, content, isLoading, isError } = useUi(prompt)
 
 	return (
 		<>
@@ -19,7 +19,7 @@ export default function Page() {
 			/>
 
 			<div className="w-full h-full aspect-square md:aspect-video overflow-hidden bg-white rounded-lg">
-				{!isLoading && content ? (
+				{!isLoading && content && (
 					<iframe
 						id="preview"
 						title={prompt}
@@ -27,11 +27,17 @@ export default function Page() {
 						className="w-full h-full border-0 min-h-0 overflow-auto opacity-100 z-10 select-auto pointer-events-auto"
 						srcDoc={content}
 					/>
-				) : (
+				)}
+
+				{isLoading && !isError ? (
 					<div className="h-full grid place-items-center text-slate-900">
 						<Spinner classNameSpinner="mx-auto">
 							Handling UI prompt for &quot;{prompt}&quot;
 						</Spinner>
+					</div>
+				) : (
+					<div className="h-full grid place-items-center text-slate-900">
+						Error generating UI for &quot;{prompt}&quot;
 					</div>
 				)}
 			</div>
