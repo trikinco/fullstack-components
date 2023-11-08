@@ -1,5 +1,6 @@
 import NextImage, { type ImageProps as NextImageProps } from 'next/image'
 import type { CreateImageRequestSizeEnum } from 'openai-edge'
+import type { SyntheticEvent } from 'react'
 import { request } from '@fullstack-components/ai-components'
 import { IS_DEV } from '@/src/utils/constants'
 
@@ -25,7 +26,7 @@ export interface ImageDescribeProps
 }
 
 export type ImageDescribeCallback = (
-	event: React.SyntheticEvent<HTMLImageElement, Event> | undefined,
+	event: SyntheticEvent<HTMLImageElement, Event> | undefined,
 	/** Image description response */
 	response?: unknown,
 	/** Image description src */
@@ -53,7 +54,7 @@ export interface ImageGenerateProps
 }
 
 export type ImageGenerateCallback = (
-	event: React.SyntheticEvent<HTMLImageElement, Event> | undefined,
+	event: SyntheticEvent<HTMLImageElement, Event> | undefined,
 	/** Image generation response */
 	response?: unknown,
 	/** Image generation prompt */
@@ -101,7 +102,7 @@ function imageCb<T extends ImageDescribeCallback | ImageGenerateCallback>(
 	response?: Parameters<T>[1],
 	meta?: Parameters<T>[2]
 ) {
-	return (e: React.SyntheticEvent<HTMLImageElement, Event> | undefined) =>
+	return (e: SyntheticEvent<HTMLImageElement, Event> | undefined) =>
 		fn?.(e, response, meta)
 }
 
