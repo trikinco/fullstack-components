@@ -1,5 +1,7 @@
+'use client'
 import { useState, useEffect, useRef } from 'react'
-import { request, type RequestConfig } from '../utils/request'
+import { request } from '../utils/request'
+import type { RequestConfig } from '../types'
 
 /** Fetch request config initialiser in addition to the `baseUrl` */
 export type UseRequestConfig<Tbody = unknown> = RequestConfig<Tbody> & {

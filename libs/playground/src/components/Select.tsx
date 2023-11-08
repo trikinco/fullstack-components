@@ -1,6 +1,6 @@
 import { useId, type HTMLAttributes } from 'react'
 import { merge } from '../utils/styles'
-import { DEPLOYMENT_URL } from '../utils/constants'
+import { URL_DEPLOYMENT } from '../utils/constants'
 
 export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
 	/**
@@ -43,7 +43,7 @@ export const Select = async ({
 		content: SelectItem[]
 	} | null> {
 		try {
-			const response = await fetch(`${DEPLOYMENT_URL}/api/select`, {
+			const response = await fetch(`${URL_DEPLOYMENT}/api/select`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

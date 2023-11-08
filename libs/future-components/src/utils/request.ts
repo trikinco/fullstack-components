@@ -1,10 +1,5 @@
 import { URL_HOST } from './constants'
-
-export interface RequestConfig<TBody = unknown>
-	extends Omit<RequestInit, 'body'> {
-	baseUrl?: string
-	body?: TBody
-}
+import type { RequestConfig } from '../types'
 
 export const request = async <TResponse = unknown, Tbody = unknown>(
 	/** Relative API url */
