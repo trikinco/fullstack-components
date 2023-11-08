@@ -1,11 +1,18 @@
 import { Select } from '@/src/components/Select'
+import { IS_DEV } from '@/src/utils/constants'
 
-export const dynamic = 'force-dynamic'
+export const dynamic = IS_DEV ? 'auto' : 'force-dynamic'
 
 # Select
 
 ```tsx noCopy
-<Select purpose="selecting a timezone" context="our users are in Sydney" />
+<Select
+  purpose="selecting a timezone"
+  context="our users are in Sydney"
+/>
 ```
 
-<Select purpose="selecting a timezone" context="our users are in Sydney" />
+<Select
+  purpose="selecting a timezone"
+  context="our users are in Sydney"
+/>

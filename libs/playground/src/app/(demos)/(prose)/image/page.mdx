@@ -1,4 +1,7 @@
 import { Image } from '@/src/modules/Image'
+import { IS_DEV } from '@/src/utils/constants'
+
+export const dynamic = IS_DEV ? 'auto' : 'force-dynamic'
 
 # Image
 
