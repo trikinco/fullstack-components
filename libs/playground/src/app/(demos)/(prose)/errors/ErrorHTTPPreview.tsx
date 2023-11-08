@@ -1,7 +1,5 @@
 'use client'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { PageHeader } from '@/src/components/PageHeader'
 import { Spinner } from '@/src/components/Spinner'
 import { Button } from '@/src/components/Button'
 
@@ -15,8 +13,13 @@ export interface UserErrorMessageContent {
 	message: string
 }
 
-export default function Home() {
-	const router = useRouter()
+export interface ErrorPreviewProps {
+	/** HTTP status code error to imitate */
+	status?: number
+}
+
+export function ErrorHTTPPreview({ status = 500 }: ErrorPreviewProps) {
+	// const router = useRouter()
 	const [isLoading, setIsLoading] = useState(false)
 	/** Formatted error message */
 	const [content, setContent] = useState<UserErrorMessageContent | null>()
@@ -30,7 +33,7 @@ export default function Home() {
 		setIsLoading(true)
 
 		try {
-			const response = await fetch('/api/error', {
+			const response = await fetch('/api/error/mock', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -38,18 +41,9 @@ export default function Home() {
 				body: JSON.stringify({ status }),
 			})
 
-			/**
-			 * 'redirect' to /error, but continue processing
-			 * since /error is a parallel route (handled by `app/@error`) which is always rendered
-			 * by `app/layout`, it will now appear
-			 */
-			if (response.redirected && response.url) {
-				router.push('/error')
-			}
-
 			if (!response.ok) {
 				throw new Error(
-					`Failed to load resource: the server responded with a status of ${response.status} (${response.statusText})`
+					`Error: the server responded with a status of ${response.status} (${response.statusText})`
 				)
 			}
 		} catch (error) {
@@ -64,7 +58,7 @@ export default function Home() {
 		setError(error)
 
 		try {
-			const response = await fetch('/api/message', {
+			const response = await fetch('/api/error/message', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -81,9 +75,7 @@ export default function Home() {
 				)
 			}
 
-			const body = JSON.parse(data.result || {})
-
-			setContent(body)
+			setContent(data)
 		} catch (error) {
 			/**
 			 * Continue handling other/fallback cases here
@@ -104,37 +96,38 @@ export default function Home() {
 
 	return (
 		<>
-			<PageHeader title="Error" />
-
-			{isLoading && <Spinner />}
-
-			<div className="grid gap-12 grid-cols-2">
+			<div className="flex flex-col gap-8">
 				{error && (
-					<div className="mb-32 max-w-lg">
-						<p className="font-bold mb-2">Error message:</p>
-						<code className="bg-white/10 mb-4 block p-4 rounded-md border-2 border-white/50">
-							{error?.message}
-						</code>
+					<>
+						<div>
+							<p className="font-bold mb-2">Error message:</p>
+							<pre className="bg-white/10 mb-4 block p-4 rounded-md border-2 border-white/50 break-all">
+								{error?.message}
+							</pre>
+						</div>
 
-						<p className="font-bold mb-2">Error stack:</p>
-						<code className="bg-white/10 mb-4 block p-4 rounded-md border-2 border-white/50">
-							{error?.stack}
-						</code>
-					</div>
+						<div>
+							<p className="font-bold mb-2">Error stack:</p>
+							<pre className="bg-white/10 mb-4 block p-4 rounded-md border-2 border-white/50 break-all">
+								{error?.stack}
+							</pre>
+						</div>
+					</>
 				)}
-
-				{content && (
-					<div className="mb-32 max-w-lg">
-						<h2 className="text-2xl font-bold mb-3 block">{content?.title}</h2>
+				{!isLoading && content && (
+					<div>
+						<h2 className="text-2xl font-bold mb-3 mt-0 block">
+							{content?.title}
+						</h2>
 						<p>{content?.message}</p>
 					</div>
 				)}
+				{isLoading && <Spinner>Generating user-friendly error message</Spinner>}
 			</div>
 
-			<div className="mb-32 flex gap-4 w-full max-w-prose">
-				<Button onClick={() => handleError()}>500 error</Button>
-				<Button onClick={() => handleError(400)}>400 error</Button>
-			</div>
+			<Button className="mt-8" onClick={() => handleError(status)}>
+				{status} error
+			</Button>
 		</>
 	)
 }
