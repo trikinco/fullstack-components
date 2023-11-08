@@ -28,10 +28,17 @@ export const getChatCompletion = async (options: ChatCompletionOptions) => {
 }
 
 export const getImageGeneration = async (options: CreateImageRequest) => {
-	const response = await openai.createImage({
-		size: '256x256', // Default to small images to save $
-		...options,
-	})
+	try {
+		const response = await openai.createImage({
+			size: '256x256', // Default to small images to save $
+			n: 1,
+			response_format: 'url',
+			...options,
+		})
 
-	return response.json()
+		return response.json()
+	} catch (error) {
+		console.error('failed to create an image')
+		throw error
+	}
 }
