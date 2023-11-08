@@ -42,6 +42,9 @@ const handleFSComponents = handlerFactory({
 	handleNotFoundEnhancement: handleNotFoundEnhancement,
 })
 
+// Utils
+export { request } from './utils/request'
+
 // public library api for server
 export { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
 export { NotFoundEnhancerContentGenerator } from './handlers/notFoundEnhancer/notFoundEnhancerContentGenerator'
