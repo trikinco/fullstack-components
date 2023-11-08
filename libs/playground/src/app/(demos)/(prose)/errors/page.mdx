@@ -1,0 +1,38 @@
+import { ErrorHTTPPreview } from './ErrorHTTPPreview'
+import { ClientErrors } from './ClientErrors'
+
+# Errors
+
+## API
+
+Calling the API directly after catching a HTTP response error.
+
+### HTTP `400 Bad Request`
+
+<ErrorHTTPPreview status={400} />
+
+### HTTP `401 Unauthorized`
+
+<ErrorHTTPPreview status={401} />
+
+### HTTP `403 Forbidden`
+
+<ErrorHTTPPreview status={403} />
+
+### HTTP `404 Not Found`
+
+<ErrorHTTPPreview status={404} />
+
+### HTTP `500 Internal Server Error`
+
+<ErrorHTTPPreview status={500} />
+
+### HTTP `503 Service Unavailable`
+
+<ErrorHTTPPreview status={503} />
+
+## Client errors
+
+Handling client errors with `ErrorBoundary`
+
+<ClientErrors />

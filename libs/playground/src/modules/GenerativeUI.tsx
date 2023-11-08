@@ -47,13 +47,15 @@ export function GenerativeUI({
 					</ErrorBoundary>
 				)}
 
-				{isLoading && !isError ? (
+				{isLoading && !isError && (
 					<div className="h-full grid place-items-center text-slate-900">
 						<Spinner classNameSpinner="mx-auto">
 							Handling UI generation prompt for &quot;{prompt}&quot;
 						</Spinner>
 					</div>
-				) : (
+				)}
+
+				{!isLoading && isError && (
 					<div className="h-full grid place-items-center text-slate-900">
 						Error generating UI for &quot;{prompt}&quot;
 					</div>

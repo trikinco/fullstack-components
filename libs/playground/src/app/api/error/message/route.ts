@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server'
-import { openai, getChatCompletion } from '../_lib/openai'
+import { openai, getChatCompletion } from '../../_lib/openai'
+import { jsonrepair } from 'jsonrepair'
 
 export const runtime = 'edge'
 
@@ -77,14 +78,13 @@ export async function POST(req: NextRequest) {
 			],
 		})
 
-		return NextResponse.json(
-			{
-				result: chatCompletion.choices[0].message.content,
-			},
-			{
-				status: 200,
-			}
-		)
+		const content = chatCompletion.choices[0].message.content
+		const safeContent = jsonrepair(content)
+		const json = JSON.parse(safeContent)
+
+		return NextResponse.json(json, {
+			status: 200,
+		})
 	} catch (e) {
 		return NextResponse.json(
 			{
