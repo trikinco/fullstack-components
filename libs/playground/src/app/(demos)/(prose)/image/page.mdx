@@ -1,5 +1,47 @@
-import { ImagePage } from './ImagePage'
+import { Image } from '@/src/modules/Image'
 
 # Image
 
-<ImagePage />
+A smart image component that either describes a known image, generates an image based on a prompt, or behaves just like a regular `next/image`.
+
+## Describing an image
+
+<Image
+  src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Felis_catus-cat_on_snow.jpg/179px-Felis_catus-cat_on_snow.jpg"
+  width={256}
+  height={170}
+/>
+
+```jsx
+<Image
+  src="https://absolute-cat-url.jpg"
+  width={256}
+  height={170}
+/>
+```
+
+## Generating an image
+
+<Image prompt="A horse in outer space" />
+
+```jsx
+<Image prompt="A horse in outer space" />
+```
+
+## Standard `next/image`
+
+<Image
+  src="/images/MobiusStrip.png"
+  alt="A white coiling mobius strip"
+  width={300}
+  height={300}
+/>
+
+```jsx
+<Image
+  src="/images/MobiusStrip.png"
+  alt="A white coiling mobius strip"
+  width={300}
+  height={300}
+/>
+```
