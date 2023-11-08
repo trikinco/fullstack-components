@@ -7,6 +7,15 @@ const config = {
 	printWidth: 80,
 	useTabs: true,
 	bracketSpacing: true,
+	overrides: [
+		{
+			files: '*.mdx',
+			options: {
+				printWidth: 66,
+				useTabs: false,
+			},
+		},
+	],
 }
 
 module.exports = config
