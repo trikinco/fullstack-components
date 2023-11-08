@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Space_Grotesk, Space_Mono } from 'next/font/google'
 import { Footer } from '../components/Footer'
 import { Nav } from '../components/Nav'
-import { URL_BASE, DEPLOYMENT_URL, NAME_LONG } from '../utils/constants'
+import { URL_BASE, URL_DEPLOYMENT, NAME_LONG } from '../utils/constants'
 
 const fontBase = Space_Grotesk({ subsets: ['latin'], variable: '--font-base' })
 const fontMono = Space_Mono({
@@ -13,7 +13,7 @@ const fontMono = Space_Mono({
 })
 
 export const metadata: Metadata = {
-	metadataBase: new URL(DEPLOYMENT_URL || URL_BASE),
+	metadataBase: new URL(URL_DEPLOYMENT || URL_BASE),
 	title: NAME_LONG,
 	description: NAME_LONG,
 }

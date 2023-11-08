@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, type ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { flushSync } from 'react-dom'
 import { ordinal } from '../utils/lang'
-import type { RewriteOptions } from '../models/Text'
+import type { RewriteOptions } from '../types/Text'
 
 /**
  * Renders a react tree to an HTML string
