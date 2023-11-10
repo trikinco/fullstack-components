@@ -2,6 +2,7 @@
 
 import { memo, useId, useRef, useEffect, type HTMLAttributes } from 'react'
 import { request } from '@fullstack-components/ai-components/client'
+import { Spinner } from '../components/Spinner'
 
 export interface BlockProps extends HTMLAttributes<HTMLElement> {
 	prompt: string
@@ -76,7 +77,9 @@ export const Block = memo(function Block({ prompt, ...props }: BlockProps) {
 
 	return (
 		<div id={id} {...props}>
-			Loading...
+			<Spinner className="flex gap-3 p-3 items-center" classNameSpinner="mb-0">
+				Creating &quot;{prompt}&quot;...
+			</Spinner>
 		</div>
 	)
 })
