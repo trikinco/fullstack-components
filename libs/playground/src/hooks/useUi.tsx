@@ -16,7 +16,7 @@ export const useUi = (prompt: string) => {
 		setIsError(false)
 
 		try {
-			const response = await fetch('/api/ui', {
+			const response = await fetch('/api/ui/page', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

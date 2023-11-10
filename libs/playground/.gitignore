@@ -14,6 +14,7 @@ test-results
 # next.js
 /.next/
 /out/
+next.lock
 
 # production
 /build
