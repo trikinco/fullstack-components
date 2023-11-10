@@ -37,6 +37,7 @@ export const Block = memo(function Block({ prompt, ...props }: BlockProps) {
 				const response = request<{ result: string }>('/api/ui/component', {
 					body: { prompt },
 				})
+				// @ts-ignore Cannot find module 'https://esm.sh/build' or its corresponding type declarations.
 				const build = import(/* webpackIgnore: true */ 'https://esm.sh/build')
 
 				const { result } = (await response) || {}
