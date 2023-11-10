@@ -112,6 +112,22 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
+					href="/ui/block"
+					title="Block"
+					image={{
+						src: '/images/WireframeCube.png',
+						alt: 'A wireframe cube',
+					}}
+					footer={
+						<>
+							<Chip>Component</Chip>
+						</>
+					}
+				>
+					AI-Powered Generative UI. Prompt goes in, UI comes out. Easy.
+				</Card>
+				<Card
+					as={Link}
 					href="/chat"
 					title="Chat toolkit"
 					image={{
