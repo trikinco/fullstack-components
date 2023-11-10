@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server'
-import { openai, getChatCompletion } from '../_lib/openai'
+import { openai, getChatCompletion } from '../../_lib/openai'
 import { jsonrepair } from 'jsonrepair'
 import { NAME_LONG } from '@/src/utils/constants'
 

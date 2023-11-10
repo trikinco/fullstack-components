@@ -64,7 +64,7 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 					{children}
 				</div>
 
-				{footer && <div className="mt-auto pt-2">{footer}</div>}
+				{footer && <div className="flex gap-2 mt-auto pt-2">{footer}</div>}
 			</div>
 		</Component>
 	)
