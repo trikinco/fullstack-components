@@ -2,7 +2,7 @@
 
 import { useState, useRef, FormEvent } from 'react'
 import { PageHeader } from '@/src/components/PageHeader'
-import { useUI } from '@/src/hooks/useUI'
+import { useGenerateUI } from '@/src/hooks/useGenerateUI'
 import { GenerativeUI } from '@/src/modules/GenerativeUI'
 import { ColorPicker } from '@/src/components/ColorPicker/ColorPicker'
 
@@ -12,7 +12,7 @@ export default function Page() {
 	const [src, setSrc] = useState('')
 	const [colors, setColors] = useState('')
 
-	const { fetchUi, content, isLoading, isError } = useUI({
+	const { fetchUi, content, isLoading, isError } = useGenerateUI({
 		prompt,
 		src,
 		colors,

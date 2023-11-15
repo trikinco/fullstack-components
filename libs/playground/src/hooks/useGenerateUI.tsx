@@ -2,13 +2,13 @@
 
 import { useState, useRef, useEffect } from 'react'
 
-export interface UseUIProps {
+export interface UseGenerateUIProps {
 	prompt: string
 	src?: string
 	colors?: string
 }
 
-export const useUI = ({ prompt, src, colors }: UseUIProps) => {
+export const useGenerateUI = ({ prompt, src, colors }: UseGenerateUIProps) => {
 	const [content, setContent] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
 	const [isError, setIsError] = useState(false)
@@ -17,7 +17,7 @@ export const useUI = ({ prompt, src, colors }: UseUIProps) => {
 	/**
 	 * Placeholder for passing an error prompt to OpenAI and generating a user-friendly message
 	 */
-	async function fetchUi({ prompt, src, colors }: UseUIProps) {
+	async function fetchUi({ prompt, src, colors }: UseGenerateUIProps) {
 		setIsLoading(true)
 		setIsError(false)
 
