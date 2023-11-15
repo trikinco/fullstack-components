@@ -2,7 +2,13 @@
 
 import { useState, useRef, useEffect } from 'react'
 
-export const useUi = (prompt: string) => {
+export interface UseUIProps {
+	prompt: string
+	src?: string
+	colors?: string
+}
+
+export const useUI = ({ prompt, src, colors }: UseUIProps) => {
 	const [content, setContent] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
 	const [isError, setIsError] = useState(false)
@@ -11,7 +17,7 @@ export const useUi = (prompt: string) => {
 	/**
 	 * Placeholder for passing an error prompt to OpenAI and generating a user-friendly message
 	 */
-	async function fetchUi(prompt: string) {
+	async function fetchUi({ prompt, src, colors }: UseUIProps) {
 		setIsLoading(true)
 		setIsError(false)
 
@@ -21,7 +27,7 @@ export const useUi = (prompt: string) => {
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ prompt }),
+				body: JSON.stringify({ prompt, src, colors }),
 			})
 
 			const data = await response.json()
@@ -55,12 +61,12 @@ export const useUi = (prompt: string) => {
 	}
 
 	useEffect(() => {
-		if (!didFetch.current) {
+		if (!didFetch.current && (prompt || src)) {
 			didFetch.current = true
-			fetchUi(prompt)
+			fetchUi({ prompt, src, colors })
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [prompt])
+	}, [prompt, src, colors])
 
 	return {
 		fetchUi,

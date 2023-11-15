@@ -5,7 +5,8 @@ import { ErrorBoundary } from 'react-error-boundary'
 
 export interface GenerativeUIProps {
 	refetch: () => void
-	prompt: string
+	prompt?: string
+	src?: string
 	/** The generated HTML content to preview in the iframe */
 	content: string
 	isLoading?: boolean
@@ -15,6 +16,7 @@ export interface GenerativeUIProps {
 export function GenerativeUI({
 	refetch,
 	prompt,
+	src,
 	content,
 	isLoading,
 	isError,
@@ -26,13 +28,14 @@ export function GenerativeUI({
 					<ErrorBoundary
 						fallback={
 							<div className="h-full grid place-items-center text-slate-900">
-								Something went wront while generating &quot;{prompt}&quot;
+								Something went wront while generating &quot;{prompt || src}
+								&quot;
 							</div>
 						}
 					>
 						<iframe
 							id="preview"
-							title={prompt}
+							title={prompt || src}
 							/**
 							 * This is just a POC.
 							 * To truly be sandboxed, the iframe should likely
@@ -50,14 +53,14 @@ export function GenerativeUI({
 				{isLoading && !isError && (
 					<div className="h-full grid place-items-center text-slate-900">
 						<Spinner classNameSpinner="mx-auto">
-							Handling UI generation prompt for &quot;{prompt}&quot;
+							Handling UI generation prompt for &quot;{prompt || src}&quot;
 						</Spinner>
 					</div>
 				)}
 
 				{!isLoading && isError && (
 					<div className="h-full grid place-items-center text-slate-900">
-						Error generating UI for &quot;{prompt}&quot;
+						Error generating UI for &quot;{prompt || src}&quot;
 					</div>
 				)}
 			</div>
@@ -65,13 +68,14 @@ export function GenerativeUI({
 			<div className="flex gap-3">
 				<button
 					disabled={isLoading}
-					aria-label={`Regenerate "${prompt}"`}
+					aria-label={`Regenerate "${prompt || 'UI'}"`}
 					className="mt-3 flex items-center justify-center w-9 h-9 text-xs font-medium text-gray-900 bg-white border-2 border-gray-200 rounded-lg toggle-full-view hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-500 dark:bg-gray-900 focus:outline-none dark:text-gray-400 dark:border-gray-700 dark:hover:text-white dark:hover:bg-gray-800"
 					onClick={() => refetch()}
 				>
 					<IconRefresh />
 				</button>
-				<Chip className="mt-3 capitalize">{prompt}</Chip>
+				{prompt && <Chip className="mt-3 capitalize">{prompt}</Chip>}
+				{src && <Chip className="mt-3 max-w-sm">{src}</Chip>}
 			</div>
 		</>
 	)
