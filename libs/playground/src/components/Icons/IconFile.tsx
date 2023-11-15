@@ -1,7 +1,9 @@
 import type { HTMLAttributes } from 'react'
-import { merge } from '@/src/utils/styles'
+import { merge } from '../../utils/styles'
 
-// https://www.svgrepo.com/collection/dazzle-line-icons/
+/**
+ * https://www.svgrepo.com/collection/dazzle-line-icons/
+ */
 export const IconFile = ({
 	className,
 	...rest
