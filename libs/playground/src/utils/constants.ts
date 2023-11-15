@@ -7,6 +7,9 @@ export const NAME_SHORT = 'Fullstack Components'
 export const NAME_LIB = '@fullstack-components'
 export const URL_GITHUB = 'https://github.com/ambient-co/fullstack-components'
 
+// Id's
+export const ID_DIALOG_PORTAL = 'dialog-portal'
+
 // Use process.env.PORT by default and fallback to port 3000
 export const PORT = process.env.PORT || 3000
 export const URL_BASE = `http://localhost:${PORT}`
