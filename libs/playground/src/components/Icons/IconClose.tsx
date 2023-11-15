@@ -4,7 +4,7 @@ import { merge } from '../../utils/styles'
 /**
  * https://www.svgrepo.com/collection/dazzle-line-icons/
  */
-export const IconCheck = ({
+export const IconClose = ({
 	className,
 	...rest
 }: HTMLAttributes<SVGSVGElement>) => (
@@ -17,7 +17,7 @@ export const IconCheck = ({
 		{...rest}
 	>
 		<path
-			d="M4 12.6111L8.92308 17.5L20 6.5"
+			d="M6 6L18 18M18 6L6 18"
 			stroke="currentColor"
 			strokeWidth="2"
 			strokeLinecap="round"

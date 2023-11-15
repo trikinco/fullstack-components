@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react'
-import { merge } from '@/src/utils/styles'
+import { merge } from '../../utils/styles'
 
 export const IconRefresh = ({
 	className,
