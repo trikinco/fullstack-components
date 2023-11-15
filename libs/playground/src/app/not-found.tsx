@@ -1,7 +1,6 @@
-import { Space_Grotesk } from 'next/font/google'
 import '../styles/globals.css'
-
-const font = Space_Grotesk({ subsets: ['latin'] })
+import { ID_DIALOG_PORTAL } from '../utils/constants'
+import { fontClassNames } from '../utils/fonts'
 
 /**
  * Uses parallel routing to only render @error/error/page,
@@ -22,7 +21,10 @@ export default function RootNotFound({
 }) {
 	return (
 		<html lang="en">
-			<body className={font.className}>{error}</body>
+			<body className={fontClassNames}>
+				{error}
+				<div id={ID_DIALOG_PORTAL} />
+			</body>
 		</html>
 	)
 }
