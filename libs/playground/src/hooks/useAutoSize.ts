@@ -44,10 +44,14 @@ export function useAutoSize({
 	}, [input, minRows, maxRows])
 
 	// Submit when hitting enter - unless shift is not pressed
-	const commentEnterSubmit = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+	const commentEnterSubmit = (event: KeyboardEvent<HTMLTextAreaElement>) => {
 		if (!formRef.current || !textareaRef.current) return
 
-		if (e.key === 'Enter' && e.shiftKey == false) {
+		if (
+			event.key === 'Enter' &&
+			!event.shiftKey &&
+			!event.nativeEvent.isComposing
+		) {
 			formRef.current.requestSubmit()
 
 			// Reset height - important to shrink immediately on submit when clearing the value
