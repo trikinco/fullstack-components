@@ -14,7 +14,7 @@ export const Chip = ({ children, className, ...rest }: ChipProps) => {
 			)}
 			{...rest}
 		>
-			<div className="mt-px">{children}</div>
+			<div className="mt-px truncate">{children}</div>
 		</div>
 	)
 }
