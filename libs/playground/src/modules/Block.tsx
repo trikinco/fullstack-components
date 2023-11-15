@@ -73,7 +73,7 @@ export const Block = memo(function Block({ prompt, ...props }: BlockProps) {
 		return () => {
 			isEnabled.current = false
 		}
-	}, [])
+	}, [id, prompt])
 
 	return (
 		<div id={id} {...props}>
