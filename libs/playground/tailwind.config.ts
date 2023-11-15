@@ -31,6 +31,18 @@ const config: Config = {
 		},
 	},
 	plugins: [require('@tailwindcss/typography')],
+	safelist: [
+		{
+			/**
+			 * Generates classNames for all bg- colors except the deprecated ones
+			 * Used for the color picker.
+			 * Remove if not using the color picker to avoid bloating the bundle.
+			 * @see {@link https://tailwindcss.com/docs/content-configuration#using-regular-expressions Safelist with regular expression}
+			 */
+			pattern:
+				/bg-(?!(lightBlue|warmGray|trueGray|coolGray|blueGray)-[^\/]+\/)/,
+		},
+	],
 }
 
 export default config
