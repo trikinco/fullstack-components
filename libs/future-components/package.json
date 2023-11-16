@@ -1,20 +1,20 @@
 {
-	"name": "@fullstack-components/ai-components",
+	"name": "@trikinco/fullstack-components",
 	"version": "1.0.13",
 	"description": "A collection of AI components",
 	"exports": {
 		".": "./dist/index.js",
 		"./client": "./dist/client/index.js"
 	},
-	"author": "Ambient Co",
+	"author": "trikinco",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/ambient-co/fullstack-components/issues"
+		"url": "https://github.com/trikinco/fullstack-components/issues"
 	},
-	"homepage": "https://github.com/ambient-co/fullstack-components#readme",
+	"homepage": "https://github.com/trikinco/fullstack-components#readme",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/ambient-co/fullstack-components.git"
+		"url": "git+https://github.com/trikinco/fullstack-components.git"
 	},
 	"scripts": {
 		"build": "tsc -p tsconfig.build.json",
