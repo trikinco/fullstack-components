@@ -1,4 +1,4 @@
-import { NAME_LIB, NAME_SHORT, NAME_LONG } from '@/src/utils/constants'
+import { NAME_SHORT, NAME_LONG } from '@/src/utils/constants'
 
 # Get started with {NAME_SHORT}
 
@@ -6,20 +6,19 @@ import { NAME_LIB, NAME_SHORT, NAME_LONG } from '@/src/utils/constants'
 
 ```sh
 npm install @trikinco/fullstack-components
-
 ```
 
 ## Setup
 
 ```tsx title="app/api/future/route.ts"
 import {
-	handleFSComponents,
-	handleNotFoundEnhancement,
-	type FSCOptions,
+  handleFSComponents,
+  handleNotFoundEnhancement,
+  type FSCOptions,
 } from '@trikinco/fullstack-components'
 
 const fscOptions: FSCOptions = {
-	// Your options...
+  // Your options...
 }
 
 const fscHandler = handleFSComponents(fscOptions)
@@ -36,27 +35,27 @@ import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
 import Link from 'next/link'
 
 export function NotFoundEnhancer() {
-	const { content, isLoading } = useNotFoundEnhancement()
+  const { content, isLoading } = useNotFoundEnhancement()
 
-	if (!content || isLoading) {
-		return <p>Checking for alternate solution...</p>
-	}
+  if (!content || isLoading) {
+    return <p>Checking for alternate solution...</p>
+  }
 
-	return (
-		<div>
-			<p>{content?.generatedContent}</p>
-			<p>Try this url instead:</p>
-			<div>
-				<Link href={content?.bestAlternateUrl || '#'}>
-					{content?.bestAlternateUrl || 'No alternate url found'}
-				</Link>
-			</div>
-		</div>
-	)
+  return (
+    <div>
+      <p>{content?.generatedContent}</p>
+      <p>Try this url instead:</p>
+      <div>
+        <Link href={content?.bestAlternateUrl || '#'}>
+          {content?.bestAlternateUrl || 'No alternate url found'}
+        </Link>
+      </div>
+    </div>
+  )
 }
 ```
 
 export const metadata = {
-	title: `Get started with ${NAME_SHORT}`,
-	description: `Get started with ${NAME_LONG} to build websites by writing prompts`,
+  title: `Get started with ${NAME_SHORT}`,
+  description: `Get started with ${NAME_LONG} to build websites by writing prompts`,
 }
