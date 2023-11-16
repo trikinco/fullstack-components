@@ -6,7 +6,7 @@
 		".": "./dist/index.js",
 		"./client": "./dist/client/index.js"
 	},
-	"author": "Trikin Co",
+	"author": "trikinco",
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/trikinco/fullstack-components/issues"

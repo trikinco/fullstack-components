@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { merge } from '../utils/styles'
 import { NAME_SHORT, URL_GITHUB } from '../utils/constants'
 import { IconGitHub } from './Icons/IconGitHub'
+import { IconLogo } from './Icons/IconLogo'
 
 export interface NavProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode
@@ -19,12 +20,7 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 			{...rest}
 		>
 			<Link href="/">
-				<Image
-					src="/images/MobiusStrip.png"
-					alt={NAME_SHORT}
-					width={30}
-					height={30}
-				/>
+				<IconLogo className="w-10 h-10" />
 			</Link>
 			{children}
 
