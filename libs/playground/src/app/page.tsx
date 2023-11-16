@@ -47,9 +47,9 @@ export default function Home() {
 						</Button>
 					</div>
 				</PageHeader>
-				<div className="flex grow items-center justify-center gap-6">
+				{/* <div className="flex grow items-center justify-center gap-6">
 					Some cool gif, demonstration or illustration goes here
-				</div>
+				</div> */}
 			</div>
 
 			<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl">
