@@ -19,14 +19,17 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 			)}
 			{...rest}
 		>
-			<Link href="/">
+			<Link
+				href="/"
+				className="rounded-full ring-offset-2 focus:outline-none focus:ring"
+			>
 				<IconLogo className="w-10 h-10" />
 			</Link>
 			{children}
 
 			<Link
 				href={URL_GITHUB}
-				className="ml-auto block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300"
+				className="ml-auto block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300 rounded-full ring-offset-2 focus:outline-none focus:ring"
 			>
 				<span className="sr-only">{NAME_SHORT} on GitHub</span>
 				<IconGitHub />
