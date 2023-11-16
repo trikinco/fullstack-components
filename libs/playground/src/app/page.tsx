@@ -26,7 +26,7 @@ export default function Home() {
 					}
 				>
 					<p className="mt-6 text-lg text-slate-600 max-w-3xl mx-auto dark:text-slate-300">
-						{NAME_SHORT} is an AI-powered framework that turns words into fully
+						{NAME_SHORT} is an AI-powered library that turns words into fully
 						integrated components, like magic.
 					</p>
 					<p className="text-lg text-slate-600 max-w-3xl mx-auto dark:text-slate-300">
