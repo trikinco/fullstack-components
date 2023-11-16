@@ -23,6 +23,21 @@
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"browser": "dist/client/index.js",
+	"release": {
+		"branches": [
+			"main"
+		],
+		"plugins": [
+			"@semantic-release/commit-analyzer",
+			"@semantic-release/release-notes-generator",
+			[
+				"@semantic-release/github",
+				{
+					"assets": []
+				}
+			]
+		]
+	},
 	"files": [
 		"dist",
 		"src",

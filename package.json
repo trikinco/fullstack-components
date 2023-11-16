@@ -36,20 +36,5 @@
 		"lint-staged": "15.0.2",
 		"semantic-release": "22.0.5",
 		"typescript": "5.2.2"
-	},
-	"release": {
-		"branches": [
-			"main"
-		],
-		"plugins": [
-			"@semantic-release/commit-analyzer",
-			"@semantic-release/release-notes-generator",
-			[
-				"@semantic-release/github",
-				{
-					"assets": []
-				}
-			]
-		]
 	}
 }
