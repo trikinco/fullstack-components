@@ -3,8 +3,9 @@ on:
   push:
     branches:
       - main
+
+permissions: write-all
 jobs:
-  permissions: write-all
   publish:
     runs-on: ubuntu-latest
     steps:
