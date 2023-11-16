@@ -48,7 +48,10 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 			<div className="flex grow flex-col relative">
 				{src && (
 					<Image
-						className={merge('hover:mix-blend-hard-light', imgClassName)}
+						className={merge(
+							'invert dark:invert-0 hover:mix-blend-hard-light',
+							imgClassName
+						)}
 						src={src}
 						alt={alt || ''}
 						width={width as number}
