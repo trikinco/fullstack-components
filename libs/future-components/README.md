@@ -37,7 +37,7 @@ Note there's no auth on these endpoints but you can wrap them to add auth. [[TOD
 
 ## Components
 
-There are many components available. Here are some examples.
+There are many components available. Here are some examples...
 
 ### Enhanced Not Found Component
 
