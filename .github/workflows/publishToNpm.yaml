@@ -4,6 +4,7 @@ on:
     branches:
       - main
 jobs:
+  permissions: write-all
   publish:
     runs-on: ubuntu-latest
     steps:
