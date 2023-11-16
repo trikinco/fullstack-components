@@ -4,7 +4,7 @@ import {
 	type FallbackProps,
 	type ErrorBoundaryProps as ReactErrorBoundaryProps,
 } from 'react-error-boundary'
-import { useRequest } from '@fullstack-components/ai-components/client'
+import { useRequest } from '@trikinco/fullstack-components/client'
 import { Spinner } from '@/src/components/Spinner'
 import { IS_DEV } from '@/src/utils/constants'
 

@@ -2,7 +2,7 @@ import {
 	handleFSComponents,
 	handleNotFoundEnhancement,
 	type FSCOptions,
-} from '@fullstack-components/ai-components'
+} from '@trikinco/fullstack-components'
 
 const fscOptions: FSCOptions = {
 	notFoundEnhancer: handleNotFoundEnhancement({

@@ -1,5 +1,5 @@
 {
-	"name": "@fullstack-components/playground",
+	"name": "@trikinco/fullstack-components-playground",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
@@ -13,7 +13,7 @@
 		"build-storybook": "storybook build"
 	},
 	"dependencies": {
-		"@fullstack-components/ai-components": "workspace:*",
+		"@trikinco/fullstack-components": "workspace:*",
 		"@mdx-js/loader": "3.0.0",
 		"@mdx-js/react": "3.0.0",
 		"@next/mdx": "14.0.1",

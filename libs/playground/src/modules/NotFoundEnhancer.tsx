@@ -1,6 +1,6 @@
 'use client'
 
-import { useNotFoundEnhancement } from '@fullstack-components/ai-components/client'
+import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
 import Link from 'next/link'
 
 export function NotFoundEnhancer() {

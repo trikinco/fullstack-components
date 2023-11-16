@@ -5,7 +5,8 @@ import { NAME_LIB, NAME_SHORT, NAME_LONG } from '@/src/utils/constants'
 ## Installation
 
 ```sh
-npm install @fullstack-components
+npm install @trikinco/fullstack-components
+
 ```
 
 ## Setup
@@ -15,7 +16,7 @@ import {
 	handleFSComponents,
 	handleNotFoundEnhancement,
 	type FSCOptions,
-} from '@fullstack-components/ai-components'
+} from '@trikinco/fullstack-components'
 
 const fscOptions: FSCOptions = {
 	// Your options...
@@ -31,7 +32,7 @@ export { fscHandler as GET, fscHandler as POST }
 ```tsx title="components/NotFoundEnhancment.tsx"
 'use client'
 
-import { useNotFoundEnhancement } from '@fullstack-components/ai-components/client'
+import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
 import Link from 'next/link'
 
 export function NotFoundEnhancer() {

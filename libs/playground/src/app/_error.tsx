@@ -2,7 +2,7 @@ import { NextApiResponse } from 'next'
 import {
 	ErrorClient,
 	ErrorEnhancementResponse,
-} from '@fullstack-components/ai-components'
+} from '@trikinco/fullstack-components'
 
 const errorClient = new ErrorClient()
 

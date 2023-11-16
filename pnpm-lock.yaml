@@ -105,9 +105,6 @@ importers:
 
   libs/playground:
     dependencies:
-      '@fullstack-components/ai-components':
-        specifier: workspace:*
-        version: link:../future-components
       '@mdx-js/loader':
         specifier: 3.0.0
         version: 3.0.0(webpack@5.89.0)
@@ -117,6 +114,9 @@ importers:
       '@next/mdx':
         specifier: 14.0.1
         version: 14.0.1(@mdx-js/loader@3.0.0)(@mdx-js/react@3.0.0)
+      '@trikinco/fullstack-components':
+        specifier: workspace:*
+        version: link:../future-components
       ai:
         specifier: 2.2.20
         version: 2.2.20(react@18.2.0)(solid-js@1.8.5)(svelte@4.2.2)(vue@3.3.8)

@@ -4,8 +4,8 @@ export const IS_DEV = process.env.NODE_ENV === 'development'
 // Lib-specific
 export const NAME_LONG = 'AI-Powered Fullstack Components'
 export const NAME_SHORT = 'Fullstack Components'
-export const NAME_LIB = '@fullstack-components'
-export const URL_GITHUB = 'https://github.com/ambient-co/fullstack-components'
+export const NAME_LIB = '@trikinco/fullstack-components'
+export const URL_GITHUB = 'https://github.com/trikinco/fullstack-components'
 
 // Id's
 export const ID_DIALOG_PORTAL = 'dialog-portal'

@@ -1,7 +1,7 @@
 'use client'
 
 import { PageHeader } from '@/src/components/PageHeader'
-import { usePrompt } from '@fullstack-components/ai-components/client'
+import { usePrompt } from '@trikinco/fullstack-components/client'
 
 export default function Page() {
 	const { isLoading, data } = usePrompt(

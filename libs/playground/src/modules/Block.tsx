@@ -1,7 +1,7 @@
 'use client'
 
 import { memo, useId, useRef, useEffect, type HTMLAttributes } from 'react'
-import { request } from '@fullstack-components/ai-components/client'
+import { request } from '@trikinco/fullstack-components/client'
 import { Spinner } from '../components/Spinner'
 
 export interface BlockProps extends HTMLAttributes<HTMLElement> {

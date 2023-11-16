@@ -25,7 +25,7 @@ or if using pages
 And the contents should be:
 
 ```ts
-import { handleFSComponents } from '@fullstack-components/ai-components'
+import { handleFSComponents } from '@trikin-co/fullstack-components'
 
 export const GET =
 	handleFSComponents(/* various options. see each component below */)
@@ -66,7 +66,7 @@ The key here is to use the `useNotFoundEnhancement` hook to get the data from th
 // components/NotFoundEnhancment.tsx
 'use client'
 
-import { useNotFoundEnhancement } from '@fullstack-components/ai-components/client'
+import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
 import Link from 'next/link'
 
 export function NotFoundEnhancer() {

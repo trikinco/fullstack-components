@@ -1,7 +1,7 @@
 import NextImage, { type ImageProps as NextImageProps } from 'next/image'
 import type { CreateImageRequestSizeEnum } from 'openai-edge'
 import type { SyntheticEvent } from 'react'
-import { request } from '@fullstack-components/ai-components'
+import { request } from '@trikinco/fullstack-components'
 import { IS_DEV } from '@/src/utils/constants'
 
 export const imageAPIURLs = {
