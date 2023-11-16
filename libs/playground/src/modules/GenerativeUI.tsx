@@ -28,7 +28,7 @@ export function GenerativeUI({
 					<ErrorBoundary
 						fallback={
 							<div className="h-full grid place-items-center text-slate-900">
-								Something went wront while generating &quot;{prompt || src}
+								Something went wrong while generating &quot;{prompt || src}
 								&quot;
 							</div>
 						}
