@@ -35,8 +35,8 @@
 				{
 					"assets": []
 				}
-			]
-		]
+			],
+"@semantic-release/npm"]
 	},
 	"files": [
 		"dist",
