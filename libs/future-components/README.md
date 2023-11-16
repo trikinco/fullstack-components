@@ -7,9 +7,9 @@ Smart web components with built in AI
 
 ## Installation
 
-`npm i @name/name`
-`pnpm i @name/name`
-`yarn add @name/name`
+`npm i @trinkinco/fullstack-components`
+`pnpm i @trinkinco/fullstack-components`
+`yarn add @trinkinco/fullstack-components`
 
 ## Usage
 
