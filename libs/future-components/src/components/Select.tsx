@@ -1,8 +1,9 @@
 import { useId, type HTMLAttributes } from 'react'
-import { merge } from '@trikinco/fullstack-components/utils'
-import { URL_DEPLOYMENT } from '../utils/constants'
+import { merge } from '../utils/styles'
+import { request } from '../utils/request'
+import { ApiUrlEnum } from '../enums/ApiUrlEnum'
 
-export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
+export interface SelectOptions {
 	/**
 	 * Additional context to pass to the prompt. Free text
 	 */
@@ -16,6 +17,11 @@ export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
 	 * The number of items to aim for
 	 */
 	count?: number
+}
+
+export interface SelectProps
+	extends SelectOptions,
+		HTMLAttributes<HTMLSelectElement> {
 	/**
 	 * Additional props to pass to the <label>
 	 */
@@ -28,50 +34,34 @@ export interface SelectItem {
 	selected?: true
 }
 
-export const Select = async ({
+/**
+ * Select generation fetcher
+ */
+export function getSelect(props: SelectOptions) {
+	const { purpose, context, count } = props || {}
+	const body = { purpose, context, count }
+
+	return request<{
+		label: string
+		content: SelectItem[]
+	}>(ApiUrlEnum.select, { body })
+}
+
+export async function Select({
 	purpose,
 	context,
 	count = 0,
 	className,
 	labelProps,
 	...rest
-}: SelectProps) => {
+}: SelectProps) {
 	const selectId = useId()
 
-	async function fetchSelect(options: SelectProps): Promise<{
-		label: string
-		content: SelectItem[]
-	} | null> {
-		try {
-			const response = await fetch(`${URL_DEPLOYMENT}/api/select`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(options),
-			})
-
-			const data = await response.json()
-
-			if (response.status !== 200) {
-				throw (
-					data.error ||
-					new Error(`Request failed with status ${response.status}`)
-				)
-			}
-
-			return JSON.parse(data.result || {})
-		} catch (error) {
-			console.error(error)
-
-			return null
-		}
-	}
-
 	const { label, content } =
-		(await fetchSelect({ purpose, context, count })) || {}
+		(await getSelect({ purpose, context, count })) || {}
 
 	if (!label || !content) {
+		// eslint-disable-next-line unicorn/no-null
 		return null
 	}
 
@@ -105,3 +95,5 @@ export const Select = async ({
 		</>
 	)
 }
+
+export default Select

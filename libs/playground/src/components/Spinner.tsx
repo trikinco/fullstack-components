@@ -1,5 +1,5 @@
 import type { ReactNode, HTMLAttributes } from 'react'
-import { merge } from '../utils/styles'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export interface SpinnerProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode

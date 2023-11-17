@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import { ButtonCopy } from './ButtonCopy'
-import { merge } from '../utils/styles'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export interface CodeBlockProps extends HTMLAttributes<HTMLPreElement> {
 	children?: ReactNode

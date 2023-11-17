@@ -19,7 +19,6 @@
 		"@trikinco/fullstack-components": "workspace:*",
 		"@vercel/analytics": "1.1.1",
 		"ai": "2.2.20",
-		"clsx": "2.0.0",
 		"jsonrepair": "3.4.0",
 		"next": "14.0.1",
 		"openai": "4.16.1",
@@ -32,7 +31,6 @@
 		"rehype-slug": "6.0.0",
 		"remark-gfm": "4.0.0",
 		"shiki": "0.14.5",
-		"tailwind-merge": "2.0.0",
 		"unist-util-visit": "5.0.0"
 	},
 	"devDependencies": {
@@ -54,7 +52,7 @@
 		"@types/react": "18.2.31",
 		"@types/react-dom": "18.2.14",
 		"@types/xml2json": "0.11.5",
-		"autoprefixer": "10",
+		"autoprefixer": "10.4.16",
 		"encoding": "0.1.13",
 		"eslint": "8.52.0",
 		"eslint-config-next": "14.0.1",
@@ -62,7 +60,7 @@
 		"eslint-plugin-storybook": "0.6.15",
 		"husky": "8.0.3",
 		"next-sitemap": "4.2.3",
-		"postcss": "8",
+		"postcss": "8.4.31",
 		"prettier": "3.0.3",
 		"storybook": "7.5.2",
 		"tailwindcss": "3.3.5",

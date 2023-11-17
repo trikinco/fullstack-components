@@ -4,7 +4,8 @@
 	"description": "A collection of Fullstack and AI powered components",
 	"exports": {
 		".": "./dist/index.js",
-		"./client": "./dist/client/index.js"
+		"./client": "./dist/client/index.js",
+		"./utils": "./dist/utils/index.js"
 	},
 	"author": "trikinco",
 	"license": "MIT",
@@ -36,7 +37,8 @@
 					"assets": []
 				}
 			],
-"@semantic-release/npm"]
+			"@semantic-release/npm"
+		]
 	},
 	"files": [
 		"dist",
@@ -50,12 +52,14 @@
 		"node": ">=18"
 	},
 	"dependencies": {
+		"clsx": "2.0.0",
 		"encoding": "0.1.13",
 		"next": "14.0.1",
 		"openai": "4.14.2",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
-		"sitemapper": "3.2.6"
+		"sitemapper": "3.2.6",
+		"tailwind-merge": "2.0.0"
 	},
 	"devDependencies": {
 		"@types/node": "20",

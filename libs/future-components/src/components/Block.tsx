@@ -1,11 +1,19 @@
 'use client'
 
-import { memo, useId, useRef, useEffect, type HTMLAttributes } from 'react'
-import { request } from '@trikinco/fullstack-components/utils'
-import { Spinner } from '../components/Spinner'
+import {
+	memo,
+	useId,
+	useRef,
+	useEffect,
+	type HTMLAttributes,
+	ReactNode,
+} from 'react'
+import { request } from '../utils/request'
 
 export interface BlockProps extends HTMLAttributes<HTMLElement> {
 	prompt: string
+	/** A fallback react tree to show when the component is building, e.g a loading state */
+	fallback?: ReactNode
 }
 
 /**
@@ -25,9 +33,12 @@ export interface BlockProps extends HTMLAttributes<HTMLElement> {
  * - tailwind css injection, 
  * - caching, 
  * = server component, 
- * - nicer loading states
  */
-export const Block = memo(function Block({ prompt, ...props }: BlockProps) {
+export const Block = memo(function Block({
+	prompt,
+	fallback,
+	...props
+}: BlockProps) {
 	const id = useId()
 	// Just for avoiding multiple API calls in strict mode - this isn't really needed
 	const isEnabled = useRef(true)
@@ -38,13 +49,19 @@ export const Block = memo(function Block({ prompt, ...props }: BlockProps) {
 				const response = request<{ result: string }>('/api/ui/component', {
 					body: { prompt },
 				})
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore Cannot find module 'https://esm.sh/build' or its corresponding type declarations.
 				const build = import(/* webpackIgnore: true */ 'https://esm.sh/build')
 
 				const { result } = (await response) || {}
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 				const { esm } = await build
-				const { content, usage } = JSON.parse(result.replace(/\r?\n|\r/g, ' ')) // remove newlines - it can mess with SVG's and other markup
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+				const { content, usage } = JSON.parse(
+					result.replaceAll(/\r?\n|\r/g, ' ')
+				) // remove newlines - it can mess with SVG's and other markup
 
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 				esm`
 				/* @jsx */
 				import React from 'https://esm.sh/react';
@@ -77,9 +94,7 @@ export const Block = memo(function Block({ prompt, ...props }: BlockProps) {
 
 	return (
 		<div id={id} {...props}>
-			<Spinner className="flex gap-3 p-3 items-center" classNameSpinner="mb-0">
-				Creating &quot;{prompt}&quot;...
-			</Spinner>
+			{fallback}
 		</div>
 	)
 })

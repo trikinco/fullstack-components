@@ -42,11 +42,10 @@ const handleFSComponents = handlerFactory({
 	handleNotFoundEnhancement: handleNotFoundEnhancement,
 })
 
-// Utils
-export { request } from './utils/request'
-
 // Server components
 export { Prompt } from './components/Prompt'
+export { Image } from './components/Image'
+export { Select } from './components/Select'
 
 // public library api for server
 export { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'

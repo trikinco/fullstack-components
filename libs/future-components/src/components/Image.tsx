@@ -1,13 +1,8 @@
 import NextImage, { type ImageProps as NextImageProps } from 'next/image'
-import type { CreateImageRequestSizeEnum } from 'openai-edge'
 import type { SyntheticEvent } from 'react'
-import { request } from '@trikinco/fullstack-components/utils'
-import { IS_DEV } from '@/src/utils/constants'
-
-export const imageAPIURLs = {
-	describe: '/api/image/describe',
-	generate: '/api/image/generate',
-} as const
+import { request } from '../utils/request'
+import { IS_DEV } from '../utils/constants'
+import { ApiUrlEnum } from '../enums/ApiUrlEnum'
 
 export interface ImageDescribeProps
 	extends Omit<NextImageProps, 'src' | 'alt' | 'onLoad' | 'onError'> {
@@ -41,7 +36,7 @@ export interface ImageGenerateProps
 	/** Image generation prompt */
 	prompt: string
 	/** Width and height of the image. Default '256x256' */
-	size?: CreateImageRequestSizeEnum
+	size?: '256x256' | '512x512' | '1024x1024'
 	/** Alternative text describing the image, uses `prompt` if not provided */
 	alt?: string
 	/**
@@ -73,8 +68,8 @@ export type ImageProps<T> = T extends { prompt: unknown }
 export function getImage<T>(props: ImageProps<T>) {
 	const shouldGenerateImage = 'prompt' in props
 	const apiURL = shouldGenerateImage
-		? imageAPIURLs.generate
-		: imageAPIURLs.describe
+		? ApiUrlEnum.imageGenerate
+		: ApiUrlEnum.imageDescribe
 	const body = shouldGenerateImage
 		? { prompt: props.prompt }
 		: { src: props.src }
@@ -82,7 +77,7 @@ export function getImage<T>(props: ImageProps<T>) {
 	if (!('prompt' in props) && 'alt' in props) {
 		if (IS_DEV) {
 			console.warn(
-				`Provided 'alt' and no 'prompt' for image with src: "${props.src}"\nYou may want to use '<Image>' from 'next/image' instead.`
+				`Provided 'alt' and no 'prompt' for image.\nYou may want to use '<Image>' from 'next/image' instead.`
 			)
 		}
 
@@ -97,13 +92,13 @@ export function getImage<T>(props: ImageProps<T>) {
 /**
  * client-only callback for Image `onLoad` | `onError`
  */
-function imageCb<T extends ImageDescribeCallback | ImageGenerateCallback>(
-	fn?: T,
+function imageEvent<T extends ImageDescribeCallback | ImageGenerateCallback>(
+	handler?: T,
 	response?: Parameters<T>[1],
 	meta?: Parameters<T>[2]
 ) {
-	return (e: SyntheticEvent<HTMLImageElement, Event> | undefined) =>
-		fn?.(e, response, meta)
+	return (event: SyntheticEvent<HTMLImageElement, Event> | undefined) =>
+		handler?.(event, response, meta)
 }
 
 /**
@@ -120,8 +115,8 @@ export async function Image<T>(props: ImageProps<T>) {
 	if ('prompt' in props && response !== false) {
 		const { prompt, size = '256x256', onLoad, onError, ...rest } = props || {}
 		const sizes = size.split('x')
-		const width = parseInt(sizes[0])
-		const height = parseInt(sizes[1])
+		const width = Number.parseInt(sizes[0])
+		const height = Number.parseInt(sizes[1])
 
 		return (
 			<NextImage
@@ -129,8 +124,8 @@ export async function Image<T>(props: ImageProps<T>) {
 				alt={prompt}
 				width={width}
 				height={height}
-				onLoad={isClient ? imageCb?.(onLoad, response, prompt) : undefined}
-				onError={isClient ? imageCb?.(onError, response, prompt) : undefined}
+				onLoad={isClient ? imageEvent?.(onLoad, response, prompt) : undefined}
+				onError={isClient ? imageEvent?.(onError, response, prompt) : undefined}
 				{...rest}
 			/>
 		)
@@ -144,8 +139,8 @@ export async function Image<T>(props: ImageProps<T>) {
 			<NextImage
 				src={src}
 				alt={response?.result}
-				onLoad={isClient ? imageCb?.(onLoad, response, src) : undefined}
-				onError={isClient ? imageCb?.(onError, response, src) : undefined}
+				onLoad={isClient ? imageEvent?.(onLoad, response, src) : undefined}
+				onError={isClient ? imageEvent?.(onError, response, src) : undefined}
 				{...rest}
 			/>
 		)
@@ -154,3 +149,5 @@ export async function Image<T>(props: ImageProps<T>) {
 	// Regular Next image
 	return <NextImage src="" alt="" {...props} />
 }
+
+export default Image

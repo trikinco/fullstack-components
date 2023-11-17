@@ -9,7 +9,7 @@ import {
 } from 'react'
 import { Portal } from '../Portal'
 import { ID_DIALOG_PORTAL } from '../../utils/constants'
-import { merge } from '../../utils/styles'
+import { merge } from '@trikinco/fullstack-components/utils'
 import { ColorPickerButton } from './ColorPickerButton'
 import { ColorPickerDialog } from './ColorPickerDialog'
 import type { Color } from '../../utils/tailwind'
