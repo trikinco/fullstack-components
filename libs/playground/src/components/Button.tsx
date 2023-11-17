@@ -1,5 +1,5 @@
 import type { ElementType, HTMLAttributes } from 'react'
-import type { AsComponent } from '../types/AsComponent'
+import type { AsComponent } from '@trikinco/fullstack-components'
 import { merge } from '../utils/styles'
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
