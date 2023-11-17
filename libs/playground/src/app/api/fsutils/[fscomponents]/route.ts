@@ -1,14 +1,18 @@
 import {
 	handleFSComponents,
+	handlePromptRequest,
 	handleNotFoundEnhancement,
 	type FSCOptions,
 } from '@trikinco/fullstack-components'
 
+const config = {
+	siteUrl: process.env.SITE_URL || '',
+	openAiApiKey: process.env.OPENAI_API_KEY || '',
+}
+
 const fscOptions: FSCOptions = {
-	notFoundEnhancer: handleNotFoundEnhancement({
-		siteUrl: process.env.SITE_URL || '',
-		openAiApiKey: process.env.OPENAI_API_KEY || '',
-	}),
+	handlePrompt: handlePromptRequest(config),
+	notFoundEnhancer: handleNotFoundEnhancement(config),
 }
 
 const fscHandler = handleFSComponents(fscOptions)
