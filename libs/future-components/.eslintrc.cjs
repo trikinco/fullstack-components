@@ -122,6 +122,9 @@ module.exports = {
 			'error',
 			{
 				checkFilenames: false,
+				allowList: {
+					Props: true,
+				},
 				replacements: {
 					e: {},
 					e2e: {
