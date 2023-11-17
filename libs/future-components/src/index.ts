@@ -45,6 +45,9 @@ const handleFSComponents = handlerFactory({
 // Utils
 export { request } from './utils/request'
 
+// Server components
+export { Prompt } from './components/Prompt'
+
 // public library api for server
 export { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
 export { NotFoundEnhancerContentGenerator } from './handlers/notFoundEnhancer/notFoundEnhancerContentGenerator'
@@ -59,10 +62,16 @@ export {
 	NotFoundEnhancerResponse,
 	NotFoundEnhancerOptions,
 } from './handlers/notFoundEnhancer/models'
+export {
+	PromptRequestBody,
+	PromptResponse,
+	PromptOptions,
+} from './handlers/prompt/models'
 export { AppRouteHandlerContext } from './nextjs-handlers'
 
 export {
 	getInstance,
+	handlePromptRequest,
 	handleErrorRequest,
 	handleNotFoundEnhancement,
 	handleFSComponents,

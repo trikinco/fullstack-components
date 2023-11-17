@@ -11,32 +11,18 @@ import {
 	getHandler,
 } from '../../nextjs-handlers'
 import { PromptClient } from './promptClient'
+import {
+	type PromptRequestBody,
+	type PromptOptions,
+	PromptError,
+} from './models'
 
-export class PromptRequestBody {
-	prompt?: string
-}
-
-export type PromptResponse = {
-	data: string
-}
-
-export class PromptError extends Error {
-	public rootCause: string
-
-	constructor(error: any) {
-		super('Error running prompt')
-		this.name = 'PromptError'
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-		this.rootCause = error.message
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-		this.stack = error.stack
-	}
-}
 /**
  * The handler for the `/api/future-components/prompt` API route.
  */
-export type PromptHandler = Handler<never>
-export type HandlePrompt = FutureCompHandler<never>
+export type PromptHandler = Handler<PromptOptions>
+export type HandlePrompt = FutureCompHandler<PromptOptions>
+
 /**
  * @ignore
  */
@@ -55,7 +41,7 @@ const appRouteHandlerFactory: (
 ) => (
 	req: NextRequest,
 	ctx: AppRouteHandlerContext,
-	options?: object
+	options?: PromptOptions
 ) => Promise<Response> | Response =
 	(client) =>
 	async (req, _ctx, options = {}) => {
@@ -68,7 +54,7 @@ const appRouteHandlerFactory: (
 			res.headers.set('Cache-Control', 'no-store')
 			const requestBody = (await req.json()) as PromptRequestBody
 			console.log('requestBody', requestBody)
-			const gptResponse = await client.handle(requestBody)
+			const gptResponse = await client.handle(requestBody, options)
 
 			return NextResponse.json(gptResponse.responseText, res)
 		} catch (error) {
@@ -84,7 +70,7 @@ const pageRouteHandlerFactory: (
 ) => (
 	req: NextApiRequest,
 	res: NextApiResponse,
-	options?: object
+	options?: PromptOptions
 ) => Promise<void> =
 	(client) =>
 	async (
@@ -97,7 +83,7 @@ const pageRouteHandlerFactory: (
 			console.log('Prompt PAGES RouteHandlerFactory')
 			res.setHeader('Cache-Control', 'no-store')
 			const requestBody = req.body as PromptRequestBody
-			const parsedError = await client.handle(requestBody)
+			const parsedError = await client.handle(requestBody, options)
 			res.json(JSON.parse(parsedError.responseText))
 		} catch (error) {
 			throw new PromptError(error)
