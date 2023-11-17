@@ -14,11 +14,15 @@ Fullstack Components is an AI-powered library that turns words into fully integr
 
 ## Getting Started
 
-Visit <a href="https://fullstack-components.vercel.app/docs/get-started">fullstack-components.vercel.app/docs/get-started</a> to get started with fullstack-components.
+Visit [fullstack-components.vercel.app/docs/get-started](https://fullstack-components.vercel.app/docs/get-started) to get started with fullstack-components.
 
 ## Documentation
 
 Visit [https://fullstack-components.vercel.app/docs](https://fullstack-components.vercel.app/docs) to view the full documentation.
+
+## Feedback And Discussions
+
+The Fullstack Components community can be found on [GitHub Discussions](https://github.com/trikinco/fullstack-components/discussions), where you can provide feedback, ask questions, voice ideas, and share your projects.
 
 ## Authors
 
