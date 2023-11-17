@@ -1,9 +1,12 @@
 import { runChatCompletion } from '../../chatGptService'
 import { OPENAI_API_KEY } from '../../utils/constants'
-import { PromptRequestBody } from './promptHandler'
+import type { PromptRequestBody, PromptOptions } from './models'
 
 export class PromptClient {
-	public handle = async (request: PromptRequestBody) => {
+	public handle = async (
+		request: PromptRequestBody,
+		options: PromptOptions
+	) => {
 		console.log('handling prompt request', request)
 
 		return await runChatCompletion(
@@ -14,7 +17,7 @@ export class PromptClient {
 				},
 			],
 			{
-				openAIApiKey: OPENAI_API_KEY,
+				openAIApiKey: options.openAiApiKey || OPENAI_API_KEY,
 			}
 		)
 	}
