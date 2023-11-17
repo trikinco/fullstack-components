@@ -55,16 +55,21 @@ export default function Home() {
 			<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl">
 				<Card
 					as={Link}
-					href="/use-prompt"
-					title="usePrompt"
+					href="/prompt"
+					title="Prompt"
 					image={{
 						src: '/images/InfinityStrip.png',
 						alt: 'Infinity',
 					}}
-					footer={<Chip>Hook</Chip>}
+					footer={
+						<>
+							<Chip>Component</Chip>
+							<Chip>Hook</Chip>
+						</>
+					}
 				>
-					AI-Powered Prompt hook. Easily integrate prompts into any part of your
-					application. Unlock the magic of words.
+					AI-Powered Prompt component and hook. Easily integrate prompts into
+					any part of your application. Unlock the magic of words.
 				</Card>
 				<Card
 					as={Link}

@@ -60,6 +60,10 @@
 	@apply ml-5 mt-4 text-slate-400;
 }
 
+[data-highlighted-chars] {
+	@apply rounded-md bg-slate-50 dark:bg-slate-700;
+}
+
 body {
 	color: rgb(var(--foreground-rgb));
 	@apply bg-slate-100 dark:bg-slate-950;

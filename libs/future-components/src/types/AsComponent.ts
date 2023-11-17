@@ -13,7 +13,7 @@ import type { ComponentProps, ElementType, ReactNode } from 'react'
  * renders <a href="/sauce">See sauce</a>
  */
 export interface PolymorphicComponentBase<C extends ElementType> {
-	// The component to turn your component into
+	// The element or component to turn your component into
 	as?: C
 	// Children within the component
 	children?: ReactNode

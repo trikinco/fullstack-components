@@ -1,0 +1,55 @@
+import { Prompt } from '@trikinco/fullstack-components'
+
+# Prompt
+
+The `Prompt` component and its hook counterpart `usePrompt` are the most basic building blocks for AI-powered components.
+They simply accept a text `prompt` and return the data as-is.
+
+## `Prompt` server component
+
+### Simple `Prompt` usage
+
+<Prompt prompt="What's the longest river in the world?" />
+
+```jsx
+<Prompt prompt="What's the longest river in the world?" />
+```
+
+### Wrapping element
+
+The response can be wrapped in an element by using the `as` prop.
+In addition, this allows you to pass in any of the standard HTML attributes as expected by that element type.
+
+<Prompt
+  prompt="How big is the moon?"
+  as="div"
+  className="rounded-md overflow-hidden p-6 bg-sky-200 text-sky-800 text-xl"
+/>
+
+```jsx /as="div"/
+<Prompt
+  prompt="How big is the moon?"
+  as="div"
+  className="rounded-md overflow-hidden p-6 bg-sky-200 text-sky-800 text-xl"
+/>
+```
+
+## `usePrompt` hook
+
+```jsx
+'use client'
+
+import { usePrompt } from '@trikinco/fullstack-components/client'
+
+export default function Page() {
+  const { isLoading, data } = usePrompt(
+    'What is the longest river in the world?'
+  )
+
+  if (isLoading) {
+    return 'Loading...'
+  }
+
+  return <div className="max-w-prose">{data}</div>
+}
+```

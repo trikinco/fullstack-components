@@ -6,7 +6,7 @@ import type {
 } from 'react'
 import Image from 'next/image'
 import { merge } from '../utils/styles'
-import type { AsComponent } from '../types/AsComponent'
+import type { AsComponent } from '@trikinco/fullstack-components'
 
 export interface CardProps
 	extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
@@ -25,7 +25,7 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 	title,
 	children,
 	footer,
-	component: TitleComponent = 'p',
+	component: TitleComponent = 'h2',
 	...rest
 }: AsComponent<C, CardProps>) => {
 	const Component = as || defaultElement
@@ -40,7 +40,7 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 	return (
 		<Component
 			className={merge(
-				'w-full flex flex-col grow max-w-sm p-4 bg-white border-2 border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50',
+				'w-full flex flex-col grow max-w-sm p-4 bg-white border-2 border-gray-200 rounded-lg shadow sm:p-8 dark:bg-slate-900 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50',
 				className
 			)}
 			{...rest}
