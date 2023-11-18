@@ -27,7 +27,7 @@ export const ButtonCopy = ({ className, text, ...rest }: ButtonCopyProps) => {
 	return (
 		<button
 			className={merge(
-				'w-9 h-9 inline-flex items-center justify-center rounded-md border-2 border-slate-300 dark:border-white/20 hover:bg-slate-100 dark:hover:bg-white/10',
+				'w-9 h-9 inline-flex items-center justify-center rounded-md border-2 bg-white dark:bg-slate-950 border-slate-300 dark:border-white/20 hover:bg-slate-100 dark:hover:bg-slate-900',
 				className
 			)}
 			disabled={isCopied}
