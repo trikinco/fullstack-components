@@ -12,7 +12,7 @@ export default function Home() {
 			<div className="grid gap-6 lg:grid-cols-2 mb-24 max-w-6xl">
 				<PageHeader
 					className="prose dark:prose-invert"
-					headingProps={{ className: 'text-6xl' }}
+					headingProps={{ className: 'text-4xl sm:text-6xl' }}
 					title={
 						<>
 							Build websites by
@@ -52,7 +52,7 @@ export default function Home() {
 				</div> */}
 			</div>
 
-			<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl">
+			<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl">
 				<Card
 					as={Link}
 					href="/prompt"

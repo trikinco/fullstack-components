@@ -12,7 +12,7 @@ export interface NavProps extends HTMLAttributes<HTMLDivElement> {
 export const Nav = ({ children, className, ...rest }: NavProps) => {
 	return (
 		<>
-			<div className="flex justify-between text-sm p-6 bg-white dark:bg-transparent border-b border-slate-950/10 dark:border-white/30">
+			<div className="flex gap-3 justify-between text-sm p-6 bg-white dark:bg-black border-b border-slate-950/10 dark:border-white/30">
 				<p>
 					<strong>
 						<span role="img" aria-label="Hey there, hand waving">
@@ -22,7 +22,7 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 						not ready for production use.
 					</strong>{' '}
 				</p>
-				<p>
+				<p className="hidden md:block">
 					We&apos;re just getting started and{' '}
 					<Link
 						className="underline"
@@ -34,7 +34,7 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 			</div>
 			<nav
 				className={merge(
-					'flex sticky top-0 left-0 backdrop-blur-md items-center p-6',
+					'flex sticky top-0 left-0 backdrop-blur-md items-center p-6 z-20 border-b border-slate-950/5 dark:border-white/10',
 					className
 				)}
 				{...rest}
@@ -43,7 +43,7 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 					href="/"
 					className="rounded-full ring-offset-2 focus:outline-none focus:ring"
 				>
-					<IconLogo className="w-10 h-10" />
+					<IconLogo className="w-6 h-6 md:w-10 md:h-10" />
 				</Link>
 				{children}
 
