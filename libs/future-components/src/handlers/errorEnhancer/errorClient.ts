@@ -37,7 +37,7 @@ export class ErrorClient {
 			},
 			{
 				role: 'user',
-				content: `Here is an error to analyse: ${JSON.stringify(
+				content: `Only return JSON in the format {"title":string, "message":string}. Here is an error to analyse: ${JSON.stringify(
 					errorEnhancementRequest
 				)}.`,
 			}
