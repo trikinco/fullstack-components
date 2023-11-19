@@ -8,8 +8,9 @@ export class ErrorEnhancementRequestBody {
 	stackTrace?: string
 }
 export type ErrorEnhancementResponse = {
-	message: string
-	title: string
+	message?: string
+	title?: string
+	developmentModeContext?: string
 }
 export class ErrorEnhancementError extends Error {
 	public rootCause: string

@@ -10,7 +10,46 @@ export class ErrorClient {
 	) => {
 		console.log('handling error request', errorEnhancementRequest)
 		const messages: ChatMessage[] = []
-		messages.push(
+		if (process.env.NODE_ENV === 'development') {
+			messages.push(
+				...this.getDevelopmentOutputMessages(errorEnhancementRequest)
+			)
+		} else {
+			messages.push(...this.getSimpleOutputMessages(errorEnhancementRequest))
+		}
+		return await runChatCompletion(messages, {
+			openAIApiKey: options?.openAiApiKey || OPENAI_API_KEY,
+		})
+	}
+
+	private getDevelopmentOutputMessages = (
+		errorEnhancementRequest: ErrorEnhancementRequestBody
+	) => {
+		return [
+			{
+				role: 'system',
+				content: `
+                You are an expert software developer and debugger.`,
+			},
+			{
+				role: 'user',
+				content: `Only return JSON in the format {"developmentModeContext":<markdown string>}. Where "developmentModeContext" is a markdown string with your response
+                
+                You are building an application in NextJS framework and there is an error. 
+                
+                Identify the potential cause of the error and suggest a solution. 
+                        
+                Here is an error to analyse: ${JSON.stringify(
+									errorEnhancementRequest
+								)}.`,
+			},
+		] as ChatMessage[]
+	}
+
+	private getSimpleOutputMessages = (
+		errorEnhancementRequest: ErrorEnhancementRequestBody
+	) => {
+		return [
 			{
 				role: 'system',
 				content: `
@@ -20,7 +59,7 @@ export class ErrorClient {
                 3. Only return JSON in the format {title:string, message:string} where title is a short title for the error and message is a longer description of the error.
                 
                 # Instruction
-                Please evaluate the following rubrics internally and then perform one of the actions below:
+                Evaluate the following rubrics internally and then perform one of the actions below:
                 
                 ## Rubrics
                 1. Categorise the problem: Recoverable or non-recoverable?
@@ -31,19 +70,16 @@ export class ErrorClient {
                 1. [is recoverable]: If this is a recoverable error, suggest a solution to the user.
                 2. [is non-recoverable]: If this is a non-recoverable error, suggest a workaround to the user.
                 3. [is a user caused error]: If this is a user caused error, suggest retrying the action that caused the issue.
-                4. [is a system bug]: If this is a system bug, please suggest contacting the software developer and provide a description of the error for the user to send to the developer.
+                4. [is a system bug]: If this is a system bug, suggest contacting the software developer.
 
-                Please perform the action directly and do not include the reasoning. Remember, ONLY RETURN JSON.`,
+                Perform the action directly and do not include the reasoning. Remember, ONLY RETURN JSON.`,
 			},
 			{
 				role: 'user',
 				content: `Only return JSON in the format {"title":string, "message":string}. Here is an error to analyse: ${JSON.stringify(
 					errorEnhancementRequest
 				)}.`,
-			}
-		)
-		return await runChatCompletion(messages, {
-			openAIApiKey: options?.openAiApiKey || OPENAI_API_KEY,
-		})
+			},
+		] as ChatMessage[]
 	}
 }
