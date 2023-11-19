@@ -8,7 +8,7 @@ export function NotFoundEnhancer() {
 	const { data, isLoading } = useNotFoundEnhancement()
 
 	if (!data || isLoading) {
-		return <p>Checking for alternate solutions...</p>
+		return <p>Please wait, checking for other solutions...</p>
 	}
 	console.log('Enhanced not found data', data)
 	const hasUrls = data?.bestAlternateUrls && data.bestAlternateUrls.length > 0
