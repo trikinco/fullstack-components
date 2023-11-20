@@ -14,13 +14,13 @@ export const Footer = ({ children, className, ...rest }: FooterProps) => {
 	return (
 		<footer
 			className={merge(
-				'py-12 px-6 bg-white dark:bg-slate-950 border-t border-slate-950/10 dark:border-white/30',
+				'py-12 px-6 mt-10 bg-white dark:bg-slate-950 border-t border-slate-950/10 dark:border-white/30',
 				className
 			)}
 			{...rest}
 		>
 			<div className="flex flex-wrap gap-10 md:gap-16 items-center max-w-6xl mx-auto">
-				<div className="flex gap-3 mb-auto">
+				<div className="hidden sm:flex gap-3 mb-auto">
 					<Link
 						href="/"
 						className="rounded-full ring-offset-2 focus:outline-none focus:ring"
@@ -57,8 +57,8 @@ export const Footer = ({ children, className, ...rest }: FooterProps) => {
 					</Link>
 				</div>
 				{children}
-				<div className="md:ml-auto flex md:flex-col gap-3">
-					<h3 className="m-auto">Created by</h3>
+				<div className="sm:ml-auto flex w-full sm:w-auto mb-auto gap-3">
+					<h3 className="my-auto sm:m-auto">Created by</h3>
 					<div className="flex gap-3">
 						<Link
 							href="https://www.darraghoriordan.com"

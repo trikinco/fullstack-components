@@ -22,17 +22,21 @@ export const CodeBlock = ({
 	...props
 }: CodeBlockProps) => {
 	return (
-		<>
-			{!!noCopy && (
-				<ButtonCopy className="absolute top-4 right-4" text={raw} data-copy />
-			)}
-
+		<div className="group">
 			<pre
 				className={merge('not-prose p-5 overflow-auto', className)}
 				{...props}
 			>
 				{children}
 			</pre>
-		</>
+
+			{!!noCopy && (
+				<ButtonCopy
+					className="absolute top-4 right-4 invisible group-hover:visible group-focus-within:visible focus:visible"
+					text={raw}
+					data-copy
+				/>
+			)}
+		</div>
 	)
 }

@@ -10,6 +10,7 @@ import type { PageRouterOnError, AppRouterOnError } from './types/routers'
 import type { FSCApiHandler, FSCOptions, ApiHandlers } from './types/handlers'
 import type { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
 import type { HandlePrompt } from './handlers/prompt/promptHandler'
+import type { HandleBlock } from './handlers/block/blockHandler'
 
 /**
  * @ignore
@@ -31,10 +32,12 @@ const defaultAppRouterOnError: AppRouterOnError = (_req, error) => {
  * @ignore
  */
 export default function handlerFactory({
+	handleBlock,
 	handlePrompt,
 	handleErrorParser,
 	handleNotFoundEnhancement,
 }: {
+	handleBlock: HandleBlock
 	handlePrompt: HandlePrompt
 	handleErrorParser: HandleErrorParser
 	handleNotFoundEnhancement: HandleNotFoundEnhancement
@@ -43,6 +46,7 @@ export default function handlerFactory({
 		| NextApiHandler<void>
 		| AppRouteHandler => {
 		const customHandlers: ApiHandlers = {
+			block: handleBlock,
 			prompt: handlePrompt,
 			errorEnhancer: handleErrorParser,
 			notFoundEnhancer: handleNotFoundEnhancement,
@@ -125,7 +129,8 @@ const pageRouteHandlerFactory: (
 		let {
 			query: { fscomponents: components },
 		} = req
-
+		// eslint-disable-next-line unicorn/consistent-destructuring
+		console.log('query', { query: req?.query })
 		if (Array.isArray(components)) {
 			let otherRoutes
 			;[components, ...otherRoutes] = components
@@ -141,9 +146,12 @@ const pageRouteHandlerFactory: (
 				// eslint-disable-next-line no-prototype-builtins
 				customHandlers.hasOwnProperty(components) &&
 				customHandlers[components]
+			// eslint-disable-next-line unicorn/consistent-destructuring
+			console.log('query and handler', { query: req?.query, handler })
 			if (handler) {
 				await (handler as NextApiHandler)(req, res)
 			} else {
+				console.log('handler not found.swapping to 404')
 				res.status(404).end()
 			}
 		} catch (error) {

@@ -12,7 +12,7 @@ export default function Home() {
 			<div className="grid gap-6 lg:grid-cols-2 mb-24 max-w-6xl">
 				<PageHeader
 					className="prose dark:prose-invert"
-					headingProps={{ className: 'text-6xl' }}
+					headingProps={{ className: 'text-4xl sm:text-6xl' }}
 					title={
 						<>
 							Build websites by
@@ -52,7 +52,7 @@ export default function Home() {
 				</div> */}
 			</div>
 
-			<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl">
+			<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl">
 				<Card
 					as={Link}
 					href="/prompt"
@@ -73,17 +73,21 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
-					href="/errors"
-					title="Error"
+					href="/block"
+					title="Block"
 					image={{
-						src: '/images/Cone.png',
-						alt: 'Cone',
+						src: '/images/WireframeCube.png',
+						alt: 'A wireframe cube',
 					}}
-					footer={<Chip>Tools</Chip>}
+					footer={
+						<>
+							<Chip>Component</Chip>
+						</>
+					}
 				>
-					AI-Powered Error Helper. Makes sense of complex technical errors. Turn
-					confusion into clarity.
+					AI-Powered Generative UI. Prompt goes in, UI comes out. Easy.
 				</Card>
+
 				<Card
 					as={Link}
 					href="/some-account"
@@ -117,19 +121,16 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
-					href="/ui/block"
-					title="Block"
+					href="/errors"
+					title="Error"
 					image={{
-						src: '/images/WireframeCube.png',
-						alt: 'A wireframe cube',
+						src: '/images/Cone.png',
+						alt: 'Cone',
 					}}
-					footer={
-						<>
-							<Chip>Component</Chip>
-						</>
-					}
+					footer={<Chip>Tools</Chip>}
 				>
-					AI-Powered Generative UI. Prompt goes in, UI comes out. Easy.
+					AI-Powered Error Helper. Makes sense of complex technical errors. Turn
+					confusion into clarity.
 				</Card>
 				<Card
 					as={Link}

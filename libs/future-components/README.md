@@ -72,7 +72,7 @@ import Link from 'next/link'
 export function NotFoundEnhancer() {
 	const { content, isLoading } = useNotFoundEnhancement()
 	if (!content || isLoading) {
-		return <p>Checking for alternate solution...</p>
+		return <p>Please wait, checking for other solutions...</p>
 	}
 	return (
 		<div>

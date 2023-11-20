@@ -9,6 +9,8 @@ import { NotFoundEnhancerContentGenerator } from './handlers/notFoundEnhancer/no
 import { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
 import { PromptClient } from './handlers/prompt/promptClient'
 import promptHandler, { HandlePrompt } from './handlers/prompt/promptHandler'
+import { BlockClient } from './handlers/block/blockClient'
+import blockHandler, { HandleBlock } from './handlers/block/blockHandler'
 
 const handleErrorRequest = errorParserHandler(new ErrorClient())
 const requestCache = new Map<string, string>()
@@ -17,11 +19,13 @@ const handleNotFoundEnhancement = notFoundEnhancementHandler(
 	new NotFoundEnhancerContentGenerator()
 )
 const handlePromptRequest = promptHandler(new PromptClient())
+const handleBlockRequest = blockHandler(new BlockClient())
 
 export type FutureComponentsServer = {
 	requestCache: Map<string, string>
 	handleErrorRequest: HandleErrorParser
 	handlePromptRequest: HandlePrompt
+	handleBlockRequest: HandleBlock
 	handleNotFoundEnhancement: HandleNotFoundEnhancement
 }
 // Creates the instance of the library. We don't allow a custom one yet
@@ -31,6 +35,7 @@ export function _init(): FutureComponentsServer {
 		requestCache, // this isn't really used, just thinking about caching
 		handleErrorRequest,
 		handlePromptRequest,
+		handleBlockRequest,
 		handleNotFoundEnhancement,
 	}
 }

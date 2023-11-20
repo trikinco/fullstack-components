@@ -23,7 +23,10 @@
 	},
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
-	"browser": "dist/client/index.js",
+	"browser": {
+		"client": "dist/client/index.js",
+		"utils": "dist/utils/index.js"
+	},
 	"release": {
 		"branches": [
 			"main"
@@ -46,7 +49,9 @@
 		"package.json",
 		"README.md",
 		"client.js",
-		"client.d.ts"
+		"client.d.ts",
+		"utils.js",
+		"utils.d.ts"
 	],
 	"engines": {
 		"node": ">=18"
@@ -55,10 +60,11 @@
 		"clsx": "2.0.0",
 		"encoding": "0.1.13",
 		"next": "14.0.1",
-		"openai": "4.14.2",
+		"openai": "4.19.0",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"sitemapper": "3.2.6",
+		"react-error-boundary": "4.0.11",
 		"tailwind-merge": "2.0.0"
 	},
 	"devDependencies": {

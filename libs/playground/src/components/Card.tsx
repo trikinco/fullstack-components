@@ -40,7 +40,7 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 	return (
 		<Component
 			className={merge(
-				'w-full flex flex-col grow max-w-sm p-4 bg-white border-2 border-gray-200 rounded-lg shadow sm:p-8 dark:bg-slate-900 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50',
+				'w-full flex flex-col grow sm:max-w-sm p-4 bg-white border-2 border-gray-200 rounded-lg shadow sm:p-8 dark:bg-slate-900 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50',
 				className
 			)}
 			{...rest}
@@ -49,7 +49,7 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 				{src && (
 					<Image
 						className={merge(
-							'invert dark:invert-0 hover:mix-blend-hard-light',
+							'mx-auto invert dark:invert-0 hover:mix-blend-hard-light',
 							imgClassName
 						)}
 						src={src}

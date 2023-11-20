@@ -6,54 +6,57 @@ import {
 	useRef,
 	useEffect,
 	type HTMLAttributes,
-	ReactNode,
+	type ReactNode,
 } from 'react'
+import {
+	ErrorBoundary,
+	useErrorBoundary,
+	type ErrorBoundaryPropsWithFallback,
+} from 'react-error-boundary'
 import { request } from '../utils/request'
+import ApiUrlEnum from '../enums/ApiUrlEnum'
 
 export interface BlockProps extends HTMLAttributes<HTMLElement> {
 	prompt: string
-	/** A fallback react tree to show when the component is building, e.g a loading state */
-	fallback?: ReactNode
+	/** a react tree to render in the error boundary if the Block build or renderer fails */
+	fallback?: ErrorBoundaryPropsWithFallback['fallback']
+	/** a react tree to render in the root before rendering the Block */
+	loading?: ReactNode
+	/** props to pass to the wrapping error boundary */
+	errorBoundaryProps?: Omit<ErrorBoundaryPropsWithFallback, 'fallback'>
 }
 
+export type BlockRendererProps = Omit<
+	BlockProps,
+	'fallback' | 'errorBoundaryProps'
+>
+
 /**
- * Block renders any UI React component based on a prompt
- *
- * This could likely become a server component with some of the following changes:
- * - enabling experimental URL imports
-    experimental: {
-		urlImports: ['https://esm.sh/'],
-	},
- * - this may also require package.json script changes
- * "dev": "NODE_OPTIONS='--experimental-network-imports' next dev",
- * - changing `createRoot(document.getElementById('${id}')...` with piping and hydrating
- * 
- * TODO - Handle: 
- * - errors
- * - tailwind css injection, 
- * - caching, 
- * = server component, 
+ * BlockRenderer renders any UI React component based on a prompt
  */
-export const Block = memo(function Block({
+export const BlockRenderer = memo(function BlockRenderer({
 	prompt,
-	fallback,
+	loading,
 	...props
-}: BlockProps) {
+}: BlockRendererProps) {
 	const id = useId()
 	// Just for avoiding multiple API calls in strict mode - this isn't really needed
 	const isEnabled = useRef(true)
+	const { showBoundary } = useErrorBoundary()
 
 	useEffect(() => {
 		const loadContent = async () => {
 			try {
-				const response = request<{ result: string }>('/api/ui/component', {
+				const response = request<any>(ApiUrlEnum.block, {
 					body: { prompt },
 				})
 				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 				// @ts-ignore Cannot find module 'https://esm.sh/build' or its corresponding type declarations.
 				const build = import(/* webpackIgnore: true */ 'https://esm.sh/build')
 
-				const { result } = (await response) || {}
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+				const result: string = (await response) || {}
+
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 				const { esm } = await build
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -62,10 +65,10 @@ export const Block = memo(function Block({
 				) // remove newlines - it can mess with SVG's and other markup
 
 				// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-				esm`
+				await esm`
 				/* @jsx */
 				import React from 'https://esm.sh/react';
-				import { createRoot } from 'https://esm.sh/react-dom?exports=createRoot';
+				import { createRoot } from 'https://esm.sh/react-dom/client?exports=createRoot';
 
 				${content}
 
@@ -76,9 +79,11 @@ export const Block = memo(function Block({
 						${usage}
 					</React.StrictMode>
 				)
-			`
+				`
 			} catch (error) {
 				console.error('something went wrong when loading block content', error)
+
+				showBoundary(error)
 			}
 		}
 
@@ -94,7 +99,29 @@ export const Block = memo(function Block({
 
 	return (
 		<div id={id} {...props}>
-			{fallback}
+			{loading}
 		</div>
 	)
 })
+
+/**
+ * Block renders any UI React component based on a prompt
+ * This block is wrapped in an ErrorBoundary
+ */
+export const Block = ({
+	prompt,
+	fallback,
+	errorBoundaryProps,
+	...props
+}: BlockProps) => {
+	const fallbackTree = fallback || (
+		<>Something went wrong when generating "{prompt}"</>
+	)
+	return (
+		<ErrorBoundary fallback={fallbackTree} {...errorBoundaryProps}>
+			<BlockRenderer prompt={prompt} {...props} />
+		</ErrorBoundary>
+	)
+}
+
+export default Block

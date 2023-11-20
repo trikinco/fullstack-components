@@ -9,6 +9,10 @@ export const imageAPIURLs = {
 	generate: '/api/image/generate',
 } as const
 
+export type ImageResponse = {
+	result: string
+}
+
 export interface ImageDescribeProps
 	extends Omit<NextImageProps, 'src' | 'alt' | 'onLoad' | 'onError'> {
 	/**
@@ -16,6 +20,10 @@ export interface ImageDescribeProps
 	 * The `alt` text is then passed to the image and returned in `onLoad`
 	 */
 	src: string
+	/**
+	 * Whether or not to render the result string adjacent to the image
+	 */
+	includeResult?: boolean
 	/**
 	 * Callback function invoked once the image is completely loaded and the `placeholder` has been removed.
 	 * Returns the `event`, description `response` and the original `src`
@@ -28,7 +36,7 @@ export interface ImageDescribeProps
 export type ImageDescribeCallback = (
 	event: SyntheticEvent<HTMLImageElement, Event> | undefined,
 	/** Image description response */
-	response?: unknown,
+	response?: ImageResponse,
 	/** Image description src */
 	src?: string
 ) => void
@@ -40,6 +48,10 @@ export interface ImageGenerateProps
 	> {
 	/** Image generation prompt */
 	prompt: string
+	/**
+	 * Whether or not to render the result string adjacent to the image
+	 */
+	includeResult?: boolean
 	/** Width and height of the image. Default '256x256' */
 	size?: CreateImageRequestSizeEnum
 	/** Alternative text describing the image, uses `prompt` if not provided */
@@ -56,7 +68,7 @@ export interface ImageGenerateProps
 export type ImageGenerateCallback = (
 	event: SyntheticEvent<HTMLImageElement, Event> | undefined,
 	/** Image generation response */
-	response?: unknown,
+	response?: ImageResponse,
 	/** Image generation prompt */
 	prompt?: string
 ) => void
@@ -70,7 +82,7 @@ export type ImageProps<T> = T extends { prompt: unknown }
 /**
  * Image generation and description fetcher
  */
-export function getImage<T>(props: ImageProps<T>) {
+export async function getImage<T>(props: ImageProps<T>) {
 	const shouldGenerateImage = 'prompt' in props
 	const apiURL = shouldGenerateImage
 		? imageAPIURLs.generate
@@ -89,9 +101,7 @@ export function getImage<T>(props: ImageProps<T>) {
 		return false
 	}
 
-	return request<{
-		result: string
-	}>(apiURL, { body })
+	return await request<ImageResponse>(apiURL, { body })
 }
 
 /**
@@ -118,36 +128,49 @@ export async function Image<T>(props: ImageProps<T>) {
 
 	// Image generation
 	if ('prompt' in props && response !== false) {
-		const { prompt, size = '256x256', onLoad, onError, ...rest } = props || {}
+		const {
+			prompt,
+			size = '256x256',
+			includeResult,
+			onLoad,
+			onError,
+			...rest
+		} = props || {}
 		const sizes = size.split('x')
 		const width = parseInt(sizes[0])
 		const height = parseInt(sizes[1])
 
 		return (
-			<NextImage
-				src={response?.result || ''}
-				alt={prompt}
-				width={width}
-				height={height}
-				onLoad={isClient ? imageCb?.(onLoad, response, prompt) : undefined}
-				onError={isClient ? imageCb?.(onError, response, prompt) : undefined}
-				{...rest}
-			/>
+			<>
+				<NextImage
+					src={response?.result || ''}
+					alt={prompt}
+					width={width}
+					height={height}
+					onLoad={isClient ? imageCb?.(onLoad, response, prompt) : undefined}
+					onError={isClient ? imageCb?.(onError, response, prompt) : undefined}
+					{...rest}
+				/>
+				{includeResult && response?.result}
+			</>
 		)
 	}
 
 	// Image description
 	if ('src' in props && !('alt' in props) && response !== false) {
-		const { src, onLoad, onError, ...rest } = props || {}
+		const { src, includeResult, onLoad, onError, ...rest } = props || {}
 
 		return (
-			<NextImage
-				src={src}
-				alt={response?.result}
-				onLoad={isClient ? imageCb?.(onLoad, response, src) : undefined}
-				onError={isClient ? imageCb?.(onError, response, src) : undefined}
-				{...rest}
-			/>
+			<>
+				<NextImage
+					src={src}
+					alt={response?.result}
+					onLoad={isClient ? imageCb?.(onLoad, response, src) : undefined}
+					onError={isClient ? imageCb?.(onError, response, src) : undefined}
+					{...rest}
+				/>
+				{includeResult && response?.result}
+			</>
 		)
 	}
 
