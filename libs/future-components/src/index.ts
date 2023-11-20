@@ -63,6 +63,9 @@ export { Prompt } from './components/Prompt'
 export { Image } from './components/Image'
 export { Select } from './components/Select'
 
+// Service utils
+export { getSelect } from './handlers/select/getters'
+
 // public library api for server
 export { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
 export { NotFoundEnhancerContentGenerator } from './handlers/notFoundEnhancer/notFoundEnhancerContentGenerator'

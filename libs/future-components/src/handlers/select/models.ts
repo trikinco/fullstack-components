@@ -14,6 +14,9 @@ export class SelectRequestBody {
 	count?: number
 }
 
+export type SelectRequestOptions = Omit<SelectRequestBody, 'prompt'> &
+	Required<Pick<SelectRequestBody, 'prompt'>>
+
 export type SelectResponseItem = {
 	label: string
 	value: string

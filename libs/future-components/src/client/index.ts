@@ -2,4 +2,5 @@ export { useNotFoundEnhancement } from '../handlers/notFoundEnhancer/useNotFound
 export { usePrompt } from '../handlers/prompt/usePrompt'
 export { useRequest } from '../hooks/useRequest'
 export { useErrorEnhancement } from '../handlers/errorEnhancer/useErrorEnhancement'
+export { useSelect } from '../handlers/select/useSelect'
 export { Block } from '../components/Block'
