@@ -14,19 +14,32 @@ export type ChatGptCompletionResponse = {
 	errorMessage?: string
 }
 
+export type ChatCompletionsOptions = Omit<
+	OpenAI.ChatCompletionCreateParamsNonStreaming,
+	'messages' | 'model'
+> & {
+	openAIApiKey: string
+	model?: OpenAI.ChatCompletionCreateParamsNonStreaming['model']
+}
+
 export async function runChatCompletion(
 	messages: ChatMessage[],
-	options: { openAIApiKey: string; temperature?: number }
+	options: ChatCompletionsOptions
 ): Promise<ChatGptCompletionResponse> {
+	const { openAIApiKey, temperature, model, ...opts } = options || {}
+
 	const openai = new OpenAI({
-		apiKey: options.openAIApiKey,
+		apiKey: openAIApiKey,
 	})
-	const model = selectBestModel(messages)
+
+	const selectedModel = model || selectBestModel(messages)
 	console.log('Running chat completion', messages)
+
 	try {
 		const completion = await openai.chat.completions.create({
-			model: model,
-			temperature: options.temperature || 0.9,
+			...opts,
+			model: selectedModel,
+			temperature: temperature || 0.9,
 			messages,
 		})
 

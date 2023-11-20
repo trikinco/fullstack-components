@@ -10,6 +10,7 @@ import type { PageRouterOnError, AppRouterOnError } from './types/routers'
 import type { FSCApiHandler, FSCOptions, ApiHandlers } from './types/handlers'
 import type { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
 import type { HandlePrompt } from './handlers/prompt/promptHandler'
+import type { HandleBlock } from './handlers/block/blockHandler'
 
 /**
  * @ignore
@@ -31,10 +32,12 @@ const defaultAppRouterOnError: AppRouterOnError = (_req, error) => {
  * @ignore
  */
 export default function handlerFactory({
+	handleBlock,
 	handlePrompt,
 	handleErrorParser,
 	handleNotFoundEnhancement,
 }: {
+	handleBlock: HandleBlock
 	handlePrompt: HandlePrompt
 	handleErrorParser: HandleErrorParser
 	handleNotFoundEnhancement: HandleNotFoundEnhancement
@@ -43,6 +46,7 @@ export default function handlerFactory({
 		| NextApiHandler<void>
 		| AppRouteHandler => {
 		const customHandlers: ApiHandlers = {
+			block: handleBlock,
 			prompt: handlePrompt,
 			errorEnhancer: handleErrorParser,
 			notFoundEnhancer: handleNotFoundEnhancement,

@@ -49,7 +49,9 @@
 		"package.json",
 		"README.md",
 		"client.js",
-		"client.d.ts"
+		"client.d.ts",
+		"utils.js",
+		"utils.d.ts"
 	],
 	"engines": {
 		"node": ">=18"
@@ -57,9 +59,10 @@
 	"dependencies": {
 		"encoding": "0.1.13",
 		"next": "14.0.1",
-		"openai": "4.14.2",
+		"openai": "4.19.0",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
+		"react-error-boundary": "4.0.11",
 		"sitemapper": "3.2.6"
 	},
 	"devDependencies": {

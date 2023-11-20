@@ -20,7 +20,7 @@
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
 		"inlineSources": false,
-		"jsx": "preserve",
+		"jsx": "react-jsx",
 		"target": "ES2022",
 		"lib": ["es2022", "DOM"],
 		"sourceMap": true,

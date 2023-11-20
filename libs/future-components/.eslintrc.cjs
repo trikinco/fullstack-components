@@ -124,6 +124,7 @@ module.exports = {
 				checkFilenames: false,
 				allowList: {
 					Props: true,
+					props: true,
 				},
 				replacements: {
 					e: {},
