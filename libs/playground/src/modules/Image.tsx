@@ -23,7 +23,7 @@ export interface ImageDescribeProps
 	/**
 	 * Whether or not to render the result string adjacent to the image
 	 */
-	includeResult?: boolean
+	showResult?: boolean
 	/**
 	 * Callback function invoked once the image is completely loaded and the `placeholder` has been removed.
 	 * Returns the `event`, description `response` and the original `src`
@@ -51,7 +51,7 @@ export interface ImageGenerateProps
 	/**
 	 * Whether or not to render the result string adjacent to the image
 	 */
-	includeResult?: boolean
+	showResult?: boolean
 	/** Width and height of the image. Default '256x256' */
 	size?: CreateImageRequestSizeEnum
 	/** Alternative text describing the image, uses `prompt` if not provided */
@@ -131,7 +131,7 @@ export async function Image<T>(props: ImageProps<T>) {
 		const {
 			prompt,
 			size = '256x256',
-			includeResult,
+			showResult,
 			onLoad,
 			onError,
 			...rest
@@ -151,14 +151,14 @@ export async function Image<T>(props: ImageProps<T>) {
 					onError={isClient ? imageCb?.(onError, response, prompt) : undefined}
 					{...rest}
 				/>
-				{includeResult && response?.result}
+				{showResult && response?.result}
 			</>
 		)
 	}
 
 	// Image description
 	if ('src' in props && !('alt' in props) && response !== false) {
-		const { src, includeResult, onLoad, onError, ...rest } = props || {}
+		const { src, showResult, onLoad, onError, ...rest } = props || {}
 
 		return (
 			<>
@@ -169,7 +169,7 @@ export async function Image<T>(props: ImageProps<T>) {
 					onError={isClient ? imageCb?.(onError, response, src) : undefined}
 					{...rest}
 				/>
-				{includeResult && response?.result}
+				{showResult && response?.result}
 			</>
 		)
 	}
