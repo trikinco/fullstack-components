@@ -1,4 +1,5 @@
 import { Select } from '@trikinco/fullstack-components'
+import { UseSelect } from './UseSelect'
 
 # Select
 
@@ -17,3 +18,46 @@ A smart dropdown component that creates, labels and sorts all its own options.
   context="The time zone for Sydney should be selected"
 />
 ```
+
+## `useSelect`
+
+`useSelect` is a utility hook that allows for full access to Select generation data.
+Useful for generating lists or when creating custom dropdown components.
+
+```jsx
+import { useSelect } from '@trikinco/fullstack-components/client'
+```
+
+```jsx
+'use client'
+
+import { useSelect } from '@trikinco/fullstack-components/client'
+
+export default () => {
+  const { isLoading, isError, data } = useSelect({
+    prompt:
+      'The 10 nearest countries to Australia. Include a flag emoji in the label.',
+  })
+
+  if (isLoading) {
+    return 'Loading "The 10 nearest countries to Australia"'
+  }
+
+  if (isError) {
+    return 'Could not load "The 10 nearest countries to Australia"'
+  }
+
+  return (
+    <>
+      <p className="font-bold">{data?.label}</p>
+      <ul>
+        {data?.content?.map((item) => (
+          <li key={item.value}>{item.label}</li>
+        ))}
+      </ul>
+    </>
+  )
+}
+```
+
+<UseSelect />

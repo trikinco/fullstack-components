@@ -1,14 +1,10 @@
 import { useId, type HTMLAttributes, type ReactNode } from 'react'
 import { merge } from '../utils/styles'
-import { request } from '../utils/request'
-import { ApiUrlEnum } from '../enums/ApiUrlEnum'
-import { SelectResponse, SelectRequestBody } from '../handlers/select/models'
-
-export type SelectOptions = Omit<SelectRequestBody, 'prompt'> &
-	Required<Pick<SelectRequestBody, 'prompt'>>
+import { SelectRequestOptions } from '../handlers/select/models'
+import { getSelect } from '../handlers/select/getters'
 
 export interface SelectProps
-	extends SelectOptions,
+	extends SelectRequestOptions,
 		HTMLAttributes<HTMLSelectElement> {
 	/** Visible label in the `<label>` element. Overrides any label from the response */
 	label?: ReactNode
@@ -16,16 +12,6 @@ export interface SelectProps
 	 * Additional props to pass to the <label>
 	 */
 	labelProps?: HTMLAttributes<HTMLLabelElement>
-}
-
-/**
- * Select generation fetcher
- */
-export function getSelect(props: SelectOptions) {
-	const { prompt, context, count } = props || {}
-	const body = { prompt, context, count }
-
-	return request<SelectResponse>(ApiUrlEnum.select, { body })
 }
 
 export async function Select({
