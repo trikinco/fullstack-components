@@ -129,7 +129,8 @@ const pageRouteHandlerFactory: (
 		let {
 			query: { fscomponents: components },
 		} = req
-
+		// eslint-disable-next-line unicorn/consistent-destructuring
+		console.log('query', { query: req?.query })
 		if (Array.isArray(components)) {
 			let otherRoutes
 			;[components, ...otherRoutes] = components
@@ -145,9 +146,12 @@ const pageRouteHandlerFactory: (
 				// eslint-disable-next-line no-prototype-builtins
 				customHandlers.hasOwnProperty(components) &&
 				customHandlers[components]
+			// eslint-disable-next-line unicorn/consistent-destructuring
+			console.log('query and handler', { query: req?.query, handler })
 			if (handler) {
 				await (handler as NextApiHandler)(req, res)
 			} else {
+				console.log('handler not found.swapping to 404')
 				res.status(404).end()
 			}
 		} catch (error) {

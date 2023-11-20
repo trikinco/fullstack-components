@@ -117,7 +117,7 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
-					href="/ui/block"
+					href="/block"
 					title="Block"
 					image={{
 						src: '/images/WireframeCube.png',
