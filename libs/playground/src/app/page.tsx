@@ -116,6 +116,19 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
+					href="/select"
+					title="Select"
+					image={{
+						src: '/images/DiamondSlim.png',
+						alt: 'Diamond',
+					}}
+					footer={<Chip>Component</Chip>}
+				>
+					AI-Powered Select Options Generator. Create options for your
+					dropdowns.
+				</Card>
+				<Card
+					as={Link}
 					href="/ui"
 					title="Generate UI"
 					image={{
@@ -175,19 +188,6 @@ export default function Home() {
 				>
 					AI-Powered Text Simplification. Transform any text into
 					easy-to-understand information.
-				</Card>
-				<Card
-					as={Link}
-					href="/select"
-					title="Select"
-					image={{
-						src: '/images/DiamondSlim.png',
-						alt: 'Diamond',
-					}}
-					footer={<Chip>Component</Chip>}
-				>
-					AI-Powered Select Options Generator. Create options for your
-					dropdowns.
 				</Card>
 			</div>
 		</main>
