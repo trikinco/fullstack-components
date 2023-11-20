@@ -8,6 +8,7 @@ import type { FutureComponentsServer } from './init'
 import type { HandlePrompt } from './handlers/prompt/promptHandler'
 import type { HandleBlock } from './handlers/block/blockHandler'
 import type { HandleImage } from './handlers/image/imageHandler'
+import type { HandleSelect } from './handlers/select/selectHandler'
 
 // Because we use a cache and use clients,
 // we may want to create a singleton for the library
@@ -32,6 +33,10 @@ const handlePromptRequest: HandlePrompt = ((
 const handleImageRequest: HandleImage = ((...args: Parameters<HandleImage>) =>
 	getInstance().handleImageRequest(...args)) as HandleImage
 
+const handleSelectRequest: HandleSelect = ((
+	...args: Parameters<HandleSelect>
+) => getInstance().handleSelectRequest(...args)) as HandleSelect
+
 const handleBlockRequest: HandleBlock = ((...args: Parameters<HandleBlock>) =>
 	getInstance().handleBlockRequest(...args)) as HandleBlock
 
@@ -45,6 +50,7 @@ const handleNotFoundEnhancement: HandleNotFoundEnhancement = ((
 	getInstance().handleNotFoundEnhancement(...args)) as HandleNotFoundEnhancement
 
 const handleFSComponents = handlerFactory({
+	handleSelect: handleSelectRequest,
 	handleImage: handleImageRequest,
 	handleBlock: handleBlockRequest,
 	handlePrompt: handlePromptRequest,
@@ -74,10 +80,12 @@ export {
 export * from './handlers/prompt/models'
 export * from './handlers/block/models'
 export * from './handlers/image/models'
+export * from './handlers/select/models'
 export { AppRouteHandlerContext } from './nextjs-handlers'
 
 export {
 	getInstance,
+	handleSelectRequest,
 	handleImageRequest,
 	handleBlockRequest,
 	handlePromptRequest,

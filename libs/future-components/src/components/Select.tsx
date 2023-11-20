@@ -1,69 +1,47 @@
-import { useId, type HTMLAttributes } from 'react'
+import { useId, type HTMLAttributes, type ReactNode } from 'react'
 import { merge } from '../utils/styles'
 import { request } from '../utils/request'
 import { ApiUrlEnum } from '../enums/ApiUrlEnum'
+import { SelectResponse, SelectRequestBody } from '../handlers/select/models'
 
-export interface SelectOptions {
-	/**
-	 * Additional context to pass to the prompt. Free text
-	 */
-	context?: string
-	/**
-	 * @example 'selecting your time zone'
-	 * @example 'weekday selection'
-	 */
-	purpose: string
-	/**
-	 * The number of items to aim for
-	 */
-	count?: number
-}
+export type SelectOptions = Omit<SelectRequestBody, 'prompt'> &
+	Required<Pick<SelectRequestBody, 'prompt'>>
 
 export interface SelectProps
 	extends SelectOptions,
 		HTMLAttributes<HTMLSelectElement> {
+	/** Visible label in the `<label>` element. Overrides any label from the response */
+	label?: ReactNode
 	/**
 	 * Additional props to pass to the <label>
 	 */
 	labelProps?: HTMLAttributes<HTMLLabelElement>
 }
 
-export interface SelectItem {
-	value: string
-	label: string
-	selected?: true
-}
-
 /**
  * Select generation fetcher
  */
 export function getSelect(props: SelectOptions) {
-	const { purpose, context, count } = props || {}
-	const body = { purpose, context, count }
+	const { prompt, context, count } = props || {}
+	const body = { prompt, context, count }
 
-	return request<{
-		label: string
-		content: SelectItem[]
-	}>(ApiUrlEnum.select, { body })
+	return request<SelectResponse>(ApiUrlEnum.select, { body })
 }
 
 export async function Select({
-	purpose,
+	prompt,
 	context,
 	count = 0,
 	className,
 	labelProps,
+	label: defaultLabel,
 	...rest
 }: SelectProps) {
 	const selectId = useId()
 
-	const { label, content } =
-		(await getSelect({ purpose, context, count })) || {}
-
-	if (!label || !content) {
-		// eslint-disable-next-line unicorn/no-null
-		return null
-	}
+	const { label, content = [] } =
+		(await getSelect({ prompt, context, count })) || {}
+	const selectLabel = defaultLabel || label
 
 	return (
 		<>
@@ -74,13 +52,13 @@ export async function Select({
 				)}
 				{...labelProps}
 			>
-				{label}
+				{selectLabel}
 			</label>
 
 			<select
 				id={selectId}
 				className={merge(
-					'appearance-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
+					'appearance-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
 					className
 				)}
 				defaultValue={content?.find(({ selected }) => selected)?.value}
