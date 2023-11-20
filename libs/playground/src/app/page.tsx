@@ -103,6 +103,19 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
+					href="/image"
+					title="Image"
+					image={{
+						src: '/images/Asterisk.png',
+						alt: 'Asterisk',
+					}}
+					footer={<Chip>Component</Chip>}
+				>
+					AI-Powered Image Tools. Craft visuals effortlessly and reveal their
+					secrets with instant image descriptions.
+				</Card>
+				<Card
+					as={Link}
 					href="/ui"
 					title="Generate UI"
 					image={{
@@ -175,19 +188,6 @@ export default function Home() {
 				>
 					AI-Powered Select Options Generator. Create options for your
 					dropdowns.
-				</Card>
-				<Card
-					as={Link}
-					href="/image"
-					title="Image"
-					image={{
-						src: '/images/Asterisk.png',
-						alt: 'Asterisk',
-					}}
-					footer={<Chip>Component</Chip>}
-				>
-					AI-Powered Image Tools. Craft visuals effortlessly and reveal their
-					secrets with instant image descriptions.
 				</Card>
 			</div>
 		</main>

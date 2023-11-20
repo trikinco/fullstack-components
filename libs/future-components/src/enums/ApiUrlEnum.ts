@@ -3,8 +3,7 @@ export const ApiUrlEnum = {
 	errorEnhancer: '/api/fsutils/errorEnhancer',
 	notFoundEnhancer: '/api/fsutils/notFoundEnhancer',
 	select: '/api/fsutils/select',
-	imageDescribe: '/api/fsutils/imageDescribe',
-	imageGenerate: '/api/fsutils/imageGenerate',
+	image: '/api/fsutils/image',
 	block: '/api/fsutils/block',
 } as const
 

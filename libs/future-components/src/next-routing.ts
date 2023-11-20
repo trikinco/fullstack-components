@@ -11,6 +11,7 @@ import type { FSCApiHandler, FSCOptions, ApiHandlers } from './types/handlers'
 import type { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
 import type { HandlePrompt } from './handlers/prompt/promptHandler'
 import type { HandleBlock } from './handlers/block/blockHandler'
+import type { HandleImage } from './handlers/image/imageHandler'
 
 /**
  * @ignore
@@ -32,11 +33,13 @@ const defaultAppRouterOnError: AppRouterOnError = (_req, error) => {
  * @ignore
  */
 export default function handlerFactory({
+	handleImage,
 	handleBlock,
 	handlePrompt,
 	handleErrorParser,
 	handleNotFoundEnhancement,
 }: {
+	handleImage: HandleImage
 	handleBlock: HandleBlock
 	handlePrompt: HandlePrompt
 	handleErrorParser: HandleErrorParser
@@ -46,6 +49,7 @@ export default function handlerFactory({
 		| NextApiHandler<void>
 		| AppRouteHandler => {
 		const customHandlers: ApiHandlers = {
+			image: handleImage,
 			block: handleBlock,
 			prompt: handlePrompt,
 			errorEnhancer: handleErrorParser,

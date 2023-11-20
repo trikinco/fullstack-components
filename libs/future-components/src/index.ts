@@ -7,6 +7,7 @@ import type { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notF
 import type { FutureComponentsServer } from './init'
 import type { HandlePrompt } from './handlers/prompt/promptHandler'
 import type { HandleBlock } from './handlers/block/blockHandler'
+import type { HandleImage } from './handlers/image/imageHandler'
 
 // Because we use a cache and use clients,
 // we may want to create a singleton for the library
@@ -28,6 +29,9 @@ const handlePromptRequest: HandlePrompt = ((
 	...args: Parameters<HandlePrompt>
 ) => getInstance().handlePromptRequest(...args)) as HandlePrompt
 
+const handleImageRequest: HandleImage = ((...args: Parameters<HandleImage>) =>
+	getInstance().handleImageRequest(...args)) as HandleImage
+
 const handleBlockRequest: HandleBlock = ((...args: Parameters<HandleBlock>) =>
 	getInstance().handleBlockRequest(...args)) as HandleBlock
 
@@ -41,6 +45,7 @@ const handleNotFoundEnhancement: HandleNotFoundEnhancement = ((
 	getInstance().handleNotFoundEnhancement(...args)) as HandleNotFoundEnhancement
 
 const handleFSComponents = handlerFactory({
+	handleImage: handleImageRequest,
 	handleBlock: handleBlockRequest,
 	handlePrompt: handlePromptRequest,
 	handleErrorParser: handleErrorRequest,
@@ -66,20 +71,14 @@ export {
 	NotFoundEnhancerResponse,
 	NotFoundEnhancerOptions,
 } from './handlers/notFoundEnhancer/models'
-export {
-	PromptRequestBody,
-	PromptResponse,
-	PromptOptions,
-} from './handlers/prompt/models'
-export {
-	BlockRequestBody,
-	BlockResponse,
-	BlockOptions,
-} from './handlers/block/models'
+export * from './handlers/prompt/models'
+export * from './handlers/block/models'
+export * from './handlers/image/models'
 export { AppRouteHandlerContext } from './nextjs-handlers'
 
 export {
 	getInstance,
+	handleImageRequest,
 	handleBlockRequest,
 	handlePromptRequest,
 	handleErrorRequest,

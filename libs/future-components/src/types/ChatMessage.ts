@@ -1,4 +1,3 @@
-export type ChatMessage = {
-	role: 'system' | 'user' | 'assistant'
-	content: string
-}
+import OpenAI from 'openai'
+
+export type ChatMessage = OpenAI.ChatCompletionMessageParam
