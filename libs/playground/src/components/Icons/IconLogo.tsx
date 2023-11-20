@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react'
-import { merge } from '../../utils/styles'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export const IconLogo = ({
 	className,

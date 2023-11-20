@@ -1,5 +1,5 @@
 import { useId, type HTMLAttributes } from 'react'
-import { merge } from '../utils/styles'
+import { merge } from '@trikinco/fullstack-components/utils'
 import { URL_DEPLOYMENT } from '../utils/constants'
 
 export interface SelectProps extends HTMLAttributes<HTMLSelectElement> {

@@ -32,6 +32,9 @@ importers:
 
   libs/future-components:
     dependencies:
+      clsx:
+        specifier: 2.0.0
+        version: 2.0.0
       encoding:
         specifier: 0.1.13
         version: 0.1.13
@@ -53,6 +56,9 @@ importers:
       sitemapper:
         specifier: 3.2.6
         version: 3.2.6
+      tailwind-merge:
+        specifier: 2.0.0
+        version: 2.0.0
     devDependencies:
       '@types/node':
         specifier: '20'
@@ -126,9 +132,6 @@ importers:
       ai:
         specifier: 2.2.20
         version: 2.2.20(react@18.2.0)(solid-js@1.8.5)(svelte@4.2.5)(vue@3.3.8)
-      clsx:
-        specifier: 2.0.0
-        version: 2.0.0
       jsonrepair:
         specifier: 3.4.0
         version: 3.4.0
@@ -165,9 +168,6 @@ importers:
       shiki:
         specifier: 0.14.5
         version: 0.14.5
-      tailwind-merge:
-        specifier: 2.0.0
-        version: 2.0.0
       unist-util-visit:
         specifier: 5.0.0
         version: 5.0.0
@@ -227,7 +227,7 @@ importers:
         specifier: 0.11.5
         version: 0.11.5
       autoprefixer:
-        specifier: '10'
+        specifier: 10.4.16
         version: 10.4.16(postcss@8.4.31)
       encoding:
         specifier: 0.1.13
@@ -251,7 +251,7 @@ importers:
         specifier: 4.2.3
         version: 4.2.3(next@14.0.1)
       postcss:
-        specifier: '8'
+        specifier: 8.4.31
         version: 8.4.31
       prettier:
         specifier: 3.0.3
@@ -6134,7 +6134,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.22.1
-      caniuse-lite: 1.0.30001551
+      caniuse-lite: 1.0.30001562
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -6490,7 +6490,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001551
+      caniuse-lite: 1.0.30001562
       electron-to-chromium: 1.4.561
       node-releases: 2.0.13
       update-browserslist-db: 1.0.13(browserslist@4.22.1)
@@ -6629,9 +6629,6 @@ packages:
     resolution: {integrity: sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==}
     engines: {node: '>=10'}
     dev: true
-
-  /caniuse-lite@1.0.30001551:
-    resolution: {integrity: sha512-vtBAez47BoGMMzlbYhfXrMV1kvRF2WP/lqiMuDu1Sb4EE4LKEgjopFDSRtZfdVnslNRpOqV/woE+Xgrwj6VQlg==}
 
   /caniuse-lite@1.0.30001562:
     resolution: {integrity: sha512-kfte3Hym//51EdX4239i+Rmp20EsLIYGdPkERegTgU19hQWCRhsRFGKHTliUlsry53tv17K7n077Kqa0WJU4ng==}

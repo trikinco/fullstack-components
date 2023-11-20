@@ -7,6 +7,8 @@ import type { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notF
 import type { FutureComponentsServer } from './init'
 import type { HandlePrompt } from './handlers/prompt/promptHandler'
 import type { HandleBlock } from './handlers/block/blockHandler'
+import type { HandleImage } from './handlers/image/imageHandler'
+import type { HandleSelect } from './handlers/select/selectHandler'
 
 // Because we use a cache and use clients,
 // we may want to create a singleton for the library
@@ -28,6 +30,13 @@ const handlePromptRequest: HandlePrompt = ((
 	...args: Parameters<HandlePrompt>
 ) => getInstance().handlePromptRequest(...args)) as HandlePrompt
 
+const handleImageRequest: HandleImage = ((...args: Parameters<HandleImage>) =>
+	getInstance().handleImageRequest(...args)) as HandleImage
+
+const handleSelectRequest: HandleSelect = ((
+	...args: Parameters<HandleSelect>
+) => getInstance().handleSelectRequest(...args)) as HandleSelect
+
 const handleBlockRequest: HandleBlock = ((...args: Parameters<HandleBlock>) =>
 	getInstance().handleBlockRequest(...args)) as HandleBlock
 
@@ -41,17 +50,18 @@ const handleNotFoundEnhancement: HandleNotFoundEnhancement = ((
 	getInstance().handleNotFoundEnhancement(...args)) as HandleNotFoundEnhancement
 
 const handleFSComponents = handlerFactory({
+	handleSelect: handleSelectRequest,
+	handleImage: handleImageRequest,
 	handleBlock: handleBlockRequest,
 	handlePrompt: handlePromptRequest,
 	handleErrorParser: handleErrorRequest,
 	handleNotFoundEnhancement: handleNotFoundEnhancement,
 })
 
-// Utils
-export { request } from './utils/request'
-
 // Server components
 export { Prompt } from './components/Prompt'
+export { Image } from './components/Image'
+export { Select } from './components/Select'
 
 // public library api for server
 export { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
@@ -67,20 +77,16 @@ export {
 	NotFoundEnhancerResponse,
 	NotFoundEnhancerOptions,
 } from './handlers/notFoundEnhancer/models'
-export {
-	PromptRequestBody,
-	PromptResponse,
-	PromptOptions,
-} from './handlers/prompt/models'
-export {
-	BlockRequestBody,
-	BlockResponse,
-	BlockOptions,
-} from './handlers/block/models'
+export * from './handlers/prompt/models'
+export * from './handlers/block/models'
+export * from './handlers/image/models'
+export * from './handlers/select/models'
 export { AppRouteHandlerContext } from './nextjs-handlers'
 
 export {
 	getInstance,
+	handleSelectRequest,
+	handleImageRequest,
 	handleBlockRequest,
 	handlePromptRequest,
 	handleErrorRequest,

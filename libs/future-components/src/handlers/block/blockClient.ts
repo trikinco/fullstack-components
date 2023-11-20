@@ -48,13 +48,7 @@ export class BlockClient {
 			],
 			{
 				openAIApiKey: options.openAiApiKey || OPENAI_API_KEY,
-				// eslint-disable-next-line @typescript-eslint/naming-convention
-				response_format: { type: 'json_object' },
-				/**
-				 * only gpt-4-1106-preview or gpt-3.5-turbo-1106 support JSON mode atm
-				 * @see https://platform.openai.com/docs/guides/text-generation/json-mode
-				 */
-				model: 'gpt-3.5-turbo-1106',
+				format: 'JSON',
 			}
 		)
 	}

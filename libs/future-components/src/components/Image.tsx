@@ -1,17 +1,9 @@
 import NextImage, { type ImageProps as NextImageProps } from 'next/image'
-import type { CreateImageRequestSizeEnum } from 'openai-edge'
 import type { SyntheticEvent } from 'react'
-import { request } from '@trikinco/fullstack-components/utils'
-import { IS_DEV } from '@/src/utils/constants'
-
-export const imageAPIURLs = {
-	describe: '/api/image/describe',
-	generate: '/api/image/generate',
-} as const
-
-export type ImageResponse = {
-	result: string
-}
+import { request } from '../utils/request'
+import { IS_DEV } from '../utils/constants'
+import { ApiUrlEnum } from '../enums/ApiUrlEnum'
+import type { ImageRequestBody } from '../handlers/image/models'
 
 export interface ImageDescribeProps
 	extends Omit<NextImageProps, 'src' | 'alt' | 'onLoad' | 'onError'> {
@@ -36,7 +28,7 @@ export interface ImageDescribeProps
 export type ImageDescribeCallback = (
 	event: SyntheticEvent<HTMLImageElement, Event> | undefined,
 	/** Image description response */
-	response?: ImageResponse,
+	response?: string,
 	/** Image description src */
 	src?: string
 ) => void
@@ -53,7 +45,7 @@ export interface ImageGenerateProps
 	 */
 	showResult?: boolean
 	/** Width and height of the image. Default '256x256' */
-	size?: CreateImageRequestSizeEnum
+	size?: '256x256' | '512x512' | '1024x1024'
 	/** Alternative text describing the image, uses `prompt` if not provided */
 	alt?: string
 	/**
@@ -68,7 +60,7 @@ export interface ImageGenerateProps
 export type ImageGenerateCallback = (
 	event: SyntheticEvent<HTMLImageElement, Event> | undefined,
 	/** Image generation response */
-	response?: ImageResponse,
+	response?: string,
 	/** Image generation prompt */
 	prompt?: string
 ) => void
@@ -82,38 +74,32 @@ export type ImageProps<T> = T extends { prompt: unknown }
 /**
  * Image generation and description fetcher
  */
-export async function getImage<T>(props: ImageProps<T>) {
-	const shouldGenerateImage = 'prompt' in props
-	const apiURL = shouldGenerateImage
-		? imageAPIURLs.generate
-		: imageAPIURLs.describe
-	const body = shouldGenerateImage
-		? { prompt: props.prompt }
-		: { src: props.src }
+export function getImage<T>(props: ImageProps<T>) {
+	const { prompt, src } = props as ImageRequestBody
 
 	if (!('prompt' in props) && 'alt' in props) {
 		if (IS_DEV) {
 			console.warn(
-				`Provided 'alt' and no 'prompt' for image with src: "${props.src}"\nYou may want to use '<Image>' from 'next/image' instead.`
+				`Provided 'alt' and no 'prompt' for image.\nYou may want to use '<Image>' from 'next/image' instead.`
 			)
 		}
 
 		return false
 	}
 
-	return await request<ImageResponse>(apiURL, { body })
+	return request<string>(ApiUrlEnum.image, { body: { prompt, src } })
 }
 
 /**
  * client-only callback for Image `onLoad` | `onError`
  */
-function imageCb<T extends ImageDescribeCallback | ImageGenerateCallback>(
-	fn?: T,
+function imageEvent<T extends ImageDescribeCallback | ImageGenerateCallback>(
+	handler?: T,
 	response?: Parameters<T>[1],
 	meta?: Parameters<T>[2]
 ) {
-	return (e: SyntheticEvent<HTMLImageElement, Event> | undefined) =>
-		fn?.(e, response, meta)
+	return (event: SyntheticEvent<HTMLImageElement, Event> | undefined) =>
+		handler?.(event, response, meta)
 }
 
 /**
@@ -131,45 +117,55 @@ export async function Image<T>(props: ImageProps<T>) {
 		const {
 			prompt,
 			size = '256x256',
+			// eslint-disable-next-line @typescript-eslint/naming-convention
 			showResult,
 			onLoad,
 			onError,
 			...rest
 		} = props || {}
 		const sizes = size.split('x')
-		const width = parseInt(sizes[0])
-		const height = parseInt(sizes[1])
+		const width = Number.parseInt(sizes[0])
+		const height = Number.parseInt(sizes[1])
 
 		return (
 			<>
 				<NextImage
-					src={response?.result || ''}
+					src={response || ''}
 					alt={prompt}
 					width={width}
 					height={height}
-					onLoad={isClient ? imageCb?.(onLoad, response, prompt) : undefined}
-					onError={isClient ? imageCb?.(onError, response, prompt) : undefined}
+					onLoad={isClient ? imageEvent?.(onLoad, response, prompt) : undefined}
+					onError={
+						isClient ? imageEvent?.(onError, response, prompt) : undefined
+					}
 					{...rest}
 				/>
-				{showResult && response?.result}
+				{showResult && response}
 			</>
 		)
 	}
 
 	// Image description
 	if ('src' in props && !('alt' in props) && response !== false) {
-		const { src, showResult, onLoad, onError, ...rest } = props || {}
+		const {
+			src,
+			// eslint-disable-next-line @typescript-eslint/naming-convention
+			showResult,
+			onLoad,
+			onError,
+			...rest
+		} = props || {}
 
 		return (
 			<>
 				<NextImage
 					src={src}
-					alt={response?.result}
-					onLoad={isClient ? imageCb?.(onLoad, response, src) : undefined}
-					onError={isClient ? imageCb?.(onError, response, src) : undefined}
+					alt={response}
+					onLoad={isClient ? imageEvent?.(onLoad, response, src) : undefined}
+					onError={isClient ? imageEvent?.(onError, response, src) : undefined}
 					{...rest}
 				/>
-				{showResult && response?.result}
+				{showResult && response}
 			</>
 		)
 	}
@@ -177,3 +173,5 @@ export async function Image<T>(props: ImageProps<T>) {
 	// Regular Next image
 	return <NextImage src="" alt="" {...props} />
 }
+
+export default Image

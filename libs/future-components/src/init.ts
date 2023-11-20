@@ -11,6 +11,10 @@ import { PromptClient } from './handlers/prompt/promptClient'
 import promptHandler, { HandlePrompt } from './handlers/prompt/promptHandler'
 import { BlockClient } from './handlers/block/blockClient'
 import blockHandler, { HandleBlock } from './handlers/block/blockHandler'
+import imageHandler, { HandleImage } from './handlers/image/imageHandler'
+import { ImageClient } from './handlers/image/imageClient'
+import selectHandler, { HandleSelect } from './handlers/select/selectHandler'
+import { SelectClient } from './handlers/select/selectClient'
 
 const handleErrorRequest = errorParserHandler(new ErrorClient())
 const requestCache = new Map<string, string>()
@@ -20,11 +24,15 @@ const handleNotFoundEnhancement = notFoundEnhancementHandler(
 )
 const handlePromptRequest = promptHandler(new PromptClient())
 const handleBlockRequest = blockHandler(new BlockClient())
+const handleImageRequest = imageHandler(new ImageClient())
+const handleSelectRequest = selectHandler(new SelectClient())
 
 export type FutureComponentsServer = {
 	requestCache: Map<string, string>
 	handleErrorRequest: HandleErrorParser
 	handlePromptRequest: HandlePrompt
+	handleSelectRequest: HandleSelect
+	handleImageRequest: HandleImage
 	handleBlockRequest: HandleBlock
 	handleNotFoundEnhancement: HandleNotFoundEnhancement
 }
@@ -35,6 +43,8 @@ export function _init(): FutureComponentsServer {
 		requestCache, // this isn't really used, just thinking about caching
 		handleErrorRequest,
 		handlePromptRequest,
+		handleSelectRequest,
+		handleImageRequest,
 		handleBlockRequest,
 		handleNotFoundEnhancement,
 	}

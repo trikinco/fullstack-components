@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react'
-import { merge } from '../utils/styles'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export interface ChipProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode

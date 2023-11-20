@@ -1,6 +1,6 @@
 import type { ElementType, HTMLAttributes } from 'react'
 import type { AsComponent } from '@trikinco/fullstack-components'
-import { merge } from '../utils/styles'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 	color?: 'primary' | 'secondary'

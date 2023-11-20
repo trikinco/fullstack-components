@@ -1,5 +1,5 @@
 import { type HTMLAttributes, type FormEvent, useId, useRef } from 'react'
-import { merge } from '../utils/styles'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export interface SliderProps extends HTMLAttributes<HTMLInputElement> {
 	/** Range lower-bound */

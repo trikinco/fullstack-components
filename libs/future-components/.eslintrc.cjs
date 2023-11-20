@@ -125,6 +125,7 @@ module.exports = {
 				allowList: {
 					Props: true,
 					props: true,
+					src: true,
 				},
 				replacements: {
 					e: {},

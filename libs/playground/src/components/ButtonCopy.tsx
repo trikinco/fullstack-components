@@ -3,7 +3,7 @@
 import { useState, type HTMLAttributes } from 'react'
 import { IconCheck } from './Icons/IconCheck'
 import { IconFile } from './Icons/IconFile'
-import { merge } from '../utils/styles'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export interface ButtonCopyProps extends HTMLAttributes<HTMLButtonElement> {
 	text?: string
