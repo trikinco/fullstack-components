@@ -14,11 +14,14 @@ export type ChatGptCompletionResponse = {
 	errorMessage?: string
 }
 
+export type ChatCompletionFormat = 'JSON'
+
 export type ChatCompletionsOptions = Omit<
 	OpenAI.ChatCompletionCreateParamsNonStreaming,
 	'messages' | 'model'
 > & {
 	openAIApiKey: string
+	format?: ChatCompletionFormat
 	model?: OpenAI.ChatCompletionCreateParamsNonStreaming['model']
 }
 
@@ -26,21 +29,23 @@ export async function runChatCompletion(
 	messages: ChatMessage[],
 	options: ChatCompletionsOptions
 ): Promise<ChatGptCompletionResponse> {
-	const { openAIApiKey, temperature, model, ...opts } = options || {}
+	const { openAIApiKey, temperature, model, format, ...opts } = options || {}
 
 	const openai = new OpenAI({
 		apiKey: openAIApiKey,
 	})
 
-	const selectedModel = model || selectBestModel(messages)
+	const selectedModel = model || selectBestModel(messages, format)
 	console.log('Running chat completion', messages)
 
 	try {
 		const completion = await openai.chat.completions.create({
-			...opts,
 			model: selectedModel,
 			temperature: temperature || 0.9,
 			messages,
+			// eslint-disable-next-line @typescript-eslint/naming-convention
+			response_format: format === 'JSON' ? { type: 'json_object' } : undefined,
+			...opts,
 		})
 
 		const extractedText = completion.choices[0].message?.content
@@ -71,17 +76,32 @@ export async function runChatCompletion(
 	}
 }
 
-function selectBestModel(chatMessages: ChatMessage[]) {
+function selectBestModel(
+	chatMessages: ChatMessage[],
+	format?: ChatCompletionFormat
+) {
 	let model = 'gpt-3.5-turbo'
 	const length = chatMessages.map((c) => c.content).join('').length / 3
+
 	if (length > 15_750) {
 		throw new Error(
 			'Too many tokens! Too much happened during this period for the LLM to make sense of it.'
 		)
 	}
+
 	if (length > 3800) {
 		model = 'gpt-3.5-turbo-16k'
 	}
+
+	if (format === 'JSON') {
+		/**
+		 * only gpt-4-1106-preview or gpt-3.5-turbo-1106 support JSON mode atm
+		 * @see https://platform.openai.com/docs/guides/text-generation/json-mode
+		 */
+		model = 'gpt-3.5-turbo-1106'
+	}
+
 	console.log('using gpt model', model)
+
 	return model
 }
