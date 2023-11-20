@@ -13,7 +13,7 @@ export default function Blocks() {
 
 			<Block
 				prompt={`A navbar with a modern SVG logo, ${NAME_LIB} and some links. Dark bg, light text.`}
-				fallback={
+				loading={
 					<Spinner
 						className="flex gap-3 p-3 items-center"
 						classNameSpinner="mb-0"
@@ -24,7 +24,7 @@ export default function Blocks() {
 			/>
 			<Block
 				prompt={`A sleek UI hero section with some text about ${NAME_LONG}. Dark bg, light text.`}
-				fallback={
+				loading={
 					<Spinner
 						className="flex gap-3 p-3 items-center"
 						classNameSpinner="mb-0"
@@ -35,7 +35,7 @@ export default function Blocks() {
 			/>
 			<Block
 				prompt={`A two-column call to action section with a purple button and some text listing some features of ${NAME_LONG} in one column, and a photo from Unsplash in the other column. Dark bg, light text.`}
-				fallback={
+				loading={
 					<Spinner
 						className="flex gap-3 p-3 items-center"
 						classNameSpinner="mb-0"
@@ -46,7 +46,7 @@ export default function Blocks() {
 			/>
 			<Block
 				prompt={`A footer with copyright for this year - ${NAME_SHORT}. Dark bg, light text.`}
-				fallback={
+				loading={
 					<Spinner
 						className="flex gap-3 p-3 items-center"
 						classNameSpinner="mb-0"
