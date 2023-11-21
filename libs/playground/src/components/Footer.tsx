@@ -3,8 +3,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { IconLogo } from './Icons/IconLogo'
-import { NAME_SHORT, URL_DISCUSSIONS, URL_GITHUB } from '../utils/constants'
+import {
+	NAME_SHORT,
+	URL_DISCUSSIONS,
+	URL_GITHUB,
+	URL_NPM,
+} from '../utils/constants'
 import { IconGitHub } from './Icons/IconGitHub'
+import { IconNpm } from './Icons/IconNpm'
 
 export interface FooterProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode
@@ -26,6 +32,13 @@ export const Footer = ({ children, className, ...rest }: FooterProps) => {
 						className="rounded-full ring-offset-2 focus:outline-none focus:ring"
 					>
 						<IconLogo className="w-5 h-5" />
+					</Link>
+					<Link
+						href={URL_NPM}
+						className="text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full ring-offset-2 focus:outline-none focus:ring"
+					>
+						<span className="sr-only">{NAME_SHORT} on NPM</span>
+						<IconNpm className="w-8" />
 					</Link>
 					<Link
 						href={URL_GITHUB}
