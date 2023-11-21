@@ -80,4 +80,33 @@ The UI above is made out of the following blocks:
 />
 ```
 
+## Setup
+
+1. Add the `handleBlockRequest` to the [API handler route](/docs/get-started/#setup).
+
+```ts title="app/api/fsc/route.ts"
+import {
+  handleFSComponents,
+  handleBlockRequest,
+  type FSCOptions,
+} from '@trikinco/fullstack-components'
+
+const fscOptions: FSCOptions = {
+  handleBlock: handleBlockRequest({
+    openAiApiKey: process.env.OPENAI_API_KEY || '',
+  }),
+  // Additional options and handlers...
+}
+
+const fscHandler = handleFSComponents(fscOptions)
+
+export { fscHandler as GET, fscHandler as POST }
+```
+
+2. Import and use the `Block` component from `/client`.
+
+```jsx
+import { Block } from '@trikinco/fullstack-components/client'
+```
+
 </Prose>

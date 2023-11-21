@@ -50,3 +50,32 @@ import { Image } from '@trikinco/fullstack-components'
   height={300}
 />
 ```
+
+## Setup
+
+1. Add the `handleImageRequest` to the [API handler route](/docs/get-started/#setup).
+
+```ts title="app/api/fsc/route.ts"
+import {
+  handleFSComponents,
+  handleImageRequest,
+  type FSCOptions,
+} from '@trikinco/fullstack-components'
+
+const fscOptions: FSCOptions = {
+  handleImage: handleImageRequest({
+    openAiApiKey: process.env.OPENAI_API_KEY || '',
+  }),
+  // Additional options and handlers...
+}
+
+const fscHandler = handleFSComponents(fscOptions)
+
+export { fscHandler as GET, fscHandler as POST }
+```
+
+2. Import and use the `Image` component.
+
+```jsx
+import { Image } from '@trikinco/fullstack-components'
+```

@@ -61,3 +61,33 @@ export default () => {
 ```
 
 <UseSelect />
+
+## Setup
+
+1. Add the `handleSelectRequest` to the [API handler route](/docs/get-started/#setup).
+
+```ts title="app/api/fsc/route.ts"
+import {
+  handleFSComponents,
+  handleSelectRequest,
+  type FSCOptions,
+} from '@trikinco/fullstack-components'
+
+const fscOptions: FSCOptions = {
+  handleSelect: handleSelectRequest({
+    openAiApiKey: process.env.OPENAI_API_KEY || '',
+  }),
+  // Additional options and handlers...
+}
+
+const fscHandler = handleFSComponents(fscOptions)
+
+export { fscHandler as GET, fscHandler as POST }
+```
+
+2. Import and use the `Select` component, or the `useSelect` hook from `/client`.
+
+```jsx
+import { Select } from '@trikinco/fullstack-components'
+import { useSelect } from '@trikinco/fullstack-components/client'
+```

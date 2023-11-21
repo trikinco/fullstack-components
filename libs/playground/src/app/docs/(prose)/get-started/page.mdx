@@ -10,7 +10,11 @@ npm install @trikinco/fullstack-components
 
 ## Setup
 
-```tsx title="app/api/future/route.ts"
+1. Create an API handler route to manage the API calls, e.g `app/api/future/route.ts`
+
+2. Import `@trikinco/fullstack-components` and configure the API handler route:
+
+```ts title="app/api/fsc/route.ts"
 import {
   handleFSComponents,
   handleNotFoundEnhancement,
@@ -18,7 +22,12 @@ import {
 } from '@trikinco/fullstack-components'
 
 const fscOptions: FSCOptions = {
-  // Your options...
+  // Example
+  notFoundEnhancer: handleNotFoundEnhancement({
+    siteUrl: process.env.SITE_URL || '',
+    openAiApiKey: process.env.OPENAI_API_KEY || '',
+  }),
+  // Additional options and handlers...
 }
 
 const fscHandler = handleFSComponents(fscOptions)

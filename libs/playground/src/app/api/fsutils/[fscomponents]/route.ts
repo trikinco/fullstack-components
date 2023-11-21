@@ -1,5 +1,6 @@
 import {
 	handleFSComponents,
+	handleImageRequest,
 	handleSelectRequest,
 	handleBlockRequest,
 	handlePromptRequest,
@@ -13,6 +14,7 @@ const config = {
 }
 
 const fscOptions: FSCOptions = {
+	handleImage: handleImageRequest(config),
 	handleSelect: handleSelectRequest(config),
 	handleBlock: handleBlockRequest(config),
 	handlePrompt: handlePromptRequest(config),

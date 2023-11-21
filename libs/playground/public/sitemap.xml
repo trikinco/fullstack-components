@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>http://localhost:3000/chat</loc><lastmod>2023-11-20T07:12:09.719Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/block</loc><lastmod>2023-11-20T07:12:09.719Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/ui</loc><lastmod>2023-11-20T07:12:09.719Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/image</loc><lastmod>2023-11-20T07:12:09.719Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/(.)error</loc><lastmod>2023-11-20T07:12:09.719Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/profile</loc><lastmod>2023-11-20T07:12:09.719Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000</loc><lastmod>2023-11-20T07:12:09.719Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/prompt</loc><lastmod>2023-11-20T07:12:09.719Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/errors</loc><lastmod>2023-11-20T07:12:09.719Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/error</loc><lastmod>2023-11-20T07:12:09.719Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/docs/get-started</loc><lastmod>2023-11-20T07:12:09.719Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/select</loc><lastmod>2023-11-20T07:12:09.719Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>http://localhost:3000/text</loc><lastmod>2023-11-20T07:12:09.719Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/docs/chat</loc><lastmod>2023-11-21T01:28:48.442Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/docs/ui</loc><lastmod>2023-11-21T01:28:48.442Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/docs/errors</loc><lastmod>2023-11-21T01:28:48.442Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/error</loc><lastmod>2023-11-21T01:28:48.442Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/docs/prompt</loc><lastmod>2023-11-21T01:28:48.442Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/docs/get-started</loc><lastmod>2023-11-21T01:28:48.442Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/(.)error</loc><lastmod>2023-11-21T01:28:48.442Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/docs/block</loc><lastmod>2023-11-21T01:28:48.442Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/docs/text</loc><lastmod>2023-11-21T01:28:48.442Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/docs/select</loc><lastmod>2023-11-21T01:28:48.442Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000</loc><lastmod>2023-11-21T01:28:48.442Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/docs/not-found</loc><lastmod>2023-11-21T01:28:48.442Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>http://localhost:3000/docs/image</loc><lastmod>2023-11-21T01:28:48.442Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>

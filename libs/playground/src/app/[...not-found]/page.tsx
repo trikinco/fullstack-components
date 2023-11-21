@@ -1,12 +1,13 @@
 import Link from 'next/link'
-import { NotFoundEnhancer } from '@/src/modules/NotFoundEnhancer'
+import Main from '@/src/components/Main'
+import Prose from '@/src/components/Prose'
 import { PageHeader } from '@/src/components/PageHeader'
 import { Button } from '@/src/components/Button'
-import Prose from '@/src/components/Prose'
+import { NotFoundEnhancer } from '@/src/app/docs/(prose)/not-found/NotFoundEnhancer'
 
 export default function NotFound() {
 	return (
-		<main className="flex flex-col items-center justify-between p-24 min-h-screen">
+		<Main>
 			<Prose>
 				<PageHeader title="Not Found" />
 				<p>Could not find requested resource</p>
@@ -17,6 +18,6 @@ export default function NotFound() {
 
 				<NotFoundEnhancer />
 			</Prose>
-		</main>
+		</Main>
 	)
 }
