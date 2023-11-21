@@ -1,0 +1,80 @@
+import { NotFoundEnhancer } from './NotFoundEnhancer'
+
+# Not Found Enhancer
+
+<NotFoundEnhancer />
+
+This component uses your sitemap to find the closest matching page to the `not found` URL.
+It also uses the contents of your website URL's to create a helpful message for your end-user.
+
+## Setup
+
+### Step 1: Configure the API handler
+
+In the API handler file, you should add the following configuration to use this component.
+
+**Not Found Enhancer does require configuration of the API handler.**
+
+Note that not all of our features require configuration, so read the documentation for each.
+
+```ts
+export const POST = handleFSComponents({
+  notFoundEnhancer: handleNotFoundEnhancement({
+    siteUrl: process.env.SITE_URL || '', // used to inspect the sitemap
+    openAiApiKey: process.env.OPENAI_API_KEY || '', // used to generate the contents
+  }),
+})
+```
+
+### Step 2: Create a new client component in your Next.js app
+
+The key here is to use the `useNotFoundEnhancement` hook to get the data from the api endpoint.
+
+```tsx
+// components/NotFoundEnhancment.tsx
+'use client'
+
+import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
+import Link from 'next/link'
+
+export function NotFoundEnhancer() {
+  const { content, isLoading } = useNotFoundEnhancement()
+  if (!content || isLoading) {
+    return <p>Please wait, checking for other solutions...</p>
+  }
+  return (
+    <div>
+      <p>{content?.generatedContent}</p>
+      <p>Try this url instead:</p>
+      <div>
+        <Link href={content?.bestAlternateUrl || '#'}>
+          {content?.bestAlternateUrl || 'No alternate url found'}
+        </Link>
+      </div>
+    </div>
+  )
+}
+```
+
+### Step 3: Create a `not-found` page
+
+The last piece of the puzzle is to create a `not-found` page or in your Next.js app.
+
+If you're using Next.js with the Pages Router you have to use `404.tsx`.
+[See the Next.js docs for how this works.](https://nextjs.org/docs/pages/building-your-application/routing/custom-error#404-page)
+
+```tsx
+// pages/404.tsx or app/not-found.tsx
+import Link from 'next/link'
+
+export default function NotFound() {
+  return (
+    <div>
+      <h2>Not Found</h2>
+      <p>Could not find requested resource</p>
+      <Link href="/">Return Home</Link>
+      <NotFoundEnhancer />
+    </div>
+  )
+}
+```

@@ -11,6 +11,8 @@ export const URL_DISCUSSIONS =
 
 // Id's
 export const ID_DIALOG_PORTAL = 'dialog-portal'
+export const ID_MAIN = 'main-content'
+export const ID_DOCS_NAV = 'docs-nav'
 
 // Use process.env.PORT by default and fallback to port 3000
 export const PORT = process.env.PORT || 3000

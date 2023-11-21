@@ -1,14 +1,16 @@
 import Link from 'next/link'
-import { Card } from '../components/Card'
-import { Chip } from '../components/Chip'
-import { PageHeader } from '../components/PageHeader'
-import { NAME_SHORT, URL_GITHUB } from '../utils/constants'
-import { Button } from '../components/Button'
-import { IconGitHub } from '../components/Icons/IconGitHub'
+import Main from '@/src/components/Main'
+import { Card } from '@/src/components/Card'
+import { Chip } from '@/src/components/Chip'
+import { PageHeader } from '@/src/components/PageHeader'
+import { NAME_SHORT, URL_GITHUB } from '@/src/utils/constants'
+import { Button } from '@/src/components/Button'
+import { IconGitHub } from '@/src/components/Icons/IconGitHub'
+import { routes } from '@/src/utils/routes'
 
 export default function Home() {
 	return (
-		<main className="flex flex-col items-center justify-between p-6 md:p-24 min-h-screen">
+		<Main>
 			<div className="grid gap-6 lg:grid-cols-2 mb-24 max-w-6xl">
 				<PageHeader
 					className="prose dark:prose-invert"
@@ -55,7 +57,7 @@ export default function Home() {
 			<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl">
 				<Card
 					as={Link}
-					href="/prompt"
+					href={routes.prompt}
 					title="Prompt"
 					image={{
 						src: '/images/InfinityStrip.png',
@@ -73,7 +75,7 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
-					href="/block"
+					href={routes.block}
 					title="Block"
 					image={{
 						src: '/images/WireframeCube.png',
@@ -90,20 +92,20 @@ export default function Home() {
 
 				<Card
 					as={Link}
-					href="/some-account"
+					href={routes.notFound}
 					title="Not Found"
 					image={{
 						src: '/images/Disc.png',
 						alt: 'Disc',
 					}}
-					footer={<Chip>Component</Chip>}
+					footer={<Chip>Hook</Chip>}
 				>
 					AI-Powered <i>Page Not Found</i>. Get help finding the page you were
 					looking for. Don&apos;t get lost, get found!
 				</Card>
 				<Card
 					as={Link}
-					href="/image"
+					href={routes.image}
 					title="Image"
 					image={{
 						src: '/images/Asterisk.png',
@@ -116,7 +118,7 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
-					href="/select"
+					href={routes.select}
 					title="Select"
 					image={{
 						src: '/images/DiamondSlim.png',
@@ -129,7 +131,7 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
-					href="/ui"
+					href={routes.ui}
 					title="Generate UI"
 					image={{
 						src: '/images/MobiusStrip.png',
@@ -147,7 +149,7 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
-					href="/errors"
+					href={routes.errors}
 					title="Error"
 					image={{
 						src: '/images/Cone.png',
@@ -160,7 +162,7 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
-					href="/chat"
+					href={routes.chat}
 					title="Chat toolkit"
 					image={{
 						src: '/images/Wedge.png',
@@ -178,7 +180,7 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
-					href="/text"
+					href={routes.text}
 					title="Text"
 					image={{
 						src: '/images/Cube.png',
@@ -190,6 +192,6 @@ export default function Home() {
 					easy-to-understand information.
 				</Card>
 			</div>
-		</main>
+		</Main>
 	)
 }

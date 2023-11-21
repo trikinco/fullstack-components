@@ -57,3 +57,33 @@ export default function Page() {
   return <div className="max-w-prose">{data}</div>
 }
 ```
+
+## Setup
+
+1. Add the `handlePromptRequest` to the [API handler route](/docs/get-started/#setup).
+
+```tsx title="app/api/fsc/route.ts"
+import {
+  handleFSComponents,
+  handlePromptRequest,
+  type FSCOptions,
+} from '@trikinco/fullstack-components'
+
+const fscOptions: FSCOptions = {
+  handlePrompt: handlePromptRequest({
+    openAiApiKey: process.env.OPENAI_API_KEY || '',
+  }),
+  // Additional options and handlers...
+}
+
+const fscHandler = handleFSComponents(fscOptions)
+
+export { fscHandler as GET, fscHandler as POST }
+```
+
+2. Import and use the `Prompt` component, or the `usePrompt` hook from `/client`.
+
+```jsx
+import { Prompt } from '@trikinco/fullstack-components'
+import { usePrompt } from '@trikinco/fullstack-components/client'
+```
