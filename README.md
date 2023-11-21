@@ -4,13 +4,15 @@
       <source media="(prefers-color-scheme: dark)" srcset="libs/playground/public/images/trikin-light.svg">
       <img alt="trikin" src="libs/playground/public/images/trikin-dark.svg" width="80" height="80">
     </picture>
-    <h1 align="center">trikin</h1>
+    <p align="center">trikin</p>
   </a>
 </p>
 
-## Fullstack Components
+# [Fullstack Components](https://fullstack-components.vercel.app)
 
-Fullstack Components is an AI-powered library that turns words into fully integrated components, like magic.
+**Fullstack Components is an AI-powered library for Next.js that turns words into fully integrated components.**
+
+Get started with AI on the web quickly and leverage AI as a natural part of development – all while retaining full control of your code.
 
 ## Getting Started
 
