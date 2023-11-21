@@ -6,6 +6,7 @@ import { Nav } from '../components/Nav'
 import {
 	URL_BASE,
 	URL_DEPLOYMENT,
+	NAME_SHORT,
 	NAME_LONG,
 	ID_DIALOG_PORTAL,
 } from '../utils/constants'
@@ -13,8 +14,17 @@ import { fontClassNames } from '../utils/fonts'
 
 export const metadata: Metadata = {
 	metadataBase: new URL(URL_DEPLOYMENT || URL_BASE),
-	title: NAME_LONG,
 	description: NAME_LONG,
+	keywords: ['Fullstack', 'Components', 'Next.js', 'React', 'AI'],
+	authors: [
+		{ name: 'Lars Magnus Klavenes', url: 'https://larsmagnus.co' },
+		{ name: "Darragh O'Riordan", url: 'https://www.darraghoriordan.com' },
+		{ name: 'Connor Thomsen', url: 'https://www.connorthomsen.com' },
+	],
+	title: {
+		template: `%s | ${NAME_SHORT}`,
+		default: NAME_LONG,
+	},
 }
 
 export default function RootLayout({

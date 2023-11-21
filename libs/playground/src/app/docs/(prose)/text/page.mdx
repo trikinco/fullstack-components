@@ -1,5 +1,9 @@
 import { TextRewriteControls } from '@/src/components/TextRewriteControls'
 
+export const metadata = {
+  title: 'Text',
+}
+
 # Text
 
 ## Original text content
@@ -35,18 +39,19 @@ commute, but rather satisfy the canonical commutation relation.
 
 ```tsx
 <Text grade={5} max={150}>
-	<h3>Quantum formalism and the uncertainty principle</h3>
-	<p>
-		One consequence of the basic quantum formalism is the uncertainty principle.
-		In its most familiar form, this states that no preparation of a quantum
-		particle can imply simultaneously precise predictions both for a measurement
-		of its position and for a measurement of its momentum.
-	</p>
-	<p>
-		Both position and momentum are observables, meaning that they are
-		represented by Hermitian operators. The position operator X and momentum
-		operator P do not commute, but rather satisfy the canonical commutation
-		relation.
-	</p>
+  <h3>Quantum formalism and the uncertainty principle</h3>
+  <p>
+    One consequence of the basic quantum formalism is the
+    uncertainty principle. In its most familiar form, this states
+    that no preparation of a quantum particle can imply
+    simultaneously precise predictions both for a measurement of
+    its position and for a measurement of its momentum.
+  </p>
+  <p>
+    Both position and momentum are observables, meaning that they
+    are represented by Hermitian operators. The position operator
+    X and momentum operator P do not commute, but rather satisfy
+    the canonical commutation relation.
+  </p>
 </Text>
 ```

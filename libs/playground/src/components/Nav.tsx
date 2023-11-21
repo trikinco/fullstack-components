@@ -1,9 +1,10 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import Link from 'next/link'
 import { merge } from '@trikinco/fullstack-components/utils'
-import { NAME_LIB, NAME_SHORT, URL_GITHUB } from '../utils/constants'
+import { NAME_LIB, NAME_SHORT, URL_GITHUB, URL_NPM } from '../utils/constants'
 import { IconGitHub } from './Icons/IconGitHub'
 import { IconLogo } from './Icons/IconLogo'
+import { IconNpm } from './Icons/IconNpm'
 
 export interface NavProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode
@@ -47,13 +48,22 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 				</Link>
 				{children}
 
-				<Link
-					href={URL_GITHUB}
-					className="ml-auto block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300 rounded-full ring-offset-2 focus:outline-none focus:ring"
-				>
-					<span className="sr-only">{NAME_SHORT} on GitHub</span>
-					<IconGitHub />
-				</Link>
+				<div className="flex gap-6 ml-auto">
+					<Link
+						href={URL_NPM}
+						className="text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full ring-offset-2 focus:outline-none focus:ring"
+					>
+						<span className="sr-only">{NAME_SHORT} on NPM</span>
+						<IconNpm className="w-8" />
+					</Link>
+					<Link
+						href={URL_GITHUB}
+						className="text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full ring-offset-2 focus:outline-none focus:ring"
+					>
+						<span className="sr-only">{NAME_SHORT} on GitHub</span>
+						<IconGitHub />
+					</Link>
+				</div>
 			</nav>
 		</>
 	)

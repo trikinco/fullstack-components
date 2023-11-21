@@ -1,22 +1,32 @@
 {
 	"name": "@trikinco/fullstack-components",
 	"version": "1.0.13",
-	"description": "A collection of Fullstack and AI powered components",
+	"description": "AI-powered library for Next.js",
+	"author": "trikinco",
+	"license": "MIT",
+	"homepage": "https://fullstack-components.vercel.app",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/trikinco/fullstack-components.git"
+	},
+	"bugs": {
+		"url": "https://github.com/trikinco/fullstack-components/issues"
+	},
+	"contributors": [
+		"Lars Magnus Klavenes <https://larsmagnus.co>",
+		"Darragh O'Riordan <https://www.darraghoriordan.com>"
+	],
 	"exports": {
 		".": "./dist/index.js",
 		"./client": "./dist/client/index.js",
 		"./utils": "./dist/utils/index.js"
 	},
-	"author": "trikinco",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/trikinco/fullstack-components/issues"
-	},
-	"homepage": "https://github.com/trikinco/fullstack-components#readme",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/trikinco/fullstack-components.git"
-	},
+	"keywords": [
+		"react",
+		"nodejs",
+		"nextjs",
+		"ai"
+	],
 	"scripts": {
 		"build": "tsc -p tsconfig.build.json",
 		"lint": "eslint . --ext .ts,.tsx"
