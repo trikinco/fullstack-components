@@ -28,8 +28,8 @@ export default function Home() {
 					}
 				>
 					<p className="mt-6 text-lg text-slate-600 max-w-3xl mx-auto dark:text-slate-300">
-						{NAME_SHORT} is an AI-powered library that turns words into fully
-						integrated components, like magic.
+						<strong>{NAME_SHORT}</strong> is an AI-powered library for Next.js
+						that turns words into fully integrated components, like magic.
 					</p>
 					<p className="text-lg text-slate-600 max-w-3xl mx-auto dark:text-slate-300">
 						Responsible, customizable and open source.
@@ -70,8 +70,7 @@ export default function Home() {
 						</>
 					}
 				>
-					AI-Powered Prompt component and hook. Easily integrate prompts into
-					any part of your application. Unlock the magic of words.
+					Easily integrate AI prompts into any part of your application.
 				</Card>
 				<Card
 					as={Link}
@@ -87,7 +86,7 @@ export default function Home() {
 						</>
 					}
 				>
-					AI-Powered Generative UI. Prompt goes in, UI comes out. Easy.
+					Generate UI components with AI. Prompt goes in, UI comes out. Easy.
 				</Card>
 
 				<Card
@@ -101,7 +100,7 @@ export default function Home() {
 					footer={<Chip>Hook</Chip>}
 				>
 					AI-Powered <i>Page Not Found</i>. Get help finding the page you were
-					looking for. Don&apos;t get lost, get found!
+					looking for.
 				</Card>
 				<Card
 					as={Link}
@@ -113,8 +112,7 @@ export default function Home() {
 					}}
 					footer={<Chip>Component</Chip>}
 				>
-					AI-Powered Image Tools. Craft visuals effortlessly and reveal their
-					secrets with instant image descriptions.
+					Create images with prompts or generate image descriptions.
 				</Card>
 				<Card
 					as={Link}
@@ -124,10 +122,14 @@ export default function Home() {
 						src: '/images/DiamondSlim.png',
 						alt: 'Diamond',
 					}}
-					footer={<Chip>Component</Chip>}
+					footer={
+						<>
+							<Chip>Component</Chip>
+							<Chip>Hook</Chip>
+						</>
+					}
 				>
-					AI-Powered Select Options Generator. Create options for your
-					dropdowns.
+					Creates dropdowns or lists of content.
 				</Card>
 				<Card
 					as={Link}
@@ -144,8 +146,8 @@ export default function Home() {
 						</>
 					}
 				>
-					AI-Powered Generative UI. Design, create, and innovate. Transform code
-					into stunning user interfaces easily.
+					AI-Powered Generative UI. Design and create full-page user interfaces
+					easily.
 				</Card>
 				<Card
 					as={Link}
@@ -155,10 +157,9 @@ export default function Home() {
 						src: '/images/Cone.png',
 						alt: 'Cone',
 					}}
-					footer={<Chip>Tools</Chip>}
+					footer={<Chip>Component</Chip>}
 				>
-					AI-Powered Error Helper. Makes sense of complex technical errors. Turn
-					confusion into clarity.
+					AI-Powered Error Helper. Makes sense of complex technical errors.
 				</Card>
 				<Card
 					as={Link}
@@ -175,8 +176,8 @@ export default function Home() {
 						</>
 					}
 				>
-					AI-Powered Chat Interface Toolkit. Everything you need to create fully
-					integrated, custom chat experiences.
+					Everything you need to create fully integrated, custom chat
+					experiences.
 				</Card>
 				<Card
 					as={Link}
@@ -188,8 +189,7 @@ export default function Home() {
 					}}
 					footer={<Chip>Component</Chip>}
 				>
-					AI-Powered Text Simplification. Transform any text into
-					easy-to-understand information.
+					Transform any text into easy-to-understand information.
 				</Card>
 			</div>
 		</Main>
