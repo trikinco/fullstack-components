@@ -1,5 +1,9 @@
 import { NotFoundEnhancer } from './NotFoundEnhancer'
 
+export const metadata = {
+  title: 'Not Found Enhancer',
+}
+
 # Not Found Enhancer
 
 <NotFoundEnhancer />
@@ -58,10 +62,10 @@ export function NotFoundEnhancer() {
 
 ### Step 3: Create a `not-found` page
 
-The last piece of the puzzle is to create a `not-found` page or in your Next.js app.
+The last piece of the puzzle is to create a `not-found.tsx` or `404.tsx` in your Next.js app.
 
-If you're using Next.js with the Pages Router you have to use `404.tsx`.
-[See the Next.js docs for how this works.](https://nextjs.org/docs/pages/building-your-application/routing/custom-error#404-page)
+- Using the Next.js App Router: Create a [`not-found.tsx` page](https://nextjs.org/docs/app/api-reference/file-conventions/not-found) in your app.
+- Using the Next.js Pages Router: [Create a `404.tsx` page](https://nextjs.org/docs/pages/building-your-application/routing/custom-error#404-page) in your app.
 
 ```tsx
 // pages/404.tsx or app/not-found.tsx
