@@ -1,5 +1,6 @@
 {
 	"name": "@trikinco/fullstack-components-playground",
+	"description": "fullstack-components website",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
