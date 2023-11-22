@@ -13,6 +13,7 @@ import type { HandlePrompt } from './handlers/prompt/promptHandler'
 import type { HandleBlock } from './handlers/block/blockHandler'
 import type { HandleImage } from './handlers/image/imageHandler'
 import type { HandleSelect } from './handlers/select/selectHandler'
+import type { HandleText } from './handlers/text/textHandler'
 
 /**
  * @ignore
@@ -35,6 +36,7 @@ const defaultAppRouterOnError: AppRouterOnError = (_req, error) => {
  */
 export default function handlerFactory({
 	handleSelect,
+	handleText,
 	handleImage,
 	handleBlock,
 	handlePrompt,
@@ -42,6 +44,7 @@ export default function handlerFactory({
 	handleNotFoundEnhancement,
 }: {
 	handleSelect: HandleSelect
+	handleText: HandleText
 	handleImage: HandleImage
 	handleBlock: HandleBlock
 	handlePrompt: HandlePrompt
@@ -52,6 +55,7 @@ export default function handlerFactory({
 		| NextApiHandler<void>
 		| AppRouteHandler => {
 		const customHandlers: ApiHandlers = {
+			text: handleText,
 			select: handleSelect,
 			image: handleImage,
 			block: handleBlock,
@@ -159,7 +163,7 @@ const pageRouteHandlerFactory: (
 			if (handler) {
 				await (handler as NextApiHandler)(req, res)
 			} else {
-				console.log('handler not found.swapping to 404')
+				console.log('Handler not found. Swapping to 404')
 				res.status(404).end()
 			}
 		} catch (error) {

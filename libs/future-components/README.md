@@ -25,6 +25,7 @@ Get started with AI on the web quickly and leverage AI as a natural part of deve
 
 - Prompt
 - usePrompt
+- useText
 - Block
 - Select
 - useSelect
