@@ -20,7 +20,7 @@ export default function Home() {
 							Build websites by
 							<br />
 							<span className="inline-flex justify-start">
-								<span className="overflow-hidden whitespace-nowrap my-0 mr-auto motion-safe:animate-typewriter motion-safe:after:border-r-2 motion-safe:after:animate-writing">
+								<span className="overflow-hidden leading-tight whitespace-nowrap my-0 mr-auto motion-safe:animate-typewriter motion-safe:after:border-r-2 motion-safe:after:animate-writing">
 									writing prompts.
 								</span>
 							</span>

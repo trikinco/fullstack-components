@@ -21,6 +21,7 @@ export type ChatCompletionsOptions = Omit<
 	'messages' | 'model'
 > & {
 	openAIApiKey: string
+	/** Response format. Sets the `model` and `response_format` appropriately  */
 	format?: ChatCompletionFormat
 	model?: OpenAI.ChatCompletionCreateParamsNonStreaming['model']
 }

@@ -5,6 +5,7 @@ export const ApiUrlEnum = {
 	select: '/api/fsutils/select',
 	image: '/api/fsutils/image',
 	block: '/api/fsutils/block',
+	text: '/api/fsutils/text',
 } as const
 
 export default ApiUrlEnum
