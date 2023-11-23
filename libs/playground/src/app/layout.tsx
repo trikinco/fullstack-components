@@ -27,6 +27,9 @@ export const metadata: Metadata = {
 		template: `%s | ${NAME_SHORT}`,
 		default: NAME_LONG,
 	},
+	verification: {
+		google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+	},
 }
 
 export default function RootLayout({
