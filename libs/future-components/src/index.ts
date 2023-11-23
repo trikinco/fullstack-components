@@ -67,6 +67,7 @@ const handleFSComponents = handlerFactory({
 export { Prompt } from './components/Prompt'
 export { Image } from './components/Image'
 export { Select } from './components/Select'
+export { Text } from './components/Text'
 
 // Service utils
 export { getPrompt } from './handlers/prompt/getters'
