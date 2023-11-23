@@ -60,10 +60,10 @@ export const Slider = ({
 				)}
 			>
 				{label}
-				{showValue && (
+				{showValue && value?.current !== undefined && (
 					<>
 						{' '}
-						<output>{value?.current}</output>
+						<output>{value.current + 1}</output>
 					</>
 				)}
 			</label>

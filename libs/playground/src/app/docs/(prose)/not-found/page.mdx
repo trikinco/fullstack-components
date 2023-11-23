@@ -2,6 +2,8 @@ import { NotFoundEnhancer } from './NotFoundEnhancer'
 
 export const metadata = {
   title: 'Not Found Enhancer',
+  description:
+    'AI-Powered Page Not Found. Get help finding the page you were looking for.',
 }
 
 # Not Found Enhancer
@@ -17,9 +19,9 @@ It also uses the contents of your website URL's to create a helpful message for 
 
 In the API handler file, you should add the following configuration to use this component.
 
-**Not Found Enhancer does require configuration of the API handler.**
+**Not Found Enhancer requires configuration of the API handler.**
 
-Note that not all of our features require configuration, so read the documentation for each.
+**Note:** not all features require configuration, so read the documentation for each.
 
 ```ts
 export const POST = handleFSComponents({
@@ -32,10 +34,9 @@ export const POST = handleFSComponents({
 
 ### Step 2: Create a new client component in your Next.js app
 
-The key here is to use the `useNotFoundEnhancement` hook to get the data from the api endpoint.
+The key is to use the `useNotFoundEnhancement` hook to get the data from the API endpoint.
 
-```tsx
-// components/NotFoundEnhancment.tsx
+```tsx title="components/NotFoundEnhancer.tsx"
 'use client'
 
 import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
@@ -61,8 +62,6 @@ export function NotFoundEnhancer() {
 ```
 
 ### Step 3: Create a `not-found` page
-
-The last piece of the puzzle is to create a `not-found.tsx` or `404.tsx` in your Next.js app.
 
 - Using the Next.js App Router: Create a [`not-found.tsx` page](https://nextjs.org/docs/app/api-reference/file-conventions/not-found) in your app.
 - Using the Next.js Pages Router: [Create a `404.tsx` page](https://nextjs.org/docs/pages/building-your-application/routing/custom-error#404-page) in your app.

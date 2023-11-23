@@ -2,13 +2,32 @@ import { TextRewriteControls } from '@/src/components/TextRewriteControls'
 
 export const metadata = {
   title: 'Text',
+  description:
+    'Transform any text into easy-to-understand information.',
 }
 
 # Text
 
-## Original text content
+Rewrite, simplify or create text. Handles plain text, markdown and HTML.
 
-### Quantum formalism and the uncertainty principle
+<TextRewriteControls
+  count={3}
+  grade={5}
+  max={150}
+  className="prose dark:prose-invert"
+>
+  One consequence of the basic quantum formalism is the
+  uncertainty principle. In its most familiar form, this states
+  that no preparation of a quantum particle can imply
+  simultaneously precise predictions both for a measurement of its
+  position and for a measurement of its momentum. Both position
+  and momentum are observables, meaning that they are represented
+  by Hermitian operators. The position operator X and momentum
+  operator P do not commute, but rather satisfy the canonical
+  commutation relation.
+</TextRewriteControls>
+
+## Original text content
 
 One consequence of the basic quantum formalism is the uncertainty principle.
 In its most familiar form, this states that no preparation of a quantum
@@ -19,39 +38,104 @@ Both position and momentum are observables, meaning that they are represented
 by Hermitian operators. The position operator X and momentum operator P do not
 commute, but rather satisfy the canonical commutation relation.
 
-## Rewritten text content
+## `useText` hook
 
-<TextRewriteControls
-	count={3}
-	grade={5}
-	max={150}
-	className="prose dark:prose-invert"
->
-	### Quantum formalism and the uncertainty principle
+```jsx
+'use client'
 
-    One consequence of the basic quantum formalism is the uncertainty principle. In its most familiar form, this states that no preparation of a quantum particle can imply simultaneously precise predictions both for a measurement of its position and for a measurement of its momentum.
+import { useText } from '@trikinco/fullstack-components/client'
 
-    Both position and momentum are observables, meaning that they are represented by Hermitian operators. The position operator X and momentum operator P do not commute, but rather satisfy the canonical commutation relation.
+export default function Page() {
+  const { isLoading, data } = useText({
+    prompt:
+      'Simplify and shorten this text, only return plain text',
+    grade: 5,
+    max: 250,
+    content: `
+        One consequence of the basic quantum formalism is the uncertainty principle.
+        In its most familiar form, this states that no preparation of a quantum
+        particle can imply simultaneously precise predictions both for a measurement
+        of its position and for a measurement of its momentum.
+        
+        Both position and momentum are observables, meaning that they are represented
+        by Hermitian operators. The position operator X and momentum operator P do not
+        commute, but rather satisfy the canonical commutation relation.
+        `,
+  })
 
-</TextRewriteControls>
+  if (isLoading) {
+    return 'Loading text...'
+  }
 
-## Using the `Text` component
+  // The content can also be rendered with next-mdx-remote or similar
+  return <div className="mt-6">{data?.content}</div>
+}
+```
 
-```tsx
-<Text grade={5} max={150}>
-  <h3>Quantum formalism and the uncertainty principle</h3>
-  <p>
-    One consequence of the basic quantum formalism is the
-    uncertainty principle. In its most familiar form, this states
-    that no preparation of a quantum particle can imply
-    simultaneously precise predictions both for a measurement of
-    its position and for a measurement of its momentum.
-  </p>
-  <p>
-    Both position and momentum are observables, meaning that they
-    are represented by Hermitian operators. The position operator
-    X and momentum operator P do not commute, but rather satisfy
-    the canonical commutation relation.
-  </p>
-</Text>
+`useText` also accepts a tree of components in `content`. Note that only static HTML is returned.
+
+```jsx title="useText with HTML"
+const { isLoading, data } = useText({
+  prompt: 'Simplify and shorten this text',
+  content: (
+    <>
+      <h3>Quantum formalism and the uncertainty principle</h3>
+      <p>
+        One consequence of the basic quantum formalism is the
+        uncertainty principle. In its most familiar form, this
+        states that no preparation of a quantum particle can imply
+        simultaneously precise predictions both for a measurement
+        of its position and for a measurement of its momentum.
+      </p>
+    </>
+  ),
+})
+```
+
+## `getText` utility
+
+`getText` is a built-in fetcher with all the same options as `useText`, but it can be used for Server Components.
+
+```jsx title="Server Component"
+import { getText } from '@trikinco/fullstack-components'
+
+export default async function Page() {
+  const response = await getText({
+    tone: 'Ominous',
+    content: 'Welcome to fullstack components',
+    type: 'text',
+  })
+
+  // The content can also be rendered with next-mdx-remote or similar
+  return <div className="mt-6">{data?.content}</div>
+}
+```
+
+## Setup
+
+1. Add the `handleTextRequest` to the [API handler route](/docs/get-started/#setup).
+
+```ts title="app/api/fsutils/[...fscomponents]/route.ts"
+import {
+  handleFSComponents,
+  handleTextRequest,
+  type FSCOptions,
+} from '@trikinco/fullstack-components'
+
+const fscOptions: FSCOptions = {
+  handleText: handleTextRequest({
+    openAiApiKey: process.env.OPENAI_API_KEY || '',
+  }),
+  // Additional options and handlers...
+}
+
+const fscHandler = handleFSComponents(fscOptions)
+
+export { fscHandler as GET, fscHandler as POST }
+```
+
+2. Import and use the `useText` hook from `/client`.
+
+```jsx
+import { useText } from '@trikinco/fullstack-components/client'
 ```

@@ -1,18 +1,19 @@
-<p align="center">
-  <a href="https://fullstack-components.vercel.app">
-	<picture>
-      <source media="(prefers-color-scheme: dark)" srcset="libs/playground/public/images/trikin-light.svg">
-      <img alt="trikin" src="libs/playground/public/images/trikin-dark.svg" width="80" height="80">
-    </picture>
-    <p align="center">trikin</p>
-  </a>
-</p>
+![Fullstack Components - Build websites by writing prompts](libs/playground/public/images/repo-header-dark.png)
 
 # [Fullstack Components](https://fullstack-components.vercel.app)
 
 **Fullstack Components is an AI-powered library for Next.js that turns words into fully integrated components.**
 
 Get started with AI on the web quickly and leverage AI as a natural part of development – all while retaining full control of your code.
+
+## Quick Features
+
+- **Get started with GPT prompts quickly:** Server Component and client react hooks for generic prompts
+- **Generative UI:** Creates dynamic React components with a single prompt
+- **Not Found Enhancement:** Uses AI to find the closest matching page to the `not found` URL and a helpful message for users
+- **Image generation and vision API:** Image Server Component enhances `next/image` to auto add alt tags, or generate images with DALL·E
+- **AI Text generation:** Create, modify and edit text with Server Components and dynamically with react hooks
+- **AI Select Dropdown & Lists:** Generate, sort, select and label content in dropdowns or lists
 
 ## Getting Started
 
@@ -31,3 +32,11 @@ The Fullstack Components community can be found on [GitHub Discussions](https://
 - Lars Magnus Klavenes ([@larsmagnus](https://github.com/larsmagnus))
 - Darragh O'Riordan ([@darraghoriordan](https://github.com/darraghoriordan))
 - Connor Thomsen ([@cononic](https://github.com/CONONIC))
+
+<a href="https://fullstack-components.vercel.app">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="libs/playground/public/images/trikin-light.svg">
+    <img alt="trikin" src="libs/playground/public/images/trikin-dark.svg" width="40" height="40">
+  </picture>
+  <p>trikin</p>
+</a>
