@@ -83,6 +83,7 @@ export default function Home() {
 					footer={
 						<>
 							<Chip>Component</Chip>
+							<Chip>Hook</Chip>
 						</>
 					}
 				>
@@ -97,7 +98,11 @@ export default function Home() {
 						src: '/images/Disc.png',
 						alt: 'Disc',
 					}}
-					footer={<Chip>Hook</Chip>}
+					footer={
+						<>
+							<Chip>Hook</Chip>
+						</>
+					}
 				>
 					AI-Powered <i>Page Not Found</i>. Get help finding the page you were
 					looking for.
@@ -110,7 +115,12 @@ export default function Home() {
 						src: '/images/Asterisk.png',
 						alt: 'Asterisk',
 					}}
-					footer={<Chip>Component</Chip>}
+					footer={
+						<>
+							<Chip>Component</Chip>
+							<Chip>Hook</Chip>
+						</>
+					}
 				>
 					Create images with prompts or generate image descriptions.
 				</Card>
@@ -139,7 +149,12 @@ export default function Home() {
 						src: '/images/Cube.png',
 						alt: 'Cube',
 					}}
-					footer={<Chip>Component</Chip>}
+					footer={
+						<>
+							<Chip>Component</Chip>
+							<Chip>Hook</Chip>
+						</>
+					}
 				>
 					Transform any text into easy-to-understand information.
 				</Card>
