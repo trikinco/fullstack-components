@@ -12,12 +12,13 @@ export const routes = {
 	text: '/docs/text',
 }
 
-export const routesMeta = [
-	{
-		title: 'Documentation',
-		href: routes.docs,
-		isTitle: true, // Only one item should have this
-	},
+type RoutesWithMeta = {
+	title: string
+	href: string
+	isTitle?: boolean
+}
+
+export const routesDocsMeta: RoutesWithMeta[] = [
 	{
 		title: 'Get started',
 		href: routes.getStarted,
@@ -58,4 +59,13 @@ export const routesMeta = [
 		title: 'Text',
 		href: routes.text,
 	},
+]
+
+export const routesMeta: RoutesWithMeta[] = [
+	{
+		title: 'Documentation',
+		href: routes.docs,
+		isTitle: true, // Only one item should have this
+	},
+	...routesDocsMeta,
 ]
