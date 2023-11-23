@@ -8,7 +8,8 @@ import type { ReactElement, ReactNode } from 'react'
 export const renderToStaticMarkup = async (
 	component: ReactElement | ReactNode
 ) => {
-	const { default: ReactDOMServer } = await import('react-dom/server')
+	// eslint-disable-next-line unicorn/no-await-expression-member
+	const ReactDOMServer = (await import('react-dom/server')).default
 
 	return ReactDOMServer.renderToStaticMarkup(component as ReactElement)
 }

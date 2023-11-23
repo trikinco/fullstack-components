@@ -1,4 +1,4 @@
-import { TextRewriteControls } from '@/src/components/TextRewriteControls'
+import { Text } from '@trikinco/fullstack-components'
 
 export const metadata = {
   title: 'Text',
@@ -10,33 +10,78 @@ export const metadata = {
 
 Rewrite, simplify or create text. Handles plain text, markdown and HTML.
 
-<TextRewriteControls
-  count={3}
+```jsx title="Text rewrite example"
+<Text
+  prompt="Shorten and simplify"
   grade={5}
-  max={150}
+  type="HTML"
+  as="div"
   className="prose dark:prose-invert"
 >
-  One consequence of the basic quantum formalism is the
-  uncertainty principle. In its most familiar form, this states
-  that no preparation of a quantum particle can imply
-  simultaneously precise predictions both for a measurement of its
-  position and for a measurement of its momentum. Both position
-  and momentum are observables, meaning that they are represented
-  by Hermitian operators. The position operator X and momentum
-  operator P do not commute, but rather satisfy the canonical
-  commutation relation.
-</TextRewriteControls>
+  <h2>Quantum formalism and the uncertainty principle</h2>
+  <p>
+    One consequence of the basic quantum formalism is the
+    uncertainty principle. In its most familiar form, this states
+    that no preparation of a quantum particle can imply
+    simultaneously precise predictions both for a measurement of
+    its position and for a measurement of its momentum.
+  </p>
+  <p>
+    Both position and momentum are observables, meaning that they
+    are represented by Hermitian operators. The position operator
+    X and momentum operator P do not commute, but rather satisfy
+    the canonical commutation relation.
+  </p>
+</Text>
+```
 
-## Original text content
+**Text rewrite output 👇**
 
-One consequence of the basic quantum formalism is the uncertainty principle.
-In its most familiar form, this states that no preparation of a quantum
-particle can imply simultaneously precise predictions both for a measurement
-of its position and for a measurement of its momentum.
+<Text
+  prompt="Shorten and simplify"
+  grade={5}
+  type="HTML"
+  as="div"
+  className="prose dark:prose-invert"
+>
+  <h2>Quantum formalism and the uncertainty principle</h2>
+  <p>
+    One consequence of the basic quantum formalism is the
+    uncertainty principle. In its most familiar form, this states
+    that no preparation of a quantum particle can imply
+    simultaneously precise predictions both for a measurement of its
+    position and for a measurement of its momentum.
+  </p>
 
-Both position and momentum are observables, meaning that they are represented
-by Hermitian operators. The position operator X and momentum operator P do not
-commute, but rather satisfy the canonical commutation relation.
+  <p>
+  Both position and momentum are observables, meaning that they are represented
+  by Hermitian operators. The position operator X and momentum operator P do not
+  commute, but rather satisfy the canonical commutation relation.
+  </p>
+</Text>
+
+```jsx title="Text creation example"
+<Text
+  prompt="Write a poem"
+  grade={5}
+  type="HTML"
+  as="div"
+  className="prose dark:prose-invert"
+>
+  happy lizard
+</Text>
+```
+
+**Text creation output 👇**
+
+<Text
+  prompt="Make this a longer poem that rhymes"
+  type="text"
+  as="div"
+  className="prose dark:prose-invert"
+>
+  happy lizard
+</Text>
 
 ## `useText` hook
 
@@ -56,10 +101,6 @@ export default function Page() {
         In its most familiar form, this states that no preparation of a quantum
         particle can imply simultaneously precise predictions both for a measurement
         of its position and for a measurement of its momentum.
-        
-        Both position and momentum are observables, meaning that they are represented
-        by Hermitian operators. The position operator X and momentum operator P do not
-        commute, but rather satisfy the canonical commutation relation.
         `,
   })
 

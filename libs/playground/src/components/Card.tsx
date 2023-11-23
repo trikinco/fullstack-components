@@ -13,6 +13,7 @@ export interface CardProps
 	image?: ImgHTMLAttributes<HTMLImageElement>
 	title?: ReactNode
 	children?: ReactNode
+	header?: ReactNode
 	footer?: ReactNode
 	component?: ElementType
 }
@@ -24,6 +25,7 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 	image,
 	title,
 	children,
+	header,
 	footer,
 	component: TitleComponent = 'h2',
 	...rest
@@ -40,11 +42,17 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 	return (
 		<Component
 			className={merge(
-				'w-full flex flex-col grow sm:max-w-sm p-4 bg-white border-2 border-gray-200 rounded-lg shadow sm:p-8 dark:bg-slate-900 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50',
+				'relative w-full flex flex-col grow sm:max-w-sm p-4 bg-white border-2 border-gray-200 rounded-lg shadow sm:p-8 dark:bg-slate-900 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50',
 				className
 			)}
 			{...rest}
 		>
+			{header && (
+				<div className="flex gap-2 mt-auto pt-2 absolute top-4 left-4 sm:top-8 sm:left-8 z-10">
+					{header}
+				</div>
+			)}
+
 			<div className="flex grow flex-col relative">
 				{src && (
 					<Image

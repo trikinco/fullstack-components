@@ -16,6 +16,9 @@ test-results
 /out/
 next.lock
 
+# sitemap
+public/sitemap.xml
+
 # production
 /build
 

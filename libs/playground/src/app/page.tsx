@@ -166,6 +166,11 @@ export default function Home() {
 						src: '/images/MobiusStrip.png',
 						alt: 'MobiusStrip',
 					}}
+					header={
+						<Chip className="bg-orange-100 border-orange-200 dark:bg-orange-950 dark:border-orange-900">
+							Demo
+						</Chip>
+					}
 					footer={
 						<>
 							<Chip>Component</Chip>
@@ -184,6 +189,11 @@ export default function Home() {
 						src: '/images/Cone.png',
 						alt: 'Cone',
 					}}
+					header={
+						<Chip className="bg-orange-100 border-orange-200 dark:bg-orange-950 dark:border-orange-900">
+							Demo
+						</Chip>
+					}
 					footer={<Chip>Component</Chip>}
 				>
 					AI-Powered Error Helper. Makes sense of complex technical errors.
@@ -196,6 +206,11 @@ export default function Home() {
 						src: '/images/Wedge.png',
 						alt: 'Wedge',
 					}}
+					header={
+						<Chip className="bg-orange-100 border-orange-200 dark:bg-orange-950 dark:border-orange-900">
+							Demo
+						</Chip>
+					}
 					footer={
 						<>
 							<Chip>Component</Chip>
