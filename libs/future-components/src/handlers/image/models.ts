@@ -5,9 +5,7 @@ export class ImageRequestBody {
 	prompt?: string
 }
 
-export type ImageResponse = {
-	data: string
-}
+export type ImageResponse = string
 
 export type ImageOptions = {
 	openAiApiKey?: string

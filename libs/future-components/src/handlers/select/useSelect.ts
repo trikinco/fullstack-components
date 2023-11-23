@@ -1,3 +1,5 @@
+'use client'
+
 import type { SelectResponse, SelectRequestBody } from './models'
 import {
 	useRequest,

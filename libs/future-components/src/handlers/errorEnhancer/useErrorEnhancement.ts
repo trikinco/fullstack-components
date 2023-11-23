@@ -1,8 +1,13 @@
+'use client'
+
 import {
 	useRequest,
 	type UseRequestConsumerConfig,
 } from '../../hooks/useRequest'
-import { ErrorEnhancementRequestBody, ErrorEnhancementResponse } from './models'
+import type {
+	ErrorEnhancementRequestBody,
+	ErrorEnhancementResponse,
+} from './models'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 
 export const useErrorEnhancement = (

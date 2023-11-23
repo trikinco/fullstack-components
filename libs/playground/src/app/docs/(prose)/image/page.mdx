@@ -57,6 +57,73 @@ import { Image } from '@trikinco/fullstack-components'
 />
 ```
 
+## `useImage`
+
+`useImage` is a utility hook that allows for full access to the same features as `Image`.
+
+```jsx
+import { useImage } from '@trikinco/fullstack-components/client'
+```
+
+### Image description with `src`
+
+```jsx
+'use client'
+
+import { useImage } from '@trikinco/fullstack-components/client'
+
+export default function Page() {
+  const { isLoading, isError, data } = useImage({
+    src: 'https://absolute-cat-url.jpg',
+  })
+
+  if (isLoading) {
+    return 'Describing image..."'
+  }
+
+  if (isError) {
+    return 'Could not describe image'
+  }
+
+  return (
+    <div className="rounded-md overflow-hidden p-6 bg-sky-200 text-sky-800 text-xl">
+      {data}
+    </div>
+  )
+}
+```
+
+### Image generation with `prompt`
+
+```jsx
+'use client'
+
+import { useImage } from '@trikinco/fullstack-components/client'
+
+export default function Page() {
+  const { isLoading, isError, data } = useImage({
+    prompt: 'A friendly smiling robot',
+  })
+
+  if (isLoading) {
+    return 'Generating image..."'
+  }
+
+  if (isError) {
+    return 'Could not generate image'
+  }
+
+  return (
+    <img
+      src={data}
+      alt="A friendly smiling robot"
+      width="256"
+      height="256"
+    />
+  )
+}
+```
+
 ## Setup
 
 1. Add the `handleImageRequest` to the [API handler route](/docs/get-started/#setup).

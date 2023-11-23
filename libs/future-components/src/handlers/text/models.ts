@@ -1,14 +1,29 @@
 import type { ReactNode } from 'react'
 import type { Range } from '../../types/helpers'
 
+export type TextTypes = 'text' | 'markdown' | 'HTML'
+
 export class TextRequestBody {
-	/** Content to rewrite. Plain text or stringified HTML */
+	/** Content to rewrite */
 	content?: string
 	/** Instructions on how to re/write the content */
 	prompt?: string
-	/** Unless the tone of voice is defined, the tone of the input content is matched as closely as possible. */
+	/**
+	 * Enforce a content type for the output.
+	 * Can be used to transform from one type to another.
+	 * If not defined, the content type should match the input.
+	 */
+	type?: TextTypes
+	/**
+	 * Sets the tone of voice of the output.
+	 * If not defined, the tone of the input content is matched as closely as possible.
+	 */
 	tone?: string
-	/** How heavily content is rewritten. This is a number or array of numbers from 0-100. 0 returns the original content, 100 completely rewrites the content. */
+	/**
+	 * How heavily content is rewritten.
+	 * This is a number or array of numbers from 0-100.
+	 * 0 returns the original content, 100 completely rewrites the content.
+	 */
 	strength?: Range<0, 100>
 	/** Readability level based school grades.  */
 	grade?: number | string
@@ -27,13 +42,9 @@ export type TextOptions = {
 	openAiApiKey?: string
 }
 
-export type TextResponseItem = {
-	type: 'text' | 'markdown' | 'HTML'
-	value: string
-}
-
 export type TextResponse = {
-	content: Array<TextResponseItem>
+	type: TextTypes
+	content: string
 }
 
 export class TextError extends Error {
