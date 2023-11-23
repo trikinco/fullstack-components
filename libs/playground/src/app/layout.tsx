@@ -1,14 +1,16 @@
 import '../styles/globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
-import { Footer } from '../components/Footer'
-import { Nav } from '../components/Nav'
+import { Footer } from '@/src/components/Footer'
+import { Nav } from '@/src/components/Nav'
+import SkipLink from '@/src/components/SkipLink'
 import {
 	URL_BASE,
 	URL_DEPLOYMENT,
 	NAME_SHORT,
 	NAME_LONG,
 	ID_DIALOG_PORTAL,
+	ID_MAIN,
 } from '../utils/constants'
 import { fontClassNames } from '../utils/fonts'
 
@@ -46,6 +48,12 @@ export default function RootLayout({
 			 * @see {@link https://nextjs.org/docs/pages/building-your-application/optimizing/fonts#with-tailwind-css Next fonts with Tailwind CSS}
 			 */}
 			<body className={fontClassNames}>
+				<SkipLink
+					href={`#${ID_MAIN}`}
+					className="focus:mb-6 focus:absolute focus:z-50 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950"
+				>
+					Skip to the main content
+				</SkipLink>
 				<Nav />
 				{children}
 				{error}
