@@ -1,25 +1,27 @@
 'use client'
 
 import { useId, useRef, useEffect } from 'react'
-import { useErrorBoundary } from 'react-error-boundary'
 import { getBlock } from './getters'
 
 /**
  * useBlock generates a React component based on a prompt
  * It uses `createRoot` to render it to an element with the returned `id`
  */
-export const useBlock = (prompt: string) => {
+export const useBlock = (
+	prompt: string,
+	/** Callback when errors are thrown. e.g show an error boundary */
+	onError?: (error: any) => void
+) => {
 	const id = useId()
 	// Just for avoiding multiple API calls in strict mode - this isn't really needed
 	const isEnabled = useRef(true)
-	const { showBoundary } = useErrorBoundary()
 
 	const loadBlock = async () => {
 		try {
 			await getBlock(prompt, id)
 		} catch (error) {
 			console.error('something went wrong when loading block content', error)
-			showBoundary(error)
+			onError?.(error)
 		}
 	}
 

@@ -3,6 +3,7 @@
 import { memo, type HTMLAttributes, type ReactNode } from 'react'
 import {
 	ErrorBoundary,
+	useErrorBoundary,
 	type ErrorBoundaryPropsWithFallback,
 } from 'react-error-boundary'
 import { useBlock } from '../handlers/block/useBlock'
@@ -30,7 +31,8 @@ export const BlockRenderer = memo(function BlockRenderer({
 	loading,
 	...props
 }: BlockRendererProps) {
-	const { id } = useBlock(prompt)
+	const { showBoundary } = useErrorBoundary()
+	const { id } = useBlock(prompt, showBoundary)
 
 	return (
 		<div id={id} {...props}>
