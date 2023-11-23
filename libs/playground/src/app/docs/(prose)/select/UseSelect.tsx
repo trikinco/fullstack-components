@@ -2,7 +2,7 @@
 
 import { useSelect } from '@trikinco/fullstack-components/client'
 
-export const UseSelect = () => {
+export default function Page() {
 	const { isLoading, isError, data } = useSelect({
 		prompt:
 			'The 10 nearest countries to Australia. Include a flag emoji in the label.',
