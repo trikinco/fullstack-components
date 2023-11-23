@@ -25,7 +25,7 @@ A smart dropdown component that creates, labels and sorts all its own options.
 />
 ```
 
-## `useSelect`
+## `useSelect` hook
 
 `useSelect` is a utility hook that allows for full access to Select generation data.
 Useful for generating lists or when creating custom dropdown components.
@@ -67,6 +67,44 @@ export default () => {
 ```
 
 <UseSelect />
+
+## `getSelect` utility
+
+`getSelect` is a built-in fetcher with all the same options as `useSelect`, but it works on the server. Handy for making your own custom Server Components.
+
+```jsx title="Server Component"
+import { getSelect } from '@trikinco/fullstack-components'
+
+export default async function Page() {
+  const { label, content } = await getSelect({
+    prompt:
+      'The nearest countries to Australia. Add a flag emoji in the label.',
+    count: 10,
+  })
+
+  return (
+    <>
+      <p id="label" role="label">
+        {label}
+      </p>
+      <div
+        role="listbox"
+        tabindex="0"
+        id="dropdown"
+        aria-labelledby="label"
+        aria-activedescendant="dropdown-1"
+        // ...other required attributes
+      >
+        {content?.map(({ label, value }) => (
+          <div role="option" id={`dropdown-${value}`} key={value}>
+            {label}
+          </div>
+        ))}
+      </div>
+    </>
+  )
+}
+```
 
 ## Setup
 

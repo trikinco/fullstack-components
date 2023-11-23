@@ -40,15 +40,12 @@ export default function Page() {
 
 	return (
 		<>
-			<PageHeader
-				className="max-w-prose mx-auto text-center"
-				title="Generative UI"
-			/>
+			<PageHeader className="max-w-prose mx-auto" title="Generative UI" />
 
 			<form
 				ref={formRef}
 				onSubmit={handleSubmit}
-				className="mb-10 px-5 mx-auto max-w-prose flex flex-col gap-3"
+				className="mb-10 mx-auto max-w-prose flex flex-col gap-3"
 			>
 				<label htmlFor="prompt">Generate a UI component</label>
 				<input

@@ -135,7 +135,7 @@ const { isLoading, data } = useText({
 
 ## `getText` utility
 
-`getText` is a built-in fetcher with all the same options as `useText`, but it can be used for Server Components.
+`getText` is a built-in fetcher with all the same options as `useText`, but it works on the server. Handy for making your own custom Server Components.
 
 ```jsx title="Server Component"
 import { getText } from '@trikinco/fullstack-components'
@@ -148,7 +148,7 @@ export default async function Page() {
   })
 
   // The content can also be rendered with next-mdx-remote or similar
-  return <div className="mt-6">{data?.content}</div>
+  return <div className="mt-6">{response?.content}</div>
 }
 ```
 
