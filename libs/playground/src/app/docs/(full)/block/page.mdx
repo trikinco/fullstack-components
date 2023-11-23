@@ -3,6 +3,8 @@ import Blocks from './Blocks'
 
 export const metadata = {
   title: 'Block - Generative UI',
+  description:
+    'Generate UI components with AI. Prompt goes in, UI comes out. Easy.',
 }
 
 <Prose className="mb-6">
@@ -88,7 +90,7 @@ The UI above is made out of the following blocks:
 
 1. Add the `handleBlockRequest` to the [API handler route](/docs/get-started/#setup).
 
-```ts title="app/api/fsc/route.ts"
+```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
   handleFSComponents,
   handleBlockRequest,

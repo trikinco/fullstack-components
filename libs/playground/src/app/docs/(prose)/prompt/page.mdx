@@ -2,6 +2,8 @@ import { Prompt } from '@trikinco/fullstack-components'
 
 export const metadata = {
   title: 'Prompt',
+  description:
+    'Easily integrate AI prompts into any part of your application.',
 }
 
 # Prompt
@@ -66,7 +68,7 @@ export default function Page() {
 
 1. Add the `handlePromptRequest` to the [API handler route](/docs/get-started/#setup).
 
-```ts title="app/api/fsc/route.ts"
+```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
   handleFSComponents,
   handlePromptRequest,

@@ -133,6 +133,18 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
+					href={routes.text}
+					title="Text"
+					image={{
+						src: '/images/Cube.png',
+						alt: 'Cube',
+					}}
+					footer={<Chip>Component</Chip>}
+				>
+					Transform any text into easy-to-understand information.
+				</Card>
+				<Card
+					as={Link}
 					href={routes.ui}
 					title="Generate UI"
 					image={{
@@ -164,7 +176,7 @@ export default function Home() {
 				<Card
 					as={Link}
 					href={routes.chat}
-					title="Chat toolkit"
+					title="Chat"
 					image={{
 						src: '/images/Wedge.png',
 						alt: 'Wedge',
@@ -178,18 +190,6 @@ export default function Home() {
 				>
 					Everything you need to create fully integrated, custom chat
 					experiences.
-				</Card>
-				<Card
-					as={Link}
-					href={routes.text}
-					title="Text"
-					image={{
-						src: '/images/Cube.png',
-						alt: 'Cube',
-					}}
-					footer={<Chip>Component</Chip>}
-				>
-					Transform any text into easy-to-understand information.
 				</Card>
 			</div>
 		</Main>

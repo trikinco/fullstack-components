@@ -3,6 +3,8 @@ import { UseSelect } from './UseSelect'
 
 export const metadata = {
   title: 'Select',
+  description:
+    'A smart dropdown component that creates, labels and sorts all its own options.',
 }
 
 # Select
@@ -70,7 +72,7 @@ export default () => {
 
 1. Add the `handleSelectRequest` to the [API handler route](/docs/get-started/#setup).
 
-```ts title="app/api/fsc/route.ts"
+```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
   handleFSComponents,
   handleSelectRequest,

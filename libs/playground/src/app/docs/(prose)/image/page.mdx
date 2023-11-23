@@ -2,6 +2,8 @@ import { Image } from '@trikinco/fullstack-components'
 
 export const metadata = {
   title: 'Image',
+  description:
+    'Create images with prompts or generate image descriptions.',
 }
 
 # Image
@@ -59,7 +61,7 @@ import { Image } from '@trikinco/fullstack-components'
 
 1. Add the `handleImageRequest` to the [API handler route](/docs/get-started/#setup).
 
-```ts title="app/api/fsc/route.ts"
+```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
   handleFSComponents,
   handleImageRequest,

@@ -39,55 +39,81 @@ See [fullstack-components.vercel.app](https://fullstack-components.vercel.app) f
 
 Fullstack Components comes with built-in types.
 
-## Usage
+## Setup
 
-Create a new handler for all the API endpoints in your Next.js app. These API routes are used to serve the components and their data on the frontend.
+### Step 1: Add the API handler route
 
-Depending on which router you use in Next.js, the location of the API handler will differ:
+Create a new [dynamic route](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes) with an API handler route in your Next.js app. The file will handle all the API endpoints needed by `fullstack-components` to serve data to components, hooks and fetchers.
 
-- Using the Next.js App Router: `app/api/fsutils/[fscomponents]/route.ts`
-- Using the Next.js Pages Router: `pages/api/fsutils/[fscomponents].ts`
+Depending on which router you use in Next.js, the location of the API handler route will differ:
 
-And the contents should be:
+- Using the Next.js App Router: `app/api/fsutils/[...fscomponents]/route.ts`
+- Using the Next.js Pages Router: `pages/api/fsutils/[...fscomponents].ts`
 
-```ts
-import { handleFSComponents } from '@trikin-co/fullstack-components'
+### Step 2: Configure the API handler route
 
-const fscHandler =
-	handleFSComponents(/* various options. see each component below */)
+As an example, let's set up the API handler for the `Image` component by adding `handleImageRequest`.
 
-export { fscHandler as GET, fscHandler as POST }
-```
+```ts title="app/api/fsutils/[...fscomponents]/route.ts"
+import {
+	handleFSComponents,
+	handleImageRequest,
+} from '@trikin-co/fullstack-components'
 
-Note there's no auth on these endpoints but you can wrap them to add auth.
-
-### Enhanced Not Found Component
-
-This component uses your sitemap to find the closest matching page to the "not found" URL. It also uses the contents of your website URLs to create a helpful message for users.
-
-#### Step 1: Configure the handler
-
-In the API handler file, you should add the following configuration to use this component.
-Not Found Enhancer DOES require configuration.
-Note that not all of them require configuration, read the documentation for each.
-
-```ts
 const fscHandler = handleFSComponents({
-	notFoundEnhancer: handleNotFoundEnhancement({
-		siteUrl: process.env.SITE_URL || '', // used to inspect the sitemap
-		openAiApiKey: process.env.OPENAI_API_KEY || '', // used to generate the contents
+	// Configure one or more handlers
+	handleImage: handleImageRequest({
+		openAiApiKey: process.env.OPENAI_API_KEY || '',
 	}),
+	// ...Add more handlers here
 })
 
 export { fscHandler as GET, fscHandler as POST }
 ```
 
+_All requests to `/api/fsutils/*`(image, prompt, notFoundEnhancer, etc.) will automatically be handled by `fullstack-components`, as long as you've added the appropriate handler._
+
+**Note:** there's no auth on these endpoints but you can wrap them to add auth.
+
+All handlers can be imported from `@trikin-co/fullstack-components` and are prefixed with `handle`.
+
+**Handlers examples:**
+
+- handleImageRequest
+- handleTextRequest
+- handleSelectRequest
+- handleBlockRequest
+- handlePromptRequest
+- handleNotFoundEnhancement
+
+## Usage example
+
+### Enhanced Not Found Component
+
+This component uses your sitemap to find the closest matching page to the "not found" URL. It also uses the contents of your website URLs to create a helpful message for users.
+
+#### Step 1: Configure the API handler
+
+In the API handler file, you should add the following configuration to use this component.
+
+**Not Found Enhancer requires configuration of the API handler.**
+
+**Note:** not all features require configuration, so read the documentation for each.
+
+```ts
+export const POST = handleFSComponents({
+	notFoundEnhancer: handleNotFoundEnhancement({
+		siteUrl: process.env.SITE_URL || '', // used to inspect the sitemap
+		openAiApiKey: process.env.OPENAI_API_KEY || '', // used to generate the contents
+	}),
+})
+```
+
 #### Step 2: Create a new client component in your Next.js app
 
-The key here is to use the `useNotFoundEnhancement` hook to get the data from the API endpoint.
+The key is to use the `useNotFoundEnhancement` hook to get the data from the API endpoint.
 
-```tsx
-// components/NotFoundEnhancment.tsx
+```tsx title="components/NotFoundEnhancer.tsx"
 'use client'
 
 import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
