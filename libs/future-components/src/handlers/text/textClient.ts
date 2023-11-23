@@ -30,9 +30,7 @@ export class TextClient {
 		} = request
 
 		const rules = [
-			type
-				? `All items returned in the 'content' array must be of 'type': ${type}`
-				: '',
+			type ? `All content returned must be of 'type': ${type}` : '',
 			tone
 				? `The style or tone of voice when rewriting the text is "${tone}".`
 				: '',
