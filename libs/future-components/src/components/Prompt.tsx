@@ -1,7 +1,6 @@
-import { request } from '../utils/request'
 import type { ReactNode, ElementType, HTMLAttributes } from 'react'
 import type { AsComponent } from '../types/AsComponent'
-import { ApiUrlEnum } from '../enums/ApiUrlEnum'
+import { getPrompt } from '../handlers/prompt/getters'
 
 export interface PromptProps extends HTMLAttributes<HTMLElement> {
 	prompt: string
@@ -24,7 +23,7 @@ export async function Prompt<C extends ElementType = typeof defaultElement>({
 	children,
 	...rest
 }: AsComponent<C, PromptProps>) {
-	const data = await request(ApiUrlEnum.prompt, { body: { prompt } })
+	const response = await getPrompt({ prompt })
 
 	if (as) {
 		const Component = as as 'div' | C
@@ -32,7 +31,7 @@ export async function Prompt<C extends ElementType = typeof defaultElement>({
 			<Component {...rest}>
 				<>
 					{children}
-					{data}
+					{response}
 				</>
 			</Component>
 		)
@@ -41,7 +40,7 @@ export async function Prompt<C extends ElementType = typeof defaultElement>({
 	return (
 		<>
 			{children}
-			{data}
+			{response}
 		</>
 	)
 }

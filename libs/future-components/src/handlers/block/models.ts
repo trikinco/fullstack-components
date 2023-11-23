@@ -2,9 +2,7 @@ export class BlockRequestBody {
 	prompt?: string
 }
 
-export type BlockResponse = {
-	data: string
-}
+export type BlockResponse = string
 
 export type BlockOptions = {
 	openAiApiKey?: string

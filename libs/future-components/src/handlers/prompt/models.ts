@@ -2,9 +2,7 @@ export class PromptRequestBody {
 	prompt?: string
 }
 
-export type PromptResponse = {
-	data: string
-}
+export type PromptResponse = string
 
 export type PromptOptions = {
 	openAiApiKey?: string
