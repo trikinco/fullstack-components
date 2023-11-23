@@ -2,7 +2,7 @@
 import { Children, forwardRef, useImperativeHandle } from 'react'
 import type { HTMLAttributes, ElementType } from 'react'
 import { merge } from '@trikinco/fullstack-components/utils'
-import { useText } from '../hooks/useText'
+import { useText } from '@trikinco/fullstack-components/client'
 import type { RewriteOptions } from '../types/Text'
 
 export interface TextRewriteProps
@@ -38,22 +38,22 @@ export const TextRewrite = forwardRef(function TextRewrite(
 	ref
 ) {
 	const WrapperComponent = component || 'div'
-	const options = { children, count, tone, strength, grade, max, min }
-	const { isLoading, content, fetchText } = useText(options)
+	const options = { content: children, count, tone, strength, grade, max, min }
+	const { isLoading, data, refetch: fetchText } = useText(options)
 
 	// Expose a handle to its parent
 	useImperativeHandle(ref, () => ({
 		refetch() {
-			fetchText(options)
+			fetchText()
 		},
 	}))
 
-	if (!isLoading && content?.content) {
+	if (!isLoading && data?.content) {
 		return (
 			<WrapperComponent
 				ref={ref}
 				dangerouslySetInnerHTML={{
-					__html: content ? content.content[value] : null,
+					__html: data ? data.content : null,
 				}}
 				className={merge('w-full', className)}
 				{...rest}
