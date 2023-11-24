@@ -28,12 +28,16 @@ export const routesDocsMeta: RoutesWithMeta[] = [
 		href: routes.prompt,
 	},
 	{
-		title: 'Block',
-		href: routes.block,
+		title: 'Error Enhancer',
+		href: routes.errors,
 	},
 	{
-		title: 'Not found',
+		title: 'Not Found Enhancer',
 		href: routes.notFound,
+	},
+	{
+		title: 'Block',
+		href: routes.block,
 	},
 	{
 		title: 'Image',
@@ -44,20 +48,16 @@ export const routesDocsMeta: RoutesWithMeta[] = [
 		href: routes.select,
 	},
 	{
+		title: 'Text',
+		href: routes.text,
+	},
+	{
 		title: 'Generate UI',
 		href: routes.ui,
 	},
 	{
-		title: 'Error',
-		href: routes.errors,
-	},
-	{
 		title: 'Chat',
 		href: routes.chat,
-	},
-	{
-		title: 'Text',
-		href: routes.text,
 	},
 ]
 
