@@ -76,13 +76,17 @@ export const useRequest = <TResponse = unknown, Tbody = unknown>(
 	}
 
 	useEffect(() => {
-		if (isEnabledReference.current) {
-			isEnabledReference.current = false
-			void fetchData()
-		}
+		isEnabledReference.current = isEnabled
 
 		return () => {
 			isEnabledReference.current = false
+		}
+	}, [isEnabled])
+
+	useEffect(() => {
+		if (isEnabledReference.current) {
+			isEnabledReference.current = false
+			void fetchData()
 		}
 	}, [url, isEnabled])
 

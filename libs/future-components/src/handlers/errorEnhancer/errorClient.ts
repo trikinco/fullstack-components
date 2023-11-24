@@ -10,7 +10,7 @@ export class ErrorClient {
 	) => {
 		console.log('handling error request', errorEnhancementRequest)
 		const messages: ChatMessage[] = []
-		if (process.env.NODE_ENV === 'development') {
+		if (options?.isProd !== true && process.env.NODE_ENV === 'development') {
 			messages.push(
 				...this.getDevelopmentOutputMessages(errorEnhancementRequest)
 			)
@@ -19,6 +19,7 @@ export class ErrorClient {
 		}
 		return await runChatCompletion(messages, {
 			openAIApiKey: options?.openAiApiKey || OPENAI_API_KEY,
+			format: 'JSON',
 		})
 	}
 

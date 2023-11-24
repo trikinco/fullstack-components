@@ -5,6 +5,24 @@ import type {
 	NextPageRouterHandler,
 } from '../nextjs-handlers'
 import type { PageRouterOnError, AppRouterOnError } from './routers'
+import type { HandleErrorParser } from '../handlers/errorEnhancer/errorParser'
+import type { HandleNotFoundEnhancement } from '../handlers/notFoundEnhancer/notFoundEnhancer'
+import type { HandlePrompt } from '../handlers/prompt/promptHandler'
+import type { HandleBlock } from '../handlers/block/blockHandler'
+import type { HandleImage } from '../handlers/image/imageHandler'
+import type { HandleSelect } from '../handlers/select/selectHandler'
+import type { HandleText } from '../handlers/text/textHandler'
+import { ApiUrlEnum } from '../enums/ApiUrlEnum'
+
+export type FactoryHandlers = {
+	handleSelect: HandleSelect
+	handleText: HandleText
+	handleImage: HandleImage
+	handleBlock: HandleBlock
+	handlePrompt: HandlePrompt
+	handleErrorParser: HandleErrorParser
+	handleNotFoundEnhancement: HandleNotFoundEnhancement
+}
 
 // taken from auth0 nextjs
 // to use - create a route in /api/fscomponents/[futc].ts
@@ -15,7 +33,9 @@ export type FSCOptions = ApiHandlers | ErrorHandlers
  */
 export type ApiHandlers = {
 	[key: string]: NextPageRouterHandler | NextAppRouterHandler
-}
+} & Partial<{
+	[key in keyof typeof ApiUrlEnum]: NextPageRouterHandler | NextAppRouterHandler
+}>
 
 /**
  * @ignore

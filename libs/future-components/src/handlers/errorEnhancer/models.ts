@@ -1,6 +1,8 @@
 export type ErrorParserOptions = {
 	appContext?: 'http web app' | 'mobile app' | 'desktop app'
 	openAiApiKey?: string
+	/** Overrides the output of `developmentModeContext` messages that are typically only shown when `process.env.NODE_ENV === 'development'` */
+	isProd?: boolean
 }
 export class ErrorEnhancementRequestBody {
 	errorMessage?: string

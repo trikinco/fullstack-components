@@ -5,15 +5,13 @@ import { isRequest } from './nextjs-handlers'
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import type { NextRequest } from 'next/server'
 import type { AppRouteHandler, AppRouteHandlerContext } from './nextjs-handlers'
-import type { HandleErrorParser } from './handlers/errorEnhancer/errorParser'
 import type { PageRouterOnError, AppRouterOnError } from './types/routers'
-import type { FSCApiHandler, FSCOptions, ApiHandlers } from './types/handlers'
-import type { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
-import type { HandlePrompt } from './handlers/prompt/promptHandler'
-import type { HandleBlock } from './handlers/block/blockHandler'
-import type { HandleImage } from './handlers/image/imageHandler'
-import type { HandleSelect } from './handlers/select/selectHandler'
-import type { HandleText } from './handlers/text/textHandler'
+import type {
+	FSCApiHandler,
+	FactoryHandlers,
+	FSCOptions,
+	ApiHandlers,
+} from './types/handlers'
 
 /**
  * @ignore
@@ -42,15 +40,7 @@ export default function handlerFactory({
 	handlePrompt,
 	handleErrorParser,
 	handleNotFoundEnhancement,
-}: {
-	handleSelect: HandleSelect
-	handleText: HandleText
-	handleImage: HandleImage
-	handleBlock: HandleBlock
-	handlePrompt: HandlePrompt
-	handleErrorParser: HandleErrorParser
-	handleNotFoundEnhancement: HandleNotFoundEnhancement
-}): FSCApiHandler {
+}: FactoryHandlers): FSCApiHandler {
 	return ({ onError, ...handlers }: FSCOptions = {}):
 		| NextApiHandler<void>
 		| AppRouteHandler => {
