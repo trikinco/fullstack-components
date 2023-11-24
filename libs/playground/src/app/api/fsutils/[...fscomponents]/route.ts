@@ -5,22 +5,30 @@ import {
 	handleSelectRequest,
 	handleBlockRequest,
 	handlePromptRequest,
+	handleErrorRequest,
 	handleNotFoundEnhancement,
 	type FSCOptions,
 } from '@trikinco/fullstack-components'
 
 const config = {
-	siteUrl: process.env.SITE_URL || '',
 	openAiApiKey: process.env.OPENAI_API_KEY || '',
 }
 
 const fscOptions: FSCOptions = {
-	handleText: handleTextRequest(config),
-	handleImage: handleImageRequest(config),
-	handleSelect: handleSelectRequest(config),
-	handleBlock: handleBlockRequest(config),
-	handlePrompt: handlePromptRequest(config),
-	notFoundEnhancer: handleNotFoundEnhancement(config),
+	prompt: handlePromptRequest(config),
+	errorEnhancer: handleErrorRequest({
+		...config,
+		appContext: 'http web app',
+		isProd: true,
+	}),
+	notFoundEnhancer: handleNotFoundEnhancement({
+		...config,
+		siteUrl: process.env.NEXT_PUBLIC_HOST || '',
+	}),
+	select: handleSelectRequest(config),
+	image: handleImageRequest(config),
+	block: handleBlockRequest(config),
+	text: handleTextRequest(config),
 }
 
 const fscHandler = handleFSComponents(fscOptions)

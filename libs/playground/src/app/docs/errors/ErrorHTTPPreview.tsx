@@ -2,101 +2,79 @@
 import { useState } from 'react'
 import { Spinner } from '@/src/components/Spinner'
 import { Button } from '@/src/components/Button'
-
-/**
- * The formatted user-friendly error message
- */
-export interface UserErrorMessageContent {
-	/** The summarised title for the error message */
-	title: string
-	/** The main body copy describing the error */
-	message: string
-}
+import { useErrorEnhancement } from '@trikinco/fullstack-components/client'
 
 export interface ErrorPreviewProps {
 	/** HTTP status code error to imitate */
 	status?: number
 }
 
+const getErrorTextFromStatus = (status?: number) => {
+	switch (status) {
+		case 400:
+			return 'Bad Request'
+		case 401:
+			return 'Unauthorized'
+		case 403:
+			return 'Forbidden'
+		case 404:
+			return 'Not Found'
+		case 503:
+			return 'Service Unavailable'
+		case 500:
+		default:
+			return 'Internal Server Error'
+	}
+}
+
 export function ErrorHTTPPreview({ status = 500 }: ErrorPreviewProps) {
-	// const router = useRouter()
-	const [isLoading, setIsLoading] = useState(false)
-	/** Formatted error message */
-	const [content, setContent] = useState<UserErrorMessageContent | null>()
 	/** The raw error */
 	const [error, setError] = useState<Error | null>()
+	const { isLoading, data } = useErrorEnhancement(
+		{
+			errorMessage: error?.message,
+			stackTrace: error?.stack,
+		},
+		{ isEnabled: !!error }
+	)
 
 	/**
 	 * Placeholder for generating some generic errors
 	 */
-	async function handleError(status = 500) {
-		setIsLoading(true)
-
+	function handleError(status = 500) {
 		try {
-			const response = await fetch('/api/error/mock', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ status }),
-			})
-
-			if (!response.ok) {
-				throw new Error(
-					`Error: the server responded with a status of ${response.status} (${response.statusText})`
-				)
-			}
+			throw new Error(
+				`Error: the server responded with a status of ${status} (${getErrorTextFromStatus(
+					status
+				)})`,
+				{
+					cause: 'NetworkError',
+				}
+			)
 		} catch (error) {
-			return await fetchErrorMessage(error as Error)
-		}
-	}
-
-	/**
-	 * Placeholder for passing an error prompt to OpenAI and generating a user-friendly message
-	 */
-	async function fetchErrorMessage(error: Error) {
-		setError(error)
-
-		try {
-			const response = await fetch('/api/error/message', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ message: error.message, stack: error.stack }),
-			})
-
-			const data = await response.json()
-
-			if (response.status !== 200) {
-				throw (
-					data.error ||
-					new Error(`Request failed with status ${response.status}`)
-				)
-			}
-
-			setContent(data)
-		} catch (error) {
-			/**
-			 * Continue handling other/fallback cases here
-			 * @consideration flag for turning on navigator.onLine check when applicable for the application
-			 */
 			if (error instanceof Error && error.message) {
-				console.error({
-					message: error.message,
-					stack: error.stack,
-				})
+				setError(error)
 			} else {
 				console.error(error)
 			}
-		} finally {
-			setIsLoading(false)
 		}
 	}
 
 	return (
 		<>
 			<div className="flex flex-col gap-8">
+				{isLoading && <Spinner>Generating user-friendly error message</Spinner>}
+
+				{!isLoading && data && (
+					<div>
+						<h2 className="text-2xl font-bold mb-3 mt-0 block">
+							{data?.title}
+						</h2>
+						<p>{data?.message}</p>
+						<p>{data?.developmentModeContext}</p>
+					</div>
+				)}
+
 				{error && (
 					<>
 						<div>
@@ -114,15 +92,6 @@ export function ErrorHTTPPreview({ status = 500 }: ErrorPreviewProps) {
 						</div>
 					</>
 				)}
-				{!isLoading && content && (
-					<div>
-						<h2 className="text-2xl font-bold mb-3 mt-0 block">
-							{content?.title}
-						</h2>
-						<p>{content?.message}</p>
-					</div>
-				)}
-				{isLoading && <Spinner>Generating user-friendly error message</Spinner>}
 			</div>
 
 			<Button className="mt-8" onClick={() => handleError(status)}>

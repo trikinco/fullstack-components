@@ -108,7 +108,7 @@ export default async function Page() {
 
 ## Setup
 
-1. Add the `handleSelectRequest` to the [API handler route](/docs/get-started/#setup).
+Add `select: handleSelectRequest()` to the [API handler route](/docs/get-started/#setup).
 
 ```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
@@ -118,7 +118,7 @@ import {
 } from '@trikinco/fullstack-components'
 
 const fscOptions: FSCOptions = {
-  handleSelect: handleSelectRequest({
+  select: handleSelectRequest({
     openAiApiKey: process.env.OPENAI_API_KEY || '',
   }),
   // Additional options and handlers...

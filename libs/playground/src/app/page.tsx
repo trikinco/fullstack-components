@@ -74,6 +74,40 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
+					href={routes.errors}
+					title="Error Enhancer"
+					image={{
+						src: '/images/Cone.png',
+						alt: 'Cone',
+					}}
+					footer={
+						<>
+							<Chip>Component</Chip>
+							<Chip>Hook</Chip>
+						</>
+					}
+				>
+					AI-Powered Error Enhancer. Debug and make sense of technical errors.
+				</Card>
+				<Card
+					as={Link}
+					href={routes.notFound}
+					title="Not Found Enhancer"
+					image={{
+						src: '/images/Disc.png',
+						alt: 'Disc',
+					}}
+					footer={
+						<>
+							<Chip>Hook</Chip>
+						</>
+					}
+				>
+					AI-Powered <i>Page Not Found</i>. Get help finding the page you were
+					looking for.
+				</Card>
+				<Card
+					as={Link}
 					href={routes.block}
 					title="Block"
 					image={{
@@ -88,24 +122,6 @@ export default function Home() {
 					}
 				>
 					Generate UI components with AI. Prompt goes in, UI comes out. Easy.
-				</Card>
-
-				<Card
-					as={Link}
-					href={routes.notFound}
-					title="Not Found"
-					image={{
-						src: '/images/Disc.png',
-						alt: 'Disc',
-					}}
-					footer={
-						<>
-							<Chip>Hook</Chip>
-						</>
-					}
-				>
-					AI-Powered <i>Page Not Found</i>. Get help finding the page you were
-					looking for.
 				</Card>
 				<Card
 					as={Link}
@@ -180,23 +196,6 @@ export default function Home() {
 				>
 					AI-Powered Generative UI. Design and create full-page user interfaces
 					easily.
-				</Card>
-				<Card
-					as={Link}
-					href={routes.errors}
-					title="Error"
-					image={{
-						src: '/images/Cone.png',
-						alt: 'Cone',
-					}}
-					header={
-						<Chip className="bg-orange-100 border-orange-200 dark:bg-orange-950 dark:border-orange-900">
-							Demo
-						</Chip>
-					}
-					footer={<Chip>Component</Chip>}
-				>
-					AI-Powered Error Helper. Makes sense of complex technical errors.
 				</Card>
 				<Card
 					as={Link}

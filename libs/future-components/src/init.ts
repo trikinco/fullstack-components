@@ -18,12 +18,12 @@ import { SelectClient } from './handlers/select/selectClient'
 import textHandler, { HandleText } from './handlers/text/textHandler'
 import { TextClient } from './handlers/text/textClient'
 
-const handleErrorRequest = errorParserHandler(new ErrorClient())
 const requestCache = new Map<string, string>()
 const handleNotFoundEnhancement = notFoundEnhancementHandler(
 	new NotFoundEnhancerSitemapSelector(),
 	new NotFoundEnhancerContentGenerator()
 )
+const handleErrorRequest = errorParserHandler(new ErrorClient())
 const handlePromptRequest = promptHandler(new PromptClient())
 const handleBlockRequest = blockHandler(new BlockClient())
 const handleImageRequest = imageHandler(new ImageClient())

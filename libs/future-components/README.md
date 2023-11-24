@@ -49,7 +49,7 @@ Depending on which router you use in Next.js, the location of the API handler ro
 
 ### Step 2: Configure the API handler route
 
-As an example, let's set up the API handler for the `Image` component by adding `handleImageRequest`.
+As an example, let's set up the API handler for the `Image` component by adding `image: handleImageRequest()`.
 
 ```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
@@ -59,7 +59,7 @@ import {
 
 const fscHandler = handleFSComponents({
 	// Configure one or more handlers
-	handleImage: handleImageRequest({
+	image: handleImageRequest({
 		openAiApiKey: process.env.OPENAI_API_KEY || '',
 	}),
 	// ...Add more handlers here
@@ -76,12 +76,13 @@ All handlers can be imported from `@trikin-co/fullstack-components` and are pref
 
 **Handlers examples:**
 
-- handleImageRequest
-- handleTextRequest
-- handleSelectRequest
-- handleBlockRequest
-- handlePromptRequest
-- handleNotFoundEnhancement
+- image: handleImageRequest
+- text: handleTextRequest
+- select: handleSelectRequest
+- block: handleBlockRequest
+- prompt: handlePromptRequest
+- errorEnhancer: handleErrorRequest
+- notFoundEnhancer: handleNotFoundEnhancement
 
 ## Usage example
 

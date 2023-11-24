@@ -70,6 +70,8 @@ export { Select } from './components/Select'
 export { Text } from './components/Text'
 
 // Service utils
+export { getNotFoundEnhancement } from './handlers/notFoundEnhancer/getters'
+export { getErrorEnhancement } from './handlers/errorEnhancer/getters'
 export { getPrompt } from './handlers/prompt/getters'
 export { getBlock } from './handlers/block/getters'
 export { getImage } from './handlers/image/getters'
