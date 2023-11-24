@@ -52,7 +52,6 @@
 		"@types/node": "20",
 		"@types/react": "18.2.31",
 		"@types/react-dom": "18.2.14",
-		"@types/xml2json": "0.11.5",
 		"autoprefixer": "10.4.16",
 		"encoding": "0.1.13",
 		"eslint": "8.52.0",
