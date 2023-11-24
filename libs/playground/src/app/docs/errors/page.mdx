@@ -9,36 +9,97 @@ export const metadata = {
 
 # Errors
 
-## API
+These error enhancement tools can be used to show users a user-friendly message parsed from an `Error` object, or an in-dept debugging message for developers.
 
-Calling the API directly after catching a HTTP response error.
+## `useErrorEnhancement` hook
 
-### HTTP `400 Bad Request`
+```jsx
+'use client'
+
+import { useErrorEnhancement } from '@trikinco/fullstack-components/client'
+
+export default function Page({ error }) {
+  const { isLoading, data } = useErrorEnhancement({
+    errorMessage: error?.message,
+    stackTrace: error?.stack,
+  })
+
+  if (isLoading) {
+    return 'Investigating error...'
+  }
+
+  return (
+    <div role="alert">
+      <p className="text-2xl font-bold mb-3 mt-0 block">
+        {data?.title}
+      </p>
+      <p>{data?.message}</p>
+      <p>{data?.developmentModeContext}</p>
+    </div>
+  )
+}
+```
+
+## Examples
+
+### Network Errors
+
+#### HTTP `400 Bad Request`
 
 <ErrorHTTPPreview status={400} />
 
-### HTTP `401 Unauthorized`
+#### HTTP `401 Unauthorized`
 
 <ErrorHTTPPreview status={401} />
 
-### HTTP `403 Forbidden`
+#### HTTP `403 Forbidden`
 
 <ErrorHTTPPreview status={403} />
 
-### HTTP `404 Not Found`
+#### HTTP `404 Not Found`
 
 <ErrorHTTPPreview status={404} />
 
-### HTTP `500 Internal Server Error`
+#### HTTP `500 Internal Server Error`
 
 <ErrorHTTPPreview status={500} />
 
-### HTTP `503 Service Unavailable`
+#### HTTP `503 Service Unavailable`
 
 <ErrorHTTPPreview status={503} />
 
-## Client errors
+### Client errors
 
 Handling client errors with `ErrorBoundary`
 
 <ClientErrors />
+
+## Setup
+
+Add `errorEnhancer: handleErrorRequest()` to the [API handler route](/docs/get-started/#setup).
+
+```ts title="app/api/fsutils/[...fscomponents]/route.ts"
+import {
+  handleFSComponents,
+  handleErrorRequest,
+  type FSCOptions,
+} from '@trikinco/fullstack-components'
+
+const fscOptions: FSCOptions = {
+  errorEnhancer: handleErrorRequest({
+    openAiApiKey: process.env.OPENAI_API_KEY || '',
+    appContext: 'http web app',
+    /**
+     * `isProd` overrides the output of `developmentModeContext`
+     * messages that are typically only shown when
+     * `process.env.NODE_ENV === 'development'`
+     */
+    isProd: true,
+  }),
+  // Additional options and handlers...
+}
+
+const fscHandler = handleFSComponents(fscOptions)
+
+export { fscHandler as GET, fscHandler as POST }
+```
