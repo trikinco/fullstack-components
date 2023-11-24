@@ -2,30 +2,31 @@
 
 import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
 import Link from 'next/link'
+import { Spinner } from '@/src/components/Spinner'
 
 export function NotFoundEnhancer() {
-	// load all possible pages (for this segment?)
 	const { data, isLoading } = useNotFoundEnhancement()
+	const hasUrlSuggestions =
+		data?.bestAlternateUrls && data.bestAlternateUrls.length > 0
 
 	if (!data || isLoading) {
-		return <p>Please wait, checking for other solutions...</p>
+		return <Spinner>Please wait, checking for other solutions...</Spinner>
 	}
-	console.log('Enhanced not found data', data)
-	const hasUrls = data?.bestAlternateUrls && data.bestAlternateUrls.length > 0
+
 	return (
 		<div className="mt-6">
 			<p>{data?.generatedContent}</p>
-			{hasUrls && (
+			{hasUrlSuggestions && (
 				<>
-					<p>Try one of these pages instead:</p>
+					<p className="font-bold">Try one of these pages instead:</p>
 					{data?.bestAlternateUrls.map((url, i) => (
-						<div key={i}>
-							<Link href={url}>{url}</Link>
-						</div>
+						<Link href={url} key={i} className="block">
+							{url}
+						</Link>
 					))}
 				</>
 			)}
-			{!hasUrls && (
+			{!hasUrlSuggestions && (
 				<p>
 					Sorry we couldn&amp;t find additional pages for you to try this time.
 				</p>

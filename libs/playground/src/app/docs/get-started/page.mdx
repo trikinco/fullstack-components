@@ -93,19 +93,35 @@ import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
 import Link from 'next/link'
 
 export function NotFoundEnhancer() {
-  const { content, isLoading } = useNotFoundEnhancement()
-  if (!content || isLoading) {
+  const { data, isLoading } = useNotFoundEnhancement()
+  const hasUrlSuggestions =
+    data?.bestAlternateUrls && data.bestAlternateUrls.length > 0
+
+  if (!data || isLoading) {
     return <p>Please wait, checking for other solutions...</p>
   }
+
   return (
-    <div>
-      <p>{content?.generatedContent}</p>
-      <p>Try this url instead:</p>
-      <div>
-        <Link href={content?.bestAlternateUrl || '#'}>
-          {content?.bestAlternateUrl || 'No alternate url found'}
-        </Link>
-      </div>
+    <div className="mt-6">
+      <p>{data?.generatedContent}</p>
+      {hasUrlSuggestions && (
+        <>
+          <p className="font-bold">
+            Try one of these pages instead:
+          </p>
+          {data?.bestAlternateUrls.map((url, i) => (
+            <Link href={url} key={i} className="block">
+              {url}
+            </Link>
+          ))}
+        </>
+      )}
+      {!hasUrlSuggestions && (
+        <p>
+          Sorry we couldn't find additional pages for you to try
+          this time.
+        </p>
+      )}
     </div>
   )
 }
