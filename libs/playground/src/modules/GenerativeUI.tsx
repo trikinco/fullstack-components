@@ -22,8 +22,8 @@ export function GenerativeUI({
 	isError,
 }: GenerativeUIProps) {
 	return (
-		<>
-			<div className="w-full h-full aspect-square md:aspect-video overflow-hidden bg-white rounded-lg">
+		<div className="w-full h-full xl:w-auto xl:-mx-10 2xl:-mx-28">
+			<div className="aspect-square md:aspect-video overflow-hidden bg-white rounded-lg">
 				{!isLoading && content && (
 					<ErrorBoundary
 						fallback={
@@ -77,6 +77,6 @@ export function GenerativeUI({
 				{prompt && <Chip className="mt-3 capitalize">{prompt}</Chip>}
 				{src && <Chip className="mt-3 max-w-sm">{src}</Chip>}
 			</div>
-		</>
+		</div>
 	)
 }

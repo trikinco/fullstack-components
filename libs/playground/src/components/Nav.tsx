@@ -19,17 +19,17 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 						<span role="img" aria-label="Hey there, hand waving">
 							👋
 						</span>{' '}
-						<Link href={URL_GITHUB}>{NAME_LIB}</Link> is built in public, and
-						not ready for production use.
+						<Link href={URL_GITHUB}>{NAME_LIB}</Link> is built in public. Use
+						with care in production.
 					</strong>{' '}
 				</p>
 				<p className="hidden md:block">
-					We&apos;re just getting started and{' '}
+					Got feedback? We&apos;d like to{' '}
 					<Link
 						className="underline"
 						href="https://github.com/trikinco/fullstack-components/discussions"
 					>
-						feedback is encouraged.
+						hear from you.
 					</Link>
 				</p>
 			</div>

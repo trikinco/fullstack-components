@@ -7,7 +7,7 @@ import { NAME_LIB, NAME_SHORT, NAME_LONG } from '@/src/utils/constants'
 
 export default function Blocks() {
 	return (
-		<>
+		<div className="w-full xl:w-auto xl:-mx-10 2xl:-mx-28">
 			{/* Temporary solution -> trigger build during esm step in Block */}
 			<Script src="https://cdn.tailwindcss.com" />
 
@@ -55,6 +55,6 @@ export default function Blocks() {
 					</Spinner>
 				}
 			/>
-		</>
+		</div>
 	)
 }

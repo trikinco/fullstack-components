@@ -3,7 +3,7 @@ import Main from '@/src/components/Main'
 import Prose from '@/src/components/Prose'
 import { PageHeader } from '@/src/components/PageHeader'
 import { Button } from '@/src/components/Button'
-import { NotFoundEnhancer } from '@/src/app/docs/(prose)/not-found/NotFoundEnhancer'
+import { NotFoundEnhancer } from '@/src/app/docs/not-found/NotFoundEnhancer'
 
 export default function NotFound() {
 	return (

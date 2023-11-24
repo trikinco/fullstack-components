@@ -8,10 +8,10 @@ export const metadata = {
 
 # Prompt
 
-The `Prompt` component and its hook counterpart `usePrompt` are the most basic building blocks for AI-powered components.
+The `Prompt` component and its counterparts `usePrompt` and `getPrompt` are the most basic building blocks for AI-powered components.
 They simply accept a text `prompt` and return the data as-is.
 
-## `Prompt` server component
+## `Prompt` Server Component
 
 ### Simple `Prompt` usage
 
@@ -61,6 +61,22 @@ export default function Page() {
   }
 
   return <div className="max-w-prose">{data}</div>
+}
+```
+
+## `getPrompt` utility
+
+`getPrompt` is a built-in fetcher with all the same options as `usePrompt`, but it works on the server. Handy for making your own custom Server Components.
+
+```jsx title="Server Component"
+import { getPrompt } from '@trikinco/fullstack-components'
+
+export default async function Page() {
+  const response = await getPrompt({
+    prompt: 'Tell me about TailwindCSS',
+  })
+
+  return <div>{response}</div>
 }
 ```
 

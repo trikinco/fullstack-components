@@ -57,7 +57,7 @@ import { Image } from '@trikinco/fullstack-components'
 />
 ```
 
-## `useImage`
+## `useImage` hook
 
 `useImage` is a utility hook that allows for full access to the same features as `Image`.
 
@@ -117,6 +117,30 @@ export default function Page() {
     <img
       src={data}
       alt="A friendly smiling robot"
+      width="256"
+      height="256"
+    />
+  )
+}
+```
+
+## `getImage` utility
+
+`getImage` is a built-in fetcher with all the same options as `useImage`, but it works on the server. Handy for making your own custom Server Components.
+
+```jsx title="Server Component"
+import { getImage } from '@trikinco/fullstack-components'
+
+export default async function Page() {
+  const response = await getImage({
+    prompt:
+      'An ethereal landscape in a far away fantasy land, natural light, golden hour',
+  })
+
+  return (
+    <img
+      src={response}
+      alt="An ethereal landscape in a far away fantasy land"
       width="256"
       height="256"
     />
