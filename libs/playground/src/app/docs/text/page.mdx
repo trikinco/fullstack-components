@@ -154,7 +154,7 @@ export default async function Page() {
 
 ## Setup
 
-1. Add the `handleTextRequest` to the [API handler route](/docs/get-started/#setup).
+Add `text: handleTextRequest()` to the [API handler route](/docs/get-started/#setup).
 
 ```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
@@ -164,7 +164,7 @@ import {
 } from '@trikinco/fullstack-components'
 
 const fscOptions: FSCOptions = {
-  handleText: handleTextRequest({
+  text: handleTextRequest({
     openAiApiKey: process.env.OPENAI_API_KEY || '',
   }),
   // Additional options and handlers...
@@ -173,10 +173,4 @@ const fscOptions: FSCOptions = {
 const fscHandler = handleFSComponents(fscOptions)
 
 export { fscHandler as GET, fscHandler as POST }
-```
-
-2. Import and use the `useText` hook from `/client`.
-
-```jsx
-import { useText } from '@trikinco/fullstack-components/client'
 ```
