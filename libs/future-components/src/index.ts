@@ -10,6 +10,7 @@ import type { HandleBlock } from './handlers/block/blockHandler'
 import type { HandleImage } from './handlers/image/imageHandler'
 import type { HandleSelect } from './handlers/select/selectHandler'
 import type { HandleText } from './handlers/text/textHandler'
+import { HandleHtmlPage } from './handlers/htmlPage/htmlPageHandler'
 
 // Because we use a cache and use clients,
 // we may want to create a singleton for the library
@@ -44,6 +45,10 @@ const handleSelectRequest: HandleSelect = ((
 const handleBlockRequest: HandleBlock = ((...args: Parameters<HandleBlock>) =>
 	getInstance().handleBlockRequest(...args)) as HandleBlock
 
+const handleHtmlPageRequest: HandleHtmlPage = ((
+	...args: Parameters<HandleHtmlPage>
+) => getInstance().handleHtmlPageRequest(...args)) as HandleHtmlPage
+
 const handleErrorRequest: HandleErrorParser = ((
 	...args: Parameters<HandleErrorParser>
 ) => getInstance().handleErrorRequest(...args)) as HandleErrorParser
@@ -57,6 +62,7 @@ const handleFSComponents = handlerFactory({
 	handleText: handleTextRequest,
 	handleSelect: handleSelectRequest,
 	handleImage: handleImageRequest,
+	handleHtmlPage: handleHtmlPageRequest,
 	handleBlock: handleBlockRequest,
 	handlePrompt: handlePromptRequest,
 	handleErrorParser: handleErrorRequest,
@@ -77,6 +83,7 @@ export { getBlock } from './handlers/block/getters'
 export { getImage } from './handlers/image/getters'
 export { getSelect } from './handlers/select/getters'
 export { getText } from './handlers/text/getters'
+export { getHtmlPage } from './handlers/htmlPage/getters'
 
 // public library api for server
 export { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
@@ -97,6 +104,7 @@ export * from './handlers/block/models'
 export * from './handlers/image/models'
 export * from './handlers/select/models'
 export * from './handlers/text/models'
+export * from './handlers/htmlPage/models'
 export { AppRouteHandlerContext } from './nextjs-handlers'
 
 export {
@@ -105,6 +113,7 @@ export {
 	handleSelectRequest,
 	handleImageRequest,
 	handleBlockRequest,
+	handleHtmlPageRequest,
 	handlePromptRequest,
 	handleErrorRequest,
 	handleNotFoundEnhancement,

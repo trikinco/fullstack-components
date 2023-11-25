@@ -6,6 +6,7 @@ import {
 	handleBlockRequest,
 	handlePromptRequest,
 	handleErrorRequest,
+	handleHtmlPageRequest,
 	handleNotFoundEnhancement,
 	type FSCOptions,
 } from '@trikinco/fullstack-components'
@@ -29,6 +30,7 @@ const fscOptions: FSCOptions = {
 	image: handleImageRequest(config),
 	block: handleBlockRequest(config),
 	text: handleTextRequest(config),
+	htmlPage: handleHtmlPageRequest(config),
 }
 
 const fscHandler = handleFSComponents(fscOptions)

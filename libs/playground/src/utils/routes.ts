@@ -1,7 +1,7 @@
 export const routes = {
 	docs: '/docs',
 	block: '/docs/block',
-	ui: '/docs/ui',
+	htmlPage: '/docs/html-page',
 	getStarted: '/docs/get-started',
 	chat: '/docs/chat',
 	errors: '/docs/errors',
@@ -36,6 +36,10 @@ export const routesDocsMeta: RoutesWithMeta[] = [
 		href: routes.notFound,
 	},
 	{
+		title: 'HTML Page',
+		href: routes.htmlPage,
+	},
+	{
 		title: 'Block',
 		href: routes.block,
 	},
@@ -50,10 +54,6 @@ export const routesDocsMeta: RoutesWithMeta[] = [
 	{
 		title: 'Text',
 		href: routes.text,
-	},
-	{
-		title: 'Generate UI',
-		href: routes.ui,
 	},
 	{
 		title: 'Chat',

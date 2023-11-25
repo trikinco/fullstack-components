@@ -1,3 +1,4 @@
+import { ApiUrlEnum } from '../enums/ApiUrlEnum'
 import type { NextApiHandler } from 'next'
 import type {
 	AppRouteHandler,
@@ -12,13 +13,14 @@ import type { HandleBlock } from '../handlers/block/blockHandler'
 import type { HandleImage } from '../handlers/image/imageHandler'
 import type { HandleSelect } from '../handlers/select/selectHandler'
 import type { HandleText } from '../handlers/text/textHandler'
-import { ApiUrlEnum } from '../enums/ApiUrlEnum'
+import type { HandleHtmlPage } from '../handlers/htmlPage/htmlPageHandler'
 
 export type FactoryHandlers = {
 	handleSelect: HandleSelect
 	handleText: HandleText
 	handleImage: HandleImage
 	handleBlock: HandleBlock
+	handleHtmlPage: HandleHtmlPage
 	handlePrompt: HandlePrompt
 	handleErrorParser: HandleErrorParser
 	handleNotFoundEnhancement: HandleNotFoundEnhancement

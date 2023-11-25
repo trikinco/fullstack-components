@@ -8,6 +8,11 @@ import { Button } from '@/src/components/Button'
 import { IconGitHub } from '@/src/components/Icons/IconGitHub'
 import { routes } from '@/src/utils/routes'
 
+const imageSize = {
+	width: 1000,
+	height: 1000,
+}
+
 export default function Home() {
 	return (
 		<Main>
@@ -62,6 +67,7 @@ export default function Home() {
 					image={{
 						src: '/images/InfinityStrip.png',
 						alt: 'Infinity',
+						...imageSize,
 					}}
 					footer={
 						<>
@@ -79,6 +85,7 @@ export default function Home() {
 					image={{
 						src: '/images/Cone.png',
 						alt: 'Cone',
+						...imageSize,
 					}}
 					footer={
 						<>
@@ -96,6 +103,7 @@ export default function Home() {
 					image={{
 						src: '/images/Disc.png',
 						alt: 'Disc',
+						...imageSize,
 					}}
 					footer={
 						<>
@@ -108,11 +116,29 @@ export default function Home() {
 				</Card>
 				<Card
 					as={Link}
+					href={routes.htmlPage}
+					title="HTML page"
+					image={{
+						src: '/images/MobiusStrip.png',
+						alt: 'MobiusStrip',
+						...imageSize,
+					}}
+					footer={
+						<>
+							<Chip>Hook</Chip>
+						</>
+					}
+				>
+					AI-Powered HTML page generation. Designs and codes full pages.
+				</Card>
+				<Card
+					as={Link}
 					href={routes.block}
 					title="Block"
 					image={{
 						src: '/images/WireframeCube.png',
 						alt: 'A wireframe cube',
+						...imageSize,
 					}}
 					footer={
 						<>
@@ -121,7 +147,7 @@ export default function Home() {
 						</>
 					}
 				>
-					Generate UI components with AI. Prompt goes in, UI comes out. Easy.
+					AI React Components. Prompt goes in, component comes out.
 				</Card>
 				<Card
 					as={Link}
@@ -130,6 +156,7 @@ export default function Home() {
 					image={{
 						src: '/images/Asterisk.png',
 						alt: 'Asterisk',
+						...imageSize,
 					}}
 					footer={
 						<>
@@ -138,7 +165,7 @@ export default function Home() {
 						</>
 					}
 				>
-					Create images with prompts or generate image descriptions.
+					AI creates images with prompts or generates image descriptions.
 				</Card>
 				<Card
 					as={Link}
@@ -147,6 +174,7 @@ export default function Home() {
 					image={{
 						src: '/images/DiamondSlim.png',
 						alt: 'Diamond',
+						...imageSize,
 					}}
 					footer={
 						<>
@@ -155,7 +183,7 @@ export default function Home() {
 						</>
 					}
 				>
-					Creates dropdowns or lists of content.
+					AI creates, sorts and labels dropdowns or lists of content.
 				</Card>
 				<Card
 					as={Link}
@@ -164,6 +192,7 @@ export default function Home() {
 					image={{
 						src: '/images/Cube.png',
 						alt: 'Cube',
+						...imageSize,
 					}}
 					footer={
 						<>
@@ -172,30 +201,7 @@ export default function Home() {
 						</>
 					}
 				>
-					Transform any text into easy-to-understand information.
-				</Card>
-				<Card
-					as={Link}
-					href={routes.ui}
-					title="Generate UI"
-					image={{
-						src: '/images/MobiusStrip.png',
-						alt: 'MobiusStrip',
-					}}
-					header={
-						<Chip className="bg-orange-100 border-orange-200 dark:bg-orange-950 dark:border-orange-900">
-							Demo
-						</Chip>
-					}
-					footer={
-						<>
-							<Chip>Component</Chip>
-							<Chip>Hook</Chip>
-						</>
-					}
-				>
-					AI-Powered Generative UI. Design and create full-page user interfaces
-					easily.
+					AI transforms, creates or modifies text, markdown or HTML.
 				</Card>
 				<Card
 					as={Link}
@@ -204,6 +210,7 @@ export default function Home() {
 					image={{
 						src: '/images/Wedge.png',
 						alt: 'Wedge',
+						...imageSize,
 					}}
 					header={
 						<Chip className="bg-orange-100 border-orange-200 dark:bg-orange-950 dark:border-orange-900">
