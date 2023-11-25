@@ -8,11 +8,12 @@ Get started with AI on the web quickly and leverage AI as a natural part of deve
 
 ## Quick Features
 
-- **Get started with GPT prompts quickly:** Server Component and client react hooks for generic prompts
-- **Generative UI:** Creates dynamic React components with a single prompt
+- **Get started with GPT prompts quickly:** Server Component and client React hooks for generic prompts
+- **Generative UI:** Create dynamic React components and full HTML pages with a single prompt
 - **Not Found Enhancement:** Uses AI to find the closest matching page to the `not found` URL and a helpful message for users
-- **Image generation and vision API:** Image Server Component enhances `next/image` to auto add alt tags, or generate images with DALL·E
-- **AI Text generation:** Create, modify and edit text with Server Components and dynamically with react hooks
+- **Error Enhancement:** Uses AI and smart error boundaries to show users an understandable message or show developers helpful debugging advice
+- **Image Generation and Vision API:** Image Server Component enhances `next/image` to auto add alt tags, or generate images with DALL·E
+- **AI Text Generation:** Create, modify and edit text with Server Components and dynamically with React hooks
 - **AI Select Dropdown & Lists:** Generate, sort, select and label content in dropdowns or lists
 
 ## Getting Started
