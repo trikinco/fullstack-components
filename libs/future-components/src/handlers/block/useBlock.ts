@@ -18,7 +18,7 @@ export const useBlock = (
 
 	const loadBlock = async () => {
 		try {
-			await getBlock(prompt, id)
+			await getBlock({ prompt, id })
 		} catch (error) {
 			console.error('something went wrong when loading block content', error)
 			onError?.(error)
