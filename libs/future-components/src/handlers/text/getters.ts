@@ -1,13 +1,13 @@
-import type { TextProps, TextResponse } from './models'
-import { request } from '../../utils/request'
+import { request, type RequestConfigOnly } from '../../utils/request'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 import { ordinal } from '../../utils/lang'
+import type { TextProps, TextResponse } from './models'
 
 /**
  * Text generation request
  * Transforms `content` react trees to a HTML string
  */
-export async function getText(props: TextProps) {
+export async function getText(props: TextProps, config?: RequestConfigOnly) {
 	const { content: rawContent, grade: rawGrade, ...options } = props || {}
 	const grade =
 		typeof rawGrade === 'number' ? `${ordinal(rawGrade)}-grade` : rawGrade
@@ -32,5 +32,6 @@ export async function getText(props: TextProps) {
 			grade,
 			content,
 		},
+		...config,
 	})
 }
