@@ -66,7 +66,7 @@ export function Chat({ maxRows = 10, minRows = 1, ...rest }: ChatProps) {
 							tabIndex={-1}
 						/>
 						<button
-							className="absolute right-2 bottom-2 bg-black border p-2 rounded-md"
+							className="absolute right-2 bottom-2 text-white bg-black border p-2 rounded-md"
 							type="submit"
 						>
 							Send

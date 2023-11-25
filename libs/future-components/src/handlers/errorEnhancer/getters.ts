@@ -1,4 +1,4 @@
-import { request } from '../../utils/request'
+import { request, type RequestConfigOnly } from '../../utils/request'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 import type {
 	ErrorEnhancementResponse,
@@ -8,6 +8,12 @@ import type {
 /**
  * Error enhancement request
  */
-export function getErrorEnhancement(body: ErrorEnhancementRequestBody) {
-	return request<ErrorEnhancementResponse>(ApiUrlEnum.errorEnhancer, { body })
+export function getErrorEnhancement(
+	body: ErrorEnhancementRequestBody,
+	config?: RequestConfigOnly
+) {
+	return request<ErrorEnhancementResponse>(ApiUrlEnum.errorEnhancer, {
+		body,
+		...config,
+	})
 }

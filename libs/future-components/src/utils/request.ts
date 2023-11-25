@@ -1,5 +1,6 @@
 import { URL_HOST } from './constants'
 import type { RequestConfig } from '../types'
+export type { RequestConfig, RequestConfigOnly } from '../types'
 
 export const request = async <TResponse = unknown, Tbody = unknown>(
 	/** Relative API url */

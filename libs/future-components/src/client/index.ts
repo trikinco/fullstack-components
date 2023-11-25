@@ -5,6 +5,7 @@ export { useErrorEnhancement } from '../handlers/errorEnhancer/useErrorEnhanceme
 export { useSelect } from '../handlers/select/useSelect'
 export { useBlock } from '../handlers/block/useBlock'
 export { useImage } from '../handlers/image/useImage'
+export { useHtmlPage } from '../handlers/htmlPage/useHtmlPage'
 export { useText } from '../handlers/text/useText'
 export { renderToString } from './renderToString'
 export { Block } from '../components/Block'

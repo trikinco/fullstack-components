@@ -3,32 +3,44 @@ import { IconRefresh } from '@/src/components/Icons/IconRefresh'
 import { Spinner } from '@/src/components/Spinner'
 import { ErrorBoundary } from 'react-error-boundary'
 
-export interface GenerativeUIProps {
+export interface HTMLPageProps {
 	refetch: () => void
 	prompt?: string
 	src?: string
 	/** The generated HTML content to preview in the iframe */
-	content: string
+	data?: string
 	isLoading?: boolean
 	isError?: boolean
 }
 
-export function GenerativeUI({
+/**
+ * HTML page preview in an iframe
+ */
+export function HTMLPage({
 	refetch,
 	prompt,
 	src,
-	content,
+	data,
 	isLoading,
 	isError,
-}: GenerativeUIProps) {
+}: HTMLPageProps) {
 	return (
 		<div className="w-full h-full xl:w-auto xl:-mx-10 2xl:-mx-28">
-			<div className="aspect-square md:aspect-video overflow-hidden bg-white rounded-lg">
-				{!isLoading && content && (
+			<div className="aspect-square md:aspect-video overflow-hidden bg-white rounded-lg shadow-lg">
+				{!isLoading && !isError && !data && (
+					<label
+						htmlFor="prompt"
+						className="h-full grid place-items-center text-slate-900"
+					>
+						Tell me what you&apos;d like to make ✨
+					</label>
+				)}
+
+				{!isLoading && data && (
 					<ErrorBoundary
 						fallback={
 							<div className="h-full grid place-items-center text-slate-900">
-								Something went wrong while generating &quot;{prompt || src}
+								Something went wrong while creating &quot;{prompt || src}
 								&quot;
 							</div>
 						}
@@ -45,7 +57,7 @@ export function GenerativeUI({
 							 */
 							sandbox="allow-same-origin allow-scripts allow-modals allow-popups allow-presentation allow-downloads allow-pointer-lock"
 							className="w-full h-full border-0 min-h-0 overflow-auto opacity-100 z-10 select-auto pointer-events-auto"
-							srcDoc={content}
+							srcDoc={data}
 						/>
 					</ErrorBoundary>
 				)}
@@ -53,14 +65,14 @@ export function GenerativeUI({
 				{isLoading && !isError && (
 					<div className="h-full grid place-items-center text-slate-900">
 						<Spinner classNameSpinner="mx-auto">
-							Handling UI generation prompt for &quot;{prompt || src}&quot;
+							Creating &quot;{prompt || src}&quot;
 						</Spinner>
 					</div>
 				)}
 
 				{!isLoading && isError && (
 					<div className="h-full grid place-items-center text-slate-900">
-						Error generating UI for &quot;{prompt || src}&quot;
+						Error creating &quot;{prompt || src}&quot;
 					</div>
 				)}
 			</div>
@@ -68,7 +80,7 @@ export function GenerativeUI({
 			<div className="flex gap-3">
 				<button
 					disabled={isLoading}
-					aria-label={`Regenerate "${prompt || 'UI'}"`}
+					aria-label={`Regenerate ${prompt || 'UI'}`}
 					className="mt-3 flex items-center justify-center w-9 h-9 text-xs font-medium text-gray-900 bg-white border-2 border-gray-200 rounded-lg toggle-full-view hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-500 dark:bg-gray-900 focus:outline-none dark:text-gray-400 dark:border-gray-700 dark:hover:text-white dark:hover:bg-gray-800"
 					onClick={() => refetch()}
 				>

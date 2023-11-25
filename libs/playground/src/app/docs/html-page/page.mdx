@@ -1,0 +1,70 @@
+import { Form } from './Form'
+
+# HTML Page
+
+AI-Powered HTML page generator that designs and codes user interfaces.
+
+<Form className="mt-8 pt-8 border-t border-black/20 dark:border-white/20" />
+
+## `useHtmlPage` hook
+
+```jsx
+'use client'
+
+import { useHtmlPage } from '@trikinco/fullstack-components/client'
+
+export default function Document() {
+  const { isLoading, data } = useHtmlPage({
+    prompt: 'An about page for a cat named Bubbles',
+  })
+
+  if (isLoading) {
+    return 'Generating UI...'
+  }
+
+  // Beware of the possible security implications of this, consider XSS, sandboxing, etc.
+  return <iframe title="About Bubbles" srcDoc={data} />
+}
+```
+
+## `getHtmlPage` utility
+
+`getHtmlPage` is a built-in fetcher with all the same options as `useHtmlPage`, but it works on the server. Handy for making your own custom Server Components.
+
+```jsx title="Server Component"
+import { getHtmlPage } from '@trikinco/fullstack-components'
+
+export default async function Page() {
+  const response = await getHtmlPage({
+    prompt: 'A modern marketing site for a speed boat company',
+    src: 'https://speed-boat-designs.dev/inspiration.png',
+    colors: 'blue-400,teal-200',
+    theme: 'light',
+  })
+
+  return response
+}
+```
+
+## Setup
+
+Add `htmlPage: handleHtmlPageRequest()` to the [API handler route](/docs/get-started/#setup).
+
+```ts title="app/api/fsutils/[...fscomponents]/route.ts"
+import {
+  handleFSComponents,
+  handleHtmlPageRequest,
+  type FSCOptions,
+} from '@trikinco/fullstack-components'
+
+const fscOptions: FSCOptions = {
+  htmlPage: handleHtmlPageRequest({
+    openAiApiKey: process.env.OPENAI_API_KEY || '',
+  }),
+  // Additional options and handlers...
+}
+
+const fscHandler = handleFSComponents(fscOptions)
+
+export { fscHandler as GET, fscHandler as POST }
+```

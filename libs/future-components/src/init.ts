@@ -17,6 +17,10 @@ import selectHandler, { HandleSelect } from './handlers/select/selectHandler'
 import { SelectClient } from './handlers/select/selectClient'
 import textHandler, { HandleText } from './handlers/text/textHandler'
 import { TextClient } from './handlers/text/textClient'
+import htmlPageHandler, {
+	HandleHtmlPage,
+} from './handlers/htmlPage/htmlPageHandler'
+import { HtmlPageClient } from './handlers/htmlPage/htmlPageClient'
 
 const requestCache = new Map<string, string>()
 const handleNotFoundEnhancement = notFoundEnhancementHandler(
@@ -29,6 +33,7 @@ const handleBlockRequest = blockHandler(new BlockClient())
 const handleImageRequest = imageHandler(new ImageClient())
 const handleSelectRequest = selectHandler(new SelectClient())
 const handleTextRequest = textHandler(new TextClient())
+const handleHtmlPageRequest = htmlPageHandler(new HtmlPageClient())
 
 export type FutureComponentsServer = {
 	requestCache: Map<string, string>
@@ -38,6 +43,7 @@ export type FutureComponentsServer = {
 	handleSelectRequest: HandleSelect
 	handleImageRequest: HandleImage
 	handleBlockRequest: HandleBlock
+	handleHtmlPageRequest: HandleHtmlPage
 	handleNotFoundEnhancement: HandleNotFoundEnhancement
 }
 // Creates the instance of the library. We don't allow a custom one yet
@@ -51,6 +57,7 @@ export function _init(): FutureComponentsServer {
 		handleSelectRequest,
 		handleImageRequest,
 		handleBlockRequest,
+		handleHtmlPageRequest,
 		handleNotFoundEnhancement,
 	}
 }

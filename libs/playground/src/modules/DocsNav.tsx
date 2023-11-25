@@ -38,11 +38,11 @@ export default function DocsNav({ children, className }: DocsNavProps) {
 								id={isTitle ? ID_DOCS_NAV : undefined}
 								href={href}
 								className={merge(
-									'w-full rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950 hover:text-white focus-visible:text-white',
+									'w-full rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950 hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white',
 									isCurrentPage
 										? 'text-sky-500 hover:text-sky-600 focus-visible:text-sky-600 font-bold before:content-["·"] before:mr-2'
-										: 'text-white/60',
-									isTitle && 'text-white font-bold text-lg mb-3'
+										: 'text-black/60 dark:text-white/60',
+									isTitle && 'text-black dark:text-white font-bold text-lg mb-3'
 								)}
 								aria-current={isCurrentPage ? 'page' : undefined}
 							>

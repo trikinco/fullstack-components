@@ -1,13 +1,18 @@
-import { request } from '../../utils/request'
+import { request, type RequestConfigOnly } from '../../utils/request'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
-import type { BlockResponse } from './models'
+import type { BlockRequestBody, BlockResponse } from './models'
 
 /**
  * Block generation and build processing fetcher
  */
-export async function getBlock(prompt: string, id: string) {
+export async function getBlock(
+	props: BlockRequestBody & { id: string },
+	config?: RequestConfigOnly
+) {
+	const { id, ...body } = props
 	const response = request<BlockResponse>(ApiUrlEnum.block, {
-		body: { prompt },
+		body,
+		...config,
 	})
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore Cannot find module 'https://esm.sh/build' or its corresponding type declarations.

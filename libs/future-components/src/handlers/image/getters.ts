@@ -1,4 +1,4 @@
-import { request } from '../../utils/request'
+import { request, type RequestConfigOnly } from '../../utils/request'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 import { IS_DEV } from '../../utils/constants'
 import type { ImageResponse, ImageRequestBody } from './models'
@@ -7,7 +7,7 @@ import type { ImageProps } from '../../types/Image'
 /**
  * Image generation and description fetcher
  */
-export function getImage<T>(props: ImageProps<T>) {
+export function getImage<T>(props: ImageProps<T>, config?: RequestConfigOnly) {
 	const { prompt, src } = props as ImageRequestBody
 
 	if (!('prompt' in props) && 'alt' in props) {
@@ -20,5 +20,8 @@ export function getImage<T>(props: ImageProps<T>) {
 		return false
 	}
 
-	return request<ImageResponse>(ApiUrlEnum.image, { body: { prompt, src } })
+	return request<ImageResponse>(ApiUrlEnum.image, {
+		body: { prompt, src },
+		...config,
+	})
 }

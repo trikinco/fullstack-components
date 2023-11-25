@@ -3,3 +3,5 @@ export interface RequestConfig<TBody = unknown>
 	baseUrl?: string
 	body?: TBody
 }
+
+export type RequestConfigOnly = Omit<RequestConfig, 'body'>

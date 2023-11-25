@@ -1,4 +1,4 @@
-import { request } from '../../utils/request'
+import { request, type RequestConfigOnly } from '../../utils/request'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 import type {
 	NotFoundEnhancerResponse,
@@ -8,8 +8,12 @@ import type {
 /**
  * Not found enhancement request
  */
-export function getNotFoundEnhancement(body: NotFoundEnhancerRequestBody) {
+export function getNotFoundEnhancement(
+	body: NotFoundEnhancerRequestBody,
+	config?: RequestConfigOnly
+) {
 	return request<NotFoundEnhancerResponse>(ApiUrlEnum.notFoundEnhancer, {
 		body,
+		...config,
 	})
 }
