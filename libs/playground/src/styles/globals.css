@@ -64,6 +64,24 @@
 	@apply rounded-md bg-slate-50 dark:bg-slate-700;
 }
 
+.bg-pattern {
+	background-color: transparent;
+	background-size: 20px 20px;
+	background-image: radial-gradient(
+		hsl(237deg 92% 62% / 10%) 1px,
+		transparent 1px
+	);
+}
+
+@media (prefers-color-scheme: dark) {
+	.bg-pattern {
+		background-image: radial-gradient(
+			hsl(237deg 92% 62% / 20%) 1px,
+			transparent 1px
+		);
+	}
+}
+
 body {
 	color: rgb(var(--foreground-rgb));
 	@apply bg-slate-100 dark:bg-slate-950;

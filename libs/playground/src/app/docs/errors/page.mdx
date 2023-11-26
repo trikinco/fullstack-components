@@ -2,7 +2,7 @@ import { ErrorHTTPPreview } from './ErrorHTTPPreview'
 import { ClientErrors } from './ClientErrors'
 
 export const metadata = {
-  title: 'Errors',
+  title: 'Error Enhancer - AI-Powered Smart Error Boundary',
   description:
     'AI-Powered Error Helper. Makes sense of complex technical errors.',
 }
@@ -11,7 +11,51 @@ export const metadata = {
 
 These error enhancement tools can be used to show users a user-friendly message parsed from an `Error` object, or an in-dept debugging message for developers.
 
+```jsx
+import { handleErrorRequest } from '@trikinco/fullstack-components'
+import { getErrorEnhancement } from '@trikinco/fullstack-components'
+import { useErrorEnhancement } from '@trikinco/fullstack-components/client'
+import { ErrorEnhancementFallback } from '@trikinco/fullstack-components/client'
+import { ErrorEnhancementBoundary } from '@trikinco/fullstack-components/client'
+```
+
 ## `useErrorEnhancement` hook
+
+```jsx
+import { useErrorEnhancement } from '@trikinco/fullstack-components/client'
+```
+
+### Handling network errors with the `useErrorEnhancement` hook
+
+<ErrorHTTPPreview
+  status={400}
+  label="Live Example · HTTP `400 Bad Request`"
+/>
+
+<ErrorHTTPPreview
+  status={401}
+  label="Live Example · HTTP `401 Unauthorized`"
+/>
+
+<ErrorHTTPPreview
+  status={403}
+  label="Live Example · HTTP `403 Forbidden`"
+/>
+
+<ErrorHTTPPreview
+  status={404}
+  label="Live Example · HTTP `404 Not Found`"
+/>
+
+<ErrorHTTPPreview
+  status={500}
+  label="Live Example · HTTP `500 Internal Server Error`"
+/>
+
+<ErrorHTTPPreview
+  status={503}
+  label="Live Example · HTTP `503 Service Unavailable`"
+/>
 
 ```jsx
 'use client'
@@ -40,39 +84,39 @@ export default function Page({ error }) {
 }
 ```
 
-## Examples
+## `ErrorEnhancementBoundary` Client Component
 
-### Network Errors
+```jsx
+import { ErrorEnhancementBoundary } from '@trikinco/fullstack-components/client'
+```
 
-#### HTTP `400 Bad Request`
-
-<ErrorHTTPPreview status={400} />
-
-#### HTTP `401 Unauthorized`
-
-<ErrorHTTPPreview status={401} />
-
-#### HTTP `403 Forbidden`
-
-<ErrorHTTPPreview status={403} />
-
-#### HTTP `404 Not Found`
-
-<ErrorHTTPPreview status={404} />
-
-#### HTTP `500 Internal Server Error`
-
-<ErrorHTTPPreview status={500} />
-
-#### HTTP `503 Service Unavailable`
-
-<ErrorHTTPPreview status={503} />
-
-### Client errors
-
-Handling client errors with `ErrorBoundary`
+### Handling client errors with `ErrorEnhancementBoundary`
 
 <ClientErrors />
+
+```jsx
+'use client'
+
+import { ErrorEnhancementBoundary } from '@trikinco/fullstack-components/client'
+
+export default function ComponentThatMayThrow() {
+  return (
+    <ErrorEnhancementBoundary
+      fallback={
+        <p>Generating a user-friendly error message...</p>
+      }
+    >
+      <Button
+        onClick={() => {
+          throwsCowbellOrError()
+        }}
+      >
+        Howdy 🤠
+      </Button>
+    </ErrorEnhancementBoundary>
+  )
+}
+```
 
 ## Setup
 

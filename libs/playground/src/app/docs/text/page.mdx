@@ -1,14 +1,51 @@
 import { Text } from '@trikinco/fullstack-components'
+import { Example } from '@/src/components/Example'
 
 export const metadata = {
-  title: 'Text',
+  title: 'Text - Enhance, Create And Simplify Your Text With AI',
   description:
-    'Transform any text into easy-to-understand information.',
+    'Rewrite, simplify or create text. Handles plain text, markdown and HTML',
 }
 
 # Text
 
 Rewrite, simplify or create text. Handles plain text, markdown and HTML.
+
+```jsx
+import { handleTextRequest } from '@trikinco/fullstack-components'
+import { getText } from '@trikinco/fullstack-components'
+import { Text } from '@trikinco/fullstack-components'
+import { useText } from '@trikinco/fullstack-components/client'
+```
+
+## `Text` Server Component
+
+### Rewriting text
+
+<Example>
+<Text
+  prompt="Shorten and simplify"
+  grade={5}
+  type="HTML"
+  as="div"
+  className="prose dark:prose-invert"
+>
+  <h2>Quantum formalism and the uncertainty principle</h2>
+  <p>
+    One consequence of the basic quantum formalism is the
+    uncertainty principle. In its most familiar form, this states
+    that no preparation of a quantum particle can imply
+    simultaneously precise predictions both for a measurement of its
+    position and for a measurement of its momentum.
+  </p>
+
+  <p>
+  Both position and momentum are observables, meaning that they are represented
+  by Hermitian operators. The position operator X and momentum operator P do not
+  commute, but rather satisfy the canonical commutation relation.
+  </p>
+</Text>
+</Example>
 
 ```jsx title="Text rewrite example"
 <Text
@@ -35,30 +72,18 @@ Rewrite, simplify or create text. Handles plain text, markdown and HTML.
 </Text>
 ```
 
-**Text rewrite output 👇**
+### Creating text
 
-<Text
-  prompt="Shorten and simplify"
-  grade={5}
-  type="HTML"
-  as="div"
-  className="prose dark:prose-invert"
->
-  <h2>Quantum formalism and the uncertainty principle</h2>
-  <p>
-    One consequence of the basic quantum formalism is the
-    uncertainty principle. In its most familiar form, this states
-    that no preparation of a quantum particle can imply
-    simultaneously precise predictions both for a measurement of its
-    position and for a measurement of its momentum.
-  </p>
-
-  <p>
-  Both position and momentum are observables, meaning that they are represented
-  by Hermitian operators. The position operator X and momentum operator P do not
-  commute, but rather satisfy the canonical commutation relation.
-  </p>
-</Text>
+<Example>
+  <Text
+    prompt="Make this a longer poem that rhymes"
+    type="text"
+    as="div"
+    className="prose dark:prose-invert"
+  >
+    happy lizard
+  </Text>
+</Example>
 
 ```jsx title="Text creation example"
 <Text
@@ -71,17 +96,6 @@ Rewrite, simplify or create text. Handles plain text, markdown and HTML.
   happy lizard
 </Text>
 ```
-
-**Text creation output 👇**
-
-<Text
-  prompt="Make this a longer poem that rhymes"
-  type="text"
-  as="div"
-  className="prose dark:prose-invert"
->
-  happy lizard
-</Text>
 
 ## `useText` hook
 

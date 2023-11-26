@@ -32,7 +32,7 @@ export function ClientErrors() {
 				onClick={() => {
 					throw new Error('SyntaxError: Unexpected token }')
 				}}
-				label={`SyntaxError: Unexpected token }`}
+				label="SyntaxError"
 			/>
 
 			<ErrorPreview

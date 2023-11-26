@@ -7,7 +7,7 @@ import { NAME_LIB, NAME_SHORT, NAME_LONG } from '@/src/utils/constants'
 
 export default function Blocks() {
 	return (
-		<div className="w-full xl:w-auto xl:-mx-10 2xl:-mx-28">
+		<div className="w-full">
 			{/* Temporary solution -> trigger build during esm step in Block */}
 			<Script src="https://cdn.tailwindcss.com" />
 
@@ -18,7 +18,7 @@ export default function Blocks() {
 						className="flex gap-3 p-3 items-center"
 						classNameSpinner="mb-0"
 					>
-						Creating navbar...
+						Creating navbar component...
 					</Spinner>
 				}
 			/>
@@ -29,7 +29,7 @@ export default function Blocks() {
 						className="flex gap-3 p-3 items-center"
 						classNameSpinner="mb-0"
 					>
-						Creating hero section...
+						Creating hero component...
 					</Spinner>
 				}
 			/>
@@ -40,7 +40,7 @@ export default function Blocks() {
 						className="flex gap-3 p-3 items-center"
 						classNameSpinner="mb-0"
 					>
-						Creating call to action section...
+						Creating call to action component...
 					</Spinner>
 				}
 			/>
@@ -51,7 +51,7 @@ export default function Blocks() {
 						className="flex gap-3 p-3 items-center"
 						classNameSpinner="mb-0"
 					>
-						Creating footer...
+						Creating footer component...
 					</Spinner>
 				}
 			/>
