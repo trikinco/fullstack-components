@@ -1,7 +1,8 @@
 import { Prompt } from '@trikinco/fullstack-components'
+import { Example } from '@/src/components/Example'
 
 export const metadata = {
-  title: 'Prompt',
+  title: 'Prompt - Essential AI Building Block',
   description:
     'Easily integrate AI prompts into any part of your application.',
 }
@@ -11,15 +12,18 @@ export const metadata = {
 The `Prompt` component and its counterparts `usePrompt` and `getPrompt` are the most basic building blocks for AI-powered components.
 They simply accept a text `prompt` and return the data as-is.
 
+```jsx
+import { handlePromptRequest } from '@trikinco/fullstack-components'
+import { getPrompt } from '@trikinco/fullstack-components'
+import { Prompt } from '@trikinco/fullstack-components'
+import { usePrompt } from '@trikinco/fullstack-components/client'
+```
+
 ## `Prompt` Server Component
 
-### Simple `Prompt` usage
-
-<Prompt prompt="What's the longest river in the world?" />
-
-```jsx
-import { Prompt } from '@trikinco/fullstack-components'
-```
+<Example>
+  <Prompt prompt="What's the longest river in the world?" />
+</Example>
 
 ```jsx
 <Prompt prompt="What's the longest river in the world?" />
@@ -30,11 +34,9 @@ import { Prompt } from '@trikinco/fullstack-components'
 The response can be wrapped in an element by using the `as` prop.
 In addition, this allows you to pass in any of the standard HTML attributes as expected by that element type.
 
-<Prompt
-  prompt="How big is the moon?"
-  as="div"
-  className="rounded-md overflow-hidden p-6 bg-sky-200 text-sky-800 text-xl"
-/>
+<Example>
+  <Prompt prompt="How big is the moon?" as="div" />
+</Example>
 
 ```jsx /as="div"/
 <Prompt

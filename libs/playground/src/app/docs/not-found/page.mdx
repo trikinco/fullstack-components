@@ -1,7 +1,8 @@
+import { Example } from '@/src/components/Example'
 import { NotFoundEnhancer } from './NotFoundEnhancer'
 
 export const metadata = {
-  title: 'Not Found Enhancer',
+  title: 'Not Found Enhancer - Help Users Find Their Way',
   description:
     'AI-Powered Page Not Found. Get help finding the page you were looking for.',
 }
@@ -11,9 +12,17 @@ export const metadata = {
 These enhancement tools uses your sitemap to find the closest matching page to the `not found` URL.
 It also uses the contents of your website URL's to create a helpful message for your end-user.
 
-## Example
+```jsx
+import { handleNotFoundEnhancement } from '@trikinco/fullstack-components'
+import { getNotFoundEnhancement } from '@trikinco/fullstack-components'
+import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
+```
 
-<NotFoundEnhancer />
+## `useNotFoundEnhancement` hook
+
+<Example>
+  <NotFoundEnhancer />
+</Example>
 
 ## Setup
 
@@ -25,13 +34,25 @@ In the API handler file, you should add the following configuration to use this 
 
 **Note:** not all features require configuration, so read the documentation for each.
 
-```ts
-export const POST = handleFSComponents({
+```ts title="app/api/fsutils/[...fscomponents]/route.ts"
+import {
+  handleFSComponents,
+  handleNotFoundEnhancement,
+  type FSCOptions,
+} from '@trikinco/fullstack-components'
+
+const fscOptions: FSCOptions = {
+  // Configure one or more handlers
   notFoundEnhancer: handleNotFoundEnhancement({
-    siteUrl: process.env.SITE_URL || '', // used to inspect the sitemap
-    openAiApiKey: process.env.OPENAI_API_KEY || '', // used to generate the contents
+    openAiApiKey: process.env.OPENAI_API_KEY || '',
+    siteUrl: process.env.NEXT_PUBLIC_HOST || '',
   }),
-})
+  // ...Add more handlers here
+}
+
+const fscHandler = handleFSComponents(fscOptions)
+
+export { fscHandler as GET, fscHandler as POST }
 ```
 
 ### Step 2: Create a new client component in your Next.js app
@@ -54,18 +75,22 @@ export function NotFoundEnhancer() {
   }
 
   return (
-    <div className="mt-6">
+    <div>
       <p>{data?.generatedContent}</p>
       {hasUrlSuggestions && (
         <>
-          <p className="font-bold">
+          <p className="font-bold mt-3" id="url-suggestions">
             Try one of these pages instead:
           </p>
-          {data?.bestAlternateUrls.map((url, i) => (
-            <Link href={url} key={i} className="block">
-              {url}
-            </Link>
-          ))}
+          <ul aria-labelledby="url-suggestions">
+            {data?.bestAlternateUrls.map((url, i) => (
+              <li key={i}>
+                <Link href={url} className="block underline">
+                  {url}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </>
       )}
       {!hasUrlSuggestions && (
@@ -84,8 +109,7 @@ export function NotFoundEnhancer() {
 - Using the Next.js App Router: Create a [`not-found.tsx` page](https://nextjs.org/docs/app/api-reference/file-conventions/not-found) in your app.
 - Using the Next.js Pages Router: [Create a `404.tsx` page](https://nextjs.org/docs/pages/building-your-application/routing/custom-error#404-page) in your app.
 
-```tsx
-// pages/404.tsx or app/not-found.tsx
+```tsx title="app/not-found.tsx or pages/404.tsx"
 import Link from 'next/link'
 
 export default function NotFound() {

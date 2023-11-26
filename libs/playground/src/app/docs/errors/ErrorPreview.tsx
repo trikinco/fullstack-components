@@ -1,8 +1,10 @@
 'use client'
+
+import { useState } from 'react'
 import { ErrorEnhancementBoundary } from '@trikinco/fullstack-components/client'
 import { Button } from '@/src/components/Button'
-import { useState } from 'react'
 import { Spinner } from '@/src/components/Spinner'
+import { Example } from '@/src/components/Example'
 
 export interface ErrorPreviewProps {
 	/** Do something silly here to throw an error */
@@ -22,25 +24,24 @@ export function ErrorPreview({ label, onClick }: ErrorPreviewProps) {
 	}
 
 	return (
-		<ErrorEnhancementBoundary
-			fallback={
-				<Spinner className="mb-3">
-					Generating user-friendly error message
-				</Spinner>
-			}
-			className="mb-6"
-		>
-			{shouldRenderThrow && <ComponentToThrowError />}
-
-			<h3>{label}</h3>
-			<Button
-				className="my-8"
-				onClick={() => {
-					setShouldRenderThrow(true)
-				}}
+		<Example label={`Live Example · ${label}`} className="mb-3">
+			<ErrorEnhancementBoundary
+				fallback={
+					<Spinner className="mb-3">
+						Generating user-friendly error message
+					</Spinner>
+				}
 			>
-				{label}
-			</Button>
-		</ErrorEnhancementBoundary>
+				{shouldRenderThrow && <ComponentToThrowError />}
+
+				<Button
+					onClick={() => {
+						setShouldRenderThrow(true)
+					}}
+				>
+					Trigger {label}
+				</Button>
+			</ErrorEnhancementBoundary>
+		</Example>
 	)
 }

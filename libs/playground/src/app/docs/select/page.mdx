@@ -1,8 +1,9 @@
 import { Select } from '@trikinco/fullstack-components'
+import { Example } from '@/src/components/Example'
 import UseSelect from './UseSelect'
 
 export const metadata = {
-  title: 'Select',
+  title: 'Select - Smart AI-Powered Dropdowns And Lists',
   description:
     'A smart dropdown component that creates, labels and sorts all its own options.',
 }
@@ -11,12 +12,21 @@ export const metadata = {
 
 A smart dropdown component that creates, labels and sorts all its own options.
 
-<div className="mt-6">
+```jsx
+import { handleSelectRequest } from '@trikinco/fullstack-components'
+import { getSelect } from '@trikinco/fullstack-components'
+import { Select } from '@trikinco/fullstack-components'
+import { useSelect } from '@trikinco/fullstack-components/client'
+```
+
+## `Select` Server Component
+
+<Example>
   <Select
     prompt="Selecting a time zone in GMT"
     context="The time zone for Sydney should be selected"
   />
-</div>
+</Example>
 
 ```jsx
 <Select
@@ -29,10 +39,6 @@ A smart dropdown component that creates, labels and sorts all its own options.
 
 `useSelect` is a utility hook that allows for full access to Select generation data.
 Useful for generating lists or when creating custom dropdown components.
-
-```jsx
-import { useSelect } from '@trikinco/fullstack-components/client'
-```
 
 ```jsx
 'use client'
@@ -66,7 +72,9 @@ export default () => {
 }
 ```
 
-<UseSelect />
+<Example>
+  <UseSelect />
+</Example>
 
 ## `getSelect` utility
 

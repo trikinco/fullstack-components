@@ -1,12 +1,15 @@
 'use client'
 import { useState } from 'react'
 import { Spinner } from '@/src/components/Spinner'
+import { Example } from '@/src/components/Example'
 import { Button } from '@/src/components/Button'
 import { useErrorEnhancement } from '@trikinco/fullstack-components/client'
 
 export interface ErrorPreviewProps {
 	/** HTTP status code error to imitate */
 	status?: number
+	/** Label to pass to the Example */
+	label?: string
 }
 
 const getErrorTextFromStatus = (status?: number) => {
@@ -27,7 +30,7 @@ const getErrorTextFromStatus = (status?: number) => {
 	}
 }
 
-export function ErrorHTTPPreview({ status = 500 }: ErrorPreviewProps) {
+export function ErrorHTTPPreview({ label, status = 500 }: ErrorPreviewProps) {
 	/** The raw error */
 	const [error, setError] = useState<Error | null>()
 	const { isLoading, data } = useErrorEnhancement(
@@ -61,7 +64,7 @@ export function ErrorHTTPPreview({ status = 500 }: ErrorPreviewProps) {
 	}
 
 	return (
-		<>
+		<Example className="mb-3 gap-6" label={label}>
 			<div className="flex flex-col gap-8">
 				{isLoading && <Spinner>Generating user-friendly error message</Spinner>}
 
@@ -79,14 +82,14 @@ export function ErrorHTTPPreview({ status = 500 }: ErrorPreviewProps) {
 					<>
 						<div>
 							<p className="font-bold mb-2">Error message:</p>
-							<pre className="bg-white/10 mb-4 block p-4 rounded-md border-2 border-white/50 break-all">
+							<pre className="text-black dark:text-white bg-white/10 mb-4 block p-4 rounded-md border-2 border-black/20 dark:border-white/50 break-all overflow-auto">
 								{error?.message}
 							</pre>
 						</div>
 
 						<div>
 							<p className="font-bold mb-2">Error stack:</p>
-							<pre className="bg-white/10 mb-4 block p-4 rounded-md border-2 border-white/50 break-all">
+							<pre className="text-black dark:text-white bg-white/10 mb-4 block p-4 rounded-md border-2 border-black/20 dark:border-white/50 break-all overflow-auto">
 								{error?.stack}
 							</pre>
 						</div>
@@ -94,9 +97,9 @@ export function ErrorHTTPPreview({ status = 500 }: ErrorPreviewProps) {
 				)}
 			</div>
 
-			<Button className="mt-8" onClick={() => handleError(status)}>
-				{status} error
+			<Button onClick={() => handleError(status)}>
+				Trigger {status} error
 			</Button>
-		</>
+		</Example>
 	)
 }

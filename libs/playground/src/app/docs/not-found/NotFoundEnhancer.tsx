@@ -14,16 +14,22 @@ export function NotFoundEnhancer() {
 	}
 
 	return (
-		<div className="mt-6">
+		<div>
 			<p>{data?.generatedContent}</p>
 			{hasUrlSuggestions && (
 				<>
-					<p className="font-bold">Try one of these pages instead:</p>
-					{data?.bestAlternateUrls.map((url, i) => (
-						<Link href={url} key={i} className="block">
-							{url}
-						</Link>
-					))}
+					<p className="font-bold mt-3" id="url-suggestions">
+						Try one of these pages instead:
+					</p>
+					<ul aria-labelledby="url-suggestions">
+						{data?.bestAlternateUrls.map((url, i) => (
+							<li key={i}>
+								<Link href={url} className="block underline">
+									{url}
+								</Link>
+							</li>
+						))}
+					</ul>
 				</>
 			)}
 			{!hasUrlSuggestions && (

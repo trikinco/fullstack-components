@@ -18,8 +18,8 @@ export default function Page() {
 
 	return (
 		<>
-			<p className="font-bold">{data?.label}</p>
-			<ul>
+			<p className="font-bold mt-0">{data?.label}</p>
+			<ul className="mb-0">
 				{data?.content?.map((item) => <li key={item.value}>{item.label}</li>)}
 			</ul>
 		</>

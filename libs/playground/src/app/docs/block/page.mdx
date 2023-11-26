@@ -1,50 +1,36 @@
-import Prose from '@/src/components/Prose'
+import { Example } from '@/src/components/Example'
 import Blocks from './Blocks'
 
 export const metadata = {
-  title: 'Block - Generative UI',
+  title: 'Block - AI Generated React Components',
   description:
-    'Generate UI components with AI. Prompt goes in, UI comes out. Easy.',
+    'Generate React components with AI. Prompt goes in, component comes out. Easy.',
 }
 
-<Prose className="mb-6">
 # Block
 
-Blocks are individual pieces of UI that are generated and mounted on the fly, and all you need is a `prompt`.
+Blocks are individual React components that are generated and mounted on the fly, and all you need is a `prompt`.
 
 ```jsx
+import { handleBlockRequest } from '@trikinco/fullstack-components'
+import { getBlock } from '@trikinco/fullstack-components'
 import { Block } from '@trikinco/fullstack-components/client'
+import { useBlock } from '@trikinco/fullstack-components/client'
 ```
 
-```jsx
-<Block prompt="A vibrant page section with the text 'Welcome 👋'" />
-```
+## `Block` Client Component
 
-</Prose>
-
-<Blocks />
-
-<Prose className="mt-6">
-
-## Blocks
-
-The UI above is made out of blocks like this:
+<Example className="w-full xl:w-auto xl:-mx-10 2xl:-mx-28">
+  <Blocks />
+</Example>
 
 ```jsx
 <Block
-  prompt={`A navbar with a modern SVG logo, ${NAME_LIB} and some links. Dark bg, light text.`}
-  fallback={
-    <Spinner
-      className="flex gap-3 p-3 items-center"
-      classNameSpinner="mb-0"
-    >
-      Creating navbar...
-    </Spinner>
-  }
+  prompt="A navbar with a modern SVG logo, the title 'myProject' and some links. Dark bg, light text."
+  fallback={<p>Creating navbar component...</p>}
 />
+//... etc
 ```
-
-<Prose className="mt-6">
 
 ## `useBlock` hook
 
@@ -61,8 +47,6 @@ export default function Page() {
   return <div id={id}>Generating a button...</div>
 }
 ```
-
-</Prose>
 
 ## Setup
 
@@ -86,5 +70,3 @@ const fscHandler = handleFSComponents(fscOptions)
 
 export { fscHandler as GET, fscHandler as POST }
 ```
-
-</Prose>

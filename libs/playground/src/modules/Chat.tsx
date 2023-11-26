@@ -18,17 +18,20 @@ export function Chat({ maxRows = 10, minRows = 1, ...rest }: ChatProps) {
 	} = useChat({ minRows, maxRows, ...rest })
 
 	return (
-		<div className="stretch mx-auto flex w-full max-w-md flex-col py-24">
+		<div className="stretch mx-auto flex w-full max-w-md min-h-screen flex-col py-16 lg:py-24">
 			{messages?.length > 0 ? (
-				messages.map((m) => (
+				messages.map(({ id, role, content }) => (
 					<div
-						className={`p-3 ${
-							m.role === 'user' ? 'bg-slate-700' : 'bg-slate-900'
+						className={`p-3 lg:p-5 ${
+							role === 'user'
+								? 'bg-slate-200 dark:bg-slate-800'
+								: 'bg-slate-300 dark:bg-slate-900'
 						}`}
-						key={`${m.id}-${m.role}`}
-						data-ai-role={m.role}
+						key={`${id}-${role}`}
+						data-ai-role={role}
 					>
-						{m.content}
+						<span className="mr-3">{role === 'user' ? '🤠' : '🤖'}</span>
+						<span>{content}</span>
 					</div>
 				))
 			) : (
@@ -38,7 +41,7 @@ export function Chat({ maxRows = 10, minRows = 1, ...rest }: ChatProps) {
 			<form
 				ref={formRef}
 				onSubmit={handleSubmit}
-				className="fixed bottom-0 left-0 right-0 mx-auto mb-8 w-full max-w-md p-2"
+				className="sticky bottom-6 mt-auto left-0 right-0 mx-auto mb-8 w-full max-w-md p-2"
 			>
 				<div className="overflow-hidden focus-within:shadow-lg focus-within:border-blue-300 flex flex-col w-full dark:border-gray-900/50 flex-grow border-2 border-black/10 dark:text-white rounded-xl dark:bg-gray-700 bg-white">
 					<div className="relative">
