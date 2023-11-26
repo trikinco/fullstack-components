@@ -69,18 +69,18 @@ export function ErrorEnhancementFallback({
 				</button>
 			)}
 
-			<details>
+			<details className="mt-3">
 				<summary>Technical details</summary>
 
 				<p className="font-bold mb-2">Error message:</p>
-				<pre className="bg-white/10 mb-4 block p-4 rounded-md border-2 border-white/50 break-all">
+				<pre className="bg-white/10 mb-4 block p-4 rounded-md border-2 break-all border-black/20 dark:border-white/50 break-all overflow-auto">
 					{error?.message}
 				</pre>
 
 				{IS_DEV && error?.stack && (
 					<>
 						<p className="font-bold mb-2">Error stack:</p>
-						<pre className="bg-white/10 mb-4 block p-4 rounded-md border-2 border-white/50 break-all">
+						<pre className="bg-white/10 mb-4 block p-4 rounded-md border-2 break-all border-black/20 dark:border-white/50 break-all overflow-auto">
 							{error.stack}
 						</pre>
 					</>
