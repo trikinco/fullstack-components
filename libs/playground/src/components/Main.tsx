@@ -9,7 +9,7 @@ export interface MainProps extends HTMLAttributes<HTMLElement> {
 
 export const defaultElement = 'main'
 
-export default function Main<C extends ElementType = typeof defaultElement>({
+export function Main<C extends ElementType = typeof defaultElement>({
 	id = ID_MAIN,
 	as,
 	className,
@@ -31,3 +31,5 @@ export default function Main<C extends ElementType = typeof defaultElement>({
 		</Component>
 	)
 }
+
+export default Main
