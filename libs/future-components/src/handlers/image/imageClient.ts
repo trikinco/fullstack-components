@@ -20,11 +20,12 @@ export class ImageClient {
 	public handle = async (request: ImageRequestBody, options: ImageOptions) => {
 		console.log('handling image request', request)
 
-		const prompt = request?.prompt
+		const { src = '', prompt, ...rest } = request
+		const openAIApiKey = options.openAiApiKey || OPENAI_API_KEY
 
 		// Generate images
 		if (prompt) {
-			return await runImageGeneration(prompt)
+			return await runImageGeneration(prompt, { ...rest, openAIApiKey })
 		}
 
 		// Describe images
@@ -41,14 +42,14 @@ export class ImageClient {
 							type: 'image_url',
 							// eslint-disable-next-line @typescript-eslint/naming-convention
 							image_url: {
-								url: request.src || '',
+								url: src,
 							},
 						},
 					],
 				},
 			],
 			{
-				openAIApiKey: options.openAiApiKey || OPENAI_API_KEY,
+				openAIApiKey,
 				model: 'gpt-4-vision-preview',
 			}
 		)

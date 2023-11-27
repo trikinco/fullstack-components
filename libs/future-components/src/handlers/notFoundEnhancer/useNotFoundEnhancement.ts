@@ -11,12 +11,15 @@ import {
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 
 export const useNotFoundEnhancement = (
+	/** Optional - `requestedUrl` default is `window.location.href`  */
+	body?: NotFoundEnhancerRequestBody,
 	config?: UseRequestConsumerConfig<NotFoundEnhancerRequestBody>
 ) => {
 	return useRequest<NotFoundEnhancerResponse>(ApiUrlEnum.notFoundEnhancer, {
-		...config,
 		body: {
 			requestedUrl: typeof window !== 'undefined' && window.location.href,
+			...body,
 		},
+		...config,
 	})
 }

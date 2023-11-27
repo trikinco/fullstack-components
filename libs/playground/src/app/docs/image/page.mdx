@@ -43,11 +43,19 @@ import { useImage } from '@trikinco/fullstack-components/client'
 ### Generating an image
 
 <Example>
-  <Image prompt="A horse in outer space" />
+  <Image
+    prompt="A photograph of a cat wearing a cowboy hat"
+    model="dall-e-3"
+    size="1024x1024"
+  />
 </Example>
 
 ```jsx
-<Image prompt="A horse in outer space" />
+<Image
+  prompt="A photograph of a cat wearing a cowboy hat"
+  model="dall-e-3"
+  size="1024x1024"
+/>
 ```
 
 ### Fallback To Standard `next/image`
@@ -72,13 +80,13 @@ import { useImage } from '@trikinco/fullstack-components/client'
 
 ## `useImage` hook
 
-`useImage` is a utility hook that allows for full access to the same features as `Image`.
+`useImage` is a utility hook that allows for full access to the same features as `Image`, in addition to being able to generate multiple images.
 
 ```jsx
 import { useImage } from '@trikinco/fullstack-components/client'
 ```
 
-### Image description with `src`
+### `useImage` image description with `src`
 
 ```jsx
 'use client'
@@ -106,7 +114,7 @@ export default function Page() {
 }
 ```
 
-### Image generation with `prompt`
+### `useImage` image generation of multiple images with `prompt` and `n`
 
 ```jsx
 'use client'
@@ -116,24 +124,26 @@ import { useImage } from '@trikinco/fullstack-components/client'
 export default function Page() {
   const { isLoading, isError, data } = useImage({
     prompt: 'A friendly smiling robot',
+    n: 3,
   })
 
   if (isLoading) {
-    return 'Generating image..."'
+    return 'Generating images...'
   }
 
   if (isError) {
-    return 'Could not generate image'
+    return 'Could not generate images'
   }
 
-  return (
+  return data?.map((url) => (
     <img
-      src={data}
+      key={url}
+      src={url}
       alt="A friendly smiling robot"
       width="256"
       height="256"
     />
-  )
+  ))
 }
 ```
 

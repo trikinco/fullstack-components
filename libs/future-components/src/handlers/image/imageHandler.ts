@@ -80,7 +80,7 @@ const pageRouteHandlerFactory: (
 			res.setHeader('Cache-Control', 'no-store')
 			const requestBody = req.body as ImageRequestBody
 			const parsedError = await client.handle(requestBody, options)
-			res.json(JSON.parse(parsedError.responseText))
+			res.json(parsedError.responseText)
 		} catch (error) {
 			throw new ImageError(error)
 		}

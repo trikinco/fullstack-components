@@ -1,7 +1,7 @@
 'use client'
 
 import { useId, useRef, useEffect } from 'react'
-import { getBlock } from './getters'
+import { getProcessedBlock } from './getters'
 
 /**
  * useBlock generates a React component based on a prompt
@@ -18,7 +18,7 @@ export const useBlock = (
 
 	const loadBlock = async () => {
 		try {
-			await getBlock({ prompt, id })
+			await getProcessedBlock({ prompt, id })
 		} catch (error) {
 			console.error('something went wrong when loading block content', error)
 			onError?.(error)

@@ -3,17 +3,29 @@ import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 import type { BlockRequestBody, BlockResponse } from './models'
 
 /**
- * Block generation and build processing fetcher
+ * Block generation fetcher
  */
 export async function getBlock(
+	body: BlockRequestBody,
+	config?: RequestConfigOnly
+) {
+	return request<BlockResponse>(ApiUrlEnum.block, {
+		body,
+		...config,
+	})
+}
+
+/**
+ * Block generation and build processing fetcher
+ * 'use client'
+ */
+export async function getProcessedBlock(
 	props: BlockRequestBody & { id: string },
 	config?: RequestConfigOnly
 ) {
 	const { id, ...body } = props
-	const response = request<BlockResponse>(ApiUrlEnum.block, {
-		body,
-		...config,
-	})
+	const response = getBlock(body, config)
+
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore Cannot find module 'https://esm.sh/build' or its corresponding type declarations.
 	const build = import(/* webpackIgnore: true */ 'https://esm.sh/build')

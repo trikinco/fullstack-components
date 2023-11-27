@@ -3,7 +3,7 @@
 import OpenAI from 'openai'
 
 export type ImageGenerationResponse = {
-	responseText: string
+	responseText: string | string[]
 	created: number
 	data?: OpenAI.Image[]
 	errorMessage?: string
@@ -11,7 +11,7 @@ export type ImageGenerationResponse = {
 
 export type ImageGenerationOptions = Omit<
 	OpenAI.ImageGenerateParams,
-	'model'
+	'model' | 'prompt'
 > & {
 	openAIApiKey: string
 	model?: OpenAI.ImageGenerateParams['model']
@@ -39,17 +39,22 @@ export async function runImageGeneration(
 			...opts,
 		})
 
-		const extractedUrl = generation.data[0].url
+		const generatedUrls: string[] = generation.data
+			?.map((image) => image.url || '')
+			.filter(Boolean)
 
-		if (extractedUrl === undefined) {
-			throw new Error('Could not extract URL from image generation')
+		const extractedUrls =
+			generatedUrls?.length > 1 ? generatedUrls : generatedUrls[0]
+
+		if (extractedUrls === undefined) {
+			throw new Error('Could not extract URLs from image generation')
 		}
 
-		console.log('Image generation response', extractedUrl)
+		console.log('Image generation response', extractedUrls)
 		return {
 			created: generation.created || 0,
 			data: generation.data,
-			responseText: extractedUrl || '',
+			responseText: extractedUrls || '',
 		}
 	} catch (error) {
 		// try not to throw from here. makes the path easier to follow in callers

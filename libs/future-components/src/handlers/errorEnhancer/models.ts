@@ -5,10 +5,14 @@ export type ErrorParserOptions = {
 	isProd?: boolean
 }
 export class ErrorEnhancementRequestBody {
+	/** The error message to analyze. This will usually be `error.message` */
 	errorMessage?: string
+	/** Additional context and information which may help with debugging */
 	errorContext?: string
+	/** The error stack trace to analyze. This will usually be `error.stack` */
 	stackTrace?: string
 }
+
 export type ErrorEnhancementResponse = {
 	message?: string
 	title?: string

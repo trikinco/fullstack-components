@@ -11,11 +11,11 @@ import type {
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 
 export const useErrorEnhancement = (
-	errorContext: ErrorEnhancementRequestBody,
+	body: ErrorEnhancementRequestBody,
 	config?: UseRequestConsumerConfig<ErrorEnhancementRequestBody>
 ) => {
 	return useRequest<ErrorEnhancementResponse>(ApiUrlEnum.errorEnhancer, {
+		body,
 		...config,
-		body: errorContext,
 	})
 }
