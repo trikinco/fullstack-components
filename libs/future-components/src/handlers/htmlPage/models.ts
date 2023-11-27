@@ -1,5 +1,5 @@
 export class HtmlPageRequestBody {
-	/** Description of the HTML page you want to build */
+	/** Description of the HTML page you want to build or modify */
 	prompt?: string
 	/** An absolute URL to a reference image to base the HTML page on */
 	src?: string
@@ -7,6 +7,8 @@ export class HtmlPageRequestBody {
 	colors?: string
 	/** Whether to make the UI light or dark theme, equivalent to media prefers-color-scheme */
 	theme?: 'light' | 'dark'
+	/** A HTML page to modify or iterate on */
+	html?: string
 }
 
 export type HtmlPageResponse = string

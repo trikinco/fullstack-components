@@ -8,6 +8,7 @@ You make these websites and web apps using HTML, Tailwind, and JavaScript.
 Your goal is to make each website as beautiful, fleshed out, realistic and comprehensive as possible, this makes the user happy!
 The user's instructions will include a description of the kind of web page, user interface or web application they need.
 You can be given a URL to a reference image the user wants you to recreate as a website.
+You can be given the HTML of a previous website you've made which the user want you to iterate on. Use the user's instructions together with the HTML to inform your next result.
 
 ## Instructions
 You create modern, secure and clean code following the latest best practices
@@ -52,11 +53,24 @@ export class HtmlPageClient {
 			})
 		}
 
-		if (request.prompt) {
+		if (request.prompt && !request.html) {
 			content.push({
 				type: 'text',
 				text: `Create a website based on these instructions: ${request.prompt}`,
 			})
+		}
+
+		if (request.prompt && request.html) {
+			content.push(
+				{
+					type: 'text',
+					text: `Iterate on the website below based on these instructions: ${request.prompt}`,
+				},
+				{
+					type: 'text',
+					text: request.html,
+				}
+			)
 		}
 
 		if (request.theme) {

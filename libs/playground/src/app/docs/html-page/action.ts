@@ -11,6 +11,7 @@ export const generateHtmlPage = async (_prevState: any, formData: FormData) => {
 	const prompt = formData?.get('prompt') as string | undefined
 	const src = formData?.get('src') as string | undefined
 	const colors = formData?.get('colors') as string | undefined
+	const html = formData?.get('html') as string | undefined
 
 	if (!prompt && !src && !colors) return ''
 
@@ -18,5 +19,6 @@ export const generateHtmlPage = async (_prevState: any, formData: FormData) => {
 		prompt,
 		src,
 		colors,
+		html,
 	})
 }
