@@ -1,5 +1,10 @@
+import type { ChatMessage } from '../../types/ChatMessage'
+
 export class PromptRequestBody {
+	/** Used to send a simple `user` message to chat completion */
 	prompt?: string
+	/** Messages to send to chat completion. `messages` are inserted before `prompt` if both are provided. */
+	messages?: ChatMessage[]
 }
 
 export type PromptResponse = string

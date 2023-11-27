@@ -1,6 +1,6 @@
 'use client'
 
-import type { PromptResponse } from './models'
+import type { PromptResponse, PromptRequestBody } from './models'
 import {
 	useRequest,
 	type UseRequestConsumerConfig,
@@ -8,13 +8,11 @@ import {
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 
 export const usePrompt = <T = PromptResponse>(
-	prompt: string,
-	config?: UseRequestConsumerConfig<T>
+	body: PromptRequestBody,
+	config?: UseRequestConsumerConfig<PromptRequestBody>
 ) => {
 	return useRequest<T>(ApiUrlEnum.prompt, {
+		body,
 		...config,
-		body: {
-			prompt,
-		},
 	})
 }
