@@ -71,7 +71,7 @@ const handleFSComponents = handlerFactory({
 
 // Server components
 export { Prompt } from './components/Prompt'
-export { Image } from './components/Image'
+export { Image } from './components/Image/Image'
 export { Select } from './components/Select'
 export { Text } from './components/Text'
 
@@ -80,7 +80,7 @@ export { getNotFoundEnhancement } from './handlers/notFoundEnhancer/getters'
 export { getErrorEnhancement } from './handlers/errorEnhancer/getters'
 export { getPrompt } from './handlers/prompt/getters'
 export { getBlock } from './handlers/block/getters'
-export { getImage } from './handlers/image/getters'
+export { getImage, getEnhancedImage } from './handlers/image/getters'
 export { getSelect } from './handlers/select/getters'
 export { getText } from './handlers/text/getters'
 export { getHtmlPage } from './handlers/htmlPage/getters'

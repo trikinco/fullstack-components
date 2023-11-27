@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import NextImage from 'next/image'
-import { getImage } from '../handlers/image/getters'
+import { getEnhancedImage } from '../../handlers/image/getters'
 import type { SyntheticEvent } from 'react'
 import type {
 	ImageProps,
 	ImageDescribeCallback,
 	ImageGenerateCallback,
-} from '../types/Image'
+} from '../../types/Image'
+import { ImageGeneration } from './ImageGeneration'
 
 /**
  * client-only callback for Image `onLoad` | `onError`
@@ -26,52 +28,27 @@ function imageEvent<T extends ImageDescribeCallback | ImageGenerateCallback>(
  * - Otherwise renders as a regular `<Image>` from `next/image`.
  */
 export async function Image<T>(props: ImageProps<T>) {
-	const response = await getImage(props)
+	const response = await getEnhancedImage(props)
 	const isClient = typeof window !== 'undefined'
 
 	// Image generation
 	if ('prompt' in props && response !== false) {
-		const {
-			prompt,
-			size = '256x256',
-			// eslint-disable-next-line @typescript-eslint/naming-convention
-			showResult,
-			onLoad,
-			onError,
-			...rest
-		} = props || {}
-		const sizes = size.split('x')
-		const width = Number.parseInt(sizes[0])
-		const height = Number.parseInt(sizes[1])
+		const { prompt, onLoad, onError, ...rest } = props
 
 		return (
-			<>
-				<NextImage
-					src={response || ''}
-					alt={prompt}
-					width={width}
-					height={height}
-					onLoad={isClient ? imageEvent?.(onLoad, response, prompt) : undefined}
-					onError={
-						isClient ? imageEvent?.(onError, response, prompt) : undefined
-					}
-					{...rest}
-				/>
-				{showResult && response}
-			</>
+			<ImageGeneration
+				response={response}
+				prompt={prompt}
+				onLoad={isClient ? imageEvent?.(onLoad, response, prompt) : undefined}
+				onError={isClient ? imageEvent?.(onError, response, prompt) : undefined}
+				{...rest}
+			/>
 		)
 	}
 
 	// Image description
 	if ('src' in props && !('alt' in props) && response !== false) {
-		const {
-			src,
-			// eslint-disable-next-line @typescript-eslint/naming-convention
-			showResult,
-			onLoad,
-			onError,
-			...rest
-		} = props || {}
+		const { src, showResult, onLoad, onError, ...rest } = props || {}
 
 		return (
 			<>

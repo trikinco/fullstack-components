@@ -1,14 +1,50 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { request, type RequestConfigOnly } from '../../utils/request'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 import { IS_DEV } from '../../utils/constants'
 import type { ImageResponse, ImageRequestBody } from './models'
-import type { ImageProps } from '../../types/Image'
+import type {
+	ImageProps,
+	ImageGenerateProps,
+	ImageDescribeProps,
+} from '../../types/Image'
 
 /**
  * Image generation and description fetcher
  */
-export function getImage<T>(props: ImageProps<T>, config?: RequestConfigOnly) {
-	const { prompt, src } = props as ImageRequestBody
+export function getImage(
+	body: ImageRequestBody & { n?: 1 | 0 | null },
+	config?: RequestConfigOnly
+): ReturnType<typeof request<string, ImageRequestBody>>
+export function getImage(
+	body: ImageRequestBody & { n: number },
+	config?: RequestConfigOnly
+): ReturnType<typeof request<string[], ImageRequestBody>>
+export function getImage(body: ImageRequestBody, config?: RequestConfigOnly) {
+	return request(ApiUrlEnum.image, {
+		body,
+		...config,
+	})
+}
+
+/**
+ * Image generation and description fetcher
+ * Enhanced Image component for `next/image`
+ */
+export function getEnhancedImage<T>(
+	props: ImageProps<T>,
+	config?: RequestConfigOnly
+): false | Promise<ImageResponse<1>> {
+	const {
+		prompt,
+		src,
+		model,
+		response_format,
+		size,
+		user,
+		imageQuality,
+		imageStyle,
+	} = props as ImageGenerateProps & ImageDescribeProps
 
 	if (!('prompt' in props) && 'alt' in props) {
 		if (IS_DEV) {
@@ -20,8 +56,18 @@ export function getImage<T>(props: ImageProps<T>, config?: RequestConfigOnly) {
 		return false
 	}
 
-	return request<ImageResponse>(ApiUrlEnum.image, {
-		body: { prompt, src },
-		...config,
-	})
+	return getImage(
+		{
+			prompt,
+			src,
+			model,
+			response_format,
+			size,
+			user,
+			n: 1,
+			quality: imageQuality,
+			style: imageStyle,
+		},
+		config
+	)
 }

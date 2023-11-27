@@ -1,11 +1,15 @@
-export class ImageRequestBody {
+import OpenAI from 'openai'
+
+export type ImageGenerationOptions = Partial<OpenAI.ImageGenerateParams>
+
+export interface ImageRequestBody extends ImageGenerationOptions {
 	/** URL to image to describe */
 	src?: string
-	/** Prompt for image generation */
-	prompt?: string
 }
 
-export type ImageResponse = string
+export type ImageResponse<T> = T extends 1 | null | undefined
+	? string
+	: string[]
 
 export type ImageOptions = {
 	openAiApiKey?: string

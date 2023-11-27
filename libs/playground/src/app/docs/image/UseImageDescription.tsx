@@ -8,7 +8,7 @@ export default function Page() {
 	})
 
 	if (isLoading) {
-		return 'Describing image..."'
+		return 'Describing image...'
 	}
 
 	if (isError) {

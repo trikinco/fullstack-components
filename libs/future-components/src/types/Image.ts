@@ -1,6 +1,11 @@
+import OpenAI from 'openai'
 import { type ImageProps as NextImageProps } from 'next/image'
 import type { SyntheticEvent } from 'react'
 import type { ImageResponse } from '../handlers/image/models'
+
+export type ImageGenerationOptions = Partial<
+	Omit<OpenAI.ImageGenerateParams, 'n'>
+>
 
 export interface ImageDescribeProps
 	extends Omit<NextImageProps, 'src' | 'alt' | 'onLoad' | 'onError'> {
@@ -25,26 +30,36 @@ export interface ImageDescribeProps
 export type ImageDescribeCallback = (
 	event: SyntheticEvent<HTMLImageElement, Event> | undefined,
 	/** Image description response */
-	response?: ImageResponse,
+	response?: ImageResponse<1>,
 	/** Image description src */
 	src?: string
 ) => void
 
 export interface ImageGenerateProps
 	extends Omit<
-		NextImageProps,
-		'src' | 'width' | 'height' | 'alt' | 'onLoad' | 'onError'
-	> {
-	/** Image generation prompt */
-	prompt: string
+			NextImageProps,
+			'src' | 'width' | 'height' | 'alt' | 'onLoad' | 'onError' | 'quality'
+		>,
+		Omit<ImageGenerationOptions, 'quality' | 'style'> {
 	/**
 	 * Whether or not to render the result string adjacent to the image
 	 */
 	showResult?: boolean
-	/** Width and height of the image. Default '256x256' */
-	size?: '256x256' | '512x512' | '1024x1024'
 	/** Alternative text describing the image, uses `prompt` if not provided */
 	alt?: string
+	/**
+	 * The quality of the image that will be generated. `hd` creates images with finer
+	 * details and greater consistency across the image. This param is only supported
+	 * for `dall-e-3`.
+	 */
+	imageQuality?: 'standard' | 'hd'
+	/**
+	 * The style of the generated images. Must be one of `vivid` or `natural`. Vivid
+	 * causes the model to lean towards generating hyper-real and dramatic images.
+	 * Natural causes the model to produce more natural, less hyper-real looking
+	 * images. This param is only supported for `dall-e-3`.
+	 */
+	imageStyle?: 'vivid' | 'natural' | null
 	/**
 	 * Callback function invoked once the image is completely loaded and the `placeholder` has been removed.
 	 * Returns the `event`, generation result `response` and the original `prompt`
@@ -57,7 +72,7 @@ export interface ImageGenerateProps
 export type ImageGenerateCallback = (
 	event: SyntheticEvent<HTMLImageElement, Event> | undefined,
 	/** Image generation response */
-	response?: ImageResponse,
+	response?: ImageResponse<1>,
 	/** Image generation prompt */
 	prompt?: string
 ) => void
