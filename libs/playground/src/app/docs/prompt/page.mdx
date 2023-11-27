@@ -33,6 +33,22 @@ import { usePrompt } from '@trikinco/fullstack-components/client'
 
 ### Passing an array of `messages`
 
+<Example>
+  <Prompt
+    messages={[
+      {
+        role: 'system',
+        content:
+          'You translate Norwegian to English. You return the translated text directly',
+      },
+      {
+        role: 'user',
+        content: 'Reven rasker over isen',
+      },
+    ]}
+  />
+</Example>
+
 ```jsx
 <Prompt
   messages={[
