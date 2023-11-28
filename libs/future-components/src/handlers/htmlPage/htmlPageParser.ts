@@ -27,6 +27,11 @@ export const getHtmlFromChatResponseText = (responseText?: string): string => {
 	const htmlTag = responseText.indexOf('<html>')
 	const start = docType === undefined ? htmlTag : docType
 	const end = responseText.indexOf('</html>')
+	const body = responseText.slice(start, end + '</html>'.length)
 
-	return responseText.slice(start, end + '</html>'.length)
+	if (!docType) {
+		return `<!DOCTYPE html>${body}`
+	}
+
+	return body
 }
