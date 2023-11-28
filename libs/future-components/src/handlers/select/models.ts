@@ -1,13 +1,22 @@
 export class SelectRequestBody {
 	/**
-	 * Additional context to pass to the prompt. Free text
-	 */
-	context?: string
-	/**
-	 * @example 'selecting your time zone'
-	 * @example 'weekday selection'
+	 * Prompt for creating the select
+	 * @example 'All the GMT time zones'
+	 * @example 'The nearest countries to Australia. Include a flag emoji in the label'
 	 */
 	prompt?: string
+	/**
+	 * What the purpose of the select is
+	 * @example 'Selecting your time zone'
+	 * @example 'Weekday selection'
+	 */
+	purpose?: string
+	/**
+	 * Additional context to pass to the prompt
+	 * @example 'The time zone for Sydney should be selected'
+	 * @example 'Sort the list based on what's most popular'
+	 */
+	context?: string
 	/**
 	 * The number of items to aim for
 	 */

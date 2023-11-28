@@ -5,7 +5,8 @@ import { useSelect } from '@trikinco/fullstack-components/client'
 export default function Page() {
 	const { isLoading, isError, data } = useSelect({
 		prompt:
-			'The 10 nearest countries to Australia. Include a flag emoji in the label.',
+			'The nearest countries to Australia. Include a flag emoji in the label.',
+		count: 10,
 	})
 
 	if (isLoading) {

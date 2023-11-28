@@ -17,7 +17,8 @@ export interface SelectProps
 export async function Select({
 	prompt,
 	context,
-	count = 0,
+	purpose,
+	count,
 	className,
 	labelProps,
 	label: defaultLabel,
@@ -26,7 +27,7 @@ export async function Select({
 	const selectId = useId()
 
 	const { label, content = [] } =
-		(await getSelect({ prompt, context, count })) || {}
+		(await getSelect({ prompt, context, purpose, count })) || {}
 	const selectLabel = defaultLabel || label
 
 	return (
