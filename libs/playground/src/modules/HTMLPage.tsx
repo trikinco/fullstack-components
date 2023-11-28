@@ -32,7 +32,7 @@ export function HTMLPage({
 						htmlFor="prompt"
 						className="h-full grid place-items-center text-slate-900"
 					>
-						Tell me what you&apos;d like to make ✨
+						Tell me what you&apos;d like to create ✨
 					</label>
 				)}
 
