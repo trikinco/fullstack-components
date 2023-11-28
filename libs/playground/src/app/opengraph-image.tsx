@@ -1,11 +1,11 @@
 import { ImageResponse } from 'next/og'
-import { NAME_LONG } from '../utils/constants'
+import { NAME_SHORT, NAME_DESCRIPTION } from '../utils/constants'
 
 // Route segment config
 export const runtime = 'edge'
 
 // Image metadata
-export const alt = NAME_LONG
+export const alt = `${NAME_SHORT} ${NAME_DESCRIPTION}`
 export const size = {
 	width: 1200,
 	height: 630,
@@ -34,16 +34,21 @@ export default async function Image() {
 			// ImageResponse JSX element
 			<div
 				style={{
-					fontSize: 128,
-					background: 'white',
+					padding: 60,
+					background: '#0f172a',
+					color: 'white',
 					width: '100%',
 					height: '100%',
 					display: 'flex',
-					alignItems: 'center',
+					flexDirection: 'column',
+					alignItems: 'flex-start',
 					justifyContent: 'center',
 				}}
 			>
-				{NAME_LONG}
+				<span style={{ fontSize: 110, maxWidth: '60%' }}>{NAME_SHORT}</span>
+				<span style={{ fontSize: 56, marginTop: '1em' }}>
+					{NAME_DESCRIPTION}
+				</span>
 			</div>
 		),
 		// ImageResponse options
