@@ -1,5 +1,14 @@
 import type { CardProps } from '@/src/types/Card'
 import { Chip } from '@/src/components/Chip'
+import imagePrompt from '../../public/images/InfinityStrip.png'
+import imageError from '../../public/images/Cone.png'
+import imageNotFound from '../../public/images/Disc.png'
+import imageHtmlPage from '../../public/images/MobiusStrip.png'
+import imageBlock from '../../public/images/WireframeCube.png'
+import imageImage from '../../public/images/Asterisk.png'
+import imageSelect from '../../public/images/DiamondSlim.png'
+import imageText from '../../public/images/Cube.png'
+import imageChat from '../../public/images/Wedge.png'
 
 export const routes = {
 	docs: '/docs',
@@ -22,8 +31,9 @@ type RoutesWithMeta = Omit<CardProps, 'title'> & {
 }
 
 const imageSize = {
-	width: 1000,
-	height: 1000,
+	width: 300,
+	height: 300,
+	sizes: '(min-width: 1200px) 25vw, (min-width: 640px) 33.75vw, 17.52vw',
 }
 
 export const routesCardsMeta: RoutesWithMeta[] = [
@@ -32,8 +42,9 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 		href: routes.prompt,
 		children: 'Easily integrate AI prompts into any part of your application.',
 		image: {
-			src: '/images/InfinityStrip.png',
+			src: imagePrompt,
 			alt: 'Infinity',
+			priority: true,
 			...imageSize,
 		},
 		footer: (
@@ -49,8 +60,9 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 		children:
 			'AI-Powered Error Enhancer. Debug and make sense of technical errors.',
 		image: {
-			src: '/images/Cone.png',
+			src: imageError,
 			alt: 'Cone',
+			priority: true,
 			...imageSize,
 		},
 		footer: (
@@ -70,8 +82,9 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 			</>
 		),
 		image: {
-			src: '/images/Disc.png',
+			src: imageNotFound,
 			alt: 'Disc',
+			priority: true,
 			...imageSize,
 		},
 		footer: (
@@ -85,7 +98,7 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 		href: routes.htmlPage,
 		children: 'AI-Powered HTML page generation. Designs and codes full pages.',
 		image: {
-			src: '/images/MobiusStrip.png',
+			src: imageHtmlPage,
 			alt: 'MobiusStrip',
 			...imageSize,
 		},
@@ -100,7 +113,7 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 		href: routes.block,
 		children: 'AI React Components. Prompt goes in, component comes out.',
 		image: {
-			src: '/images/WireframeCube.png',
+			src: imageBlock,
 			alt: 'A wireframe cube',
 			...imageSize,
 		},
@@ -116,7 +129,7 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 		href: routes.image,
 		children: 'AI creates images with prompts or generates image descriptions.',
 		image: {
-			src: '/images/Asterisk.png',
+			src: imageImage,
 			alt: 'Asterisk',
 			...imageSize,
 		},
@@ -132,7 +145,7 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 		href: routes.select,
 		children: 'AI creates, sorts and labels dropdowns or lists of content.',
 		image: {
-			src: '/images/DiamondSlim.png',
+			src: imageSelect,
 			alt: 'Diamond',
 			...imageSize,
 		},
@@ -148,7 +161,7 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 		href: routes.text,
 		children: 'AI transforms, creates or modifies text, markdown or HTML.',
 		image: {
-			src: '/images/Cube.png',
+			src: imageText,
 			alt: 'Cube',
 			...imageSize,
 		},
@@ -165,7 +178,7 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 		children:
 			'Everything you need to create fully integrated, custom chat experiences.',
 		image: {
-			src: '/images/Wedge.png',
+			src: imageChat,
 			alt: 'Wedge',
 			...imageSize,
 		},
@@ -188,7 +201,7 @@ export const routesDocsMeta: RoutesWithMeta[] = [
 		title: 'Get started',
 		href: routes.getStarted,
 	},
-	...routesCardsMeta
+	...routesCardsMeta,
 ]
 
 export const routesMeta: RoutesWithMeta[] = [
