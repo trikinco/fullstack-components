@@ -19,8 +19,8 @@ const config: Config = {
 					'100%': { width: '100%' },
 				},
 				caret: {
-					'0%, 100%': { borderColor: 'transparent' },
-					'50%': { borderColor: 'currentcolor' },
+					'0%, 100%': { background: 'transparent' },
+					'50%': { background: 'currentcolor' },
 				},
 			},
 		},

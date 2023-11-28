@@ -1,3 +1,4 @@
+import type { ImageProps } from 'next/image'
 import type {
 	HTMLAttributes,
 	ElementType,
@@ -7,7 +8,7 @@ import type {
 
 export interface CardProps
 	extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
-	image?: ImgHTMLAttributes<HTMLImageElement>
+	image?: ImageProps
 	title?: ReactNode
 	children?: ReactNode
 	header?: ReactNode

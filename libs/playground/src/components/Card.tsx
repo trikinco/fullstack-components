@@ -24,6 +24,7 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 		alt,
 		width = 300,
 		height = 300,
+		...imageRest
 	} = image || {}
 
 	return (
@@ -49,8 +50,9 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 						)}
 						src={src}
 						alt={alt || ''}
-						width={width as number}
-						height={height as number}
+						width={width}
+						height={height}
+						{...imageRest}
 					/>
 				)}
 

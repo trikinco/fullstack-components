@@ -2,14 +2,73 @@ import Link from 'next/link'
 import { Main } from '@/src/components/Main'
 import { Card } from '@/src/components/Card'
 import { PageHeader } from '@/src/components/PageHeader'
-import { NAME_SHORT, URL_GITHUB } from '@/src/utils/constants'
+import {
+	NAME_SHORT,
+	NAME_DESCRIPTION,
+	META_AUTHORS,
+	URL_GITHUB,
+	URL_DEPLOYMENT,
+	URL_LICENSE,
+	URL_RELEASES,
+	URL_DISCUSSIONS,
+} from '@/src/utils/constants'
 import { Button } from '@/src/components/Button'
 import { IconGitHub } from '@/src/components/Icons/IconGitHub'
-import { routesCardsMeta } from '@/src/utils/routes'
+import { routes, routesDocsMeta, routesCardsMeta } from '@/src/utils/routes'
+import { JsonSchema } from '@/src/modules/JsonSchema'
+
+const META_AUTHORS_SCHEMA = META_AUTHORS.map((author) => ({
+	...author,
+	'@type': 'Person',
+}))
+
+const META_DOCS_SCHEMA = routesDocsMeta.map((meta) => ({
+	'@type': 'WebPage',
+	'@id': `${URL_DEPLOYMENT}${meta.href}`,
+	name: meta.title,
+	url: `${URL_DEPLOYMENT}${meta.href}`,
+	isPartOf: {
+		'@id': `${URL_DEPLOYMENT}${routes.docs}`,
+	},
+}))
 
 export default function Home() {
 	return (
 		<Main>
+			<JsonSchema
+				type="SoftwareApplication"
+				name={NAME_SHORT}
+				description={NAME_DESCRIPTION}
+				url={URL_DEPLOYMENT}
+				id={URL_DEPLOYMENT}
+				applicationCategory="DeveloperApplication"
+				operatingSystem="Cross-platform"
+				license={URL_LICENSE}
+				releaseNotes={URL_RELEASES}
+				discussionUrl={URL_DISCUSSIONS}
+				author={META_AUTHORS_SCHEMA}
+				keywords={[
+					'npm library',
+					'web development',
+					'fullstack',
+					'components',
+					'next.js',
+					'react',
+					'ai',
+				]}
+				hasPart={[
+					{
+						'@type': 'WebPage',
+						'@id': `${URL_DEPLOYMENT}${routes.docs}`,
+						name: 'Documentation',
+						url: `${URL_DEPLOYMENT}${routes.docs}`,
+						isPartOf: {
+							'@id': URL_DEPLOYMENT,
+						},
+						hasPart: META_DOCS_SCHEMA,
+					},
+				]}
+			/>
 			<div className="grid gap-6 lg:grid-cols-2 lg:mb-24 max-w-6xl">
 				<PageHeader
 					className="prose dark:prose-invert"
@@ -19,7 +78,7 @@ export default function Home() {
 							Build websites by
 							<br />
 							<span className="inline-flex justify-start">
-								<span className="overflow-hidden leading-tight whitespace-nowrap my-0 mr-auto motion-safe:animate-typewriter motion-safe:after:border-r-2 motion-safe:after:animate-writing">
+								<span className="overflow-hidden leading-tight whitespace-nowrap my-0 mr-auto motion-safe:animate-typewriter motion-safe:after:w-[2px] motion-safe:after:h-[70%] motion-safe:after:inline-flex motion-safe:after:animate-writing">
 									writing prompts.
 								</span>
 							</span>

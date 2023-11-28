@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import { Analytics } from '@vercel/analytics/react'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Footer } from '@/src/components/Footer'
 import { Nav } from '@/src/components/Nav'
 import SkipLink from '@/src/components/SkipLink'
@@ -9,20 +9,22 @@ import {
 	URL_DEPLOYMENT,
 	NAME_SHORT,
 	NAME_LONG,
+	META_AUTHORS,
 	ID_DIALOG_PORTAL,
 	ID_MAIN,
 } from '../utils/constants'
 import { fontClassNames } from '../utils/fonts'
 
+export const viewport: Viewport = {
+	themeColor: '#0f172a',
+	colorScheme: 'light dark',
+}
+
 export const metadata: Metadata = {
 	metadataBase: new URL(URL_DEPLOYMENT || URL_BASE),
 	description: NAME_LONG,
 	keywords: ['Fullstack', 'Components', 'Next.js', 'React', 'AI'],
-	authors: [
-		{ name: 'Lars Magnus Klavenes', url: 'https://larsmagnus.co' },
-		{ name: "Darragh O'Riordan", url: 'https://www.darraghoriordan.com' },
-		{ name: 'Connor Thomsen', url: 'https://www.connorthomsen.com' },
-	],
+	authors: META_AUTHORS,
 	title: {
 		template: `%s | ${NAME_SHORT}`,
 		default: NAME_LONG,
