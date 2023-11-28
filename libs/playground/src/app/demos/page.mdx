@@ -1,0 +1,45 @@
+import DemoHTMLPage from './DemoHTMLPage'
+import DemoSelect from './DemoSelect'
+import DemoError from './DemoError'
+import DemoNotFound from './DemoNotFound'
+import Demo from '@/src/components/Demo'
+
+{/* Just to make it easier to turn off rounding if recording */}
+export const isRounded = true
+
+# Demos
+
+<Demo
+  label="AI HTML Page Creation"
+  component="h2" className={isRounded && 'rounded-xl'}
+
+>
+
+  <DemoHTMLPage />
+</Demo>
+
+<Demo
+  label="AI Error Boundary"
+  component="h2" className={isRounded && 'rounded-xl'}
+
+>
+
+  <DemoError />
+</Demo>
+
+<Demo
+  label="AI Not Found Page"
+  component="h2" className={isRounded && 'rounded-xl'}
+
+>
+
+  <DemoNotFound />
+</Demo>
+
+<Demo
+  label="AI Dropdown"
+  component="h2"
+  className={isRounded && 'rounded-xl'}
+>
+  <DemoSelect />
+</Demo>
