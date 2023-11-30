@@ -25,13 +25,14 @@ export interface UseDialogProps {
  * Handler hook for the `Dialog` component
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog | MDN - Dialog element}
  */
-export const useDialog = ({
-	onClose,
-	open,
-	closeOnClickBackdrop = true,
-	focusInitialRef,
-	focusReturnRef,
-}: UseDialogProps) => {
+export const useDialog = (props?: UseDialogProps) => {
+	const {
+		onClose,
+		open,
+		closeOnClickBackdrop = true,
+		focusInitialRef,
+		focusReturnRef,
+	} = props || {}
 	const id = useId()
 	const dialogRef = useRef<HTMLDialogElement>(null)
 	const formRef = useRef<HTMLFormElement>(null)
@@ -55,6 +56,7 @@ export const useDialog = ({
 	const handleClose = useCallback(() => {
 		const formData = formRef?.current ? new FormData(formRef.current) : null
 		const formEntries = Array.from(formData?.entries() || [])
+		document.body.classList.remove('no-scroll')
 
 		onClose?.(formEntries)
 		handleRefFocus(focusReturnRef)
@@ -85,6 +87,7 @@ export const useDialog = ({
 
 		if (open) {
 			dialogRef.current.showModal()
+			document.body.classList.add('no-scroll')
 
 			// Set focus on the most relevant dialog content when opening. WCAG
 			handleRefFocus(focusInitialRef)

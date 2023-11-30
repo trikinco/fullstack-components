@@ -10,11 +10,13 @@ export default function NotFound() {
 		<Main>
 			<Prose>
 				<PageHeader title="Not Found" />
-				<p>Could not find requested resource</p>
+				<div className="mb-8">
+					<p>Could not find the requested resource</p>
 
-				<Button as={Link} href="/" className="inline-flex w-auto">
-					Return Home
-				</Button>
+					<Button as={Link} href="/" className="inline-flex w-auto">
+						Return Home
+					</Button>
+				</div>
 
 				<NotFoundEnhancer />
 			</Prose>

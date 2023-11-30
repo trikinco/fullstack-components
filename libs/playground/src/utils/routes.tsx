@@ -22,6 +22,7 @@ export const routes = {
 	prompt: '/docs/prompt',
 	select: '/docs/select',
 	text: '/docs/text',
+	examples: '/examples',
 }
 
 type RoutesWithMeta = Omit<CardProps, 'title'> & {
