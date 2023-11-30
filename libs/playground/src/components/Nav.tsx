@@ -5,6 +5,7 @@ import { NAME_LIB, NAME_SHORT, URL_GITHUB, URL_NPM } from '../utils/constants'
 import { IconGitHub } from './Icons/IconGitHub'
 import { IconLogo } from './Icons/IconLogo'
 import { IconNpm } from './Icons/IconNpm'
+import { ThemeSwitcher } from '@/src/modules/ThemeSwitcher'
 
 export interface NavProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode
@@ -49,16 +50,17 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 				{children}
 
 				<div className="flex gap-6 ml-auto">
+					<ThemeSwitcher />
 					<Link
 						href={URL_NPM}
-						className="text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full ring-offset-2 focus:outline-none focus:ring"
+						className="inline-flex items-center text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full ring-offset-2 focus:outline-none focus:ring"
 					>
 						<span className="sr-only">{NAME_SHORT} on NPM</span>
 						<IconNpm className="w-8" />
 					</Link>
 					<Link
 						href={URL_GITHUB}
-						className="text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full ring-offset-2 focus:outline-none focus:ring"
+						className="inline-flex items-center text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full ring-offset-2 focus:outline-none focus:ring"
 					>
 						<span className="sr-only">{NAME_SHORT} on GitHub</span>
 						<IconGitHub />

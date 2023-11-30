@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 :root {
-	--foreground-rgb: 0, 0, 0;
-	--background-start-rgb: 214, 219, 220;
-	--background-end-rgb: 255, 255, 255;
-
 	/* code theme: vercel-light */
 	--shiki-color-text: hsla(0, 0%, 9%, 1);
 	--shiki-color-background: hsla(0, 0%, 98%, 1);
@@ -21,26 +17,19 @@
 	--shiki-token-link: hsla(133, 50%, 32%, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		color-scheme: dark; /* ensures scrollbars are dark */
-		--foreground-rgb: 255, 255, 255;
-		--background-start-rgb: 0, 0, 0;
-		--background-end-rgb: 0, 0, 0;
-
-		/* code theme: vercel-dark */
-		--shiki-color-text: hsla(0, 0%, 93%, 1);
-		--shiki-color-background: transparent;
-		--shiki-token-constant: hsla(210, 100%, 66%, 1);
-		--shiki-token-string: hsla(131, 43%, 57%, 1);
-		--shiki-token-comment: hsla(0, 0%, 63%, 1);
-		--shiki-token-keyword: hsla(341, 90%, 67%, 1);
-		--shiki-token-parameter: hsla(35, 100%, 52%, 1);
-		--shiki-token-function: hsla(275, 80%, 71%, 1);
-		--shiki-token-string-expression: hsla(131, 43%, 57%, 1);
-		--shiki-token-punctuation: hsla(0, 0%, 93%, 1);
-		--shiki-token-link: hsla(131, 43%, 57%, 1);
-	}
+:root:is(.dark) {
+	/* code theme: vercel-dark */
+	--shiki-color-text: hsla(0, 0%, 93%, 1);
+	--shiki-color-background: transparent;
+	--shiki-token-constant: hsla(210, 100%, 66%, 1);
+	--shiki-token-string: hsla(131, 43%, 57%, 1);
+	--shiki-token-comment: hsla(0, 0%, 63%, 1);
+	--shiki-token-keyword: hsla(341, 90%, 67%, 1);
+	--shiki-token-parameter: hsla(35, 100%, 52%, 1);
+	--shiki-token-function: hsla(275, 80%, 71%, 1);
+	--shiki-token-string-expression: hsla(131, 43%, 57%, 1);
+	--shiki-token-punctuation: hsla(0, 0%, 93%, 1);
+	--shiki-token-link: hsla(131, 43%, 57%, 1);
 }
 
 /* outer code blocks */
@@ -73,16 +62,19 @@
 	);
 }
 
-@media (prefers-color-scheme: dark) {
-	.bg-pattern {
-		background-image: radial-gradient(
-			hsl(237deg 92% 62% / 20%) 1px,
-			transparent 1px
-		);
-	}
+:root:is(.dark) .bg-pattern {
+	background-image: radial-gradient(
+		hsl(237deg 92% 62% / 20%) 1px,
+		transparent 1px
+	);
 }
 
 body {
-	color: rgb(var(--foreground-rgb));
 	@apply bg-slate-100 dark:bg-slate-950;
+}
+
+.no-scroll {
+	position: fixed;
+	overflow-y: scroll;
+	width: 100%;
 }

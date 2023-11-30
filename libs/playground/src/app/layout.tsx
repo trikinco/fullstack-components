@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata, Viewport } from 'next'
+import { Providers } from '@/src/providers/Providers'
 import { Footer } from '@/src/components/Footer'
 import { Nav } from '@/src/components/Nav'
 import SkipLink from '@/src/components/SkipLink'
@@ -46,25 +47,27 @@ export default function RootLayout({
 	error: React.ReactNode
 }) {
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			{/**
 			 * Apply the main body font `font-sans` with a custom CSS variable, also set in tailwind.config
 			 * the mono font is just set as a variable and will only be used as needed with `font-mono`
 			 * @see {@link https://nextjs.org/docs/pages/building-your-application/optimizing/fonts#with-tailwind-css Next fonts with Tailwind CSS}
 			 */}
 			<body className={fontClassNames}>
-				<SkipLink
-					href={`#${ID_MAIN}`}
-					className="focus:mb-6 focus:absolute focus:z-50 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950"
-				>
-					Skip to the main content
-				</SkipLink>
-				<Nav />
-				{children}
-				{error}
-				<Analytics />
-				<Footer />
-				<div id={ID_DIALOG_PORTAL} />
+				<Providers>
+					<SkipLink
+						href={`#${ID_MAIN}`}
+						className="focus:mb-6 focus:absolute focus:z-50 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950"
+					>
+						Skip to the main content
+					</SkipLink>
+					<Nav />
+					{children}
+					{error}
+					<Analytics />
+					<Footer />
+					<div id={ID_DIALOG_PORTAL} />
+				</Providers>
 			</body>
 		</html>
 	)

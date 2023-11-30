@@ -18,8 +18,10 @@ export interface DialogProps
 	describedById?: string
 	/** */
 	dialogId?: string
-	/** The visible label for the button that closes the dialog. Default "Accept and close" */
-	labelClose?: string
+	/** The visible label for the close `<button>` for the dialog. Default "Accept and close" */
+	labelClose?: ReactNode
+	/** Props to pass to the close `<button>` */
+	closeProps?: HTMLAttributes<HTMLButtonElement> & { hideClose?: boolean }
 	/** Props to pass to the `<form>`, the direct child of the `<dialog>` */
 	formProps?: DetailedHTMLProps<
 		FormHTMLAttributes<HTMLFormElement>,
@@ -44,9 +46,15 @@ export const Dialog = ({
 	closeOnClickBackdrop = true,
 	focusInitialRef,
 	focusReturnRef,
+	closeProps,
 	...rest
 }: DialogProps) => {
 	const { className: classNameForm, ...restForm } = formProps || {}
+	const {
+		className: closeClassName,
+		hideClose,
+		...restClose
+	} = closeProps || {}
 
 	const { handleBackdropClick, dialogRef, id, formRef } = useDialog({
 		onClose,
@@ -65,10 +73,7 @@ export const Dialog = ({
 				aria-label={title}
 				aria-describedby={describedById}
 				// 0 border and padding to handle backdrop clicking the correct target
-				className={merge(
-					'border-0 p-0 w-full max-w-full max-h-screen',
-					className
-				)}
+				className={merge('border-0 p-0', className)}
 				{...rest}
 			>
 				<form
@@ -81,13 +86,19 @@ export const Dialog = ({
 					)}
 					{...restForm}
 				>
-					<button
-						formMethod="dialog"
-						className="ml-auto bg-white/80 text-black border border-1 border-white/90 sticky top-3 right-0 py-2 px-6 z-50 rounded-md focus:outline-none focus:ring focus:ring-offset-2"
-						onClick={() => dialogRef?.current?.close()}
-					>
-						{labelClose}
-					</button>
+					{!hideClose && (
+						<button
+							formMethod="dialog"
+							className={merge(
+								'ml-auto bg-white/80 text-black border border-1 border-white/90 sticky top-3 right-0 py-2 px-6 z-50 rounded-md focus:outline-none focus:ring focus:ring-offset-2',
+								closeClassName
+							)}
+							onClick={() => dialogRef?.current?.close()}
+							{...restClose}
+						>
+							{labelClose}
+						</button>
+					)}
 
 					{children}
 				</form>

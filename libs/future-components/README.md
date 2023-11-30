@@ -1,5 +1,3 @@
-![Fullstack Components - Build websites by writing prompts](../playground/public/images/repo-header-dark.png)
-
 # [Fullstack Components](https://fullstack-components.vercel.app)
 
 Fullstack Components is an AI-powered library for Next.js that turns words into fully integrated components.
