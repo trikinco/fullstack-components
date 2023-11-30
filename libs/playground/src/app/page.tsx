@@ -13,7 +13,7 @@ import {
 	URL_DISCUSSIONS,
 } from '@/src/utils/constants'
 import { Button } from '@/src/components/Button'
-import { IconGitHub } from '@/src/components/Icons/IconGitHub'
+import { IconPlay } from '@/src/components/Icons/IconPlay'
 import { routes, routesDocsMeta, routesCardsMeta } from '@/src/utils/routes'
 import { JsonSchema } from '@/src/modules/JsonSchema'
 
@@ -78,7 +78,7 @@ export default function Home() {
 							Build websites by
 							<br />
 							<span className="inline-flex justify-start">
-								<span className="overflow-hidden leading-tight whitespace-nowrap my-0 mr-auto motion-safe:animate-typewriter motion-safe:after:w-[2px] motion-safe:after:h-[70%] motion-safe:after:inline-flex motion-safe:after:animate-writing">
+								<span className="overflow-hidden leading-tight whitespace-nowrap my-0 mr-auto motion-safe:animate-typewriter motion-safe:after:w-[3px] motion-safe:after:h-[70%] motion-safe:after:inline-flex motion-safe:after:animate-writing">
 									writing prompts.
 								</span>
 							</span>
@@ -98,12 +98,12 @@ export default function Home() {
 						</Button>
 						<Button
 							as={Link}
-							href={URL_GITHUB}
+							href={routes.examples}
 							color="secondary"
 							variant="outlined"
 						>
-							<IconGitHub className="mr-2" />
-							GitHub
+							<IconPlay className="mr-2" />
+							Try it live
 						</Button>
 					</div>
 				</PageHeader>
@@ -115,7 +115,7 @@ export default function Home() {
 			<section>
 				<header className="grid text-center sm:text-left gap-6 w-full max-w-6xl mb-12">
 					<h2 className="text-2xl font-bold">
-						Check out these live examples ✨
+						Check out the docs with live examples ✨
 					</h2>
 				</header>
 

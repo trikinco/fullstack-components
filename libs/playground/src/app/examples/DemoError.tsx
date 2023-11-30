@@ -21,6 +21,7 @@ export default function DemoError() {
 	return (
 		<div className="p-6 text-black">
 			<ErrorEnhancementBoundary
+				className="overflow-auto"
 				fallback={
 					<Spinner className="mb-3">
 						Generating user-friendly error message

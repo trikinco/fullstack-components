@@ -10,7 +10,11 @@ export function NotFoundEnhancer() {
 		data?.bestAlternateUrls && data.bestAlternateUrls.length > 0
 
 	if (!data || isLoading) {
-		return <Spinner>Please wait, checking for other solutions...</Spinner>
+		return (
+			<Spinner>
+				Please wait, checking for other solutions...
+			</Spinner>
+		)
 	}
 
 	return (
