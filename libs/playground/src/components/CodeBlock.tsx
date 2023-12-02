@@ -24,7 +24,10 @@ export const CodeBlock = ({
 	return (
 		<div className="group">
 			<pre
-				className={merge('not-prose p-5 overflow-auto', className)}
+				className={merge(
+					'not-prose [font-variant-ligatures:none] p-5 overflow-auto',
+					className
+				)}
 				{...props}
 			>
 				{children}

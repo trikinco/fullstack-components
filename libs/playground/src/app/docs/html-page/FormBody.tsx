@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { useFormStatus } from 'react-dom'
 import { ColorPicker } from '@/src/components/ColorPicker/ColorPicker'
 import { HTMLPage } from '@/src/modules/HTMLPage'
@@ -14,9 +15,21 @@ interface FormBodyProps {
 
 export function FormBody({ state, refetch }: FormBodyProps) {
 	const { pending, data } = useFormStatus()
+	const [prompt, setPrompt] = useState('')
+	const [src, setSrc] = useState('')
 
-	const prompt = data?.get('prompt') as string
-	const src = data?.get('src') as string
+	useEffect(() => {
+		const prompt = data?.get('prompt') as string
+		const src = data?.get('src') as string
+
+		if (prompt) {
+			setPrompt(prompt)
+		}
+
+		if (src) {
+			setSrc(src)
+		}
+	}, [data])
 
 	return (
 		<>
