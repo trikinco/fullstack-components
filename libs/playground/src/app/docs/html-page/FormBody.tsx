@@ -4,6 +4,8 @@ import { useFormStatus } from 'react-dom'
 import { ColorPicker } from '@/src/components/ColorPicker/ColorPicker'
 import { HTMLPage } from '@/src/modules/HTMLPage'
 import { Button } from '@/src/components/Button'
+import { IconLoader } from '@/src/components/Icons/IconLoader'
+import { IconSparkles } from '@/src/components/Icons/IconSparkles'
 
 interface FormBodyProps {
 	state?: string
@@ -24,7 +26,7 @@ export function FormBody({ state, refetch }: FormBodyProps) {
 						htmlFor="prompt"
 						className="block mb-2 font-bold dark:text-white"
 					>
-						What would you like to make?
+						What would you like to create?
 					</label>
 					<input
 						className="p-3 rounded-md border border-white/10 w-full"
@@ -72,7 +74,15 @@ export function FormBody({ state, refetch }: FormBodyProps) {
 					<ColorPicker max={5} multiple portal />
 
 					<Button type="submit" disabled={pending} className="ml-auto">
-						{pending ? 'Creating page ✨' : 'Create page'}
+						{pending ? (
+							<>
+								Creating page <IconLoader className="ml-2" />
+							</>
+						) : (
+							<>
+								Create page <IconSparkles className="ml-2" />
+							</>
+						)}
 					</Button>
 				</div>
 			</fieldset>
