@@ -19,7 +19,7 @@ export default function DemoError() {
 	}
 
 	return (
-		<div className="p-6 text-black">
+		<div className="p-6 text-black max-w-full">
 			<ErrorEnhancementBoundary
 				className="overflow-auto"
 				fallback={
