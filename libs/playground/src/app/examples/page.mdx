@@ -10,6 +10,23 @@ export const isRounded = true
 # Live Examples
 
 <Demo
+  label="AI Dropdown"
+  component="h2"
+  className={isRounded && 'rounded-xl'}
+>
+  <DemoSelect />
+</Demo>
+
+<Demo
+  label="AI Not Found Page"
+  component="h2" className={isRounded && 'rounded-xl'}
+
+>
+
+  <DemoNotFound />
+</Demo>
+
+<Demo
   label="AI HTML Page Creation"
   component="h2" className={isRounded && 'rounded-xl'}
 
@@ -25,21 +42,4 @@ export const isRounded = true
 >
 
   <DemoError />
-</Demo>
-
-<Demo
-  label="AI Not Found Page"
-  component="h2" className={isRounded && 'rounded-xl'}
-
->
-
-  <DemoNotFound />
-</Demo>
-
-<Demo
-  label="AI Dropdown"
-  component="h2"
-  className={isRounded && 'rounded-xl'}
->
-  <DemoSelect />
 </Demo>
