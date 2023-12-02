@@ -86,8 +86,9 @@ export default function Home() {
 					}
 				>
 					<p className="mt-6 text-lg text-slate-600 max-w-3xl mx-auto dark:text-slate-300">
-						<strong>{NAME_SHORT}</strong> is an AI-powered library for Next.js
-						that turns words into fully integrated components, like magic.
+						<strong className="dark:text-[#00FCCE]">{NAME_SHORT}</strong> is an
+						AI-powered library for Next.js that turns words into fully
+						integrated components, like magic.
 					</p>
 					<p className="text-lg text-slate-600 max-w-3xl mx-auto dark:text-slate-300">
 						Responsible, customizable and open source.
@@ -113,9 +114,9 @@ export default function Home() {
 			</div>
 
 			<section>
-				<header className="grid text-center sm:text-left gap-6 w-full max-w-6xl mb-12">
+				<header className="grid text-center sm:text-left gap-6 w-full max-w-6xl mb-6 lg:mb-12">
 					<h2 className="text-2xl font-bold">
-						Check out the docs with live examples ✨
+						Check out the docs with live&nbsp;examples&nbsp;✨
 					</h2>
 				</header>
 
