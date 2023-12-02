@@ -1,4 +1,4 @@
-import { CodeBlock } from '@/src/components/CodeBlock'
+import { CodeBlock } from '../components/CodeBlock'
 
 /**
  * Default components to use for

@@ -24,12 +24,12 @@ export const Demo = ({
 			</TitleComponent>
 			<div
 				className={merge(
-					'aspect-square bg-white grid place-content-center relative mb-12 p-6 overflow-auto text-black',
+					'aspect-square bg-white flex justify-center relative mb-12 p-6 overflow-auto text-black',
 					className
 				)}
 				{...rest}
 			>
-				{children}
+				<div className="my-auto max-w-full">{children}</div>
 			</div>
 		</>
 	)

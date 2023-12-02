@@ -100,7 +100,7 @@ export const Dialog = ({
 						</button>
 					)}
 
-					{children}
+					{open && children}
 				</form>
 			</dialog>
 		</>

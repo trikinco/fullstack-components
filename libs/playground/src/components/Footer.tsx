@@ -1,16 +1,12 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { IconLogo } from './Icons/IconLogo'
-import {
-	NAME_SHORT,
-	URL_DISCUSSIONS,
-	URL_GITHUB,
-	URL_NPM,
-} from '../utils/constants'
+import { NAME_SHORT, URL_GITHUB, URL_NPM } from '../utils/constants'
 import { IconGitHub } from './Icons/IconGitHub'
 import { IconNpm } from './Icons/IconNpm'
+import { Avatar } from './Avatar'
+import { routesFooterMeta } from '../utils/routes'
 
 export interface FooterProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode
@@ -20,13 +16,13 @@ export const Footer = ({ children, className, ...rest }: FooterProps) => {
 	return (
 		<footer
 			className={merge(
-				'py-12 px-6 mt-10 bg-white dark:bg-slate-950 border-t border-slate-950/10 dark:border-white/30',
+				'pt-12 md:py-12 sm:pb-6 md:px-6 mt-10 bg-white dark:bg-slate-950 border-t border-slate-950/10 dark:border-white/30',
 				className
 			)}
 			{...rest}
 		>
 			<div className="flex flex-wrap gap-10 md:gap-16 items-center max-w-6xl mx-auto">
-				<div className="hidden sm:flex gap-3 mb-auto">
+				<div className="hidden sm:flex gap-3 mb-auto px-6">
 					<Link
 						href="/"
 						className="rounded-full ring-offset-2 focus:outline-none focus:ring"
@@ -48,67 +44,44 @@ export const Footer = ({ children, className, ...rest }: FooterProps) => {
 						<IconGitHub />
 					</Link>
 				</div>
-				<div className="flex flex-col gap-2">
-					<h3 className="font-bold">Resources</h3>
-					<Link className="hover:underline focus:underline" href="/docs">
-						Docs
-					</Link>
-					<Link
-						className="hover:underline focus:underline"
-						href="/docs/get-started"
-					>
-						Get started
-					</Link>
-					<Link
-						className="hover:underline focus:underline"
-						href={URL_DISCUSSIONS}
-					>
-						Community
-					</Link>
-					<Link className="hover:underline focus:underline" href={URL_GITHUB}>
-						GitHub
-					</Link>
+				<div className="flex flex-col gap-2 px-6">
+					<h3 className="font-bold mb-2">Resources</h3>
+					{routesFooterMeta.map(({ href, title }) => (
+						<Link
+							key={href}
+							className="hover:underline focus:underline"
+							href={href}
+						>
+							{title}
+						</Link>
+					))}
 				</div>
 				{children}
-				<div className="sm:ml-auto flex w-full sm:w-auto mb-auto gap-3">
-					<h3 className="my-auto sm:m-auto">Created by</h3>
-					<div className="flex gap-3">
-						<Link
+				<div className="flex items-center p-6 sm:ml-auto w-full sm:w-auto mb-auto gap-2 md:gap-3 bg-white dark:bg-black border-t border-slate-950/10 dark:border-white/30 sm:bg-transparent dark:sm:bg-transparent sm:border-t-0">
+					<Link
+						href="/"
+						className="rounded-full ring-offset-2 focus:outline-none focus:ring mr-auto sm:hidden"
+					>
+						<IconLogo className="w-5 h-5" />
+					</Link>
+					<h3 className="text-xs my-auto sm:m-auto">Created by</h3>
+					<div className="flex gap-2 md:gap-3">
+						<Avatar
 							href="https://www.darraghoriordan.com"
-							className="w-10 h-10 rounded-full focus:outline-none focus:ring"
-						>
-							<Image
-								className="w-10 h-10 rounded-full border-2 border-slate-300 bg-slate-300 dark:bg-slate-600 dark:border-slate-600"
-								src="/images/darragh.png"
-								alt="Darragh ORiordan"
-								width={40}
-								height={40}
-							/>
-						</Link>
-						<Link
+							image={{ src: '/images/darragh.png', alt: 'Darragh ORiordan' }}
+						/>
+						<Avatar
 							href="https://larsmagnus.co"
-							className="w-10 h-10 rounded-full focus:outline-none focus:ring"
-						>
-							<Image
-								className="w-10 h-10 rounded-full border-2 border-slate-300 bg-slate-200 dark:bg-slate-300 dark:border-slate-600"
-								src="/images/lars.png"
-								alt="Lars Klavenes"
-								width={40}
-								height={40}
-							/>
-						</Link>
-						<Link
+							image={{
+								src: '/images/lars.png',
+								alt: 'Lars Klavenes',
+								className: 'bg-slate-200 dark:bg-slate-300',
+							}}
+						/>
+						<Avatar
 							href="https://www.connorthomsen.com"
-							className="w-10 h-10 rounded-full focus:outline-none focus:ring"
-						>
-							<Image
-								className="w-10 h-10 rounded-full border-2 border-slate-300 bg-slate-300 dark:bg-slate-600 dark:border-slate-600"
-								src="/images/connor.png"
-								alt="Connor Thomsen"
-								width={40}
-								height={40}
-							/>
-						</Link>
+							image={{ src: '/images/connor.png', alt: 'Connor Thomsen' }}
+						/>
 					</div>
 				</div>
 			</div>
