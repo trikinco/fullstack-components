@@ -9,6 +9,7 @@ import imageImage from '../../public/images/Asterisk.png'
 import imageSelect from '../../public/images/DiamondSlim.png'
 import imageText from '../../public/images/Cube.png'
 import imageChat from '../../public/images/Wedge.png'
+import { URL_DISCUSSIONS, URL_GITHUB } from './constants'
 
 export const routes = {
 	docs: '/docs',
@@ -212,4 +213,27 @@ export const routesMeta: RoutesWithMeta[] = [
 		isTitle: true, // Only one item should have this
 	},
 	...routesDocsMeta,
+]
+
+export const routesFooterMeta: RoutesWithMeta[] = [
+	{
+		title: 'Try it live',
+		href: routes.examples,
+	},
+	{
+		title: 'Get started',
+		href: routes.getStarted,
+	},
+	{
+		title: 'Docs',
+		href: routes.docs,
+	},
+	{
+		title: 'Community',
+		href: URL_DISCUSSIONS,
+	},
+	{
+		title: 'GitHub',
+		href: URL_GITHUB,
+	},
 ]
