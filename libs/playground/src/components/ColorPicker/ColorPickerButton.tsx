@@ -30,7 +30,7 @@ export const ColorPickerButton = ({
 				disabled={disabled}
 				title={title}
 				className={merge(
-					'w-12 h-12 rounded-md border border-1 border-white/10 outline outline-1 outline-white ring-1 ring-offset-1 ring-black hover:outline-white/50 focus:ring-2 focus:ring-white',
+					'w-12 h-12 rounded-md border border-1 border-white/10 ring-1 ring-offset-2 ring-black focus-ring',
 					color && `bg-${color}`
 				)}
 				{...rest}

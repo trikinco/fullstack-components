@@ -24,7 +24,7 @@ export default function DocsNav({ children, className }: DocsNavProps) {
 		>
 			<SkipLink
 				href={`#${ID_MAIN}`}
-				className="focus:mb-6 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950"
+				className="focus:mb-6 rounded-sm focus-ring"
 			>
 				Skip to the main content
 			</SkipLink>
@@ -33,14 +33,21 @@ export default function DocsNav({ children, className }: DocsNavProps) {
 					const isCurrentPage = pathname === href
 
 					return (
-						<li key={href} className="flex">
+						<li
+							key={href}
+							className={merge(
+								'flex',
+								isCurrentPage &&
+									'text-blue-600 dark:text-blue-400 font-bold before:content-["·"] before:mr-2'
+							)}
+						>
 							<Link
 								id={isTitle ? ID_DOCS_NAV : undefined}
 								href={href}
 								className={merge(
-									'w-full rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950 hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white',
+									'w-full rounded-sm focus-ring hover:text-black focus-visible:text-black dark:hover:text-white hover:underline',
 									isCurrentPage
-										? 'text-sky-500 hover:text-sky-600 focus-visible:text-sky-600 font-bold before:content-["·"] before:mr-2'
+										? 'text-blue-600 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-400 font-bold'
 										: 'text-black/60 dark:text-white/60',
 									isTitle && 'text-black dark:text-white font-bold text-lg mb-3'
 								)}

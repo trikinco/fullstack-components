@@ -3,7 +3,7 @@
 import { useId, useState } from 'react'
 import Link from 'next/link'
 import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
-import { Button } from '@/src/components/Button'
+import { Button } from '@/src/components/Elements/Button'
 import { Spinner } from '@/src/components/Spinner'
 
 function NotFound({ pathname }: { pathname: string }) {
@@ -62,7 +62,7 @@ export default function Page() {
 					<Button
 						type="button"
 						color="secondary"
-						className="font-medium dark:hover:bg-slate-800"
+						className="font-medium text-white bg-slate-900 hover:bg-slate-800 dark:hover:bg-slate-800"
 						onClick={() => setPathname('/setup')}
 					>
 						Setup
@@ -70,7 +70,7 @@ export default function Page() {
 					<Button
 						type="button"
 						color="secondary"
-						className="font-medium dark:hover:bg-slate-800"
+						className="font-medium text-white bg-slate-900 hover:bg-slate-800 dark:hover:bg-slate-800"
 						onClick={() => setPathname('/images')}
 					>
 						Images
@@ -78,7 +78,7 @@ export default function Page() {
 					<Button
 						type="button"
 						color="secondary"
-						className="font-medium dark:hover:bg-slate-800"
+						className="font-medium text-white bg-slate-900 hover:bg-slate-800 dark:hover:bg-slate-800"
 						onClick={() => setPathname('/enhancer')}
 					>
 						Enhancer

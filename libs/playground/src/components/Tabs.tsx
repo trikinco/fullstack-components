@@ -134,7 +134,7 @@ export const Tabs = ({ className, tabs, children, ...rest }: TabsProps) => {
 							tabIndex={isSelected ? 0 : -1}
 							role="tabpanel"
 							className={merge(
-								'relative focus:outline-none focus-visible:ring-2',
+								'relative rounded-lg focus-ring',
 								!isSelected && 'hidden'
 							)}
 						>

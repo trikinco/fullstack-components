@@ -32,6 +32,10 @@
 	--shiki-token-link: hsla(131, 43%, 57%, 1);
 }
 
+body {
+	@apply bg-slate-50 dark:bg-slate-950;
+}
+
 /* outer code blocks */
 [data-rehype-pretty-code-fragment] {
 	font-variant-ligatures: none;
@@ -50,7 +54,7 @@
 }
 
 [data-highlighted-chars] {
-	@apply rounded-md bg-slate-50 dark:bg-slate-700;
+	@apply rounded-md bg-slate-100 dark:bg-slate-700;
 }
 
 .bg-pattern {
@@ -69,12 +73,12 @@
 	);
 }
 
-body {
-	@apply bg-slate-100 dark:bg-slate-950;
-}
-
 .no-scroll {
 	position: fixed;
 	overflow-y: scroll;
 	width: 100%;
+}
+
+.focus-ring {
+	@apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2;
 }

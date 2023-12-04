@@ -11,7 +11,7 @@ import {
 	URL_RELEASES,
 	URL_DISCUSSIONS,
 } from '@/src/utils/constants'
-import { Button } from '@/src/components/Button'
+import { Button } from '@/src/components/Elements/Button'
 import { IconPlay } from '@/src/components/Icons/IconPlay'
 import { routes, routesDocsMeta, routesCardsMeta } from '@/src/utils/routes'
 import { JsonSchema } from '@/src/modules/JsonSchema'

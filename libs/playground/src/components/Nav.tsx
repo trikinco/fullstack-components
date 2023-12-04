@@ -26,13 +26,15 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 						<span role="img" aria-label="Hey there, hand waving">
 							👋
 						</span>{' '}
-						<Link href={URL_GITHUB}>{NAME_LIB}</Link> is built in public. Use
-						with care in production.
+						<Link className="focus-ring" href={URL_GITHUB}>
+							{NAME_LIB}
+						</Link>{' '}
+						is built in public. Use with care in production.
 					</strong>{' '}
 				</p>
 				<p className="hidden md:block">
 					Got feedback? We&apos;d like to{' '}
-					<Link className="underline" href={URL_DISCUSSIONS}>
+					<Link className="underline focus-ring" href={URL_DISCUSSIONS}>
 						hear from you.
 					</Link>
 				</p>
@@ -44,10 +46,7 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 				)}
 				{...rest}
 			>
-				<Link
-					href="/"
-					className="rounded-full ring-offset-2 focus:outline-none focus:ring"
-				>
+				<Link href="/" className="rounded-full focus-ring">
 					<IconLogo className="w-6 h-6 md:w-10 md:h-10" />
 				</Link>
 				{children}
@@ -56,14 +55,14 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 					<ThemeSwitcher />
 					<Link
 						href={URL_NPM}
-						className="inline-flex items-center text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full ring-offset-2 focus:outline-none focus:ring"
+						className="inline-flex items-center text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full focus-ring"
 					>
 						<span className="sr-only">{NAME_SHORT} on NPM</span>
 						<IconNpm className="w-8" />
 					</Link>
 					<Link
 						href={URL_GITHUB}
-						className="inline-flex items-center text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full ring-offset-2 focus:outline-none focus:ring"
+						className="inline-flex items-center text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full focus-ring"
 					>
 						<span className="sr-only">{NAME_SHORT} on GitHub</span>
 						<IconGitHub />
