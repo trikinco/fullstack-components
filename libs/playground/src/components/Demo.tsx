@@ -4,6 +4,7 @@ import { merge } from '@trikinco/fullstack-components/utils'
 export interface DemoProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode
 	label?: ReactNode
+	info?: ReactNode
 	component?: ElementType
 }
 
@@ -12,6 +13,7 @@ export interface DemoProps extends HTMLAttributes<HTMLDivElement> {
  */
 export const Demo = ({
 	label,
+	info,
 	children,
 	className,
 	component: TitleComponent = 'p',
@@ -24,13 +26,14 @@ export const Demo = ({
 			</TitleComponent>
 			<div
 				className={merge(
-					'aspect-square bg-white flex justify-center relative mb-12 p-6 overflow-auto text-black',
+					'aspect-square bg-white flex justify-center relative mb-6 p-6 overflow-auto text-black',
 					className
 				)}
 				{...rest}
 			>
 				<div className="my-auto max-w-full">{children}</div>
 			</div>
+			<div className="mb-12">{info}</div>
 		</>
 	)
 }
