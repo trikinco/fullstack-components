@@ -21,7 +21,7 @@ export default function DemoError() {
 	return (
 		<div className="p-6 text-black max-w-full">
 			<ErrorEnhancementBoundary
-				className="overflow-auto"
+				className="overflow-auto text-black not-prose"
 				fallback={
 					<Spinner className="mb-3">
 						Generating user-friendly error message
@@ -35,7 +35,7 @@ export default function DemoError() {
 					onClick={() => {
 						setShouldRenderThrow(true)
 					}}
-					className="font-medium text-white bg-slate-900 hover:hover:bg-slate-800 dark:hover:bg-slate-800"
+					className="font-medium text-white bg-slate-900 hover:hover:bg-slate-800 dark:hover:bg-slate-800 text-sm md:text-base h-10 px-4 md:h-12 md:px-6"
 				>
 					Howdy 🤠
 				</Button>

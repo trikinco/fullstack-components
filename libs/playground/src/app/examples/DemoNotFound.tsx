@@ -62,7 +62,7 @@ export default function Page() {
 					<Button
 						type="button"
 						color="secondary"
-						className="font-medium text-white bg-slate-900 hover:bg-slate-800 dark:hover:bg-slate-800"
+						className="font-medium text-white bg-slate-900 hover:bg-slate-800 dark:hover:bg-slate-800 text-sm md:text-base h-10 px-4 md:h-12 md:px-6"
 						onClick={() => setPathname('/setup')}
 					>
 						Setup
@@ -70,7 +70,7 @@ export default function Page() {
 					<Button
 						type="button"
 						color="secondary"
-						className="font-medium text-white bg-slate-900 hover:bg-slate-800 dark:hover:bg-slate-800"
+						className="font-medium text-white bg-slate-900 hover:bg-slate-800 dark:hover:bg-slate-800 text-sm md:text-base h-10 px-4 md:h-12 md:px-6"
 						onClick={() => setPathname('/images')}
 					>
 						Images
@@ -78,7 +78,7 @@ export default function Page() {
 					<Button
 						type="button"
 						color="secondary"
-						className="font-medium text-white bg-slate-900 hover:bg-slate-800 dark:hover:bg-slate-800"
+						className="font-medium text-white bg-slate-900 hover:bg-slate-800 dark:hover:bg-slate-800 text-sm md:text-base h-10 px-4 md:h-12 md:px-6"
 						onClick={() => setPathname('/enhancer')}
 					>
 						Enhancer
