@@ -30,7 +30,6 @@ export const ThemeSwitcher = () => {
 				ref={focusReturnRef}
 				type="button"
 				className="group/theme inline-flex gap-2 tracking-wide text-sm mb-1 px-1 ml-auto text-slate-400 hover:text-slate-500 dark:hover:text-slate-200"
-				aria-controls={id}
 				onClick={() => setOpen(true)}
 			>
 				<span className="transition-opacity opacity-0 group-hover/theme:opacity-100">
