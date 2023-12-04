@@ -1,10 +1,18 @@
 import { Text } from '@trikinco/fullstack-components'
 import { Example } from '@/src/components/Example'
+import { URL_DEPLOYMENT } from '@/src/utils/constants'
+import { routes } from '@/src/utils/routes'
 
 export const metadata = {
   title: 'Text - Enhance, Create And Simplify Your Text With AI',
   description:
     'Rewrite, simplify or create text. Handles plain text, markdown and HTML',
+  alternates: {
+    canonical: `${new URL(
+      routes.text,
+      URL_DEPLOYMENT || URL_BASE
+    )}`,
+  },
 }
 
 # Text

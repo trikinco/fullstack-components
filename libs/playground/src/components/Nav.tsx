@@ -1,7 +1,13 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import Link from 'next/link'
 import { merge } from '@trikinco/fullstack-components/utils'
-import { NAME_LIB, NAME_SHORT, URL_GITHUB, URL_NPM } from '../utils/constants'
+import {
+	NAME_LIB,
+	NAME_SHORT,
+	URL_DISCUSSIONS,
+	URL_GITHUB,
+	URL_NPM,
+} from '../utils/constants'
 import { IconGitHub } from './Icons/IconGitHub'
 import { IconLogo } from './Icons/IconLogo'
 import { IconNpm } from './Icons/IconNpm'
@@ -26,10 +32,7 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 				</p>
 				<p className="hidden md:block">
 					Got feedback? We&apos;d like to{' '}
-					<Link
-						className="underline"
-						href="https://github.com/trikinco/fullstack-components/discussions"
-					>
+					<Link className="underline" href={URL_DISCUSSIONS}>
 						hear from you.
 					</Link>
 				</p>

@@ -1,8 +1,19 @@
-import { NAME_SHORT, NAME_LONG } from '@/src/utils/constants'
+import {
+  URL_DEPLOYMENT,
+  NAME_SHORT,
+  NAME_LONG,
+} from '@/src/utils/constants'
+import { routes } from '@/src/utils/routes'
 
 export const metadata = {
   title: `Get started with ${NAME_SHORT}`,
   description: `Get started with ${NAME_LONG} to build websites by writing prompts`,
+  alternates: {
+    canonical: `${new URL(
+      routes.getStarted,
+      URL_DEPLOYMENT || URL_BASE
+    )}`,
+  },
 }
 
 # Get started with {NAME_SHORT}

@@ -1,8 +1,26 @@
+import Link from 'next/link'
 import DemoHTMLPage from './DemoHTMLPage'
 import DemoSelect from './DemoSelect'
 import DemoError from './DemoError'
 import DemoNotFound from './DemoNotFound'
 import Demo from '@/src/components/Demo'
+import {
+  NAME_LONG,
+  NAME_SHORT,
+  URL_DEPLOYMENT,
+} from '@/src/utils/constants'
+import { routes } from '@/src/utils/routes'
+
+export const metadata = {
+  title: `Live examples of ${NAME_LONG}`,
+  description: `Try these interactive examples from ${NAME_SHORT}`,
+  alternates: {
+    canonical: `${new URL(
+      routes.examples,
+      URL_DEPLOYMENT || URL_BASE
+    )}`,
+  },
+}
 
 {/* Just to make it easier to turn off rounding if recording */}
 export const isRounded = true
@@ -11,6 +29,14 @@ export const isRounded = true
 
 <Demo
   label="AI Dropdown"
+  info={
+    <>
+      See more examples and documentation for{' '}
+      <Link href={routes.select}>
+        `Select` and `useSelect` in the docs.
+      </Link>
+    </>
+  }
   component="h2"
   className={isRounded && 'rounded-xl'}
 >
@@ -19,6 +45,12 @@ export const isRounded = true
 
 <Demo
   label="AI Not Found Page"
+  info={
+    <>
+      See more examples and documentation for{' '}
+      <Link href={routes.notFound}>`useNotFoundEnhancement` in the docs.</Link>
+    </>
+  }
   component="h2" className={isRounded && 'rounded-xl'}
 
 >
@@ -28,6 +60,12 @@ export const isRounded = true
 
 <Demo
   label="AI HTML Page Creation"
+  info={
+    <>
+      See more examples and documentation for{' '}
+      <Link href={routes.htmlPage}>`useHtmlPage` in the docs.</Link>
+    </>
+  }
   component="h2" className={isRounded && 'rounded-xl'}
 
 >
@@ -37,6 +75,12 @@ export const isRounded = true
 
 <Demo
   label="AI Error Boundary"
+  info={
+    <>
+      See more examples and documentation for{' '}
+      <Link href={routes.errors}>`ErrorEnhancementBoundary` and `useErrorEnhancement` in the docs.</Link>
+    </>
+  }
   component="h2" className={isRounded && 'rounded-xl'}
 
 >
