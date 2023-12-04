@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/naming-convention */
 import OpenAI from 'openai'
 
 export type ImageGenerationResponse = {
@@ -21,7 +22,7 @@ export async function runImageGeneration(
 	prompt: string,
 	options?: ImageGenerationOptions
 ): Promise<ImageGenerationResponse> {
-	const { openAIApiKey, ...opts } = options || {}
+	const { openAIApiKey, response_format = 'b64_json', ...opts } = options || {}
 
 	const openai = new OpenAI({
 		apiKey: openAIApiKey,
@@ -34,13 +35,12 @@ export async function runImageGeneration(
 			prompt,
 			size: '256x256', // Default to small images to save $
 			n: 1,
-			// eslint-disable-next-line @typescript-eslint/naming-convention
-			response_format: 'url',
+			response_format,
 			...opts,
 		})
 
 		const generatedUrls: string[] = generation.data
-			?.map((image) => image.url || '')
+			?.map((image) => image[response_format as 'url' | 'b64_json'] || '')
 			.filter(Boolean)
 
 		const extractedUrls =
