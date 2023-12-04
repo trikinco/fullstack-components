@@ -6,7 +6,6 @@ import {
 	NAME_SHORT,
 	NAME_DESCRIPTION,
 	META_AUTHORS,
-	URL_GITHUB,
 	URL_DEPLOYMENT,
 	URL_LICENSE,
 	URL_RELEASES,
@@ -16,6 +15,12 @@ import { Button } from '@/src/components/Button'
 import { IconPlay } from '@/src/components/Icons/IconPlay'
 import { routes, routesDocsMeta, routesCardsMeta } from '@/src/utils/routes'
 import { JsonSchema } from '@/src/modules/JsonSchema'
+
+export const metadata = {
+	alternates: {
+		canonical: URL_DEPLOYMENT,
+	},
+}
 
 const META_AUTHORS_SCHEMA = META_AUTHORS.map((author) => ({
 	...author,
@@ -94,7 +99,7 @@ export default function Home() {
 						Responsible, customizable and open source.
 					</p>
 					<div className="mt-8 flex grow items-center gap-6">
-						<Button as={Link} href="/docs/get-started">
+						<Button as={Link} href={routes.getStarted}>
 							Get started
 						</Button>
 						<Button

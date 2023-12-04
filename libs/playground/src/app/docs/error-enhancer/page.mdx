@@ -1,10 +1,18 @@
 import { ErrorHTTPPreview } from './ErrorHTTPPreview'
 import { ClientErrors } from './ClientErrors'
+import { URL_DEPLOYMENT } from '@/src/utils/constants'
+import { routes } from '@/src/utils/routes'
 
 export const metadata = {
   title: 'Error Enhancer - AI-Powered Smart Error Boundary',
   description:
     'AI-Powered Error Helper. Makes sense of complex technical errors.',
+  alternates: {
+    canonical: `${new URL(
+      routes.errors,
+      URL_DEPLOYMENT || URL_BASE
+    )}`,
+  },
 }
 
 # Error Enhancer
