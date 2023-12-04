@@ -40,7 +40,7 @@ export default function Page() {
 	if (!name) {
 		return (
 			<form className="flex flex-col gap-3" onSubmit={handleSubmit}>
-				<label htmlFor="prompt" className="block text-lg text-black">
+				<label htmlFor="name" className="block text-lg text-black">
 					Your name
 				</label>
 				<input
