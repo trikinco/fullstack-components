@@ -10,7 +10,7 @@ export interface DocsFooterProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const linkStyles =
-	'font-bold rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950 hover:text-white focus-visible:text-white text-sky-500 hover:text-sky-600 focus-visible:text-sky-600'
+	'font-bold rounded-sm focus-ring text-blue-600 dark:text-blue-400 hover:underline'
 
 /**
  * Docs footer navigation

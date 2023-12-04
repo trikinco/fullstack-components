@@ -3,6 +3,8 @@
 import { useSelect } from '@trikinco/fullstack-components/client'
 import { Select } from '@/src/components/Select'
 import { FormEvent, useState } from 'react'
+import { Input } from '@/src/components/Elements/Input'
+import { Label } from '@/src/components/Elements/Label'
 
 export function DemoSelect({ name }: { name: FormDataEntryValue }) {
 	const { isLoading, isError, data } = useSelect({
@@ -39,13 +41,15 @@ export default function Page() {
 
 	if (!name) {
 		return (
-			<form className="flex flex-col gap-3" onSubmit={handleSubmit}>
-				<label htmlFor="name" className="block text-lg text-black">
+			<form className="flex flex-col" onSubmit={handleSubmit}>
+				<Label
+					htmlFor="name"
+					className="mb-3 text-lg font-normal dark:text-black"
+				>
 					Your name
-				</label>
-				<input
-					className="p-3 rounded-md border border-gray-200 bg-transparent text-black w-full outline-none focus:ring-2"
-					type="text"
+				</Label>
+				<Input
+					className="border border-gray-200"
 					id="name"
 					name="name"
 					minLength={1}

@@ -90,7 +90,7 @@ export const Dialog = ({
 						<button
 							formMethod="dialog"
 							className={merge(
-								'ml-auto bg-white/80 text-black border border-1 border-white/90 sticky top-3 right-0 py-2 px-6 z-50 rounded-md focus:outline-none focus:ring focus:ring-offset-2',
+								'ml-auto bg-white/80 text-black border border-1 border-white/90 sticky top-3 right-0 py-2 px-6 z-50 rounded-md focus-ring',
 								closeClassName
 							)}
 							onClick={() => dialogRef?.current?.close()}

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Main from '@/src/components/Main'
 import Prose from '@/src/components/Prose'
 import { PageHeader } from '@/src/components/PageHeader'
-import { Button } from '@/src/components/Button'
+import { Button } from '@/src/components/Elements/Button'
 import { NotFoundEnhancer } from '@/src/app/docs/not-found-enhancer/NotFoundEnhancer'
 
 export default function NotFound() {

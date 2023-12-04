@@ -25,7 +25,7 @@ export const CodeBlock = ({
 		<div className="group">
 			<pre
 				className={merge(
-					'not-prose [font-variant-ligatures:none] p-5 overflow-auto',
+					'not-prose [font-variant-ligatures:none] p-5 rounded-lg overflow-auto focus-ring focus-visible:outline-offset-[-2px]',
 					className
 				)}
 				{...props}

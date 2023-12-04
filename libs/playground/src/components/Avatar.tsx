@@ -31,7 +31,7 @@ export const Avatar = ({
 		<Link
 			href={href}
 			className={merge(
-				'w-8 h-8 md:w-10 md:h-10 rounded-full focus:outline-none focus:ring',
+				'w-8 h-8 md:w-10 md:h-10 rounded-full focus-ring',
 				className
 			)}
 			{...rest}

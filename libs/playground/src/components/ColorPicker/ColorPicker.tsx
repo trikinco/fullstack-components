@@ -152,7 +152,10 @@ export const ColorPicker = ({
 					type="button"
 					ref={focusReturnRef}
 					onClick={() => setOpen(true)}
-					className={merge('flex items-center gap-3', multiple && 'py-3')}
+					className={merge(
+						'flex items-center gap-3 focus-ring',
+						multiple && 'py-3'
+					)}
 				>
 					<span className="flex flex-col items-start gap-1">
 						{labelPicked && <span className="text-sm">{labelPicked}</span>}

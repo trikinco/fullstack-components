@@ -26,7 +26,7 @@ export const Select = ({ data, className, ...rest }: SelectProps) => {
 		<div className={merge('flex flex-col gap-2', className)} {...rest}>
 			<button
 				id={`${id}-button`}
-				className="w-full text-black bg-white border border-gray-200 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 h-12 inline-flex items-center justify-between"
+				className="w-full text-black bg-white border border-gray-200 focus:ring-2 focus:outline-none focus:ring-blue-500 font-medium rounded-lg text-sm px-6 h-12 inline-flex items-center justify-between"
 				type="button"
 				onClick={() => setIsOpen((isOpen) => !isOpen)}
 			>

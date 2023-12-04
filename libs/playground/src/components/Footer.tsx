@@ -23,22 +23,19 @@ export const Footer = ({ children, className, ...rest }: FooterProps) => {
 		>
 			<div className="flex flex-wrap gap-10 md:gap-16 items-center max-w-6xl mx-auto">
 				<div className="hidden sm:flex gap-3 mb-auto px-6">
-					<Link
-						href="/"
-						className="rounded-full ring-offset-2 focus:outline-none focus:ring"
-					>
+					<Link href="/" className="rounded-full focus-ring">
 						<IconLogo className="w-5 h-5" />
 					</Link>
 					<Link
 						href={URL_NPM}
-						className="text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full ring-offset-2 focus:outline-none focus:ring"
+						className="text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full focus-ring"
 					>
 						<span className="sr-only">{NAME_SHORT} on NPM</span>
 						<IconNpm className="w-8" />
 					</Link>
 					<Link
 						href={URL_GITHUB}
-						className="ml-auto block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300 rounded-full ring-offset-2 focus:outline-none focus:ring"
+						className="ml-auto block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300 rounded-full focus-ring"
 					>
 						<span className="sr-only">{NAME_SHORT} on GitHub</span>
 						<IconGitHub />
@@ -49,7 +46,7 @@ export const Footer = ({ children, className, ...rest }: FooterProps) => {
 					{routesFooterMeta.map(({ href, title }) => (
 						<Link
 							key={href}
-							className="hover:underline focus:underline"
+							className="hover:underline rounded-sm focus-ring"
 							href={href}
 						>
 							{title}
@@ -58,10 +55,7 @@ export const Footer = ({ children, className, ...rest }: FooterProps) => {
 				</div>
 				{children}
 				<div className="flex items-center p-6 sm:ml-auto w-full sm:w-auto mb-auto gap-2 md:gap-3 bg-white dark:bg-black border-t border-slate-950/10 dark:border-white/30 sm:bg-transparent dark:sm:bg-transparent sm:border-t-0">
-					<Link
-						href="/"
-						className="rounded-full ring-offset-2 focus:outline-none focus:ring mr-auto sm:hidden"
-					>
+					<Link href="/" className="rounded-full focus-ring mr-auto sm:hidden">
 						<IconLogo className="w-5 h-5" />
 					</Link>
 					<h3 className="text-xs my-auto sm:m-auto">Created by</h3>

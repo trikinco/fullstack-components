@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { ErrorEnhancementBoundary } from '@trikinco/fullstack-components/client'
-import { Button } from '@/src/components/Button'
+import { Button } from '@/src/components/Elements/Button'
 import { Spinner } from '@/src/components/Spinner'
 import { Example } from '@/src/components/Example'
 

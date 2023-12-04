@@ -4,7 +4,9 @@ import { useRef, type HTMLAttributes } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { generateHtmlPage } from '../docs/html-page-generator/action'
-import { Button } from '@/src/components/Button'
+import { Button } from '@/src/components/Elements/Button'
+import { Input } from '@/src/components/Elements/Input'
+import { Label } from '@/src/components/Elements/Label'
 
 interface FormBodyProps {
 	state?: string
@@ -32,12 +34,14 @@ export function FormBody({ state }: FormBodyProps) {
 				<fieldset className="m-auto flex flex-col gap-6 items-center relative z-20">
 					{!prompt ? (
 						<div>
-							<label htmlFor="prompt" className="block mb-3 text-lg text-black">
+							<Label
+								htmlFor="prompt"
+								className="mb-3 text-lg font-normal dark:text-black"
+							>
 								What do you want to create? ✨
-							</label>
-							<input
-								className="p-3 rounded-md border border-gray-200 bg-transparent text-black w-full outline-none focus:ring-2"
-								type="text"
+							</Label>
+							<Input
+								className="border border-gray-200"
 								id="prompt"
 								name="prompt"
 								placeholder="A modern login form..."

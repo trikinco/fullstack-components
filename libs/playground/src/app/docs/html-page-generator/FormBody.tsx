@@ -4,9 +4,11 @@ import { useState, useEffect } from 'react'
 import { useFormStatus } from 'react-dom'
 import { ColorPicker } from '@/src/components/ColorPicker/ColorPicker'
 import { HTMLPage } from '@/src/modules/HTMLPage'
-import { Button } from '@/src/components/Button'
+import { Button } from '@/src/components/Elements/Button'
 import { IconLoader } from '@/src/components/Icons/IconLoader'
 import { IconSparkles } from '@/src/components/Icons/IconSparkles'
+import { Input } from '@/src/components/Elements/Input'
+import { Label } from '@/src/components/Elements/Label'
 
 interface FormBodyProps {
 	state?: string
@@ -35,15 +37,8 @@ export function FormBody({ state, refetch }: FormBodyProps) {
 		<>
 			<fieldset className="mb-10 mx-auto max-w-prose flex flex-col gap-6">
 				<div>
-					<label
-						htmlFor="prompt"
-						className="block mb-2 font-bold dark:text-white"
-					>
-						What would you like to create?
-					</label>
-					<input
-						className="p-3 rounded-md border border-white/10 w-full"
-						type="text"
+					<Label htmlFor="prompt">What would you like to create?</Label>
+					<Input
 						id="prompt"
 						name="prompt"
 						placeholder="A modern login form..."
@@ -54,15 +49,8 @@ export function FormBody({ state, refetch }: FormBodyProps) {
 
 				<div className="flex gap-3 items-center">
 					<div className="grow">
-						<label
-							htmlFor="src"
-							className="block mb-2 font-bold dark:text-white"
-						>
-							Reference image URL
-						</label>
-						<input
-							className="p-3 rounded-md border border-white/10 w-full"
-							type="text"
+						<Label htmlFor="src">Reference image URL</Label>
+						<Input
 							id="src"
 							name="src"
 							placeholder="URL"

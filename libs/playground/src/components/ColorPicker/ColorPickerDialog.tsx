@@ -101,10 +101,9 @@ export const ColorPickerDialog = memo(function ColorPickerDialog({
                                             cursor-pointer disabled:cursor-not-allowed
                                             appearance-none rounded-md w-full h-12
                                             focus:z-10 hover:z-10 
-                                            border border-1 border-white/10 
-                                            outline outline-offset-1 outline-transparent 
-                                            hover:outline-white/50
-                                            focus:ring-2 focus:ring-white`}
+                                            border border-1 border-white/10  
+                                            hover:outline-white/50 
+											focus-ring`}
 									/>
 									<IconCheck
 										className={`absolute z-20 ${

@@ -46,7 +46,7 @@ export const Tab = ({
 			role="tab"
 			type="button"
 			className={merge(
-				'flex items-center rounded-md py-[0.4375rem] pl-2 pr-2 text-sm font-semibold lg:pr-3 disabled:cursor-not-allowed',
+				'flex items-center rounded-md py-[0.4375rem] pl-2 pr-2 text-sm font-semibold lg:pr-3 disabled:cursor-not-allowed focus-visible:outline-offset-2',
 				selected && 'bg-white dark:bg-gray-800 shadow'
 			)}
 			{...rest}

@@ -57,7 +57,7 @@ export default function RootLayout({
 				<Providers>
 					<SkipLink
 						href={`#${ID_MAIN}`}
-						className="focus:mb-6 focus:absolute focus:z-50 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-4 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-950"
+						className="bg-slate-50 dark:bg-slate-950 focus:mb-6 focus:absolute focus:z-50 top-3 left-3 rounded-sm focus-ring"
 					>
 						Skip to the main content
 					</SkipLink>

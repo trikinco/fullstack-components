@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { ErrorEnhancementBoundary } from '@trikinco/fullstack-components/client'
-import { Button } from '@/src/components/Button'
+import { Button } from '@/src/components/Elements/Button'
 import { Spinner } from '@/src/components/Spinner'
 
 export default function DemoError() {
@@ -35,7 +35,7 @@ export default function DemoError() {
 					onClick={() => {
 						setShouldRenderThrow(true)
 					}}
-					className="font-medium dark:hover:bg-slate-800"
+					className="font-medium text-white bg-slate-900 hover:hover:bg-slate-800 dark:hover:bg-slate-800"
 				>
 					Howdy 🤠
 				</Button>
