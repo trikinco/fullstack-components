@@ -1,6 +1,6 @@
 import { Prompt } from '@trikinco/fullstack-components'
 import { Example } from '@/src/components/Example'
-import { URL_DEPLOYMENT } from '@/src/utils/constants'
+import { URL_HOST } from '@/src/utils/constants'
 import { routes } from '@/src/utils/routes'
 
 export const metadata = {
@@ -8,10 +8,7 @@ export const metadata = {
   description:
     'Easily integrate AI prompts into any part of your application.',
   alternates: {
-    canonical: `${new URL(
-      routes.prompt,
-      URL_DEPLOYMENT || URL_BASE
-    )}`,
+    canonical: `${new URL(routes.prompt, URL_HOST)}`,
   },
 }
 

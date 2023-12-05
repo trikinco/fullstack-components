@@ -1,6 +1,6 @@
 import { Example } from '@/src/components/Example'
 import Blocks from './Blocks'
-import { URL_DEPLOYMENT } from '@/src/utils/constants'
+import { URL_HOST } from '@/src/utils/constants'
 import { routes } from '@/src/utils/routes'
 
 export const metadata = {
@@ -8,10 +8,7 @@ export const metadata = {
   description:
     'Generate React components with AI. Prompt goes in, component comes out. Easy.',
   alternates: {
-    canonical: `${new URL(
-      routes.block,
-      URL_DEPLOYMENT || URL_BASE
-    )}`,
+    canonical: `${new URL(routes.block, URL_HOST)}`,
   },
 }
 

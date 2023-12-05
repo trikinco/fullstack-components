@@ -1,5 +1,5 @@
 import { Form } from './Form'
-import { URL_DEPLOYMENT } from '@/src/utils/constants'
+import { URL_HOST } from '@/src/utils/constants'
 import { routes } from '@/src/utils/routes'
 
 export const metadata = {
@@ -7,10 +7,7 @@ export const metadata = {
   description:
     'AI-Powered HTML page generator that designs and codes user interfaces.',
   alternates: {
-    canonical: `${new URL(
-      routes.htmlPage,
-      URL_DEPLOYMENT || URL_BASE
-    )}`,
+    canonical: `${new URL(routes.htmlPage, URL_HOST)}`,
   },
 }
 

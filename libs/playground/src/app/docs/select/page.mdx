@@ -1,6 +1,7 @@
+import { Select } from '@trikinco/fullstack-components'
 import { Example } from '@/src/components/Example'
 import UseSelect from './UseSelect'
-import { URL_DEPLOYMENT } from '@/src/utils/constants'
+import { URL_HOST } from '@/src/utils/constants'
 import { routes } from '@/src/utils/routes'
 
 export const metadata = {
@@ -8,10 +9,7 @@ export const metadata = {
   description:
     'A smart dropdown component that creates, labels and sorts all its own options.',
   alternates: {
-    canonical: `${new URL(
-      routes.select,
-      URL_DEPLOYMENT || URL_BASE
-    )}`,
+    canonical: `${new URL(routes.select, URL_HOST)}`,
   },
 }
 

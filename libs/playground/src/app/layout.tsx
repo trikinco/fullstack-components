@@ -6,8 +6,7 @@ import { Footer } from '@/src/components/Footer'
 import { Nav } from '@/src/components/Nav'
 import SkipLink from '@/src/components/SkipLink'
 import {
-	URL_BASE,
-	URL_DEPLOYMENT,
+	URL_HOST,
 	NAME_SHORT,
 	NAME_LONG,
 	META_AUTHORS,
@@ -22,7 +21,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-	metadataBase: new URL(URL_DEPLOYMENT || URL_BASE),
+	metadataBase: new URL(URL_HOST),
 	description: NAME_LONG,
 	keywords: ['Fullstack', 'Components', 'Next.js', 'React', 'AI'],
 	authors: META_AUTHORS,

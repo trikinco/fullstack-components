@@ -1,6 +1,6 @@
 import { Example } from '@/src/components/Example'
 import { NotFoundEnhancer } from './NotFoundEnhancer'
-import { URL_DEPLOYMENT } from '@/src/utils/constants'
+import { URL_HOST } from '@/src/utils/constants'
 import { routes } from '@/src/utils/routes'
 
 export const metadata = {
@@ -8,10 +8,7 @@ export const metadata = {
   description:
     'AI-Powered Page Not Found. Get help finding the page you were looking for.',
   alternates: {
-    canonical: `${new URL(
-      routes.notFound,
-      URL_DEPLOYMENT || URL_BASE
-    )}`,
+    canonical: `${new URL(routes.notFound, URL_HOST)}`,
   },
 }
 

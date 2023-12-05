@@ -6,7 +6,7 @@ import {
 	NAME_SHORT,
 	NAME_DESCRIPTION,
 	META_AUTHORS,
-	URL_DEPLOYMENT,
+	URL_HOST,
 	URL_LICENSE,
 	URL_RELEASES,
 	URL_DISCUSSIONS,
@@ -18,7 +18,7 @@ import { JsonSchema } from '@/src/modules/JsonSchema'
 
 export const metadata = {
 	alternates: {
-		canonical: URL_DEPLOYMENT,
+		canonical: URL_HOST,
 	},
 }
 
@@ -29,11 +29,11 @@ const META_AUTHORS_SCHEMA = META_AUTHORS.map((author) => ({
 
 const META_DOCS_SCHEMA = routesDocsMeta.map((meta) => ({
 	'@type': 'WebPage',
-	'@id': `${URL_DEPLOYMENT}${meta.href}`,
+	'@id': `${URL_HOST}${meta.href}`,
 	name: meta.title,
-	url: `${URL_DEPLOYMENT}${meta.href}`,
+	url: `${URL_HOST}${meta.href}`,
 	isPartOf: {
-		'@id': `${URL_DEPLOYMENT}${routes.docs}`,
+		'@id': `${URL_HOST}${routes.docs}`,
 	},
 }))
 
@@ -44,8 +44,8 @@ export default function Home() {
 				type="SoftwareApplication"
 				name={NAME_SHORT}
 				description={NAME_DESCRIPTION}
-				url={URL_DEPLOYMENT}
-				id={URL_DEPLOYMENT}
+				url={URL_HOST}
+				id={URL_HOST}
 				applicationCategory="DeveloperApplication"
 				operatingSystem="Cross-platform"
 				license={URL_LICENSE}
@@ -64,11 +64,11 @@ export default function Home() {
 				hasPart={[
 					{
 						'@type': 'WebPage',
-						'@id': `${URL_DEPLOYMENT}${routes.docs}`,
+						'@id': `${URL_HOST}${routes.docs}`,
 						name: 'Documentation',
-						url: `${URL_DEPLOYMENT}${routes.docs}`,
+						url: `${URL_HOST}${routes.docs}`,
 						isPartOf: {
-							'@id': URL_DEPLOYMENT,
+							'@id': URL_HOST,
 						},
 						hasPart: META_DOCS_SCHEMA,
 					},

@@ -1,5 +1,5 @@
 import { Chat } from '@/src/modules/Chat'
-import { URL_DEPLOYMENT } from '@/src/utils/constants'
+import { URL_HOST } from '@/src/utils/constants'
 import { routes } from '@/src/utils/routes'
 
 export const metadata = {
@@ -7,10 +7,7 @@ export const metadata = {
   description:
     'Everything you need to create fully integrated, custom chat experiences.',
   alternates: {
-    canonical: `${new URL(
-      routes.chat,
-      URL_DEPLOYMENT || URL_BASE
-    )}`,
+    canonical: `${new URL(routes.chat, URL_HOST)}`,
   },
 }
 
