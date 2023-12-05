@@ -77,8 +77,7 @@ export type ImageGenerateCallback = (
 	prompt?: string
 ) => void
 
-export type ImageProps<T> = T extends { prompt: unknown }
-	? ImageGenerateProps
-	: T extends { alt: unknown }
-	? NextImageProps
-	: ImageDescribeProps
+export type ImageProps =
+	| ImageGenerateProps
+	| ImageDescribeProps
+	| NextImageProps

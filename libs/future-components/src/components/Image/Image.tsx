@@ -25,10 +25,10 @@ function imageEvent<T extends ImageDescribeCallback | ImageGenerateCallback>(
 /**
  * Shows an image.
  * - Generates an image if you provide a `prompt`.
- * - Describes an image by generating `alt` text if you provide an `src` URL.
+ * - Describes an image by generating `alt` text if you provide an `src` URL and no `alt`.
  * - Otherwise renders as a regular `<Image>` from `next/image`.
  */
-export async function Image<T>(props: ImageProps<T>) {
+export async function Image(props: ImageProps) {
 	const response = await fetchEnhancedImage(props)
 	const isClient = typeof window !== 'undefined'
 

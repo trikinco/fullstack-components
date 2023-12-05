@@ -31,8 +31,8 @@ export function fetchImage(body: ImageRequestBody, config?: RequestConfigOnly) {
  * Image generation and description fetcher
  * Enhanced Image component for `next/image`
  */
-export function fetchEnhancedImage<T>(
-	props: ImageProps<T>,
+export function fetchEnhancedImage(
+	props: ImageProps,
 	config?: RequestConfigOnly
 ): false | Promise<ImageResponse<1>> {
 	const {
