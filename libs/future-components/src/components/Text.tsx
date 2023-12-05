@@ -1,4 +1,3 @@
-'use server'
 import type { ElementType, ReactNode, HTMLAttributes } from 'react'
 import type { AsComponent } from '../types'
 import type {
@@ -14,8 +13,11 @@ export interface TextProps
 	children?: ReactNode
 }
 
-export const defaultElement = 'div'
+const defaultElement = 'div'
 
+/**
+ * Text Server Component
+ */
 export async function Text<C extends ElementType = typeof defaultElement>({
 	as,
 	// Text options
@@ -58,5 +60,3 @@ export async function Text<C extends ElementType = typeof defaultElement>({
 
 	return <>{data?.content}</>
 }
-
-export default Text

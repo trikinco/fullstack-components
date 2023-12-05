@@ -1,4 +1,3 @@
-'use server'
 import { useId, type HTMLAttributes, type ReactNode } from 'react'
 import { merge } from '../utils/styles'
 import { getSelect } from '../handlers/select/selectClient'
@@ -18,6 +17,9 @@ export interface SelectProps
 	labelProps?: HTMLAttributes<HTMLLabelElement>
 }
 
+/**
+ * Select Server Component
+ */
 export async function Select({
 	prompt,
 	context,
@@ -65,5 +67,3 @@ export async function Select({
 		</>
 	)
 }
-
-export default Select

@@ -1,4 +1,3 @@
-'use server'
 import type { ReactNode, ElementType, HTMLAttributes } from 'react'
 import type { AsComponent } from '../types/AsComponent'
 import type { ChatMessage } from '../types/ChatMessage'
@@ -12,9 +11,10 @@ export type PromptProps = HTMLAttributes<HTMLElement> & {
 		| { prompt?: string; messages: ChatMessage[] }
 	)
 
-export const defaultElement = 'div'
+const defaultElement = 'div'
 
 /**
+ * Prompt Server Component
  * Renders a prompt response as its children.
  *
  * The response can be wrapped in an element by using the `as` prop.
@@ -50,5 +50,3 @@ export async function Prompt<C extends ElementType = typeof defaultElement>({
 		</>
 	)
 }
-
-export default Prompt
