@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-'use server'
 import NextImage from 'next/image'
 import type { ImageGenerateProps } from '../../types/Image'
 
@@ -30,7 +29,7 @@ export function ImageGeneration(
 	return (
 		<>
 			<NextImage
-				src={`data:image/png;base64,${response || ''}`}
+				src={response || ''}
 				alt={prompt || ''}
 				width={width}
 				height={height}

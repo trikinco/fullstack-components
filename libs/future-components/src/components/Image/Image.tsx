@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-'use server'
 import NextImage from 'next/image'
 import { fetchEnhancedImage } from '../../handlers/image/fetchers'
 import type { SyntheticEvent } from 'react'

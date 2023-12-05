@@ -18,6 +18,10 @@ export type ImageGenerationOptions = Omit<
 	model?: OpenAI.ImageGenerateParams['model']
 }
 
+/**
+ * Image generation service
+ * Defaults to base64 data URIs
+ */
 export async function runImageGeneration(
 	prompt: string,
 	options?: ImageGenerationOptions
@@ -40,7 +44,15 @@ export async function runImageGeneration(
 		})
 
 		const generatedUrls: string[] = generation.data
-			?.map((image) => image[response_format as 'url' | 'b64_json'] || '')
+			?.map((image) => {
+				const data = image[response_format as 'url' | 'b64_json'] || ''
+
+				if (response_format === 'b64_json') {
+					return `data:image/png;base64,${data}`
+				}
+
+				return data
+			})
 			.filter(Boolean)
 
 		const extractedUrls =
