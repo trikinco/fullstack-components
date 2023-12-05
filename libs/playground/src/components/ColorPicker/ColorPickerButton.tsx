@@ -41,6 +41,8 @@ export const ColorPickerButton = ({
 			{color && (
 				<span className="absolute top-0 left-0 w-full h-full flex items-center justify-center pointer-events-none z-20 transition-opacity opacity-0 group-hover:opacity-100">
 					<IconClose
+						width={20}
+						height={20}
 						className={merge(
 							shade && parseInt(shade) < 500 ? 'text-black' : 'text-white'
 						)}

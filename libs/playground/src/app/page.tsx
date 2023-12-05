@@ -108,7 +108,7 @@ export default function Home() {
 							color="secondary"
 							variant="outlined"
 						>
-							<IconPlay className="mr-2" />
+							<IconPlay width={20} height={20} className="mr-2" />
 							Try it live
 						</Button>
 					</div>

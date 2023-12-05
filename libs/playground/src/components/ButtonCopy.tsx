@@ -36,7 +36,11 @@ export const ButtonCopy = ({ className, text, ...rest }: ButtonCopyProps) => {
 			onClick={copy}
 			{...rest}
 		>
-			{isCopied ? <IconCheck /> : <IconFile />}
+			{isCopied ? (
+				<IconCheck width={20} height={20} />
+			) : (
+				<IconFile width={20} height={20} />
+			)}
 			<span className="sr-only">{label}</span>
 		</button>
 	)

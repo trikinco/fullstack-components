@@ -106,6 +106,8 @@ export const ColorPickerDialog = memo(function ColorPickerDialog({
 											focus-ring`}
 									/>
 									<IconCheck
+										width={20}
+										height={20}
 										className={`absolute z-20 ${
 											parseInt(value) < 500 ? 'text-black' : 'text-white'
 										} transition-opacity opacity-0 peer-checked:opacity-100 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4`}

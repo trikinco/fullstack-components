@@ -9,12 +9,12 @@ export interface ThemeIconProps {
 export const ThemeIcon = ({ theme }: ThemeIconProps) => {
 	switch (theme) {
 		case 'light':
-			return <IconSun />
+			return <IconSun width={20} height={20} />
 		case 'dark':
-			return <IconMoon />
+			return <IconMoon width={20} height={20} />
 		case 'system':
 		default:
-			return <IconEclipse />
+			return <IconEclipse width={20} height={20} />
 	}
 }
 
