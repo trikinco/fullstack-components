@@ -1,7 +1,12 @@
+'use server'
 import type { ElementType, ReactNode, HTMLAttributes } from 'react'
 import type { AsComponent } from '../types'
-import type { TextProps as TextOptions } from '../handlers/text/models'
-import { getText } from '../handlers/text/getters'
+import type {
+	TextProps as TextOptions,
+	TextResponse,
+} from '../handlers/text/models'
+import { getText } from '../handlers/text/textClient'
+import { renderTreeToString } from '../handlers/text/renderTreeToString'
 
 export interface TextProps
 	extends Omit<TextOptions, 'content'>,
@@ -26,8 +31,9 @@ export async function Text<C extends ElementType = typeof defaultElement>({
 	// HTML attributes only
 	...rest
 }: AsComponent<C, TextProps>) {
+	const stringContent = await renderTreeToString(children || content)
 	const response = await getText({
-		content: children || content,
+		content: stringContent,
 		prompt,
 		type,
 		tone,
@@ -36,6 +42,8 @@ export async function Text<C extends ElementType = typeof defaultElement>({
 		max,
 		min,
 	})
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+	const data: TextResponse = JSON.parse(response.responseText || '')
 
 	if (as) {
 		const Component = as as 'div' | C
@@ -43,12 +51,12 @@ export async function Text<C extends ElementType = typeof defaultElement>({
 			<Component
 				{...rest}
 				// eslint-disable-next-line @typescript-eslint/naming-convention
-				dangerouslySetInnerHTML={{ __html: response.content }}
+				dangerouslySetInnerHTML={{ __html: data.content }}
 			/>
 		)
 	}
 
-	return <>{response?.content}</>
+	return <>{data?.content}</>
 }
 
 export default Text

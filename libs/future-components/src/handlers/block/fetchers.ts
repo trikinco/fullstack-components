@@ -5,7 +5,7 @@ import type { BlockRequestBody, BlockResponse } from './models'
 /**
  * Block generation fetcher
  */
-export async function getBlock(
+export async function fetchBlock(
 	body: BlockRequestBody,
 	config?: RequestConfigOnly
 ) {
@@ -19,12 +19,12 @@ export async function getBlock(
  * Block generation and build processing fetcher
  * 'use client'
  */
-export async function getProcessedBlock(
+export async function fetchProcessedBlock(
 	props: BlockRequestBody & { id: string },
 	config?: RequestConfigOnly
 ) {
 	const { id, ...body } = props
-	const response = getBlock(body, config)
+	const response = fetchBlock(body, config)
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore Cannot find module 'https://esm.sh/build' or its corresponding type declarations.

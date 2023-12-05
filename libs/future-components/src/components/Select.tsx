@@ -1,7 +1,11 @@
+'use server'
 import { useId, type HTMLAttributes, type ReactNode } from 'react'
 import { merge } from '../utils/styles'
-import { SelectRequestOptions } from '../handlers/select/models'
-import { getSelect } from '../handlers/select/getters'
+import { getSelect } from '../handlers/select/selectClient'
+import type {
+	SelectRequestOptions,
+	SelectResponse,
+} from '../handlers/select/models'
 
 export interface SelectProps
 	extends SelectRequestOptions,
@@ -25,10 +29,11 @@ export async function Select({
 	...rest
 }: SelectProps) {
 	const selectId = useId()
-
-	const { label, content = [] } =
-		(await getSelect({ prompt, context, purpose, count })) || {}
-	const selectLabel = defaultLabel || label
+	const response = await getSelect({ prompt, context, purpose, count })
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+	const { label, content = [] }: SelectResponse = JSON.parse(
+		response.responseText || ''
+	)
 
 	return (
 		<>
@@ -39,7 +44,7 @@ export async function Select({
 				)}
 				{...labelProps}
 			>
-				{selectLabel}
+				{defaultLabel || label}
 			</label>
 
 			<select

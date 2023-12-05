@@ -34,79 +34,89 @@ You use any provided list of TailwindCSS colors in the UI you create. EXAMPLE li
 You use images from Unsplash, placehold.co (or similar) or colored rectangles
 `
 
+export async function getHtmlPage(
+	request: HtmlPageRequestBody,
+	options?: HtmlPageOptions
+) {
+	'use server'
+	console.log('handling `getHtmlPage` request')
+
+	const content: ChatMessage['content'] = []
+
+	if (request.src) {
+		content.push({
+			type: 'image_url',
+			// eslint-disable-next-line @typescript-eslint/naming-convention
+			image_url: {
+				url: request.src,
+				detail: 'high',
+			},
+		})
+	}
+
+	if (request.prompt && !request.html) {
+		content.push({
+			type: 'text',
+			text: `Create a website based on these instructions: ${request.prompt}`,
+		})
+	}
+
+	if (request.prompt && request.html) {
+		content.push(
+			{
+				type: 'text',
+				text: `Iterate on the website below based on these instructions: ${request.prompt}`,
+			},
+			{
+				type: 'text',
+				text: request.html,
+			}
+		)
+	}
+
+	if (request.theme) {
+		content.push({
+			type: 'text',
+			text: `Also, make the theme for ${request.theme} mode`,
+		})
+	}
+
+	if (request.colors) {
+		content.push({
+			type: 'text',
+			text: `Use these Tailwind colors: ${request.colors}`,
+		})
+	}
+
+	console.log('`getHtmlPage` content', content)
+
+	return await runChatCompletion(
+		[
+			{
+				role: 'system',
+				content: systemPrompt,
+			},
+			{
+				role: 'user',
+				content,
+			},
+		],
+		{
+			openAIApiKey: options?.openAiApiKey || OPENAI_API_KEY,
+			model: 'gpt-4-vision-preview',
+			temperature: 0,
+			// eslint-disable-next-line @typescript-eslint/naming-convention
+			max_tokens: 4096,
+		}
+	)
+}
+
 export class HtmlPageClient {
 	public handle = async (
 		request: HtmlPageRequestBody,
 		options: HtmlPageOptions
 	) => {
-		console.log('handling HtmlPage request', request)
-		const content: ChatMessage['content'] = []
-
-		if (request.src) {
-			content.push({
-				type: 'image_url',
-				// eslint-disable-next-line @typescript-eslint/naming-convention
-				image_url: {
-					url: request.src,
-					detail: 'high',
-				},
-			})
-		}
-
-		if (request.prompt && !request.html) {
-			content.push({
-				type: 'text',
-				text: `Create a website based on these instructions: ${request.prompt}`,
-			})
-		}
-
-		if (request.prompt && request.html) {
-			content.push(
-				{
-					type: 'text',
-					text: `Iterate on the website below based on these instructions: ${request.prompt}`,
-				},
-				{
-					type: 'text',
-					text: request.html,
-				}
-			)
-		}
-
-		if (request.theme) {
-			content.push({
-				type: 'text',
-				text: `Also, make the theme for ${request.theme} mode`,
-			})
-		}
-
-		if (request.colors) {
-			content.push({
-				type: 'text',
-				text: `Use these Tailwind colors: ${request.colors}`,
-			})
-		}
-
-		console.log('HTML page client content', content)
-
-		return await runChatCompletion(
-			[
-				{
-					role: 'system',
-					content: systemPrompt,
-				},
-				{
-					role: 'user',
-					content,
-				},
-			],
-			{
-				openAIApiKey: options.openAiApiKey || OPENAI_API_KEY,
-				model: 'gpt-4-vision-preview',
-				temperature: 0,
-				// eslint-disable-next-line @typescript-eslint/naming-convention
-				max_tokens: 4096,
-			}
-		)
+		console.log('handling `HtmlPageClient` request', request)
+		return await getHtmlPage(request, options)
 	}
 }

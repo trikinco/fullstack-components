@@ -1,29 +1,16 @@
 import { runChatCompletion } from '../../chatGptService'
 import { OPENAI_API_KEY } from '../../utils/constants'
 import type { ChatMessage } from '../../types/ChatMessage'
-import { ErrorEnhancementRequestBody, ErrorParserOptions } from './models'
+import type { ErrorEnhancementRequestBody, ErrorParserOptions } from './models'
 
-export class ErrorClient {
-	public handle = async (
-		errorEnhancementRequest: ErrorEnhancementRequestBody,
-		options?: ErrorParserOptions
-	) => {
-		console.log('handling error request', errorEnhancementRequest)
-		const messages: ChatMessage[] = []
-		if (options?.isProd !== true && process.env.NODE_ENV === 'development') {
-			messages.push(
-				...this.getDevelopmentOutputMessages(errorEnhancementRequest)
-			)
-		} else {
-			messages.push(...this.getSimpleOutputMessages(errorEnhancementRequest))
-		}
-		return await runChatCompletion(messages, {
-			openAIApiKey: options?.openAiApiKey || OPENAI_API_KEY,
-			format: 'JSON',
-		})
-	}
+export async function getEnhancedError(
+	request: ErrorEnhancementRequestBody,
+	options?: ErrorParserOptions
+) {
+	'use server'
+	console.log('handling `getEnhancedError` request', request)
 
-	private getDevelopmentOutputMessages = (
+	const getDevelopmentOutputMessages = (
 		errorEnhancementRequest: ErrorEnhancementRequestBody
 	) => {
 		return [
@@ -49,7 +36,7 @@ export class ErrorClient {
 		] as ChatMessage[]
 	}
 
-	private getSimpleOutputMessages = (
+	const getSimpleOutputMessages = (
 		errorEnhancementRequest: ErrorEnhancementRequestBody
 	) => {
 		return [
@@ -84,5 +71,29 @@ export class ErrorClient {
 				)}.`,
 			},
 		] as ChatMessage[]
+	}
+
+	const messages: ChatMessage[] = []
+
+	if (options?.isProd !== true && process.env.NODE_ENV === 'development') {
+		messages.push(...getDevelopmentOutputMessages(request))
+	} else {
+		messages.push(...getSimpleOutputMessages(request))
+	}
+
+	return await runChatCompletion(messages, {
+		openAIApiKey: options?.openAiApiKey || OPENAI_API_KEY,
+		format: 'JSON',
+	})
+}
+
+export class ErrorClient {
+	public handle = async (
+		request: ErrorEnhancementRequestBody,
+		options?: ErrorParserOptions
+	) => {
+		console.log('handling `ErrorClient` request', request)
+
+		return await getEnhancedError(request, options)
 	}
 }

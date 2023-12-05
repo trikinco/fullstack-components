@@ -12,15 +12,15 @@ import type {
 /**
  * Image generation and description fetcher
  */
-export function getImage(
+export function fetchImage(
 	body: ImageRequestBody & { n?: 1 | 0 | null },
 	config?: RequestConfigOnly
 ): ReturnType<typeof request<string, ImageRequestBody>>
-export function getImage(
+export function fetchImage(
 	body: ImageRequestBody & { n: number },
 	config?: RequestConfigOnly
 ): ReturnType<typeof request<string[], ImageRequestBody>>
-export function getImage(body: ImageRequestBody, config?: RequestConfigOnly) {
+export function fetchImage(body: ImageRequestBody, config?: RequestConfigOnly) {
 	return request(ApiUrlEnum.image, {
 		body,
 		...config,
@@ -31,7 +31,7 @@ export function getImage(body: ImageRequestBody, config?: RequestConfigOnly) {
  * Image generation and description fetcher
  * Enhanced Image component for `next/image`
  */
-export function getEnhancedImage<T>(
+export function fetchEnhancedImage<T>(
 	props: ImageProps<T>,
 	config?: RequestConfigOnly
 ): false | Promise<ImageResponse<1>> {
@@ -56,7 +56,7 @@ export function getEnhancedImage<T>(
 		return false
 	}
 
-	return getImage(
+	return fetchImage(
 		{
 			prompt,
 			src,

@@ -1,7 +1,8 @@
+'use server'
 import type { ReactNode, ElementType, HTMLAttributes } from 'react'
 import type { AsComponent } from '../types/AsComponent'
 import type { ChatMessage } from '../types/ChatMessage'
-import { getPrompt } from '../handlers/prompt/getters'
+import { getPrompt } from '../handlers/prompt/promptClient'
 
 export type PromptProps = HTMLAttributes<HTMLElement> & {
 	/** Children to render before the prompt response content */
@@ -28,6 +29,7 @@ export async function Prompt<C extends ElementType = typeof defaultElement>({
 	...rest
 }: AsComponent<C, PromptProps>) {
 	const response = await getPrompt({ prompt, messages })
+	const data = response.responseText
 
 	if (as) {
 		const Component = as as 'div' | C
@@ -35,7 +37,7 @@ export async function Prompt<C extends ElementType = typeof defaultElement>({
 			<Component {...rest}>
 				<>
 					{children}
-					{response}
+					{data}
 				</>
 			</Component>
 		)
@@ -44,7 +46,7 @@ export async function Prompt<C extends ElementType = typeof defaultElement>({
 	return (
 		<>
 			{children}
-			{response}
+			{data}
 		</>
 	)
 }

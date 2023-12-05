@@ -6,9 +6,9 @@ import type {
 } from './models'
 
 /**
- * Error enhancement request
+ * Error enhancement fetcher
  */
-export function getErrorEnhancement(
+export function fetchErrorEnhancement(
 	body: ErrorEnhancementRequestBody,
 	config?: RequestConfigOnly
 ) {

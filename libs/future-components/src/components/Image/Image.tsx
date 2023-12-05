@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+'use server'
 import NextImage from 'next/image'
-import { getEnhancedImage } from '../../handlers/image/getters'
+import { fetchEnhancedImage } from '../../handlers/image/fetchers'
 import type { SyntheticEvent } from 'react'
 import type {
 	ImageProps,
@@ -28,7 +29,7 @@ function imageEvent<T extends ImageDescribeCallback | ImageGenerateCallback>(
  * - Otherwise renders as a regular `<Image>` from `next/image`.
  */
 export async function Image<T>(props: ImageProps<T>) {
-	const response = await getEnhancedImage(props)
+	const response = await fetchEnhancedImage(props)
 	const isClient = typeof window !== 'undefined'
 
 	// Image generation

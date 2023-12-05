@@ -8,7 +8,7 @@ import type {
 /**
  * Not found enhancement request
  */
-export function getNotFoundEnhancement(
+export function fetchNotFoundEnhancement(
 	body: NotFoundEnhancerRequestBody,
 	config?: RequestConfigOnly
 ) {

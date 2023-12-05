@@ -1,25 +1,29 @@
 import { runChatCompletion } from '../../chatGptService'
 import { OPENAI_API_KEY } from '../../utils/constants'
-import { NotFoundEnhancerOptions, NotFoundEnhancerRequestBody } from './models'
 import { sitemapFromCache } from './sitemapParser'
+import type {
+	NotFoundEnhancerOptions,
+	NotFoundEnhancerRequestBody,
+} from './models'
 
 export type ChatMessage = {
 	role: 'system' | 'user' | 'assistant'
 	content: string
 }
 
-export class NotFoundEnhancerSitemapSelector {
-	public handle = async (
-		request: NotFoundEnhancerRequestBody,
-		options: NotFoundEnhancerOptions
-	) => {
-		console.log('handling not found sitemap selector request', request)
-		const possibleUrls = await sitemapFromCache(options.siteUrl)
-		const messages: ChatMessage[] = []
-		messages.push(
-			{
-				role: 'system',
-				content: `
+export async function getNotFoundSitemapSelector(
+	request: NotFoundEnhancerRequestBody,
+	options: NotFoundEnhancerOptions
+) {
+	'use server'
+	console.log('handling `getNotFoundSitemapSelector` request', request)
+
+	const possibleUrls = await sitemapFromCache(options.siteUrl)
+	const messages: ChatMessage[] = []
+	messages.push(
+		{
+			role: 'system',
+			content: `
                 You are an expert knowledge base for a website. Here is the full sitemap for the website: ${possibleUrls}
                 # You can 
                 1. analyse a user requested resource url that was 404 "not found" and choose the most relevant urls from the provided sitemap for the user. 
@@ -50,15 +54,26 @@ export class NotFoundEnhancerSitemapSelector {
                 1. [has relevant alternate url(s)]: Set "bestAlternateUrls" to the urls. If no url is relevant, add the homepage or root url (/).
 
                 Please perform the action directly and do not include the reasoning. Remember, ONLY RETURN JSON.`,
-			},
-			{
-				role: 'user',
-				content: `Here is the 404 "not found" requested http resource: ${request.requestedUrl}. Find any bestAlternateUrls.`,
-			}
-		)
-		return await runChatCompletion(messages, {
-			openAIApiKey: options.openAiApiKey || OPENAI_API_KEY,
-			temperature: 0,
-		})
+		},
+		{
+			role: 'user',
+			content: `Here is the 404 "not found" requested http resource: ${request.requestedUrl}. Find any bestAlternateUrls.`,
+		}
+	)
+
+	return await runChatCompletion(messages, {
+		openAIApiKey: options.openAiApiKey || OPENAI_API_KEY,
+		temperature: 0,
+	})
+}
+
+export class NotFoundEnhancerSitemapSelector {
+	public handle = async (
+		request: NotFoundEnhancerRequestBody,
+		options: NotFoundEnhancerOptions
+	) => {
+		console.log('handling `NotFoundEnhancerSitemapSelector` request', request)
+
+		return await getNotFoundSitemapSelector(request, options)
 	}
 }

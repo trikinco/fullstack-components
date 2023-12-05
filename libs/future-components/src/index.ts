@@ -10,7 +10,7 @@ import type { HandleBlock } from './handlers/block/blockHandler'
 import type { HandleImage } from './handlers/image/imageHandler'
 import type { HandleSelect } from './handlers/select/selectHandler'
 import type { HandleText } from './handlers/text/textHandler'
-import { HandleHtmlPage } from './handlers/htmlPage/htmlPageHandler'
+import type { HandleHtmlPage } from './handlers/htmlPage/htmlPageHandler'
 
 // Because we use a cache and use clients,
 // we may want to create a singleton for the library
@@ -76,29 +76,39 @@ export { Select } from './components/Select'
 export { Text } from './components/Text'
 
 // Service utils
-export { getNotFoundEnhancement } from './handlers/notFoundEnhancer/getters'
-export { getErrorEnhancement } from './handlers/errorEnhancer/getters'
-export { getPrompt } from './handlers/prompt/getters'
-export { getBlock } from './handlers/block/getters'
-export { getImage, getEnhancedImage } from './handlers/image/getters'
-export { getSelect } from './handlers/select/getters'
-export { getText } from './handlers/text/getters'
-export { getHtmlPage } from './handlers/htmlPage/getters'
+export { fetchNotFoundEnhancement } from './handlers/notFoundEnhancer/fetchers'
+export { fetchErrorEnhancement } from './handlers/errorEnhancer/fetchers'
+export { fetchPrompt } from './handlers/prompt/fetchers'
+export { fetchBlock } from './handlers/block/fetchers'
+export { fetchImage, fetchEnhancedImage } from './handlers/image/fetchers'
+export { fetchSelect } from './handlers/select/fetchers'
+export { fetchText } from './handlers/text/fetchers'
+export { fetchHtmlPage } from './handlers/htmlPage/fetchers'
 
-// public library api for server
-export { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
-export { NotFoundEnhancerContentGenerator } from './handlers/notFoundEnhancer/notFoundEnhancerContentGenerator'
-export { ErrorClient } from './handlers/errorEnhancer/errorClient'
+// Public library API for server
+export { ApiUrlEnum } from './enums/ApiUrlEnum'
+export { TextClient, getText } from './handlers/text/textClient'
+export { SelectClient, getSelect } from './handlers/select/selectClient'
+export { PromptClient, getPrompt } from './handlers/prompt/promptClient'
 export {
-	ErrorEnhancementResponse,
-	ErrorEnhancementRequestBody,
-	ErrorParserOptions,
-} from './handlers/errorEnhancer/models'
+	NotFoundEnhancerSitemapSelector,
+	getNotFoundSitemapSelector,
+} from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
 export {
-	NotFoundEnhancerRequestBody,
-	NotFoundEnhancerResponse,
-	NotFoundEnhancerOptions,
-} from './handlers/notFoundEnhancer/models'
+	NotFoundEnhancerContentGenerator,
+	getNotFoundContentGenerator,
+} from './handlers/notFoundEnhancer/notFoundEnhancerContentGenerator'
+export { ImageClient, getImage } from './handlers/image/imageClient'
+export { HtmlPageClient, getHtmlPage } from './handlers/htmlPage/htmlPageClient'
+export {
+	ErrorClient,
+	getEnhancedError,
+} from './handlers/errorEnhancer/errorClient'
+export { BlockClient, getBlock } from './handlers/block/blockClient'
+
+// Public library types
+export * from './handlers/errorEnhancer/models'
+export * from './handlers/notFoundEnhancer/models'
 export * from './handlers/prompt/models'
 export * from './handlers/block/models'
 export * from './handlers/image/models'

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+'use server'
 import NextImage from 'next/image'
 import type { ImageGenerateProps } from '../../types/Image'
 
