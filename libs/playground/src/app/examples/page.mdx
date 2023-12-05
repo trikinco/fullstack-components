@@ -7,7 +7,7 @@ import Demo from '@/src/components/Demo'
 import {
   NAME_LONG,
   NAME_SHORT,
-  URL_DEPLOYMENT,
+  URL_HOST,
 } from '@/src/utils/constants'
 import { routes } from '@/src/utils/routes'
 
@@ -15,10 +15,7 @@ export const metadata = {
   title: `Live examples of ${NAME_LONG}`,
   description: `Try these interactive examples from ${NAME_SHORT}`,
   alternates: {
-    canonical: `${new URL(
-      routes.examples,
-      URL_DEPLOYMENT || URL_BASE
-    )}`,
+    canonical: `${new URL(routes.examples, URL_HOST)}`,
   },
 }
 

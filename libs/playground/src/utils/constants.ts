@@ -1,4 +1,10 @@
 // Utils
+export const PORT = process.env.PORT || 3000
+export const URL_LOCAL = `http://localhost:${PORT}`
+export const URL_HOST =
+	process.env.VERCEL_ENV === 'preview'
+		? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+		: process.env.NEXT_PUBLIC_HOST || URL_LOCAL
 export const IS_DEV = process.env.NODE_ENV === 'development'
 
 // Lib-specific
@@ -27,12 +33,3 @@ export const META_AUTHORS = [
 export const ID_DIALOG_PORTAL = 'dialog-portal'
 export const ID_MAIN = 'main-content'
 export const ID_DOCS_NAV = 'docs-nav'
-
-// Use process.env.PORT by default and fallback to port 3000
-export const PORT = process.env.PORT || 3000
-export const URL_BASE = `http://localhost:${PORT}`
-
-export const URL_DEPLOYMENT =
-	process.env.VERCEL_ENV === 'preview'
-		? `https://${process.env.VERCEL_URL}`
-		: process.env.NEXT_PUBLIC_HOST || ''

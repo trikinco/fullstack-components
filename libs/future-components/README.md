@@ -45,8 +45,8 @@ Create a new [dynamic route](https://nextjs.org/docs/app/building-your-applicati
 
 Depending on which router you use in Next.js, the location of the API handler route will differ:
 
-- Using the Next.js App Router: `app/api/fsutils/[...fscomponents]/route.ts`
-- Using the Next.js Pages Router: `pages/api/fsutils/[...fscomponents].ts`
+- Using the Next.js **App Router**: `app/api/fsutils/[...fscomponents]/route.ts`
+- Using the Next.js **Pages Router**: `pages/api/fsutils/[...fscomponents].ts`
 
 ### Step 2: Configure the API handler route
 
@@ -56,7 +56,7 @@ As an example, let's set up the API handler for the `Image` component by adding 
 import {
 	handleFSComponents,
 	handleImageRequest,
-} from '@trikin-co/fullstack-components'
+} from '@trikinco/fullstack-components'
 
 const fscHandler = handleFSComponents({
 	// Configure one or more handlers
@@ -73,7 +73,7 @@ _All requests to `/api/fsutils/*`(image, prompt, notFoundEnhancer, etc.) will au
 
 **Note:** there's no auth on these endpoints but you can wrap them to add auth.
 
-All handlers can be imported from `@trikin-co/fullstack-components` and are prefixed with `handle`.
+All handlers can be imported from `@trikinco/fullstack-components` and are prefixed with `handle`.
 
 **Handlers examples:**
 

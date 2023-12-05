@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { URL_BASE, URL_DEPLOYMENT } from '../utils/constants'
+import { URL_HOST } from '../utils/constants'
 
 export default function robots(): MetadataRoute.Robots {
 	return {
@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
 			userAgent: '*',
 			allow: '/',
 		},
-		sitemap: `${new URL('sitemap.xml', URL_DEPLOYMENT || URL_BASE)}`,
+		sitemap: `${new URL('sitemap.xml', URL_HOST)}`,
 	}
 }

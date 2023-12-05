@@ -1,6 +1,6 @@
 import { Image } from '@trikinco/fullstack-components'
 import { Example } from '@/src/components/Example'
-import { URL_DEPLOYMENT } from '@/src/utils/constants'
+import { URL_HOST } from '@/src/utils/constants'
 import { routes } from '@/src/utils/routes'
 import catImage from '../../../../public/images/A-photograph-of-a-cat-wearing-a-cowboy-hat.png'
 
@@ -9,10 +9,7 @@ export const metadata = {
   description:
     'Create images with prompts or generate image descriptions.',
   alternates: {
-    canonical: `${new URL(
-      routes.image,
-      URL_DEPLOYMENT || URL_BASE
-    )}`,
+    canonical: `${new URL(routes.image, URL_HOST)}`,
   },
 }
 
