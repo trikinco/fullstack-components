@@ -1,26 +1,32 @@
 import { runChatCompletion } from '../../chatGptService'
 import { OPENAI_API_KEY } from '../../utils/constants'
+import type { ChatMessage } from '../../types/ChatMessage'
 import type { TextRequestBody, TextOptions } from './models'
 
 const systemPrompt = `Rewrite, create, edit and modify text content for the web provided by the user.
 You have full creative licence, unless otherwise specified by the user.
 You accept HTML, markdown and plain text. 
-The user will provide you with 'Rules' for how to modify the text. Only act on the content after 'Text:', DO NOT include the prompt or 'Rules'.
+The user will provide you with 'Text'. You only regard the content after 'Text:' as the input to act on. DO NOT include the 'Instructions' or 'Rules' in your output.
+The user may give you overall 'Instructions' for what they want you to do with the text.
+The user may give you 'Rules' for how to handle the text. 
 
 ## Instructions
-You ONLY RETURN JSON WITH THE FOLLOWING STRUCTURE {type:'text'|'markdown'|'HTML',content:string}
+You ONLY RETURN THE NEW TEXT AS JSON WITH THE FOLLOWING STRUCTURE {type:'text'|'markdown'|'HTML',content:string}
+DO NOT RETURN THE REASONING
 Return a single appropriate 'type' of 'text' | 'markdown' | 'HTML', either matching the input content type, or a 'type' defined by the user. This type MUST MATCH the actual kind of content you return. 
 Return all the stringified content in the JSON 'content' property
 If the user's HTML text has HTML heading elements (h1, h2, h3 etc.) and your rewritten text includes headings, ensure that they START AT THE SAME LEVEL as the input. e.g user prompt: 'make this text shorter', user HTML: '<h3 class="font-bold">long title</h3><p>long text..</p><p>more text</p>', return: '<h3 class="font-bold">title</h3><p>text..</p>'.
+If the user asks you to shorten, reduce or otherwise summarize the text, make sure you REALLY SHORTEN the text. You are allowed to omit paragraphs to achieve this. You should retain at least one heading if present in the input (you can modify this), you can omit or shorten the remaining headings.
 `
 
 export async function getText(request: TextRequestBody, options?: TextOptions) {
 	'use server'
 	console.log('handling `getText` request', request)
+	const content: ChatMessage['content'] = []
 
 	const {
 		prompt = 'Rewrite the text',
-		content,
+		content: text,
 		type,
 		tone,
 		strength,
@@ -50,17 +56,36 @@ export async function getText(request: TextRequestBody, options?: TextOptions) {
 		.filter(Boolean)
 		.join('\n')
 
+	if (prompt) {
+		content.push({
+			type: 'text',
+			text: `Instructions: ${prompt}`,
+		})
+	}
+
+	if (rules.length > 0) {
+		content.push({
+			type: 'text',
+			text: `Rules: ${rules}`,
+		})
+	}
+
+	if (text) {
+		content.push({
+			type: 'text',
+			text: `Text: ${text}`,
+		})
+	}
+
 	return await runChatCompletion(
 		[
-			{ role: 'system', content: systemPrompt },
+			{
+				role: 'system',
+				content: systemPrompt,
+			},
 			{
 				role: 'user',
-				content: `# ${prompt}
-					Rules: 
-					${rules}
-					Text: 
-					${content}
-					`,
+				content,
 			},
 		],
 		{
