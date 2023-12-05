@@ -23,7 +23,7 @@ npm install @trikinco/fullstack-components
 
 ## Requirements
 
-- `next>=13` - App and Pages Routers are supported!
+- `next>=13` (both App and Pages Routers are supported)
 - Your own [OpenAI API key](https://platform.openai.com/docs/overview)
 
 ## Setup
@@ -73,9 +73,17 @@ All handlers can be imported from `@trikinco/fullstack-components` and are prefi
 - errorEnhancer: handleErrorRequest
 - notFoundEnhancer: handleNotFoundEnhancement
 
-### Step 3: Add your OpenAI API key
+### Step 3: Add Environment Variables
 
-Add `OPENAI_API_KEY=<key>` to an [`.env` file](https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables) at the root of your project.
+```sh title=".env.local"
+OPENAI_API_KEY=<key>
+NEXT_PUBLIC_HOST=<url>
+```
+
+- Replace `<key>` with your [OpenAI API key](https://platform.openai.com/docs/overview)
+- Replace `<url>` with the full root URL of your project. e.g `http://localhost:3000` for local development and `https://example.com` for production
+
+Read more about adding [environment variables](https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables) to your project.
 
 ## Usage example
 
@@ -85,20 +93,22 @@ This component uses your sitemap to find the closest matching page to the "not f
 
 #### Step 1: Configure the API handler
 
-In the API handler file, you should add the following configuration to use this component.
+In the API handler route, you should add the following configuration to use the `useNotFoundEnhancement` hook shown later.
+
+```ts title="app/api/fsutils/[...fscomponents]/route.ts"
+export const POST = handleFSComponents({
+  notFoundEnhancer: handleNotFoundEnhancement({
+    // used to inspect the sitemap
+    siteUrl: process.env.NEXT_PUBLIC_HOST || '',
+    // used to generate the contents
+    openAiApiKey: process.env.OPENAI_API_KEY || '',
+  }),
+})
+```
 
 **Not Found Enhancer requires configuration of the API handler.**
 
 **Note:** not all features require configuration, so read the documentation for each feature.
-
-```ts
-export const POST = handleFSComponents({
-  notFoundEnhancer: handleNotFoundEnhancement({
-    siteUrl: process.env.SITE_URL || '', // used to inspect the sitemap
-    openAiApiKey: process.env.OPENAI_API_KEY || '', // used to generate the contents
-  }),
-})
-```
 
 #### Step 2: Create a new client component in your Next.js app
 

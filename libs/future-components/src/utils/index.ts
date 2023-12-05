@@ -1,4 +1,5 @@
 export * from './constants'
+export { ApiUrlEnum } from '../enums/ApiUrlEnum'
 export { request } from './request'
 export { merge } from './styles'
 export { renderToStaticMarkup } from './renderToStaticMarkup'
