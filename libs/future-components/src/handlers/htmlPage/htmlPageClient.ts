@@ -1,5 +1,6 @@
 import { runChatCompletion } from '../../chatGptService'
 import { OPENAI_API_KEY } from '../../utils/constants'
+import { getHtmlFromChatResponseText } from './htmlPageParser'
 import type { ChatMessage } from '../../types/ChatMessage'
 import type { HtmlPageRequestBody, HtmlPageOptions } from './models'
 
@@ -90,7 +91,7 @@ export async function getHtmlPage(
 
 	console.log('`getHtmlPage` content', content)
 
-	return await runChatCompletion(
+	const chatCompletion = await runChatCompletion(
 		[
 			{
 				role: 'system',
@@ -109,6 +110,21 @@ export async function getHtmlPage(
 			max_tokens: 4096,
 		}
 	)
+
+	console.log(
+		'`getHtmlPage` raw chatCompletion responseText',
+		chatCompletion.responseText
+	)
+
+	if (chatCompletion.responseText) {
+		chatCompletion.responseText = getHtmlFromChatResponseText(
+			chatCompletion.responseText
+		)
+	}
+
+	console.log('`getHtmlPage` chatCompletion response', chatCompletion)
+
+	return chatCompletion
 }
 
 export class HtmlPageClient {
