@@ -86,7 +86,6 @@ export { fetchText } from './handlers/text/fetchers'
 export { fetchHtmlPage } from './handlers/htmlPage/fetchers'
 
 // Public library API for server
-export { ApiUrlEnum } from './enums/ApiUrlEnum'
 export { TextClient, getText } from './handlers/text/textClient'
 export { SelectClient, getSelect } from './handlers/select/selectClient'
 export { PromptClient, getPrompt } from './handlers/prompt/promptClient'
