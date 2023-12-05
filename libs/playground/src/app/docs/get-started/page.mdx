@@ -95,7 +95,7 @@ This component uses your sitemap to find the closest matching page to the "not f
 
 In the API handler route, you should add the following configuration to use the `useNotFoundEnhancement` hook shown later.
 
-```ts
+```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 export const POST = handleFSComponents({
   notFoundEnhancer: handleNotFoundEnhancement({
     // used to inspect the sitemap
