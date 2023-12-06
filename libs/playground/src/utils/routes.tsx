@@ -53,6 +53,7 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 			<>
 				<Chip>Component</Chip>
 				<Chip>Hook</Chip>
+				<Chip>Utils</Chip>
 			</>
 		),
 	},
@@ -71,6 +72,7 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 			<>
 				<Chip>Component</Chip>
 				<Chip>Hook</Chip>
+				<Chip>Utils</Chip>
 			</>
 		),
 	},
@@ -92,6 +94,7 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 		footer: (
 			<>
 				<Chip>Hook</Chip>
+				<Chip>Utils</Chip>
 			</>
 		),
 	},
@@ -107,6 +110,7 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 		footer: (
 			<>
 				<Chip>Hook</Chip>
+				<Chip>Utils</Chip>
 			</>
 		),
 	},
@@ -123,6 +127,7 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 			<>
 				<Chip>Component</Chip>
 				<Chip>Hook</Chip>
+				<Chip>Utils</Chip>
 			</>
 		),
 	},
@@ -139,6 +144,7 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 			<>
 				<Chip>Component</Chip>
 				<Chip>Hook</Chip>
+				<Chip>Utils</Chip>
 			</>
 		),
 	},
@@ -155,6 +161,7 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 			<>
 				<Chip>Component</Chip>
 				<Chip>Hook</Chip>
+				<Chip>Utils</Chip>
 			</>
 		),
 	},
@@ -171,6 +178,7 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 			<>
 				<Chip>Component</Chip>
 				<Chip>Hook</Chip>
+				<Chip>Utils</Chip>
 			</>
 		),
 	},
