@@ -6,5 +6,5 @@ export default async function Page() {
 			"A navbar with a modern SVG logo, the title 'myProject' and some links. Dark bg, light text.",
 	})
 
-	return <div>{response}</div>
+	return <div>{response.responseText}</div>
 }

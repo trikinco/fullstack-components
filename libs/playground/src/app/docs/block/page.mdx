@@ -19,6 +19,8 @@ Blocks are individual React components that are generated and mounted on the fly
 ```jsx
 import { handleBlockRequest } from '@trikinco/fullstack-components'
 import { getBlock } from '@trikinco/fullstack-components'
+import { fetchBlock } from '@trikinco/fullstack-components/client'
+import { fetchProcessedBlock } from '@trikinco/fullstack-components/client'
 import { Block } from '@trikinco/fullstack-components/client'
 import { useBlock } from '@trikinco/fullstack-components/client'
 ```
@@ -52,6 +54,24 @@ export default function Page() {
   return <div id={id}>Generating a button...</div>
 }
 ```
+
+## Utilities
+
+- `getBlock`: Generates a tree of React components.
+  - 'use server'
+  - Third-party API request only
+  - Can be used to make Server Components and functionality
+  - Returns `ChatGptCompletionResponse`
+- `fetchBlock`: Generates a tree of React components.
+  - 'use client'
+  - Internal Next.js API request and third-party request
+  - Can be used to make Client Components and functionality
+  - Returns `string` (unparsed `BlockResult`)
+- `fetchProcessedBlock`: Generates and mounts a tree of React components. Calls `fetchBlock`, parses response and mounts the React tree to a node with the passed-in `id`.
+  - 'use client'
+  - Internal Next.js API request and third-party request
+  - Can be used to make Client Components and functionality
+  - Returns `BlockResult`
 
 ## Setup
 

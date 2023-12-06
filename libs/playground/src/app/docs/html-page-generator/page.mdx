@@ -13,18 +13,19 @@ export const metadata = {
 
 # HTML Page Generator
 
-AI-Powered HTML page generator that designs and codes user interfaces.
+AI-Powered HTML page generator utilities that designs and codes user interfaces.
 
 ```jsx
 import { handleHtmlPageRequest } from '@trikinco/fullstack-components'
 import { getHtmlPage } from '@trikinco/fullstack-components'
+import { fetchHtmlPage } from '@trikinco/fullstack-components/client'
 import { useHtmlPage } from '@trikinco/fullstack-components/client'
 ```
 
+The below HTML page generator and preview is an example of the kinds of interfaces and interactions you can build with `useHtmlPage`.
+
 <p className="ml-3 mb-3 mt-6 text-sm font-bold font-mono">{`Live Example`}</p>
 <Form className="mt-8 pt-8 border-t border-black/20 dark:border-white/20" />
-
-The above HTML page generator and preview is a simple example of the kinds of interfaces and interactions you can build with `useHtmlPage`.
 
 ## `useHtmlPage` hook
 
@@ -35,7 +36,32 @@ import { useHtmlPage } from '@trikinco/fullstack-components/client'
 
 export default function Document() {
   const { isLoading, data } = useHtmlPage({
+    /**
+     * Description of what you want to create
+     */
     prompt: 'An about page for a cat named Bubbles',
+    /**
+     * Full URL to a reference image
+     */
+    src: 'https://awesome-cat-ui/aboutcat.png',
+    /**
+     * Comma separated list of unprefixed
+     * Tailwind colors
+     */
+    colors: 'blue-800,purple-300',
+    /**
+     * HTML string of a full HTML document
+     * used to iterate on an existing document
+     * or previous generation result
+     */
+    html: `<!DOCTYPE html>
+    <html lang="en">
+      <body>
+        <h1>The Home of Bubbles</h1>
+        ...
+      </body>
+    </html>
+    `,
   })
 
   if (isLoading) {
@@ -47,15 +73,24 @@ export default function Document() {
 }
 ```
 
-## `getHtmlPage` utility
+## Utilities
 
-`getHtmlPage` is a built-in fetcher with all the same options as `useHtmlPage`, but it works on the server. Handy for making your own custom Server Components.
+- `getHtmlPage`: Generates a HTML document.
+  - 'use server'
+  - Third-party API request only
+  - Can be used to make Server Components and functionality
+  - Returns `ChatGptCompletionResponse`
+- `fetchHtmlPage`: Generates a HTML document.
+  - 'use client'
+  - Internal Next.js API request and third-party request
+  - Can be used to make Client Components and functionality
+  - Returns `string`
 
 ```jsx title="Server Component"
 import { getHtmlPage } from '@trikinco/fullstack-components'
 
 export default async function Page() {
-  const response = await getHtmlPage({
+  const { responseText } = await getHtmlPage({
     prompt: 'A modern marketing site for a speed boat company',
     src: 'https://speed-boat-designs.dev/inspiration.png',
     colors: 'blue-400,teal-200',
@@ -64,7 +99,7 @@ export default async function Page() {
     html: '<!DOCTYPE html><html>...</html>',
   })
 
-  return response
+  return responseText
 }
 ```
 

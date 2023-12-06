@@ -20,6 +20,7 @@ Rewrite, simplify or create text. Handles plain text, markdown and HTML.
 import { handleTextRequest } from '@trikinco/fullstack-components'
 import { getText } from '@trikinco/fullstack-components'
 import { Text } from '@trikinco/fullstack-components'
+import { fetchText } from '@trikinco/fullstack-components/client'
 import { useText } from '@trikinco/fullstack-components/client'
 ```
 
@@ -27,9 +28,9 @@ import { useText } from '@trikinco/fullstack-components/client'
 
 ### Rewriting text
 
-<Example>
+<Example isProse>
 <Text
-  prompt="Shorten and simplify"
+  prompt="Summarize to one or two short paragraphs"
   grade={5}
   type="HTML"
   as="div"
@@ -49,12 +50,13 @@ import { useText } from '@trikinco/fullstack-components/client'
   by Hermitian operators. The position operator X and momentum operator P do not
   commute, but rather satisfy the canonical commutation relation.
   </p>
+  <p>Given a quantum state, the Born rule lets us compute expectation values for both X and P, and moreover for powers of them</p>
 </Text>
 </Example>
 
 ```jsx title="Text rewrite example"
 <Text
-  prompt="Shorten and simplify"
+  prompt="Summarize to one or two short paragraphs"
   grade={5}
   type="HTML"
   as="div"
@@ -73,6 +75,11 @@ import { useText } from '@trikinco/fullstack-components/client'
     are represented by Hermitian operators. The position operator
     X and momentum operator P do not commute, but rather satisfy
     the canonical commutation relation.
+  </p>
+  <p>
+    Given a quantum state, the Born rule lets us compute
+    expectation values for both X and P, and moreover for powers
+    of them
   </p>
 </Text>
 ```
@@ -152,9 +159,18 @@ const { isLoading, data } = useText({
 })
 ```
 
-## `getText` utility
+## Utilities
 
-`getText` is a built-in fetcher with all the same options as `useText`, but it works on the server. Handy for making your own custom Server Components.
+- `getText`: Generates modified or new text. Only accepts `content` as a string / stringified HTML.
+  - 'use server'
+  - Third-party API request only
+  - Can be used to make Server Components and functionality
+  - Returns `ChatGptCompletionResponse`
+- `fetchText`: Generates modified or new text. Transforms `content` react trees to a HTML string.
+  - 'use client'
+  - Internal Next.js API request and third-party request
+  - Can be used to make Client Components and functionality
+  - Returns `TextResponse`
 
 ```jsx title="Server Component"
 import { getText } from '@trikinco/fullstack-components'

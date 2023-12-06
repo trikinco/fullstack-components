@@ -7,7 +7,7 @@ import { generateHtmlPage } from './action'
 import { FormBody } from './FormBody'
 
 export function Form({ className }: HTMLAttributes<HTMLFormElement>) {
-	const [state, formAction] = useFormState(generateHtmlPage, '')
+	const [state, formAction] = useFormState(generateHtmlPage, null)
 	const formRef = useRef<HTMLFormElement>(null)
 
 	const refetch = () => {

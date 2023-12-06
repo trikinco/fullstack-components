@@ -2,7 +2,6 @@ import { Image } from '@trikinco/fullstack-components'
 import { Example } from '@/src/components/Example'
 import { URL_HOST } from '@/src/utils/constants'
 import { routes } from '@/src/utils/routes'
-import catImage from '../../../../public/images/A-photograph-of-a-cat-wearing-a-cowboy-hat.png'
 
 export const metadata = {
   title: 'Image - AI Image Generation And Visual Descriptions',
@@ -20,7 +19,9 @@ A smart image component that either describes a known image, generates an image 
 ```jsx
 import { handleImageRequest } from '@trikinco/fullstack-components'
 import { getImage } from '@trikinco/fullstack-components'
+import { getEnhancedImage } from '@trikinco/fullstack-components'
 import { Image } from '@trikinco/fullstack-components'
+import { fetchImage } from '@trikinco/fullstack-components/client'
 import { useImage } from '@trikinco/fullstack-components/client'
 ```
 
@@ -50,10 +51,9 @@ import { useImage } from '@trikinco/fullstack-components/client'
 
 <Example label="Example">
   <Image
-    src={catImage}
-    alt="A photograph of a cat wearing a cowboy hat"
-    width={1024}
-    height={1024}
+    prompt="A photograph of a cat wearing a cowboy hat"
+    model="dall-e-3"
+    size="1024x1024"
   />
 </Example>
 
@@ -102,7 +102,7 @@ import { useImage } from '@trikinco/fullstack-components/client'
 
 export default function Page() {
   const { isLoading, isError, data } = useImage({
-    src: 'https://absolute-cat-url.jpg',
+    src: 'https://absolute-cat-url/tabbycat.jpg',
   })
 
   if (isLoading) {
@@ -154,22 +154,36 @@ export default function Page() {
 }
 ```
 
-## `getImage` utility
+## Utilities
 
-`getImage` is a built-in fetcher with all the same options as `useImage`, but it works on the server. Handy for making your own custom Server Components.
+- `getImage`: Generates or describes image/s.
+  - 'use server'
+  - Third-party API request only
+  - Can be used to make Server Components and functionality
+  - Returns `ChatGptCompletionResponse` | `ImageGenerationResponse`
+- `getEnhancedImage`: Generates or describes one image. Accepts all the props of the `Image` component.
+  - 'use server'
+  - Third-party API request only
+  - Can be used to make Server Components and functionality
+  - Returns `string` | `string[]` | `''` (and logs a development warning if `alt` and no `prompt` was passed)
+- `fetchImage`: Generates or describes image/s.
+  - 'use client'
+  - Internal Next.js API request and third-party request
+  - Can be used to make Client Components and functionality
+  - Returns `string` | `string[]`
 
 ```jsx title="Server Component"
 import { getImage } from '@trikinco/fullstack-components'
 
 export default async function Page() {
-  const response = await getImage({
+  const { responseText } = await getImage({
     prompt:
       'An ethereal landscape in a far away fantasy land, natural light, golden hour',
   })
 
   return (
     <img
-      src={response}
+      src={responseText}
       alt="An ethereal landscape in a far away fantasy land"
       width="256"
       height="256"

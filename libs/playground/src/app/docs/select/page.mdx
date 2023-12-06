@@ -21,11 +21,18 @@ A smart dropdown component that creates, labels and sorts all its own options.
 import { handleSelectRequest } from '@trikinco/fullstack-components'
 import { getSelect } from '@trikinco/fullstack-components'
 import { Select } from '@trikinco/fullstack-components'
+import { fetchSelect } from '@trikinco/fullstack-components/client'
 import { useSelect } from '@trikinco/fullstack-components/client'
 ```
 
 ## `Select` Server Component
 
+<Example>
+  <Select
+    prompt="Selecting a time zone in GMT"
+    context="The time zone for Sydney should be selected"
+  />
+</Example>
 ```jsx
 <Select
   prompt="Selecting a time zone in GMT"
@@ -38,12 +45,16 @@ import { useSelect } from '@trikinco/fullstack-components/client'
 `useSelect` is a utility hook that allows for full access to Select generation data.
 Useful for generating lists or when creating custom dropdown components.
 
+<Example>
+  <UseSelect />
+</Example>
+
 ```jsx
 'use client'
 
 import { useSelect } from '@trikinco/fullstack-components/client'
 
-export default () => {
+export default function Page() {
   const { isLoading, isError, data } = useSelect({
     prompt:
       'The nearest countries to Australia. Include a flag emoji in the label.',
@@ -60,8 +71,8 @@ export default () => {
 
   return (
     <>
-      <p className="font-bold">{data?.label}</p>
-      <ul>
+      <p className="font-bold mt-0">{data?.label}</p>
+      <ul className="mb-0">
         {data?.content?.map((item) => (
           <li key={item.value}>{item.label}</li>
         ))}
@@ -71,13 +82,18 @@ export default () => {
 }
 ```
 
-<Example>
-  <UseSelect />
-</Example>
+## Utilities
 
-## `getSelect` utility
-
-`getSelect` is a built-in fetcher with all the same options as `useSelect`, but it works on the server. Handy for making your own custom Server Components.
+- `getSelect`: Generates lists of items.
+  - 'use server'
+  - Third-party API request only
+  - Can be used to make Server Components and functionality
+  - Returns `ChatGptCompletionResponse`
+- `fetchSelect`: Generates lists of items. Transforms `content` react trees to a HTML string.
+  - 'use client'
+  - Internal Next.js API request and third-party request
+  - Can be used to make Client Components and functionality
+  - Returns `SelectResponse`
 
 ```jsx title="Server Component"
 import { getSelect } from '@trikinco/fullstack-components'
