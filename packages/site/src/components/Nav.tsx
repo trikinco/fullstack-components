@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import Link from 'next/link'
-import { merge } from '../../../fullstack-components/dist/utils'
+import { merge } from '@trikinco/fullstack-components/utils'
 import {
 	NAME_LIB,
 	NAME_SHORT,

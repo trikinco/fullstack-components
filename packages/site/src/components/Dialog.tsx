@@ -6,7 +6,7 @@ import type {
 	ReactNode,
 } from 'react'
 import { useDialog, type UseDialogProps } from '../hooks/useDialog'
-import { merge } from '../../../fullstack-components/dist/utils'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export interface DialogProps
 	extends UseDialogProps,

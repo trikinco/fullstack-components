@@ -1,8 +1,8 @@
 'use client'
 import { Children, forwardRef, useImperativeHandle } from 'react'
 import type { HTMLAttributes, ElementType } from 'react'
-import { merge } from '../../../fullstack-components/dist/utils'
-import { useText } from '../../../fullstack-components/dist/client'
+import { merge } from '@trikinco/fullstack-components/utils'
+import { useText } from '@trikinco/fullstack-components/client'
 import type { RewriteOptions } from '../types/Text'
 
 export interface TextRewriteProps

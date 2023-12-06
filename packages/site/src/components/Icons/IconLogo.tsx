@@ -1,5 +1,5 @@
 import { useId, type SVGAttributes } from 'react'
-import { merge } from '../../../../fullstack-components/dist/utils'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export const IconLogo = ({
 	className,

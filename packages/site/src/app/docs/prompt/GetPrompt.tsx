@@ -1,4 +1,4 @@
-import { getPrompt } from '../../../../../fullstack-components/dist'
+import { getPrompt } from '@trikinco/fullstack-components'
 
 export default async function Page() {
 	const { responseText } = await getPrompt({

@@ -1,4 +1,4 @@
-import { merge } from '../../../../fullstack-components/dist/utils'
+import { merge } from '@trikinco/fullstack-components/utils'
 import type { DetailedHTMLProps, InputHTMLAttributes } from 'react'
 
 export type InputProps = DetailedHTMLProps<

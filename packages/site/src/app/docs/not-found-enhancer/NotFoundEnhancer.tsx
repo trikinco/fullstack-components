@@ -1,6 +1,6 @@
 'use client'
 
-import { useNotFoundEnhancement } from '../../../../../fullstack-components/dist/client'
+import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
 import Link from 'next/link'
 import { Spinner } from '@/src/components/Spinner'
 

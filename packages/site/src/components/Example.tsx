@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode, ElementType } from 'react'
-import type { AsComponent } from '../../../fullstack-components/dist'
-import { merge } from '../../../fullstack-components/dist/utils'
+import type { AsComponent } from '@trikinco/fullstack-components'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export interface ExampleProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode

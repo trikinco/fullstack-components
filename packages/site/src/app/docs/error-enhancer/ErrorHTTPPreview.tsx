@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Spinner } from '@/src/components/Spinner'
 import { Example } from '@/src/components/Example'
 import { Button } from '@/src/components/Elements/Button'
-import { useErrorEnhancement } from '../../../../../fullstack-components/dist/client'
+import { useErrorEnhancement } from '@trikinco/fullstack-components/client'
 
 export interface ErrorPreviewProps {
 	/** HTTP status code error to imitate */

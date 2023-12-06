@@ -1,4 +1,4 @@
-import { getBlock } from '../../../../../fullstack-components/dist'
+import { getBlock } from '@trikinco/fullstack-components'
 
 export default async function Page() {
 	const response = await getBlock({

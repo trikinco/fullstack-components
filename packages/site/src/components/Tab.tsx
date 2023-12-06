@@ -1,5 +1,5 @@
 import type { DetailedHTMLProps, ButtonHTMLAttributes, ReactNode } from 'react'
-import { merge } from '../../../fullstack-components/dist/utils'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export interface TabProps
 	extends DetailedHTMLProps<

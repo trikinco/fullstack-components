@@ -1,6 +1,6 @@
 'use client'
 
-import { useText } from '../../../../../fullstack-components/dist/client'
+import { useText } from '@trikinco/fullstack-components/client'
 
 export default function Page() {
 	const { isLoading, data } = useText({

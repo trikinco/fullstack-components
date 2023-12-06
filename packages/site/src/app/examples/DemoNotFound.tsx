@@ -2,7 +2,7 @@
 
 import { useId, useState } from 'react'
 import Link from 'next/link'
-import { useNotFoundEnhancement } from '../../../../fullstack-components/dist/client'
+import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
 import { Button } from '@/src/components/Elements/Button'
 import { Spinner } from '@/src/components/Spinner'
 

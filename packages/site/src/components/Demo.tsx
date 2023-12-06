@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode, ElementType } from 'react'
-import { merge } from '../../../fullstack-components/dist/utils'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export interface DemoProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode

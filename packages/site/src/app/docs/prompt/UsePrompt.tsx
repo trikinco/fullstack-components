@@ -1,6 +1,6 @@
 'use client'
 
-import { usePrompt } from '../../../../../fullstack-components/dist/client'
+import { usePrompt } from '@trikinco/fullstack-components/client'
 
 export default function Page() {
 	const { isLoading, data } = usePrompt({

@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import Link, { type LinkProps } from 'next/link'
 import Image, { type ImageProps } from 'next/image'
-import { merge } from '../../../fullstack-components/dist/utils'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export interface AvatarProps
 	extends HTMLAttributes<HTMLAnchorElement>,

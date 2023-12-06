@@ -1,6 +1,6 @@
 'use client'
 
-import { useImage } from '../../../../../fullstack-components/dist/client'
+import { useImage } from '@trikinco/fullstack-components/client'
 
 export default function Page() {
 	const { isLoading, isError, data } = useImage({

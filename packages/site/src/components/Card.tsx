@@ -1,7 +1,7 @@
 import type { ElementType } from 'react'
 import Image from 'next/image'
-import { merge } from '../../../fullstack-components/dist/utils'
-import type { AsComponent } from '../../../fullstack-components/dist'
+import { merge } from '@trikinco/fullstack-components/utils'
+import type { AsComponent } from '@trikinco/fullstack-components'
 import type { CardProps } from '@/src/types/Card'
 
 export const defaultElement = 'div'

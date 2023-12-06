@@ -2,7 +2,7 @@
 import type { ReactNode, HTMLAttributes } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { merge } from '../../../fullstack-components/dist/utils'
+import { merge } from '@trikinco/fullstack-components/utils'
 import SkipLink from '@/src/components/SkipLink'
 import { routesMeta } from '@/src/utils/routes'
 import { ID_DOCS_NAV, ID_MAIN } from '@/src/utils/constants'

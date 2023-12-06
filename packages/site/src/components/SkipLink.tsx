@@ -1,5 +1,5 @@
 import type { ReactNode, DetailedHTMLProps, AnchorHTMLAttributes } from 'react'
-import { merge } from '../../../fullstack-components/dist/utils'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export interface SkipLinkProps
 	extends DetailedHTMLProps<

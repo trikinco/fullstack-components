@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import Link from 'next/link'
-import { merge } from '../../../fullstack-components/dist/utils'
+import { merge } from '@trikinco/fullstack-components/utils'
 import { IconLogo } from './Icons/IconLogo'
 import { NAME_SHORT, URL_GITHUB, URL_NPM } from '../utils/constants'
 import { IconGitHub } from './Icons/IconGitHub'

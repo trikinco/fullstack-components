@@ -2,7 +2,7 @@
 import type { ReactNode, HTMLAttributes } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { merge } from '../../../fullstack-components/dist/utils'
+import { merge } from '@trikinco/fullstack-components/utils'
 import { routesDocsMeta } from '@/src/utils/routes'
 
 export interface DocsFooterProps extends HTMLAttributes<HTMLDivElement> {

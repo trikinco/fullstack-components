@@ -1,8 +1,8 @@
 'use client'
 
 import { type HTMLAttributes, useId, useState } from 'react'
-import type { SelectResponse } from '../../../fullstack-components/dist'
-import { merge } from '../../../fullstack-components/dist/utils'
+import type { SelectResponse } from '@trikinco/fullstack-components'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export interface SelectProps extends HTMLAttributes<HTMLDivElement> {
 	data?: SelectResponse

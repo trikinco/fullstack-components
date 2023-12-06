@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ErrorEnhancementBoundary } from '../../../../fullstack-components/dist/client'
+import { ErrorEnhancementBoundary } from '@trikinco/fullstack-components/client'
 import { Button } from '@/src/components/Elements/Button'
 import { Spinner } from '@/src/components/Spinner'
 

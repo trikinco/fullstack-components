@@ -1,6 +1,6 @@
 'use client'
 
-import { useSelect } from '../../../../../fullstack-components/dist/client'
+import { useSelect } from '@trikinco/fullstack-components/client'
 
 export default function Page() {
 	const { isLoading, isError, data } = useSelect({

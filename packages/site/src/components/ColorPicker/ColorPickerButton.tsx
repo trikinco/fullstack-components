@@ -1,5 +1,5 @@
 import type { HTMLAttributes } from 'react'
-import { merge } from '../../../../fullstack-components/dist/utils'
+import { merge } from '@trikinco/fullstack-components/utils'
 import { IconClose } from '../Icons/IconClose'
 import type { Color } from '../../utils/tailwind'
 

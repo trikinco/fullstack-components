@@ -9,7 +9,7 @@ import {
 	handleHtmlPageRequest,
 	handleNotFoundEnhancement,
 	type FSCOptions,
-} from '../../../../../../fullstack-components/dist'
+} from '@trikinco/fullstack-components'
 
 const config = {
 	openAiApiKey: process.env.OPENAI_API_KEY || '',

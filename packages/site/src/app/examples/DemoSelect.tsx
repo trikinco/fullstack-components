@@ -1,6 +1,6 @@
 'use client'
 
-import { useSelect } from '../../../../fullstack-components/dist/client'
+import { useSelect } from '@trikinco/fullstack-components/client'
 import { Select } from '@/src/components/Select'
 import { FormEvent, useState } from 'react'
 import { Input } from '@/src/components/Elements/Input'

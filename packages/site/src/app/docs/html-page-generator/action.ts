@@ -1,6 +1,6 @@
 'use server'
 
-import { getHtmlPage } from '../../../../../fullstack-components/dist'
+import { getHtmlPage } from '@trikinco/fullstack-components'
 
 /**
  * Form action for generating a HTML page

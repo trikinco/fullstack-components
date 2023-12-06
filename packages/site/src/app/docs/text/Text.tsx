@@ -1,4 +1,4 @@
-import { Text } from '../../../../../fullstack-components/dist'
+import { Text } from '@trikinco/fullstack-components'
 
 export default function Page() {
 	return (

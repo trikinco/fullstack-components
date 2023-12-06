@@ -1,7 +1,7 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { Block } from '../../../../../fullstack-components/dist/client'
+import { Block } from '@trikinco/fullstack-components/client'
 import { Spinner } from '@/src/components/Spinner'
 import { NAME_LIB, NAME_SHORT, NAME_LONG } from '@/src/utils/constants'
 import { useRuntimeStyles } from '@/src/hooks/useRuntimeStyles'

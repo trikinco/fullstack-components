@@ -2,7 +2,7 @@
 
 import { useRef, type HTMLAttributes } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
-import { merge } from '../../../../fullstack-components/dist/utils'
+import { merge } from '@trikinco/fullstack-components/utils'
 import { generateHtmlPage } from '../docs/html-page-generator/action'
 import { Button } from '@/src/components/Elements/Button'
 import { Input } from '@/src/components/Elements/Input'

@@ -1,4 +1,4 @@
-import { getImage } from '../../../../../fullstack-components/dist'
+import { getImage } from '@trikinco/fullstack-components'
 
 export default async function Page() {
 	const { responseText } = await getImage({

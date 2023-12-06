@@ -1,6 +1,6 @@
 import type { ReactNode, HTMLAttributes, ElementType } from 'react'
-import { merge } from '../../../fullstack-components/dist/utils'
-import type { AsComponent } from '../../../fullstack-components/dist'
+import { merge } from '@trikinco/fullstack-components/utils'
+import type { AsComponent } from '@trikinco/fullstack-components'
 import { ID_MAIN } from '../utils/constants'
 
 export interface MainProps extends HTMLAttributes<HTMLElement> {
