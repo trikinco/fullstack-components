@@ -75,16 +75,6 @@ export { Image } from './components/Image/Image'
 export { Select } from './components/Select'
 export { Text } from './components/Text'
 
-// Service utils
-export { fetchNotFoundEnhancement } from './handlers/notFoundEnhancer/fetchers'
-export { fetchErrorEnhancement } from './handlers/errorEnhancer/fetchers'
-export { fetchPrompt } from './handlers/prompt/fetchers'
-export { fetchBlock } from './handlers/block/fetchers'
-export { fetchImage, fetchEnhancedImage } from './handlers/image/fetchers'
-export { fetchSelect } from './handlers/select/fetchers'
-export { fetchText } from './handlers/text/fetchers'
-export { fetchHtmlPage } from './handlers/htmlPage/fetchers'
-
 // Public library API for server
 export { TextClient, getText } from './handlers/text/textClient'
 export { SelectClient, getSelect } from './handlers/select/selectClient'
@@ -98,14 +88,17 @@ export {
 	getNotFoundContentGenerator,
 } from './handlers/notFoundEnhancer/notFoundEnhancerContentGenerator'
 export { ImageClient, getImage } from './handlers/image/imageClient'
+export { getEnhancedImage } from './handlers/image/getters'
 export { HtmlPageClient, getHtmlPage } from './handlers/htmlPage/htmlPageClient'
 export {
 	ErrorClient,
-	getEnhancedError,
+	getErrorEnhancement,
 } from './handlers/errorEnhancer/errorClient'
 export { BlockClient, getBlock } from './handlers/block/blockClient'
 
 // Public library types
+export { ChatGptCompletionResponse } from './chatGptService'
+export { ImageGenerationResponse } from './imageGenerationService'
 export * from './handlers/errorEnhancer/models'
 export * from './handlers/notFoundEnhancer/models'
 export * from './handlers/prompt/models'

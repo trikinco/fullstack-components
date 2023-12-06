@@ -3,12 +3,12 @@ import { OPENAI_API_KEY } from '../../utils/constants'
 import type { ChatMessage } from '../../types/ChatMessage'
 import type { ErrorEnhancementRequestBody, ErrorParserOptions } from './models'
 
-export async function getEnhancedError(
+export async function getErrorEnhancement(
 	request: ErrorEnhancementRequestBody,
 	options?: ErrorParserOptions
 ) {
 	'use server'
-	console.log('handling `getEnhancedError` request', request)
+	console.log('handling `getErrorEnhancement` request', request)
 
 	const getDevelopmentOutputMessages = (
 		errorEnhancementRequest: ErrorEnhancementRequestBody
@@ -94,6 +94,6 @@ export class ErrorClient {
 	) => {
 		console.log('handling `ErrorClient` request', request)
 
-		return await getEnhancedError(request, options)
+		return await getErrorEnhancement(request, options)
 	}
 }

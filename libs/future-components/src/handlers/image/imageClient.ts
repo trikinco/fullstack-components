@@ -1,5 +1,8 @@
 import { runChatCompletion } from '../../chatGptService'
-import { runImageGeneration } from '../../imageGenerationService'
+import {
+	runImageGeneration,
+	type ImageGenerationResponse,
+} from '../../imageGenerationService'
 import { OPENAI_API_KEY } from '../../utils/constants'
 import type { ImageRequestBody, ImageOptions } from './models'
 
@@ -15,7 +18,14 @@ There's usually no need to include words like "image", "icon", or "picture" in t
 Perform the action directly and do not include the reasoning
 Only return PLAIN TEXT
 `
-
+export async function getImage(
+	request: Omit<ImageRequestBody, 'n'> & { n?: 1 | 0 | null },
+	options?: ImageOptions
+): Promise<ImageGenerationResponse<string>>
+export async function getImage(
+	request: Omit<ImageRequestBody, 'n'> & { n: number },
+	options?: ImageOptions
+): Promise<ImageGenerationResponse<string[]>>
 export async function getImage(
 	request: ImageRequestBody,
 	options?: ImageOptions
@@ -61,7 +71,10 @@ export async function getImage(
 }
 
 export class ImageClient {
-	public handle = async (request: ImageRequestBody, options: ImageOptions) => {
+	public handle = async (
+		request: ImageRequestBody & { n?: any },
+		options: ImageOptions
+	) => {
 		console.log('handling `ImageClient` request', request)
 
 		return await getImage(request, options)

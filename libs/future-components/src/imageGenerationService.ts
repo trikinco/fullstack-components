@@ -3,8 +3,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import OpenAI from 'openai'
 
-export type ImageGenerationResponse = {
-	responseText: string | string[]
+export type ImageGenerationResponse<T = string | string[]> = {
+	responseText: T
 	created: number
 	data?: OpenAI.Image[]
 	errorMessage?: string

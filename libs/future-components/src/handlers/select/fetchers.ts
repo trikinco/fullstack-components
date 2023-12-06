@@ -1,3 +1,4 @@
+'use client'
 import { request, type RequestConfigOnly } from '../../utils/request'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 import type { SelectResponse, SelectRequestBody } from './models'
