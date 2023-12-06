@@ -1,40 +1,18 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { request, type RequestConfigOnly } from '../../utils/request'
-import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
+'use server'
 import { IS_DEV } from '../../utils/constants'
-import type { ImageResponse, ImageRequestBody } from './models'
 import type {
 	ImageProps,
 	ImageGenerateProps,
 	ImageDescribeProps,
 } from '../../types/Image'
+import { getImage } from './imageClient'
 
 /**
- * Image generation and description fetcher
+ * Image generation and description getter
+ * Used to make enhanced `Image` components similar to `next/image`
  */
-export function getImage(
-	body: ImageRequestBody & { n?: 1 | 0 | null },
-	config?: RequestConfigOnly
-): ReturnType<typeof request<string, ImageRequestBody>>
-export function getImage(
-	body: ImageRequestBody & { n: number },
-	config?: RequestConfigOnly
-): ReturnType<typeof request<string[], ImageRequestBody>>
-export function getImage(body: ImageRequestBody, config?: RequestConfigOnly) {
-	return request(ApiUrlEnum.image, {
-		body,
-		...config,
-	})
-}
-
-/**
- * Image generation and description fetcher
- * Enhanced Image component for `next/image`
- */
-export function getEnhancedImage<T>(
-	props: ImageProps<T>,
-	config?: RequestConfigOnly
-): false | Promise<ImageResponse<1>> {
+export async function getEnhancedImage(props: ImageProps) {
 	const {
 		prompt,
 		src,
@@ -53,21 +31,20 @@ export function getEnhancedImage<T>(
 			)
 		}
 
-		return false
+		return ''
 	}
 
-	return getImage(
-		{
-			prompt,
-			src,
-			model,
-			response_format,
-			size,
-			user,
-			n: 1,
-			quality: imageQuality,
-			style: imageStyle,
-		},
-		config
-	)
+	const response = await getImage({
+		prompt,
+		src,
+		model,
+		response_format,
+		size,
+		user,
+		n: 1,
+		quality: imageQuality,
+		style: imageStyle,
+	})
+
+	return response.responseText
 }

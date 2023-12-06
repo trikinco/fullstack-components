@@ -1,10 +1,14 @@
+'use client'
 import { request, type RequestConfigOnly } from '../../utils/request'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 import type { SelectResponse, SelectRequestBody } from './models'
 
 /**
- * Select generation request
+ * Select generation fetcher
  */
-export function getSelect(body: SelectRequestBody, config?: RequestConfigOnly) {
+export function fetchSelect(
+	body: SelectRequestBody,
+	config?: RequestConfigOnly
+) {
 	return request<SelectResponse>(ApiUrlEnum.select, { body, ...config })
 }

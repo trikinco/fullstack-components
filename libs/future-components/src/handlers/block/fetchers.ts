@@ -1,11 +1,12 @@
+'use client'
 import { request, type RequestConfigOnly } from '../../utils/request'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
-import type { BlockRequestBody, BlockResponse } from './models'
+import type { BlockRequestBody, BlockResponse, BlockResult } from './models'
 
 /**
  * Block generation fetcher
  */
-export async function getBlock(
+export async function fetchBlock(
 	body: BlockRequestBody,
 	config?: RequestConfigOnly
 ) {
@@ -19,12 +20,12 @@ export async function getBlock(
  * Block generation and build processing fetcher
  * 'use client'
  */
-export async function getProcessedBlock(
+export async function fetchProcessedBlock(
 	props: BlockRequestBody & { id: string },
 	config?: RequestConfigOnly
-) {
+): Promise<BlockResult> {
 	const { id, ...body } = props
-	const response = getBlock(body, config)
+	const response = fetchBlock(body, config)
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore Cannot find module 'https://esm.sh/build' or its corresponding type declarations.
@@ -34,7 +35,7 @@ export async function getProcessedBlock(
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const { esm } = await build
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-	const { content, usage }: { content?: string; usage?: string } = JSON.parse(
+	const { content, usage }: BlockResult = JSON.parse(
 		result.replaceAll(/\r?\n|\r/g, ' ')
 	) // remove newlines - it can mess with SVG's and other markup
 

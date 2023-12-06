@@ -11,7 +11,7 @@ import { CodeBlock } from './CodeBlock'
 export interface PreviewCodeProps extends ErrorBoundaryPropsWithFallback {
 	children?: ReactNode
 	/** the code to preview and show */
-	code?: string
+	code?: string | null
 	/** accessible label for the preview iframe */
 	title: string
 }
@@ -31,7 +31,7 @@ export const PreviewCode = ({
 					{
 						id: `${id}-preview`,
 						label: 'Preview',
-						icon: <IconEye />,
+						icon: <IconEye width={20} height={20} />,
 						children: (
 							<div className="aspect-square md:aspect-video overflow-hidden bg-white rounded-lg shadow-lg">
 								<ErrorBoundary fallback={fallback}>
@@ -47,7 +47,7 @@ export const PreviewCode = ({
 										 */
 										sandbox="allow-same-origin allow-scripts allow-modals allow-popups allow-presentation allow-downloads allow-pointer-lock"
 										className="w-full h-full border-0 min-h-0 overflow-auto opacity-100 z-10 select-auto pointer-events-auto"
-										srcDoc={code}
+										srcDoc={code || ''}
 									/>
 								</ErrorBoundary>
 							</div>
@@ -56,11 +56,11 @@ export const PreviewCode = ({
 					{
 						id: `${id}-code`,
 						label: 'Code',
-						icon: <IconCode />,
+						icon: <IconCode width={20} height={20} />,
 						disabled: !code,
 						children: (
 							<div className="aspect-square md:aspect-video rounded-lg shadow-lg overflow-auto bg-[--shiki-color-background] border border-slate-300 dark:border-white/20">
-								<CodeBlock noCopy raw={code}>
+								<CodeBlock noCopy raw={code || ''}>
 									{code}
 								</CodeBlock>
 							</div>

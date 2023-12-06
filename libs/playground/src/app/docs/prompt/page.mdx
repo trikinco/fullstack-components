@@ -21,6 +21,7 @@ They accept a text `prompt` and arrays of `messages` and return the data as-is.
 import { handlePromptRequest } from '@trikinco/fullstack-components'
 import { getPrompt } from '@trikinco/fullstack-components'
 import { Prompt } from '@trikinco/fullstack-components'
+import { fetchPrompt } from '@trikinco/fullstack-components/client'
 import { usePrompt } from '@trikinco/fullstack-components/client'
 ```
 
@@ -109,19 +110,28 @@ export default function Page() {
 }
 ```
 
-## `getPrompt` utility
+## Utilities
 
-`getPrompt` is a built-in fetcher with all the same options as `usePrompt`, but it works on the server. Handy for making your own custom Server Components.
+- `getPrompt`: Runs any prompt.
+  - 'use server'
+  - Third-party API request only
+  - Can be used to make Server Components and functionality
+  - Returns `ChatGptCompletionResponse`
+- `fetchPrompt`: Runs any prompt.
+  - 'use client'
+  - Internal Next.js API request and third-party request
+  - Can be used to make Client Components and functionality
+  - Returns `string`
 
 ```jsx title="Server Component"
 import { getPrompt } from '@trikinco/fullstack-components'
 
 export default async function Page() {
-  const response = await getPrompt({
+  const { responseText } = await getPrompt({
     prompt: 'Tell me about TailwindCSS',
   })
 
-  return <div>{response}</div>
+  return <div>{responseText}</div>
 }
 ```
 

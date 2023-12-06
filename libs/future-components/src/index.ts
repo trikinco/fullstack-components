@@ -10,7 +10,7 @@ import type { HandleBlock } from './handlers/block/blockHandler'
 import type { HandleImage } from './handlers/image/imageHandler'
 import type { HandleSelect } from './handlers/select/selectHandler'
 import type { HandleText } from './handlers/text/textHandler'
-import { HandleHtmlPage } from './handlers/htmlPage/htmlPageHandler'
+import type { HandleHtmlPage } from './handlers/htmlPage/htmlPageHandler'
 
 // Because we use a cache and use clients,
 // we may want to create a singleton for the library
@@ -75,30 +75,32 @@ export { Image } from './components/Image/Image'
 export { Select } from './components/Select'
 export { Text } from './components/Text'
 
-// Service utils
-export { getNotFoundEnhancement } from './handlers/notFoundEnhancer/getters'
-export { getErrorEnhancement } from './handlers/errorEnhancer/getters'
-export { getPrompt } from './handlers/prompt/getters'
-export { getBlock } from './handlers/block/getters'
-export { getImage, getEnhancedImage } from './handlers/image/getters'
-export { getSelect } from './handlers/select/getters'
-export { getText } from './handlers/text/getters'
-export { getHtmlPage } from './handlers/htmlPage/getters'
+// Public library API for server
+export { TextClient, getText } from './handlers/text/textClient'
+export { SelectClient, getSelect } from './handlers/select/selectClient'
+export { PromptClient, getPrompt } from './handlers/prompt/promptClient'
+export {
+	NotFoundEnhancerSitemapSelector,
+	getNotFoundSitemapSelector,
+} from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
+export {
+	NotFoundEnhancerContentGenerator,
+	getNotFoundContentGenerator,
+} from './handlers/notFoundEnhancer/notFoundEnhancerContentGenerator'
+export { ImageClient, getImage } from './handlers/image/imageClient'
+export { getEnhancedImage } from './handlers/image/getters'
+export { HtmlPageClient, getHtmlPage } from './handlers/htmlPage/htmlPageClient'
+export {
+	ErrorClient,
+	getErrorEnhancement,
+} from './handlers/errorEnhancer/errorClient'
+export { BlockClient, getBlock } from './handlers/block/blockClient'
 
-// public library api for server
-export { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
-export { NotFoundEnhancerContentGenerator } from './handlers/notFoundEnhancer/notFoundEnhancerContentGenerator'
-export { ErrorClient } from './handlers/errorEnhancer/errorClient'
-export {
-	ErrorEnhancementResponse,
-	ErrorEnhancementRequestBody,
-	ErrorParserOptions,
-} from './handlers/errorEnhancer/models'
-export {
-	NotFoundEnhancerRequestBody,
-	NotFoundEnhancerResponse,
-	NotFoundEnhancerOptions,
-} from './handlers/notFoundEnhancer/models'
+// Public library types
+export { ChatGptCompletionResponse } from './chatGptService'
+export { ImageGenerationResponse } from './imageGenerationService'
+export * from './handlers/errorEnhancer/models'
+export * from './handlers/notFoundEnhancer/models'
 export * from './handlers/prompt/models'
 export * from './handlers/block/models'
 export * from './handlers/image/models'

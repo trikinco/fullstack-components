@@ -47,7 +47,11 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 				{...rest}
 			>
 				<Link href="/" className="rounded-full focus-ring">
-					<IconLogo className="w-6 h-6 md:w-10 md:h-10" />
+					<IconLogo
+						className="w-6 h-6 md:w-10 md:h-10"
+						width={40}
+						height={40}
+					/>
 				</Link>
 				{children}
 
@@ -58,14 +62,14 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 						className="inline-flex items-center text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full focus-ring"
 					>
 						<span className="sr-only">{NAME_SHORT} on NPM</span>
-						<IconNpm className="w-8" />
+						<IconNpm className="w-8" width={32} height={10} />
 					</Link>
 					<Link
 						href={URL_GITHUB}
 						className="inline-flex items-center text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full focus-ring"
 					>
 						<span className="sr-only">{NAME_SHORT} on GitHub</span>
-						<IconGitHub />
+						<IconGitHub width={20} height={20} />
 					</Link>
 				</div>
 			</nav>

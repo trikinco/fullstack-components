@@ -15,19 +15,31 @@ const themes = [
 	{
 		name: 'light',
 		image: (
-			<IconThemeLight className="transform-gpu scale-105 origin-center transition-transform ease-in-out group-hover/icon:scale-110" />
+			<IconThemeLight
+				width={84}
+				height={84}
+				className="transform-gpu scale-105 origin-center transition-transform ease-in-out group-hover/icon:scale-110"
+			/>
 		),
 	},
 	{
 		name: 'dark',
 		image: (
-			<IconThemeDark className="transform-gpu scale-105 origin-center transition-transform ease-in-out group-hover/icon:scale-110" />
+			<IconThemeDark
+				width={84}
+				height={84}
+				className="transform-gpu scale-105 origin-center transition-transform ease-in-out group-hover/icon:scale-110"
+			/>
 		),
 	},
 	{
 		name: 'system',
 		image: (
-			<IconThemeSystem className="transform-gpu scale-105 origin-center transition-transform ease-in-out group-hover/icon:scale-110" />
+			<IconThemeSystem
+				width={84}
+				height={84}
+				className="transform-gpu scale-105 origin-center transition-transform ease-in-out group-hover/icon:scale-110"
+			/>
 		),
 	},
 ]

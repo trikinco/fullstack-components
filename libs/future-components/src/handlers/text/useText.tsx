@@ -5,7 +5,7 @@ import {
 	type UseRequestConsumerConfig,
 } from '../../hooks/useRequest'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
-import { getText } from './getters'
+import { fetchText } from './fetchers'
 import type { TextRequestBody, TextResponse, TextProps } from './models'
 
 export const useText = (
@@ -14,6 +14,6 @@ export const useText = (
 ) => {
 	return useRequest<TextResponse>(ApiUrlEnum.text, {
 		...config,
-		fetcher: () => getText(props),
+		fetcher: () => fetchText(props),
 	})
 }

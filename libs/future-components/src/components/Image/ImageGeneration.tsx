@@ -29,7 +29,7 @@ export function ImageGeneration(
 	return (
 		<>
 			<NextImage
-				src={`data:image/png;base64,${response || ''}`}
+				src={response || ''}
 				alt={prompt || ''}
 				width={width}
 				height={height}

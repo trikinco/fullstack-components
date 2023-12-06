@@ -1,7 +1,7 @@
 import type { ReactNode, ElementType, HTMLAttributes } from 'react'
 import type { AsComponent } from '../types/AsComponent'
 import type { ChatMessage } from '../types/ChatMessage'
-import { getPrompt } from '../handlers/prompt/getters'
+import { getPrompt } from '../handlers/prompt/promptClient'
 
 export type PromptProps = HTMLAttributes<HTMLElement> & {
 	/** Children to render before the prompt response content */
@@ -11,9 +11,10 @@ export type PromptProps = HTMLAttributes<HTMLElement> & {
 		| { prompt?: string; messages: ChatMessage[] }
 	)
 
-export const defaultElement = 'div'
+const defaultElement = 'div'
 
 /**
+ * Prompt Server Component
  * Renders a prompt response as its children.
  *
  * The response can be wrapped in an element by using the `as` prop.
@@ -28,6 +29,7 @@ export async function Prompt<C extends ElementType = typeof defaultElement>({
 	...rest
 }: AsComponent<C, PromptProps>) {
 	const response = await getPrompt({ prompt, messages })
+	const data = response.responseText
 
 	if (as) {
 		const Component = as as 'div' | C
@@ -35,7 +37,7 @@ export async function Prompt<C extends ElementType = typeof defaultElement>({
 			<Component {...rest}>
 				<>
 					{children}
-					{response}
+					{data}
 				</>
 			</Component>
 		)
@@ -44,9 +46,7 @@ export async function Prompt<C extends ElementType = typeof defaultElement>({
 	return (
 		<>
 			{children}
-			{response}
+			{data}
 		</>
 	)
 }
-
-export default Prompt

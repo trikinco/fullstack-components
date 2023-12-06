@@ -1,3 +1,4 @@
+'use client'
 import { request, type RequestConfigOnly } from '../../utils/request'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 import type {
@@ -8,7 +9,7 @@ import type {
 /**
  * Not found enhancement request
  */
-export function getNotFoundEnhancement(
+export function fetchNotFoundEnhancement(
 	body: NotFoundEnhancerRequestBody,
 	config?: RequestConfigOnly
 ) {

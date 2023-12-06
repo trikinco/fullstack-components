@@ -1,10 +1,10 @@
-import type { HTMLAttributes } from 'react'
+import type { SVGAttributes } from 'react'
 import { merge } from '@trikinco/fullstack-components/utils'
 
 export const IconGitHub = ({
 	className,
 	...rest
-}: HTMLAttributes<SVGSVGElement>) => (
+}: SVGAttributes<SVGSVGElement>) => (
 	<svg
 		viewBox="0 0 16 16"
 		xmlns="http://www.w3.org/2000/svg"

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useFormStatus } from 'react-dom'
 import { ColorPicker } from '@/src/components/ColorPicker/ColorPicker'
 import { HTMLPage } from '@/src/modules/HTMLPage'
@@ -11,27 +11,18 @@ import { Input } from '@/src/components/Elements/Input'
 import { Label } from '@/src/components/Elements/Label'
 
 interface FormBodyProps {
-	state?: string
+	/** The gen HTML content to preview in an iframe */
+	state?: string | null
+	/** Refetch gen HTML with current form values */
 	refetch: () => void
 }
 
 export function FormBody({ state, refetch }: FormBodyProps) {
-	const { pending, data } = useFormStatus()
+	const { pending } = useFormStatus()
+	// This is just for the preview messages and chips
 	const [prompt, setPrompt] = useState('')
 	const [src, setSrc] = useState('')
-
-	useEffect(() => {
-		const prompt = data?.get('prompt') as string
-		const src = data?.get('src') as string
-
-		if (prompt) {
-			setPrompt(prompt)
-		}
-
-		if (src) {
-			setSrc(src)
-		}
-	}, [data])
+	const [colors, setColors] = useState('')
 
 	return (
 		<>
@@ -44,6 +35,7 @@ export function FormBody({ state, refetch }: FormBodyProps) {
 						placeholder="A modern login form..."
 						minLength={2}
 						maxLength={300}
+						onChange={(e) => setPrompt(e.target.value)}
 					/>
 				</div>
 
@@ -56,6 +48,7 @@ export function FormBody({ state, refetch }: FormBodyProps) {
 							placeholder="URL"
 							minLength={2}
 							maxLength={300}
+							onChange={(e) => setSrc(e.target.value)}
 						/>
 					</div>
 
@@ -72,16 +65,23 @@ export function FormBody({ state, refetch }: FormBodyProps) {
 				</div>
 
 				<div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-					<ColorPicker max={5} multiple portal />
+					<ColorPicker
+						onChange={(values) => setColors(values as string)}
+						max={5}
+						multiple
+						portal
+					/>
 
 					<Button type="submit" disabled={pending} className="ml-auto">
 						{pending ? (
 							<>
-								Creating page <IconLoader className="ml-2" />
+								Creating page{' '}
+								<IconLoader className="ml-2" width={20} height={20} />
 							</>
 						) : (
 							<>
-								Create page <IconSparkles className="ml-2" />
+								Create page{' '}
+								<IconSparkles className="ml-2" width={20} height={20} />
 							</>
 						)}
 					</Button>
@@ -91,8 +91,9 @@ export function FormBody({ state, refetch }: FormBodyProps) {
 			<HTMLPage
 				refetch={refetch}
 				prompt={prompt}
+				colors={colors}
 				src={src}
-				data={state}
+				state={state}
 				isLoading={pending}
 			/>
 		</>

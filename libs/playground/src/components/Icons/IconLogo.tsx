@@ -1,10 +1,10 @@
-import { useId, type HTMLAttributes } from 'react'
+import { useId, type SVGAttributes } from 'react'
 import { merge } from '@trikinco/fullstack-components/utils'
 
 export const IconLogo = ({
 	className,
 	...rest
-}: HTMLAttributes<SVGSVGElement>) => {
+}: SVGAttributes<SVGSVGElement>) => {
 	const id = useId()
 	return (
 		<svg

@@ -1,5 +1,8 @@
 import { runChatCompletion } from '../../chatGptService'
-import { runImageGeneration } from '../../imageGenerationService'
+import {
+	runImageGeneration,
+	type ImageGenerationResponse,
+} from '../../imageGenerationService'
 import { OPENAI_API_KEY } from '../../utils/constants'
 import type { ImageRequestBody, ImageOptions } from './models'
 
@@ -15,43 +18,65 @@ There's usually no need to include words like "image", "icon", or "picture" in t
 Perform the action directly and do not include the reasoning
 Only return PLAIN TEXT
 `
+export async function getImage(
+	request: Omit<ImageRequestBody, 'n'> & { n?: 1 | 0 | null },
+	options?: ImageOptions
+): Promise<ImageGenerationResponse<string>>
+export async function getImage(
+	request: Omit<ImageRequestBody, 'n'> & { n: number },
+	options?: ImageOptions
+): Promise<ImageGenerationResponse<string[]>>
+export async function getImage(
+	request: ImageRequestBody,
+	options?: ImageOptions
+) {
+	'use server'
+	console.log('handling `getImage` request', request)
+
+	const { src = '', prompt, ...rest } = request
+	const openAIApiKey = options?.openAiApiKey || OPENAI_API_KEY
+
+	// Generate images
+	if (prompt) {
+		console.log('handling `getImage`, image generation')
+		return await runImageGeneration(prompt, { ...rest, openAIApiKey })
+	}
+
+	console.log('handling `getImage`, image description')
+	// Describe images
+	return await runChatCompletion(
+		[
+			{
+				role: 'system',
+				content: systemPrompt,
+			},
+			{
+				role: 'user',
+				content: [
+					{
+						type: 'image_url',
+						// eslint-disable-next-line @typescript-eslint/naming-convention
+						image_url: {
+							url: src,
+						},
+					},
+				],
+			},
+		],
+		{
+			openAIApiKey,
+			model: 'gpt-4-vision-preview',
+		}
+	)
+}
 
 export class ImageClient {
-	public handle = async (request: ImageRequestBody, options: ImageOptions) => {
-		console.log('handling image request', request)
+	public handle = async (
+		request: ImageRequestBody & { n?: any },
+		options: ImageOptions
+	) => {
+		console.log('handling `ImageClient` request', request)
 
-		const { src = '', prompt, ...rest } = request
-		const openAIApiKey = options.openAiApiKey || OPENAI_API_KEY
-
-		// Generate images
-		if (prompt) {
-			return await runImageGeneration(prompt, { ...rest, openAIApiKey })
-		}
-
-		// Describe images
-		return await runChatCompletion(
-			[
-				{
-					role: 'system',
-					content: systemPrompt,
-				},
-				{
-					role: 'user',
-					content: [
-						{
-							type: 'image_url',
-							// eslint-disable-next-line @typescript-eslint/naming-convention
-							image_url: {
-								url: src,
-							},
-						},
-					],
-				},
-			],
-			{
-				openAIApiKey,
-				model: 'gpt-4-vision-preview',
-			}
-		)
+		return await getImage(request, options)
 	}
 }

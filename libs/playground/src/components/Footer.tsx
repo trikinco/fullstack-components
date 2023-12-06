@@ -24,21 +24,21 @@ export const Footer = ({ children, className, ...rest }: FooterProps) => {
 			<div className="flex flex-wrap gap-10 md:gap-16 items-center max-w-6xl mx-auto">
 				<div className="hidden sm:flex gap-3 mb-auto px-6">
 					<Link href="/" className="rounded-full focus-ring">
-						<IconLogo className="w-5 h-5" />
+						<IconLogo className="w-5 h-5" width={20} height={20} />
 					</Link>
 					<Link
 						href={URL_NPM}
 						className="text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full focus-ring"
 					>
 						<span className="sr-only">{NAME_SHORT} on NPM</span>
-						<IconNpm className="w-8" />
+						<IconNpm className="w-8" width={32} height={20} />
 					</Link>
 					<Link
 						href={URL_GITHUB}
 						className="ml-auto block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300 rounded-full focus-ring"
 					>
 						<span className="sr-only">{NAME_SHORT} on GitHub</span>
-						<IconGitHub />
+						<IconGitHub width={20} height={20} />
 					</Link>
 				</div>
 				<div className="flex flex-col gap-2 px-6">
@@ -56,7 +56,7 @@ export const Footer = ({ children, className, ...rest }: FooterProps) => {
 				{children}
 				<div className="flex items-center p-6 sm:ml-auto w-full sm:w-auto mb-auto gap-2 md:gap-3 bg-white dark:bg-black border-t border-slate-950/10 dark:border-white/30 sm:bg-transparent dark:sm:bg-transparent sm:border-t-0">
 					<Link href="/" className="rounded-full focus-ring mr-auto sm:hidden">
-						<IconLogo className="w-5 h-5" />
+						<IconLogo className="w-5 h-5" width={20} height={20} />
 					</Link>
 					<h3 className="text-xs my-auto sm:m-auto">Created by</h3>
 					<div className="flex gap-2 md:gap-3">

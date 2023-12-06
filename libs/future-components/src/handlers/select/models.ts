@@ -27,13 +27,26 @@ export type SelectRequestOptions = Omit<SelectRequestBody, 'prompt'> &
 	Required<Pick<SelectRequestBody, 'prompt'>>
 
 export type SelectResponseItem = {
+	/**
+	 * Readable label for the option
+	 */
 	label: string
+	/**
+	 * Value for the option
+	 */
 	value: string
+	/**
+	 * Whether the option is selected
+	 */
 	selected?: true
 }
 
 export type SelectResponse = {
+	/**
+	 * An array of options to display in the dropdown
+	 */
 	content: Array<SelectResponseItem>
+	/** The overall associated label for the dropdown */
 	label: string
 }
 

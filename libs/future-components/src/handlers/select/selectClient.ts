@@ -17,57 +17,67 @@ Make the dropdown options diverse and relevant for the given context
 Do not include the reasoning
 `
 
+export async function getSelect(
+	request: SelectRequestBody,
+	options?: SelectOptions
+) {
+	'use server'
+	console.log('handling `getSelect` request', request)
+	const content: ChatMessage['content'] = []
+
+	if (request.prompt) {
+		content.push({
+			type: 'text',
+			text: `Create a list of dropdown menu options based on these instructions: ${request.prompt}`,
+		})
+	}
+
+	if (request.purpose) {
+		content.push({
+			type: 'text',
+			text: `Purpose: ${request.purpose}`,
+		})
+	}
+
+	if (request.context) {
+		content.push({
+			type: 'text',
+			text: `Context: ${request.context}`,
+		})
+	}
+
+	if (request.count) {
+		content.push({
+			type: 'text',
+			text: `Count: generate at least ${request?.count} options`,
+		})
+	}
+
+	return await runChatCompletion(
+		[
+			{
+				role: 'system',
+				content: systemPrompt,
+			},
+			{
+				role: 'user',
+				content,
+			},
+		],
+		{
+			openAIApiKey: options?.openAiApiKey || OPENAI_API_KEY,
+			format: 'JSON',
+		}
+	)
+}
+
 export class SelectClient {
 	public handle = async (
 		request: SelectRequestBody,
 		options: SelectOptions
 	) => {
-		const content: ChatMessage['content'] = []
-		console.log('handling select request', request)
+		console.log('handling `SelectClient` request', request)
 
-		if (request.prompt) {
-			content.push({
-				type: 'text',
-				text: `Create a list of dropdown menu options based on these instructions: ${request.prompt}`,
-			})
-		}
-
-		if (request.purpose) {
-			content.push({
-				type: 'text',
-				text: `Purpose: ${request.purpose}`,
-			})
-		}
-
-		if (request.context) {
-			content.push({
-				type: 'text',
-				text: `Context: ${request.context}`,
-			})
-		}
-
-		if (request.count) {
-			content.push({
-				type: 'text',
-				text: `Count: generate at least ${request?.count} options`,
-			})
-		}
-
-		return await runChatCompletion(
-			[
-				{
-					role: 'system',
-					content: systemPrompt,
-				},
-				{
-					role: 'user',
-					content,
-				},
-			],
-			{
-				openAIApiKey: options.openAiApiKey || OPENAI_API_KEY,
-				format: 'JSON',
-			}
-		)
+		return await getSelect(request, options)
 	}
 }

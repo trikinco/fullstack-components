@@ -1,3 +1,5 @@
+'use client'
+
 import {
 	ErrorBoundary as ReactErrorBoundary,
 	type ErrorBoundaryProps as ReactErrorBoundaryProps,

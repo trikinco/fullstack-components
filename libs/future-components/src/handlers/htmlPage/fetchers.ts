@@ -1,13 +1,12 @@
-'use server'
-
+'use client'
 import { request, type RequestConfigOnly } from '../../utils/request'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 import type { HtmlPageResponse, HtmlPageRequestBody } from './models'
 
 /**
- * Html page generation
+ * Html page generation fetcher
  */
-export async function getHtmlPage(
+export async function fetchHtmlPage(
 	body: HtmlPageRequestBody,
 	config?: RequestConfigOnly
 ) {

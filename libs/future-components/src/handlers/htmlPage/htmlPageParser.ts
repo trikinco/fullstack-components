@@ -24,8 +24,8 @@ export const getHtmlFromChatResponseText = (responseText?: string): string => {
 	// Only get the relevant HTML markup - gpt loves returning markdown
 	// eslint-disable-next-line unicorn/prevent-abbreviations
 	const docType = responseText.indexOf('<!DOCTYPE html>')
-	const htmlTag = responseText.indexOf('<html>')
-	const start = docType === undefined ? htmlTag : docType
+	const htmlTag = responseText.match(/<html[^>]*>/)?.index ?? -1
+	const start = docType === -1 ? htmlTag : docType
 	const end = responseText.indexOf('</html>')
 	const body = responseText.slice(start, end + '</html>'.length)
 

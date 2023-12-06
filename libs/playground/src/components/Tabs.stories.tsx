@@ -27,13 +27,13 @@ export const Primary: Story = {
 			{
 				id: 'tab-1',
 				label: 'Preview',
-				icon: <IconEye />,
+				icon: <IconEye width={20} height={20} />,
 				children: <div className="text-white p-6">Tab 1</div>,
 			},
 			{
 				id: 'tab-2',
 				label: 'Code',
-				icon: <IconCode />,
+				icon: <IconCode width={20} height={20} />,
 				children: <div className="text-white p-6">Tab 2</div>,
 			},
 		],

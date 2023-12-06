@@ -35,25 +35,35 @@ example of EXPECTED output:
 }
 `
 
+export async function getBlock(
+	request: BlockRequestBody,
+	options?: BlockOptions
+) {
+	'use server'
+	console.log('handling `getBlock` request', request)
+
+	return await runChatCompletion(
+		[
+			{
+				role: 'system',
+				content: systemPrompt,
+			},
+			{
+				role: 'user',
+				content: request.prompt || '',
+			},
+		],
+		{
+			openAIApiKey: options?.openAiApiKey || OPENAI_API_KEY,
+			format: 'JSON',
+		}
+	)
+}
+
 export class BlockClient {
 	public handle = async (request: BlockRequestBody, options: BlockOptions) => {
-		console.log('handling block request', request)
+		console.log('handling `BlockClient` request', request)
 
-		return await runChatCompletion(
-			[
-				{
-					role: 'system',
-					content: systemPrompt,
-				},
-				{
-					role: 'user',
-					content: request.prompt || '',
-				},
-			],
-			{
-				openAIApiKey: options.openAiApiKey || OPENAI_API_KEY,
-				format: 'JSON',
-			}
-		)
+		return await getBlock(request, options)
 	}
 }

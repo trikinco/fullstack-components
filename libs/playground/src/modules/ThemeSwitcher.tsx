@@ -48,7 +48,7 @@ export const ThemeSwitcher = () => {
 					title: 'Close',
 					'aria-label': 'Close',
 				}}
-				labelClose={<IconClose />}
+				labelClose={<IconClose width={20} height={20} />}
 				formProps={{ className: 'p-6' }}
 				style={coords}
 			>

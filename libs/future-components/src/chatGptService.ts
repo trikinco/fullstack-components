@@ -7,8 +7,8 @@ import type { ChatMessage } from './types/ChatMessage'
 // instead
 //import { encode } from 'gpt-3-encoder'
 
-export type ChatGptCompletionResponse = {
-	responseText: string
+export type ChatGptCompletionResponse<T = string> = {
+	responseText: T
 	tokensUsed: number
 	finishReason?: string
 	errorMessage?: string

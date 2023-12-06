@@ -16,7 +16,6 @@ import {
 	type HtmlPageOptions,
 	HtmlPageError,
 } from './models'
-import { getHtmlFromChatResponseText } from './htmlPageParser'
 
 /**
  * The handler for the `/api/future-components/htmlPage` API route.
@@ -50,7 +49,7 @@ const appRouteHandlerFactory: (
 	async (req, _ctx, options = {}) => {
 		try {
 			const res = new NextResponse()
-			console.log('HTML Page APP RouteHandlerFactory')
+			console.log('HTMLPage APP RouteHandlerFactory')
 
 			if (req.method !== 'POST') {
 				throw new HtmlPageError(new Error('Only POST requests are supported'))
@@ -60,13 +59,9 @@ const appRouteHandlerFactory: (
 			res.headers.set('Content-Type', 'text/html')
 
 			const requestBody = (await req.json()) as HtmlPageRequestBody
-
-			console.log('requestBody', requestBody)
-
 			const gptResponse = await client.handle(requestBody, options)
-			const htmlText = getHtmlFromChatResponseText(gptResponse.responseText)
 
-			return NextResponse.json(htmlText, res)
+			return NextResponse.json(gptResponse.responseText, res)
 		} catch (error) {
 			throw new HtmlPageError(error)
 		}
@@ -90,16 +85,15 @@ const pageRouteHandlerFactory: (
 	): Promise<void> => {
 		try {
 			assertReqRes(req, res)
-			console.log('HTML Page PAGES RouteHandlerFactory')
+			console.log('HTMLPage PAGES RouteHandlerFactory')
 
 			res.setHeader('Cache-Control', 'no-store')
 			res.setHeader('Content-Type', 'text/html')
 
 			const requestBody = req.body as HtmlPageRequestBody
 			const gptResponse = await client.handle(requestBody, options)
-			const htmlText = getHtmlFromChatResponseText(gptResponse.responseText)
 
-			res.json(htmlText)
+			res.json(gptResponse.responseText)
 		} catch (error) {
 			throw new HtmlPageError(error)
 		}

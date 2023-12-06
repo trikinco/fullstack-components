@@ -1,3 +1,4 @@
+'use client'
 import { request, type RequestConfigOnly } from '../../utils/request'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 import type {
@@ -6,9 +7,9 @@ import type {
 } from './models'
 
 /**
- * Error enhancement request
+ * Error enhancement fetcher
  */
-export function getErrorEnhancement(
+export function fetchErrorEnhancement(
 	body: ErrorEnhancementRequestBody,
 	config?: RequestConfigOnly
 ) {
