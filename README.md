@@ -1,4 +1,4 @@
-![Fullstack Components - Build websites by writing prompts](libs/playground/public/images/repo-header-dark.png)
+![Fullstack Components - Build websites by writing prompts](packages/site/public/images/repo-header-dark.png)
 
 # [Fullstack Components](https://fullstack-components.vercel.app)
 
@@ -36,8 +36,8 @@ The Fullstack Components community can be found on [GitHub Discussions](https://
 
 <a href="https://fullstack-components.vercel.app">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="libs/playground/public/images/trikin-light.svg">
-    <img alt="trikin" src="libs/playground/public/images/trikin-dark.svg" width="40" height="40">
+    <source media="(prefers-color-scheme: dark)" srcset="packages/site/public/images/trikin-light.svg">
+    <img alt="trikin" src="packages/site/public/images/trikin-dark.svg" width="40" height="40">
   </picture>
   <p>trikin</p>
 </a>

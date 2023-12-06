@@ -31,7 +31,7 @@ jobs:
         with:
           path: |
             ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-            ${{ github.workspace }}/libs/playground/.next/cache
+            ${{ github.workspace }}/packages/site/.next/cache
           key: ${{ runner.os }}-pnpm-store-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-nextjs
