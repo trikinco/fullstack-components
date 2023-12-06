@@ -29,7 +29,7 @@ jobs:
         with:
           path: |
             ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-            ${{ github.workspace }}/libs/playground/.next/cache
+            ${{ github.workspace }}/packages/site/.next/cache
           key: ${{ runner.os }}-pnpm-store-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-nextjs
@@ -42,4 +42,4 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: cd libs/future-components && npx semantic-release
+        run: cd packages/fullstack-components && npx semantic-release
