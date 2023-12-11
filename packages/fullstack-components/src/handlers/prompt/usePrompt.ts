@@ -7,9 +7,20 @@ import {
 } from '../../hooks/useRequest'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 
-export const usePrompt = <T = PromptResponse>(
-	body: PromptRequestBody,
+/**
+ * Prompt client hook
+ */
+export interface UsePromptParameters {
+	/**
+	 * @see `PromptRequestBody`
+	 */
+	body: PromptRequestBody
 	config?: UseRequestConsumerConfig<PromptRequestBody>
+}
+
+export const usePrompt = <T = PromptResponse>(
+	body: UsePromptParameters['body'],
+	config?: UsePromptParameters['config']
 ) => {
 	return useRequest<T>(ApiUrlEnum.prompt, {
 		body,

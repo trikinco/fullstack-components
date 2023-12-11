@@ -1,24 +1,24 @@
-export class SelectRequestBody {
+export interface SelectRequestBody {
 	/**
-	 * Prompt for creating the select
+	 * A text description for creating the dropdown.
 	 * @example 'All the GMT time zones'
 	 * @example 'The nearest countries to Australia. Include a flag emoji in the label'
 	 */
 	prompt?: string
 	/**
-	 * What the purpose of the select is
+	 * A text description of the purpose of the dropdown.
 	 * @example 'Selecting your time zone'
 	 * @example 'Weekday selection'
 	 */
 	purpose?: string
 	/**
-	 * Additional context to pass to the prompt
+	 * A text description of additional context or information to help create the dropdown.
 	 * @example 'The time zone for Sydney should be selected'
 	 * @example 'Sort the list based on what's most popular'
 	 */
 	context?: string
 	/**
-	 * The number of items to aim for
+	 * The number of dropdown options or list items to create.
 	 */
 	count?: number
 }
@@ -51,6 +51,9 @@ export type SelectResponse = {
 }
 
 export type SelectOptions = {
+	/**
+	 * @default `process.env.OPENAI_API_KEY`.
+	 */
 	openAiApiKey?: string
 }
 

@@ -10,9 +10,14 @@ import type {
 } from './models'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 
-export const useErrorEnhancement = (
-	body: ErrorEnhancementRequestBody,
+export interface UseErrorEnhancementParameters {
+	body: ErrorEnhancementRequestBody
 	config?: UseRequestConsumerConfig<ErrorEnhancementRequestBody>
+}
+
+export const useErrorEnhancement = (
+	body: UseErrorEnhancementParameters['body'],
+	config?: UseErrorEnhancementParameters['config']
 ) => {
 	return useRequest<ErrorEnhancementResponse>(ApiUrlEnum.errorEnhancer, {
 		body,

@@ -1,19 +1,25 @@
-export class HtmlPageRequestBody {
-	/** Description of the HTML page you want to build or modify */
+export interface HtmlPageRequestBody {
+	/** Description of the HTML page you want to build or modify. */
 	prompt?: string
-	/** An absolute URL to a reference image to base the HTML page on */
+	/** An absolute URL to a reference image to base the HTML page on. */
 	src?: string
-	/** A list of unprefixed TailwindCSS colors to use, e.g 'blue-400' */
+	/**
+	 * A comma-separated list of unprefixed TailwindCSS colors to use.
+	 * @example 'blue-400,red-600'
+	 */
 	colors?: string
-	/** Whether to make the UI light or dark theme, equivalent to media prefers-color-scheme */
+	/** The theme to make the UI for, equivalent to media `prefers-color-scheme`. */
 	theme?: 'light' | 'dark'
-	/** A HTML page to modify or iterate on */
+	/** A HTML page to modify or iterate on. */
 	html?: string
 }
 
 export type HtmlPageResponse = string
 
 export type HtmlPageOptions = {
+	/**
+	 * @default `process.env.OPENAI_API_KEY`.
+	 */
 	openAiApiKey?: string
 }
 

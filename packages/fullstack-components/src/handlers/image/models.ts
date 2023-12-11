@@ -2,6 +2,10 @@ import OpenAI from 'openai'
 
 export type ImageGenerationOptions = Partial<OpenAI.ImageGenerateParams>
 
+/**
+ * @extends `Partial<OpenAI.ImageGenerateParams>`
+ * @see `openai` for full `OpenAI.ImageGenerateParams` type information.
+ */
 export interface ImageRequestBody extends ImageGenerationOptions {
 	/** URL to image to describe */
 	src?: string
@@ -12,6 +16,9 @@ export type ImageResponse<T> = T extends 1 | null | undefined
 	: string[]
 
 export type ImageOptions = {
+	/**
+	 * @default `process.env.OPENAI_API_KEY`.
+	 */
 	openAiApiKey?: string
 }
 

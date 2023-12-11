@@ -1,16 +1,19 @@
-import type { ElementType, ReactNode, HTMLAttributes } from 'react'
+import type { ElementType, HTMLAttributes, ReactNode } from 'react'
 import type { AsComponent } from '../types'
-import type {
-	TextProps as TextOptions,
-	TextResponse,
-} from '../handlers/text/models'
+import type { TextRequestBody, TextResponse } from '../handlers/text/models'
 import { getText } from '../handlers/text/textClient'
 import { renderTreeToString } from '../handlers/text/renderTreeToString'
 
+/**
+ * Text Server Component
+ * @extends `Omit<TextRequestBody, 'content'>`
+ * @extends `Omit<HTMLAttributes<HTMLElement>, 'content'>`
+ */
 export interface TextProps
-	extends Omit<TextOptions, 'content'>,
-		HTMLAttributes<HTMLElement> {
-	children?: ReactNode
+	extends Omit<TextRequestBody, 'content'>,
+		Omit<HTMLAttributes<HTMLElement>, 'content'> {
+	/** Content to re/write. Plain text or a React tree. */
+	content: ReactNode
 }
 
 const defaultElement = 'div'

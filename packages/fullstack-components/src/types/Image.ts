@@ -3,49 +3,66 @@ import { type ImageProps as NextImageProps } from 'next/image'
 import type { SyntheticEvent } from 'react'
 import type { ImageResponse } from '../handlers/image/models'
 
-export type ImageGenerationOptions = Partial<
-	Omit<OpenAI.ImageGenerateParams, 'n'>
->
-
+/**
+ * Props specific to describing an image.
+ * @extends `Omit<NextImageProps, 'src' | 'alt' | 'onLoad' | 'onError'>`
+ * @see `next/image` for full `NextImageProps` type information.
+ */
 export interface ImageDescribeProps
 	extends Omit<NextImageProps, 'src' | 'alt' | 'onLoad' | 'onError'> {
 	/**
 	 * URL to the image to describe. Generates `alt` text.
-	 * The `alt` text is then passed to the image and returned in `onLoad`
+	 * The `alt` text is then passed to the image and returned in `onLoad`.
 	 */
 	src: string
 	/**
-	 * Whether or not to render the result string adjacent to the image
+	 * Shows the image description text adjacent to the image.
 	 */
 	showResult?: boolean
 	/**
 	 * Callback function invoked once the image is completely loaded and the `placeholder` has been removed.
-	 * Returns the `event`, description `response` and the original `src`
 	 */
-	onLoad?: ImageDescribeCallback
-	/** Callback function that is invoked if the image fails to load. */
-	onError?: ImageDescribeCallback
+	onLoad?: (
+		/** A React `HTMLImageElement` event object with no additional properties. */
+		event: SyntheticEvent<HTMLImageElement, Event> | undefined,
+		/** A text description response of the image. */
+		response?: ImageResponse<1> | undefined,
+		/** Source of the image being described. */
+		src?: string
+	) => void
+	/**
+	 * Callback function that is invoked if the image fails to load.
+	 */
+	onError?: (
+		/** A React `HTMLImageElement` event object with no additional properties. */
+		event: SyntheticEvent<HTMLImageElement, Event> | undefined,
+		/** A text description response of the image. */
+		response?: ImageResponse<1> | undefined,
+		/** Source of the image being described. */
+		src?: string
+	) => void
 }
 
-export type ImageDescribeCallback = (
-	event: SyntheticEvent<HTMLImageElement, Event> | undefined,
-	/** Image description response */
-	response?: ImageResponse<1>,
-	/** Image description src */
-	src?: string
-) => void
+export type ImageDescribeCallback = NonNullable<ImageDescribeProps['onLoad']>
 
+/**
+ * Props specific to generating an image.
+ * @extends `Omit<NextImageProps, 'src' | 'width' | 'height' | 'alt' | 'onLoad' | 'onError' | 'quality'>`.
+ * @see `next/image` for full `NextImageProps` type information.
+ * @extends `Partial<Omit<OpenAI.ImageGenerateParams, 'n' | 'quality' | 'style'>>`.
+ * @see `openai` for full `ImageGenerateParams` type information.
+ */
 export interface ImageGenerateProps
 	extends Omit<
 			NextImageProps,
 			'src' | 'width' | 'height' | 'alt' | 'onLoad' | 'onError' | 'quality'
 		>,
-		Omit<ImageGenerationOptions, 'quality' | 'style'> {
+		Partial<Omit<OpenAI.ImageGenerateParams, 'n' | 'quality' | 'style'>> {
 	/**
-	 * Whether or not to render the result string adjacent to the image
+	 * Shows the image generation result base64 string or URL adjacent to the image.
 	 */
 	showResult?: boolean
-	/** Alternative text describing the image, uses `prompt` if not provided */
+	/** Alternative text describing the image, uses `prompt` if not provided. */
 	alt?: string
 	/**
 	 * The quality of the image that will be generated. `hd` creates images with finer
@@ -62,20 +79,35 @@ export interface ImageGenerateProps
 	imageStyle?: 'vivid' | 'natural' | null
 	/**
 	 * Callback function invoked once the image is completely loaded and the `placeholder` has been removed.
-	 * Returns the `event`, generation result `response` and the original `prompt`
 	 */
-	onLoad?: ImageGenerateCallback
-	/** Callback function that is invoked if the image fails to load. */
-	onError?: ImageGenerateCallback
+	onLoad?: (
+		/** A React `HTMLImageElement` event object with no additional properties. */
+		event: SyntheticEvent<HTMLImageElement, Event> | undefined,
+		/** Image generation response base64 string or URL. */
+		response?: ImageResponse<1> | undefined,
+		/**
+		 * A text description of the desired image. The maximum length is 1000
+		 * characters for `dall-e-2` and 4000 characters for `dall-e-3`.
+		 */
+		prompt?: string
+	) => void
+	/**
+	 * Callback function that is invoked if the image fails to load.
+	 */
+	onError?: (
+		/** A React `HTMLImageElement` event object with no additional properties. */
+		event: SyntheticEvent<HTMLImageElement, Event> | undefined,
+		/** Image generation response base64 string or URL. */
+		response?: ImageResponse<1> | undefined,
+		/**
+		 * A text description of the desired image. The maximum length is 1000
+		 * characters for `dall-e-2` and 4000 characters for `dall-e-3`.
+		 */
+		prompt?: string
+	) => void
 }
 
-export type ImageGenerateCallback = (
-	event: SyntheticEvent<HTMLImageElement, Event> | undefined,
-	/** Image generation response */
-	response?: ImageResponse<1>,
-	/** Image generation prompt */
-	prompt?: string
-) => void
+export type ImageGenerateCallback = NonNullable<ImageGenerateProps['onLoad']>
 
 export type ImageProps =
 	| ImageGenerateProps

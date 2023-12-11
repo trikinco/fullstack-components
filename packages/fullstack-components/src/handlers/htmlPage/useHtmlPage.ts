@@ -8,12 +8,18 @@ import {
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 
 /**
- * Creates a HTML page based on prompts
- * Will by default set the `theme` to the current `prefers-color-scheme` setting
+ * HTML Page client hook.
+ * Creates a HTML page based on prompts.
+ * Will by default set the `theme` to the current `prefers-color-scheme` setting.
  */
-export const useHtmlPage = (
-	body: HtmlPageRequestBody,
+export interface UseHtmlPageParameters {
+	body: HtmlPageRequestBody
 	config?: UseRequestConsumerConfig<HtmlPageRequestBody>
+}
+
+export const useHtmlPage = (
+	body: UseHtmlPageParameters['body'],
+	config?: UseHtmlPageParameters['config']
 ) => {
 	const isPrefersDark =
 		typeof window !== 'undefined' &&

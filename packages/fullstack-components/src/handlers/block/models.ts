@@ -1,4 +1,7 @@
 export class BlockRequestBody {
+	/**
+	 * A text description of the desired component.
+	 */
 	prompt?: string
 }
 
@@ -34,6 +37,9 @@ export type BlockResult = {
 }
 
 export type BlockOptions = {
+	/**
+	 * @default `process.env.OPENAI_API_KEY`.
+	 */
 	openAiApiKey?: string
 }
 

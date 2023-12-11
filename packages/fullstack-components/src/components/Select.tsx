@@ -6,13 +6,25 @@ import type {
 	SelectResponse,
 } from '../handlers/select/models'
 
+export type {
+	SelectRequestOptions,
+	SelectRequestBody,
+} from '../handlers/select/models'
+
+/**
+ * A smart dropdown component that creates, labels and sorts all its own options.
+ * @extends `SelectRequestOptions`
+ * @extends `HTMLAttributes<HTMLSelectElement>`.
+ */
 export interface SelectProps
 	extends SelectRequestOptions,
 		HTMLAttributes<HTMLSelectElement> {
-	/** Visible label in the `<label>` element. Overrides any label from the response */
+	/**
+	 * Visible text in the `<label>`. Overrides any `label` from the response.
+	 */
 	label?: ReactNode
 	/**
-	 * Additional props to pass to the <label>
+	 * Additional props to pass to the `<label>`.
 	 */
 	labelProps?: HTMLAttributes<HTMLLabelElement>
 }

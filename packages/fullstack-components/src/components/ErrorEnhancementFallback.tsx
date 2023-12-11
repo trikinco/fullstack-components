@@ -6,22 +6,28 @@ import type { FallbackProps } from 'react-error-boundary'
 import { useErrorEnhancement } from '../handlers/errorEnhancer/useErrorEnhancement'
 import { IS_DEV } from '../utils'
 
-export interface ErrorEnhancementFallbackBaseProps
-	extends HTMLAttributes<HTMLDivElement> {
-	/** React tree to show while the error enhancement is loading */
-	fallback?: ReactNode
-	/** Additional context to pass to the error enhancement which may help with debugging */
-	errorContext?: string
-	/** Shows a button to reset the error boundary and retry the render */
-	showResetBoundaryButton?: boolean
-	/** Label to display inside the reset `<button>` when `showResetBoundary` is true  */
-	resetBoundaryButtonLabel?: ReactNode
-	/** Additional props to pass to the reset `<button>` */
-	resetBoundaryButtonProps?: HTMLAttributes<HTMLButtonElement>
-}
+/**
+ * The fallback component to show in the error boundary when an error is thrown.
+ * @extends `HTMLAttributes<HTMLDivElement>`
+ * @extends `FallbackProps`
+ * @see `react-error-boundary` for `FallbackProps` type information.
+ */
+export type ErrorEnhancementFallbackProps = HTMLAttributes<HTMLDivElement> &
+	FallbackProps & {
+		/** React tree to show while the error enhancement is loading. */
+		fallback?: ReactNode
+		/** Additional context to pass to the error enhancement which may help with debugging. */
+		errorContext?: string
+		/** Shows a button to reset the error boundary and retry the render. */
+		showResetBoundaryButton?: boolean
+		/** Label to display inside the reset `<button>` when `showResetBoundary` is true.  */
+		resetBoundaryButtonLabel?: ReactNode
+		/** Additional props to pass to the reset `<button>`. */
+		resetBoundaryButtonProps?: HTMLAttributes<HTMLButtonElement>
+	}
 
-export type ErrorEnhancementFallbackProps = ErrorEnhancementFallbackBaseProps &
-	FallbackProps
+// export type ErrorEnhancementFallbackProps = ErrorEnhancementFallbackBaseProps &
+// 	FallbackProps
 
 /**
  * A custom enhanced error fallback component to render inside a `react-error-boundary`

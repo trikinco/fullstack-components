@@ -4,12 +4,18 @@ import { useState, useEffect, useRef } from 'react'
 import { request } from '../utils/request'
 import type { RequestConfig } from '../types'
 
-/** Fetch request config initialiser in addition to the `baseUrl` */
+/**
+ * Fetch request config initialiser in addition to the `baseUrl`.
+ * @extends `RequestConfig`
+ */
 export type UseRequestConfig<
 	TResponse = unknown,
 	Tbody = unknown,
 > = RequestConfig<Tbody> & {
-	/** Whether the hook should run or not */
+	/**
+	 * Enables the fetch call.
+	 * @default `true`
+	 */
 	isEnabled?: boolean
 	/** Custom fetcher function enabling replacement of the built-in `request` in `requestData`  */
 	fetcher?: (
@@ -18,7 +24,10 @@ export type UseRequestConfig<
 	) => Promise<TResponse>
 }
 
-/** Config for hooks consuming `useRequest` */
+/**
+ * Config for hooks consuming `useRequest`
+ * @extends `UseRequestConfig`
+ */
 export type UseRequestConsumerConfig<Tbody = unknown> = Omit<
 	UseRequestConfig<unknown, Tbody>,
 	'fetcher'

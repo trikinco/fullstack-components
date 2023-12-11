@@ -7,10 +7,18 @@ import { fetchProcessedBlock } from './fetchers'
  * useBlock generates a React component based on a prompt
  * It uses `createRoot` to render it to an element with the returned `id`
  */
-export const useBlock = (
-	prompt: string,
-	/** Callback when errors are thrown. e.g show an error boundary */
+export interface UseBlockParameters {
+	/**
+	 * A text description of the desired component.
+	 */
+	prompt: string
+	/** Callback when errors are thrown. Used to e.g show an error boundary. */
 	onError?: (error: any) => void
+}
+
+export const useBlock = (
+	prompt: UseBlockParameters['prompt'],
+	onError?: UseBlockParameters['onError']
 ) => {
 	const id = useId()
 	// Just for avoiding multiple API calls in strict mode - this isn't really needed

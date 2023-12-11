@@ -3,13 +3,30 @@ import type { AsComponent } from '../types/AsComponent'
 import type { ChatMessage } from '../types/ChatMessage'
 import { getPrompt } from '../handlers/prompt/promptClient'
 
-export type PromptProps = HTMLAttributes<HTMLElement> & {
-	/** Children to render before the prompt response content */
+export interface PromptOnlyProps {
+	/** A text description of the desired output. */
+	prompt: string
+	/** Children to render before the response content. */
 	children?: ReactNode
-} & (
-		| { prompt: string; messages?: ChatMessage[] }
-		| { prompt?: string; messages: ChatMessage[] }
-	)
+}
+
+export interface PromptWithMessagesProps {
+	/**
+	 * A list of chat completion messages comprising a conversation.
+	 * @see `openai` for full `OpenAI.ChatCompletionMessageParam` type information.
+	 */
+	messages: ChatMessage[]
+	/** Children to render before the response content. */
+	children?: ReactNode
+}
+
+/**
+ * Props to pass to the `<Prompt>`.
+ * @extends `PromptOnlyProps | PromptWithMessagesProps`
+ * @extends `HTMLAttributes<HTMLElement>`.
+ */
+export type PromptProps = HTMLAttributes<HTMLElement> &
+	(PromptOnlyProps | PromptWithMessagesProps)
 
 const defaultElement = 'div'
 

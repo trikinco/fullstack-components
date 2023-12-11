@@ -6,14 +6,14 @@ import {
 } from 'react-error-boundary'
 import {
 	ErrorEnhancementFallback,
-	type ErrorEnhancementFallbackBaseProps,
+	type ErrorEnhancementFallbackProps,
 } from './ErrorEnhancementFallback'
 
 export type ErrorBoundaryProps = Omit<
 	ReactErrorBoundaryProps,
 	'FallbackComponent' | 'fallbackRender'
 > &
-	ErrorEnhancementFallbackBaseProps
+	Omit<ErrorEnhancementFallbackProps, 'error' | 'resetErrorBoundary'>
 
 /**
  * A smart error boundary that generates user friendly messages

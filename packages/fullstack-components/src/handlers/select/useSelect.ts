@@ -7,9 +7,17 @@ import {
 } from '../../hooks/useRequest'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 
-export const useSelect = (
-	body: SelectRequestBody,
+/**
+ * Select client hook
+ */
+export interface UseSelectParameters {
+	body: SelectRequestBody
 	config?: UseRequestConsumerConfig<SelectRequestBody>
+}
+
+export const useSelect = (
+	body: UseSelectParameters['body'],
+	config?: UseSelectParameters['config']
 ) => {
 	return useRequest<SelectResponse>(ApiUrlEnum.select, {
 		body,

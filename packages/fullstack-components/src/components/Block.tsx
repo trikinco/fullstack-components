@@ -8,13 +8,24 @@ import {
 } from 'react-error-boundary'
 import { useBlock } from '../handlers/block/useBlock'
 
+/**
+ * A Block is a React component that is generated and mounted dynamically.
+ * @extends `HTMLAttributes<HTMLElement>`
+ */
 export interface BlockProps extends HTMLAttributes<HTMLElement> {
+	/** A text description of the desired component. */
 	prompt: string
-	/** a react tree to render in the error boundary if the Block build or renderer fails */
+	/**
+	 * A React tree to render in the error boundary if the `<Block>` build or renderer fails.
+	 * @see `react-error-boundary` for full type information.
+	 */
 	fallback?: ErrorBoundaryPropsWithFallback['fallback']
-	/** a react tree to render in the root before rendering the Block */
+	/** A React tree to render in the target root before rendering the `<Block>`. */
 	loading?: ReactNode
-	/** props to pass to the wrapping error boundary */
+	/**
+	 * Props to pass to the wrapping error boundary.
+	 * @see `react-error-boundary` for full type information.
+	 */
 	errorBoundaryProps?: Omit<ErrorBoundaryPropsWithFallback, 'fallback'>
 }
 
