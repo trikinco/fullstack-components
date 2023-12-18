@@ -1,17 +1,12 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import { merge } from '@trikinco/fullstack-components/utils'
-import { getTypeDocs } from '@/src/utils/getTypeDocs'
-import { TypeInfo } from './TypeInfo'
+import { TypeInfo, type TypeInfoDetails } from './TypeInfo'
+import { getTypeDocs } from '../utils/getTypeDocs'
 
 export interface TypesToMdxProps
-	extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+	extends Omit<HTMLAttributes<HTMLDivElement>, 'title'>,
+		Omit<TypeInfoDetails, 'name'> {
 	children?: ReactNode
-	/**
-	 * Relative path to the fileName to extract types from
-	 * @example
-	 * 'src/components/Button.tsx'
-	 */
-	path: string
 	/**
 	 * Name of the type or interface to extract.
 	 * Needed to extract a single type from a .ts/x file
@@ -20,55 +15,58 @@ export interface TypesToMdxProps
 	 */
 	name: string
 	/**
-	 * Title to override the top level type `name`
+	 * Title that overrides `name`
 	 */
 	title?: ReactNode
 	/**
-	 * Hides the top level type `name` or `title`
+	 * Relative path to the fileName to extract types from
+	 * @example
+	 * 'src/components/Button.tsx'
 	 */
-	hideTitle?: boolean
+	path: string
 	/**
-	 * Description to override the top level type description
+	 * Relative path to the base directory to extract types from
 	 */
-	description?: ReactNode
+	basePath: string
 }
 
 export const TypesToMdx = async ({
-	path,
+	basePath = '../fullstack-components/dist/',
+	path: filePath,
 	name,
 	title,
-	hideTitle,
+	type,
 	description,
+	hideName,
 	children,
 	className,
 	...rest
 }: TypesToMdxProps) => {
-	const markdown = await getTypeDocs(path, name)
+	const path = basePath + filePath
+	const { properties, parameters, ...schema } = await getTypeDocs(path, name)
+	const hasParameters = parameters && parameters?.length > 0
 
 	return (
 		<div
 			className={merge('typedoc inline-flex flex-col w-full mb-8', className)}
 			{...rest}
 		>
-			{!hideTitle && (
-				<span
-					className="text-xl font-bold mb-3 [&>*]:m-0"
-					dangerouslySetInnerHTML={{ __html: title || markdown.name }}
-				/>
-			)}
-			{(description || markdown.description) && (
-				<span
-					className="text-lg mt-0 mb-3 whitespace-pre-wrap [&>*]:m-0"
-					dangerouslySetInnerHTML={{
-						__html: description || markdown.description || '',
-					}}
-				/>
-			)}
+			<TypeInfo
+				hideName={hideName}
+				name={title || schema.name || name}
+				type={schema.type}
+				description={description || schema.description}
+				tags={schema.tags}
+				parameters={parameters}
+				className="border-t-0"
+				component="h3"
+				id={name}
+			/>
 
-			{markdown.properties.length > 0 && (
-				<div className="flex flex-col mt-6">
-					{markdown.properties.map(
-						({ name, type, required, description, parameters }) => (
+			{!hasParameters && properties && properties.length > 0 && (
+				<div className="flex flex-col">
+					{properties.map(
+						({ name, type, required, description, parameters, tags }) => (
 							<TypeInfo
 								key={name}
 								name={name}
@@ -76,6 +74,7 @@ export const TypesToMdx = async ({
 								required={required}
 								description={description}
 								parameters={parameters}
+								tags={tags}
 							/>
 						)
 					)}

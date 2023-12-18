@@ -1,234 +1,173 @@
-import ts from 'typescript'
-import fs from 'fs'
-import path from 'path'
-import { markdownToHtml } from './markdown'
+import {
+	createLinker,
+	isFunctionSchema,
+	type ICodeSchema,
+	type SchemaTypes,
+} from '@wix/typescript-schema-extract'
 
-type ExtractedTypeInfo = {
+export type ExtractedTagValue = string | number | boolean
+
+export type ExtractedTags = {
+	note?: ExtractedTagValue
+	see?: ExtractedTagValue
+	example?: ExtractedTagValue
+	link?: ExtractedTagValue
+	extends?: ExtractedTagValue
+}
+
+export type ExtractedTypeInfo = {
 	/** Name of the type/interface */
 	name: string
 	/** Typedoc descriptions */
 	description: string | undefined
 	/** The type */
 	type: string
-	/** Parameters if the type is a function */
-	parameters: ExtractedTypeInfo[] | undefined
-	/** Whether the type is required or optional */
-	required: boolean
-}
-
-/**
- * An object interface or type
- */
-type ExtractedTypes = Omit<ExtractedTypeInfo, 'required'> & {
 	/**
-	 * Each individual prop in the object type
+	 * Arguments if the type is a function
 	 */
-	properties: ExtractedTypeInfo[]
+	parameters?: ExtractedTypeInfo[] | undefined
+	/**
+	 * Each individual prop for nested types
+	 */
+	properties?: ExtractedTypeInfo[] | undefined
+	/** Whether the type is required or optional */
+	required?: boolean
+	// tags
+	tags?: {
+		name: string
+		value: ExtractedTagValue
+	}[]
 }
 
-/**
- * Parses JSDoc comments and returns clean strings
- */
-function parseJSDocCommentsAndTags(
-	hostNode: ts.Node,
-	sourceFile: ts.SourceFile
-) {
-	const comment = ts
-		.getJSDocCommentsAndTags(hostNode)
-		.map((doc) => doc.getText(sourceFile))
-		.join('')
+type TaggableSchema = ICodeSchema & ExtractedTags
 
-	const extractedComments = comment.match(/\/\*\*\s*([\s\S]*?)\s*\*\//)
-
-	const parsedComment = extractedComments?.[1]
-		.replaceAll(/^\s*\*\s*/gm, '') // Remove leading asterisks and spaces on each line
-		.replaceAll(/@(\w+)/g, '`$1{:sh}`')
-		.trim() // Trim leading and trailing whitespace
-
-	return parsedComment || ''
-}
-
-/**
- * Checks whether a node is a function or method
- *
- * @example function type
- * onError: (event: Event) => void
- */
-function isNodeFunctionType(node: ts.Node) {
-	const member = node as ts.PropertySignature
-
-	// @note `ts.SyntaxKind` number references may change across TS versions
+export function isTaggableSchema(
+	schema?: TaggableSchema | null
+): schema is TaggableSchema {
 	return (
-		// 184
-		member.type?.kind === ts.SyntaxKind.FunctionType ||
-		// 173
-		member.type?.kind === ts.SyntaxKind.MethodSignature
+		!!schema &&
+		typeof schema === 'object' &&
+		(schema.example !== undefined ||
+			schema.note !== undefined ||
+			schema.see !== undefined ||
+			schema.link !== undefined ||
+			schema.extends !== undefined ||
+			schema.default !== undefined)
 	)
 }
 
-function isMatchingNodeInterface(node: ts.Node, typeName: string) {
-	return (
-		(ts.isInterfaceDeclaration(node) || ts.isTypeAliasDeclaration(node)) &&
-		node.name.text === typeName
+const cleanRef = (ref?: string) =>
+	ref?.split('#').pop()?.split(' ').pop()?.split('!').pop()?.trim()
+
+const getTypeName = (node: SchemaTypes) => {
+	const base = node['$ref']?.includes('#') ? '' : node['$ref']?.split('/').pop()
+	const oneOf = node.oneOf
+		?.map(
+			(node) => node.type || node['$ref']?.split('/').pop()?.split('#').pop()
+		)
+		.join(' | ')
+
+	const union = node.enum?.join(' | ')
+
+	const type =
+		union ||
+		base ||
+		(node.type as string) ||
+		oneOf ||
+		/**
+		 * If no other type names are found, use the $ref
+		 * since it's probably a linked type that has been flattened
+		 * @example ref value '../fullstack-components/dist/hooks/useRequest#type UseRequestConsumerConfig'
+		 */
+		cleanRef(node['$ref']) ||
+		''
+
+	// Combine the type with any generic arguments into a single string
+	if (node.genericArguments?.length) {
+		const genericArguments = node.genericArguments
+			?.map((item) => cleanRef(item['$ref']))
+			.filter(Boolean)
+
+		if (genericArguments?.length) {
+			return `${type}<${genericArguments.join(', ')}>`
+		}
+	}
+
+	return type?.split('React.').pop() || type
+}
+
+const getItemTags = (item: ICodeSchema) => {
+	let tags: ExtractedTypeInfo['tags'] = []
+
+	if (isTaggableSchema(item)) {
+		tags = [
+			{ name: 'example', value: item?.example },
+			{ name: 'note', value: item?.note },
+			{ name: 'see', value: item?.see },
+			{ name: 'link', value: item?.link },
+			{ name: 'extends', value: item?.extends },
+			{ name: 'default', value: item?.default },
+		].filter(
+			(tag) =>
+				typeof tag.value === 'string' ||
+				typeof tag.value === 'number' ||
+				typeof tag.value === 'boolean'
+		) as ExtractedTypeInfo['tags']
+	}
+
+	return tags
+}
+
+const getItemArguments = (item: ICodeSchema, typeName?: string) => {
+	let parameters = undefined
+
+	if (isFunctionSchema(item)) {
+		parameters = item.arguments?.map((argument) =>
+			getExtractedTypeInfo(argument, typeName, item)
+		)
+	}
+
+	return parameters
+}
+
+const getExtractedTypeInfo = (
+	item: ICodeSchema,
+	typeName?: string,
+	schema?: SchemaTypes
+): ExtractedTypeInfo => {
+	const type = getTypeName(item)
+	const tags = getItemTags(item)
+	const parameters = getItemArguments(item, typeName)
+	const name = item.name || typeName || ''
+	const description = item.description as string
+	const required = isFunctionSchema(schema)
+		? schema.requiredArguments?.includes(name)
+		: false
+	const properties = Object.entries(item.properties || {}).map(([key, value]) =>
+		getExtractedTypeInfo(value, key, item)
 	)
-}
-
-/**
- * Gets the node `type` name
- *
- * @example type names
- * string | number | function | unknown
- */
-function getNodeType(sourceFile: ts.SourceFile, node?: ts.Node) {
-	if (!node) return 'object'
-
-	const member = node as ts.PropertySignature
-	const type = member?.type?.getText(sourceFile) ?? 'unknown'
-
-	if (!ts.isPropertySignature(member)) {
-		return type
-	}
-
-	if (isNodeFunctionType(member)) {
-		return 'function'
-	}
-
-	return type
-}
-
-/**
- * Gets all the properties and parameters for a node
- */
-function getNodeProperty(
-	node: ts.PropertySignature | ts.ParameterDeclaration,
-	sourceFile: ts.SourceFile
-) {
-	const name = node.name.getText(sourceFile)
-	const description = parseJSDocCommentsAndTags(node, sourceFile)
-	const required = !node.questionToken
-	const type = getNodeType(sourceFile, node)
-	const parameters = getNodeParameters(node, sourceFile)
 
 	return {
 		name,
 		type,
 		description,
-		required,
 		parameters,
-		// Additional handling for enum + other types can be added here
+		properties,
+		required,
+		tags,
 	}
 }
 
-/**
- * Recursively gets all parameters for a node
- */
-function getNodeParameters(
-	node: ts.Node,
-	sourceFile: ts.SourceFile
-): ExtractedTypeInfo[] {
-	if (!ts.isPropertySignature(node) || !isNodeFunctionType(node)) return []
-
-	const member = node.type as ts.FunctionTypeNode
-	const members = member?.parameters || member?.typeParameters
-
-	return members?.map((param) => getNodeProperty(param, sourceFile)) || []
-}
-
-/**
- * Recursively gets all parameters for a node
- */
-function getTypeProperties(typeName: string, sourceFile: ts.SourceFile) {
-	let properties: ExtractedTypeInfo[] = []
-
-	ts.forEachChild(sourceFile, (node) => {
-		if (!isMatchingNodeInterface(node, typeName)) return
-
-		node.forEachChild((member) => {
-			if (!ts.isPropertySignature(member)) return
-
-			const property = getNodeProperty(member, sourceFile)
-			properties.push(property)
-		})
-	})
-
-	return properties
-}
-
-function getTypeDescription(typeName: string, sourceFile: ts.SourceFile) {
-	let description = ''
-
-	ts.forEachChild(sourceFile, (node) => {
-		if (!isMatchingNodeInterface(node, typeName)) return
-
-		description = parseJSDocCommentsAndTags(node, sourceFile)
-	})
-
-	return description
-}
-
-/**
- * Formats a type's comment and all it's members comments to HTML
- *
- * @consideration format parameter comments?
- */
-async function formatComments(
-	description: string | undefined,
-	properties: ExtractedTypeInfo[]
-) {
-	const descriptions = [
-		description,
-		...properties.map((value) => value.description),
-	]
-
-	const data = await Promise.allSettled(
-		descriptions.map((text) => markdownToHtml(text).then((file) => file.value))
-	)
-	const response = data.filter(
-		(res) => res.status === 'fulfilled'
-	) as PromiseFulfilledResult<string | undefined>[]
-
-	return response
-}
-
-/**
- * Extracts type information and formats descriptions to HTML.
- *
- * @example filePath
- * 'src/components/Button.tsx'
- *
- * @note only handles simple objects like interfaces and types.
- * Does not handle parsing the heritage clauses of the interface declaration.
- * e.g extracting type info from extended interfaces and types using Pick, Omit, etc.
- */
 export async function getTypeDocs(
 	filePath: string,
 	typeName: string
-): Promise<ExtractedTypes> {
-	const sourceFile = ts.createSourceFile(
-		path.join(process.cwd(), filePath),
-		fs.readFileSync(filePath).toString(),
-		ts.ScriptTarget.ES2015,
-		true
-	)
+): Promise<ExtractedTypeInfo> {
+	const files = [filePath]
+	const linker = createLinker(files)
+	const schema = linker.flatten(files[0], typeName)
 
-	const type = getNodeType(sourceFile)
-	const description = getTypeDescription(typeName, sourceFile)
-	const properties = getTypeProperties(typeName, sourceFile)
-	const response = await formatComments(description, properties)
+	// Extract the type info
+	const data = getExtractedTypeInfo(schema, typeName)
 
-	return {
-		name: typeName,
-		type,
-		parameters: [],
-		description: response[0].value,
-		properties: properties.map((property, i) => ({
-			name: property.name,
-			type: property.type,
-			required: property.required,
-			parameters: property.parameters,
-			description: response[i + 1].value,
-		})),
-	}
+	return data
 }
-
-export default getTypeDocs

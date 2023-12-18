@@ -53,6 +53,10 @@ body {
 	@apply mr-2;
 }
 
+.typedoc a code {
+	@apply underline;
+}
+
 .typedoc [data-rehype-pretty-code-fragment] code::before,
 .typedoc [data-rehype-pretty-code-fragment] code::after {
 	content: none;
