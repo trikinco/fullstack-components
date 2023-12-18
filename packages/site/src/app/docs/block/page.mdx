@@ -1,3 +1,4 @@
+import { TypesToMdx } from '@/src/components/TypesToMdx'
 import { Example } from '@/src/components/Example'
 import Blocks from './Blocks'
 import { URL_HOST } from '@/src/utils/constants'
@@ -95,3 +96,33 @@ const fscHandler = handleFSComponents(fscOptions)
 
 export { fscHandler as GET, fscHandler as POST }
 ```
+
+## API Reference
+
+<TypesToMdx
+  path="handlers/block/models.d.ts"
+  name="BlockOptions"
+  description="Block API handler route options."
+/>
+
+<TypesToMdx
+  path="handlers/block/models.d.ts"
+  name="BlockRequestBody"
+  description="Block request body."
+/>
+
+<TypesToMdx path="components/Block.d.ts" name="BlockProps" />
+
+<TypesToMdx path="components/Block.d.ts" name="Block" />
+
+<TypesToMdx path="handlers/block/useBlock.d.ts" name="useBlock" />
+
+<TypesToMdx
+  path="handlers/block/blockClient.d.ts"
+  name="getBlock"
+/>
+
+<TypesToMdx
+  path="handlers/block/fetchers.d.ts"
+  name="fetchBlock"
+/>

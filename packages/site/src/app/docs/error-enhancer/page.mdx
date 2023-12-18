@@ -1,3 +1,4 @@
+import { TypesToMdx } from '@/src/components/TypesToMdx'
 import { ErrorHTTPPreview } from './ErrorHTTPPreview'
 import { ClientErrors } from './ClientErrors'
 import { URL_HOST } from '@/src/utils/constants'
@@ -153,3 +154,53 @@ const fscHandler = handleFSComponents(fscOptions)
 
 export { fscHandler as GET, fscHandler as POST }
 ```
+
+## API Reference
+
+<TypesToMdx
+  path="handlers/errorEnhancer/models.d.ts"
+  name="ErrorParserOptions"
+  description="Error enhancer API handler route options."
+/>
+
+<TypesToMdx
+  path="handlers/errorEnhancer/models.d.ts"
+  name="ErrorEnhancementRequestBody"
+  description="Error enhancer request body."
+/>
+
+<TypesToMdx
+  path="handlers/errorEnhancer/models.d.ts"
+  name="ErrorEnhancementResponse"
+  description="Error enhancer response body."
+/>
+
+<TypesToMdx
+  path="components/ErrorEnhancementBoundary.d.ts"
+  name="ErrorEnhancementBoundary"
+/>
+
+<TypesToMdx
+  path="components/ErrorEnhancementFallback.d.ts"
+  name="ErrorEnhancementFallbackProps"
+/>
+
+<TypesToMdx
+  path="components/ErrorEnhancementFallback.d.ts"
+  name="ErrorEnhancementFallback"
+/>
+
+<TypesToMdx
+  path="handlers/errorEnhancer/useErrorEnhancement.d.ts"
+  name="useErrorEnhancement"
+/>
+
+<TypesToMdx
+  path="handlers/errorEnhancer/errorClient.d.ts"
+  name="getErrorEnhancement"
+/>
+
+<TypesToMdx
+  path="handlers/errorEnhancer/fetchers.d.ts"
+  name="fetchErrorEnhancement"
+/>

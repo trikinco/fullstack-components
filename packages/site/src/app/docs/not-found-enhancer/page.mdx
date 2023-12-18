@@ -1,3 +1,4 @@
+import { TypesToMdx } from '@/src/components/TypesToMdx'
 import { Example } from '@/src/components/Example'
 import { NotFoundEnhancer } from './NotFoundEnhancer'
 import { URL_HOST } from '@/src/utils/constants'
@@ -129,3 +130,43 @@ export default function NotFound() {
   )
 }
 ```
+
+## API Reference
+
+<TypesToMdx
+  path="handlers/notFoundEnhancer/models.d.ts"
+  name="NotFoundEnhancerOptions"
+  description="Not found enhancer API handler route options."
+/>
+
+<TypesToMdx
+  path="handlers/notFoundEnhancer/models.d.ts"
+  name="NotFoundEnhancerRequestBody"
+  description="Not found enhancer request body."
+/>
+
+<TypesToMdx
+  path="handlers/notFoundEnhancer/models.d.ts"
+  name="NotFoundEnhancerResponse"
+  description="Not found enhancer response body."
+/>
+
+<TypesToMdx
+  path="handlers/notFoundEnhancer/useNotFoundEnhancement.d.ts"
+  name="useNotFoundEnhancement"
+/>
+
+<TypesToMdx
+  path="handlers/notFoundEnhancer/notFoundEnhancerContentGenerator.d.ts"
+  name="getNotFoundContentGenerator"
+/>
+
+<TypesToMdx
+  path="handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector.d.ts"
+  name="getNotFoundSitemapSelector"
+/>
+
+<TypesToMdx
+  path="handlers/notFoundEnhancer/fetchers.d.ts"
+  name="fetchNotFoundEnhancement"
+/>
