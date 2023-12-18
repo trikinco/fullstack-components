@@ -2,7 +2,7 @@ import type { ReactElement, ReactNode } from 'react'
 
 /**
  * Renders a React tree to a static HTML string.
- * @see {@link https://github.com/vercel/next.js/issues/43810}
+ * @link https://github.com/vercel/next.js/issues/43810
  * @note server version of `client/renderToString`
  */
 export const renderToStaticMarkup = async (

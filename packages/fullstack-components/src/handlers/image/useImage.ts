@@ -8,15 +8,18 @@ import {
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 
 /**
- * Image client hook
+ * A client-side fetch handler hook for generating one or more images or describing a single image based on the provided `ImageRequestBody`.
+ * @see `ApiUrlEnum.image`
  */
-export interface UseImageParameters {
-	body: ImageRequestBody
-	config?: UseRequestConsumerConfig<ImageRequestBody>
-}
-
 export function useImage(
+	/**
+	 * @link ImageRequestBody
+	 */
 	body: ImageRequestBody & { n?: 1 | 0 | null },
+	/**
+	 * Fetch utility hook request options without the `fetcher`. Allows for overriding the default `request` config.
+	 * @link https://developer.mozilla.org/en-US/docs/Web/API/Request/Request
+	 */
 	config?: UseRequestConsumerConfig<ImageRequestBody>
 ): ReturnType<typeof useRequest<string, ImageRequestBody>>
 export function useImage(

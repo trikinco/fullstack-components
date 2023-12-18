@@ -9,10 +9,20 @@ import type {
 import { getImage } from './imageClient'
 
 /**
- * Image generation and description getter
- * Used to make enhanced `Image` components similar to `next/image`
+ * Generates or describes a single image based on the provided `ImageProps`.
+ * Logs warnings in development if `alt` is provided without `prompt`.
+ * Used specifically for wrapping the `Image` component from `next/image`.
+ *
+ * Image Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
+ * @link https://nextjs.org/docs/app/building-your-application/data-fetching/patterns Next.js Data Fetching Patterns and Best Practices
+ * @returns {Promise<string>} Text description or the base64 string or URL of the generated image
  */
-export async function getEnhancedImage(props: ImageProps) {
+export async function getEnhancedImage(
+	/**
+	 * @link ImageProps
+	 */
+	props: ImageProps
+) {
 	const {
 		prompt,
 		src,

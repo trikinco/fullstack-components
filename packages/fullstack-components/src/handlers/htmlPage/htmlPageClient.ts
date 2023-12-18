@@ -35,8 +35,22 @@ You use any provided list of TailwindCSS colors in the UI you create. EXAMPLE li
 You use images from Unsplash, placehold.co (or similar) or colored rectangles
 `
 
+/**
+ * Generates a website based on the provided `HtmlPageRequestBody`.
+ *
+ * HtmlPage Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
+ * @note uses the `gpt-4-vision-preview` model and returns a maximum of 4096 output tokens
+ * @link https://nextjs.org/docs/app/building-your-application/data-fetching/patterns Next.js Data Fetching Patterns and Best Practices
+ * @returns {Promise<ChatGptCompletionResponse<string>>} Stringified JSON response
+ */
 export async function getHtmlPage(
+	/**
+	 * @link HtmlPageRequestBody
+	 */
 	request: HtmlPageRequestBody,
+	/**
+	 * @link HtmlPageOptions
+	 */
 	options?: HtmlPageOptions
 ) {
 	'use server'

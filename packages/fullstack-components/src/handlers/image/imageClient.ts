@@ -18,8 +18,22 @@ There's usually no need to include words like "image", "icon", or "picture" in t
 Perform the action directly and do not include the reasoning
 Only return PLAIN TEXT
 `
+
+/**
+ * Generates one or more images or describes a single image based on the provided `ImageRequestBody`.
+ *
+ * Image Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
+ * @link https://nextjs.org/docs/app/building-your-application/data-fetching/patterns Next.js Data Fetching Patterns and Best Practices
+ * @returns {Promise<ImageGenerationResponse<string | string[]>>} A single string or an array of strings (if `n` > 1) containing the text description or the base64 string or URL of the generated image.
+ */
 export async function getImage(
+	/**
+	 * @link ImageRequestBody
+	 */
 	request: Omit<ImageRequestBody, 'n'> & { n?: 1 | 0 | null },
+	/**
+	 * @link ImageOptions
+	 */
 	options?: ImageOptions
 ): Promise<ImageGenerationResponse<string>>
 export async function getImage(

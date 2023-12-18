@@ -12,6 +12,7 @@ export async function sitemapFromCache(currentHost: string) {
 	return sitemapCache
 }
 
+// TODO: make the file path configurable
 async function loadAndParseSitemapToListOfUrls(
 	currentHost: string
 ): Promise<string[]> {

@@ -6,7 +6,7 @@ import type { RequestConfig } from '../types'
 
 /**
  * Fetch request config initialiser in addition to the `baseUrl`.
- * @extends `RequestConfig`
+ * @see RequestConfig
  */
 export type UseRequestConfig<
 	TResponse = unknown,
@@ -26,7 +26,7 @@ export type UseRequestConfig<
 
 /**
  * Config for hooks consuming `useRequest`
- * @extends `UseRequestConfig`
+ * @see UseRequestConfig
  */
 export type UseRequestConsumerConfig<Tbody = unknown> = Omit<
 	UseRequestConfig<unknown, Tbody>,
@@ -48,10 +48,17 @@ const requestData = <TResponse = unknown, Tbody = unknown>(
 	return request<TResponse, Tbody>(url, requestConfig)
 }
 
+/**
+ * Fetch utility hook for calling internal Next.js API route handlers.
+ * Handles loading, error and data states.
+ */
 export const useRequest = <TResponse = unknown, Tbody = unknown>(
 	/** Relative API url */
 	url: string,
-	/** Fetch request config initialiser in addition to the `baseUrl` */
+	/**
+	 * Fetch request config initialiser in addition to the `baseUrl`
+	 * @link UseRequestConfig
+	 */
 	config: UseRequestConfig<TResponse, Tbody>
 ) => {
 	const { isEnabled = true, ...requestConfig } = config

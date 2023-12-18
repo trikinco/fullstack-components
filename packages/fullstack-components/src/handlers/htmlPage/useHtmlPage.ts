@@ -8,19 +8,22 @@ import {
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 
 /**
- * HTML Page client hook.
- * Creates a HTML page based on prompts.
- * Will by default set the `theme` to the current `prefers-color-scheme` setting.
+ * A client-side fetch handler hook for creating a HTML page based on a provided `prompt`, and other optional parameters.
+ * @default `theme` is set to the current `prefers-color-scheme` value using `window.matchMedia`
+ * @see `ApiUrlEnum.htmlPage`
  */
-export interface UseHtmlPageParameters {
-	body: HtmlPageRequestBody
+export function useHtmlPage(
+	/**
+	 * @link HtmlPageRequestBody
+	 * @default `theme` is set to the current `prefers-color-scheme` value using `window.matchMedia`
+	 */
+	body: HtmlPageRequestBody,
+	/**
+	 * Fetch utility hook request options without the `fetcher`. Allows for overriding the default `request` config.
+	 * @link https://developer.mozilla.org/en-US/docs/Web/API/Request/Request
+	 */
 	config?: UseRequestConsumerConfig<HtmlPageRequestBody>
-}
-
-export const useHtmlPage = (
-	body: UseHtmlPageParameters['body'],
-	config?: UseHtmlPageParameters['config']
-) => {
+) {
 	const isPrefersDark =
 		typeof window !== 'undefined' &&
 		window.matchMedia('(prefers-color-scheme: dark)').matches

@@ -3,13 +3,17 @@ import { type ImageProps as NextImageProps } from 'next/image'
 import type { SyntheticEvent } from 'react'
 import type { ImageResponse } from '../handlers/image/models'
 
+type NextImageDescribeProps = Omit<
+	NextImageProps,
+	'src' | 'alt' | 'onLoad' | 'onError'
+>
+
 /**
- * Props specific to describing an image.
- * @extends `Omit<NextImageProps, 'src' | 'alt' | 'onLoad' | 'onError'>`
- * @see `next/image` for full `NextImageProps` type information.
+ * Props specific to describing an image. Used in `ImageProps`.
+ * @extends Omit<NextImageProps, 'src' | 'alt' | 'onLoad' | 'onError'>
+ * @link https://nextjs.org/docs/app/api-reference/components/image `next/image` for full `NextImageProps` type information.
  */
-export interface ImageDescribeProps
-	extends Omit<NextImageProps, 'src' | 'alt' | 'onLoad' | 'onError'> {
+export interface ImageDescribeProps extends NextImageDescribeProps {
 	/**
 	 * URL to the image to describe. Generates `alt` text.
 	 * The `alt` text is then passed to the image and returned in `onLoad`.
@@ -23,41 +27,56 @@ export interface ImageDescribeProps
 	 * Callback function invoked once the image is completely loaded and the `placeholder` has been removed.
 	 */
 	onLoad?: (
-		/** A React `HTMLImageElement` event object with no additional properties. */
+		/**
+		 * A React `HTMLImageElement` event object with no additional properties.
+		 */
 		event: SyntheticEvent<HTMLImageElement, Event> | undefined,
-		/** A text description response of the image. */
+		/**
+		 * A text description response of the image.
+		 */
 		response?: ImageResponse<1> | undefined,
-		/** Source of the image being described. */
+		/**
+		 * An absolute URL to the image being described.
+		 * @example 'https://absolute-cat-url/tabbycat.jpg'
+		 */
 		src?: string
 	) => void
 	/**
 	 * Callback function that is invoked if the image fails to load.
 	 */
 	onError?: (
-		/** A React `HTMLImageElement` event object with no additional properties. */
+		/**
+		 * A React `HTMLImageElement` event object with no additional properties.
+		 */
 		event: SyntheticEvent<HTMLImageElement, Event> | undefined,
-		/** A text description response of the image. */
+		/**
+		 * A text description response of the image.
+		 */
 		response?: ImageResponse<1> | undefined,
-		/** Source of the image being described. */
+		/**
+		 * An absolute URL to the image being described.
+		 * @example 'https://absolute-cat-url/tabbycat.jpg'
+		 */
 		src?: string
 	) => void
 }
 
 export type ImageDescribeCallback = NonNullable<ImageDescribeProps['onLoad']>
 
+type NextImageGenerateProps = Omit<
+	NextImageProps,
+	'src' | 'width' | 'height' | 'alt' | 'onLoad' | 'onError' | 'quality'
+> &
+	Partial<Omit<OpenAI.ImageGenerateParams, 'n' | 'quality' | 'style'>>
+
 /**
- * Props specific to generating an image.
- * @extends `Omit<NextImageProps, 'src' | 'width' | 'height' | 'alt' | 'onLoad' | 'onError' | 'quality'>`.
- * @see `next/image` for full `NextImageProps` type information.
- * @extends `Partial<Omit<OpenAI.ImageGenerateParams, 'n' | 'quality' | 'style'>>`.
- * @see `openai` for full `ImageGenerateParams` type information.
+ * Props specific to generating an image. Used in `ImageProps`.
+ * @extends NextImageProps
+ * @link https://nextjs.org/docs/app/api-reference/components/image `next/image` for full `NextImageProps` type information.
+ * @extends OpenAI.ImageGenerateParams
+ * @link https://www.npmjs.com/package/openai `openai` for full `ImageGenerateParams` type information.
  */
-export interface ImageGenerateProps
-	extends Omit<
-			NextImageProps,
-			'src' | 'width' | 'height' | 'alt' | 'onLoad' | 'onError' | 'quality'
-		>,
-		Partial<Omit<OpenAI.ImageGenerateParams, 'n' | 'quality' | 'style'>> {
+export interface ImageGenerateProps extends NextImageGenerateProps {
 	/**
 	 * Shows the image generation result base64 string or URL adjacent to the image.
 	 */
@@ -81,9 +100,13 @@ export interface ImageGenerateProps
 	 * Callback function invoked once the image is completely loaded and the `placeholder` has been removed.
 	 */
 	onLoad?: (
-		/** A React `HTMLImageElement` event object with no additional properties. */
+		/**
+		 * A React `HTMLImageElement` event object with no additional properties.
+		 */
 		event: SyntheticEvent<HTMLImageElement, Event> | undefined,
-		/** Image generation response base64 string or URL. */
+		/**
+		 * The image generation response as a base64 string or URL.
+		 */
 		response?: ImageResponse<1> | undefined,
 		/**
 		 * A text description of the desired image. The maximum length is 1000
@@ -95,9 +118,13 @@ export interface ImageGenerateProps
 	 * Callback function that is invoked if the image fails to load.
 	 */
 	onError?: (
-		/** A React `HTMLImageElement` event object with no additional properties. */
+		/**
+		 * A React `HTMLImageElement` event object with no additional properties.
+		 */
 		event: SyntheticEvent<HTMLImageElement, Event> | undefined,
-		/** Image generation response base64 string or URL. */
+		/**
+		 * The image generation response as a base64 string or URL.
+		 */
 		response?: ImageResponse<1> | undefined,
 		/**
 		 * A text description of the desired image. The maximum length is 1000
@@ -109,6 +136,9 @@ export interface ImageGenerateProps
 
 export type ImageGenerateCallback = NonNullable<ImageGenerateProps['onLoad']>
 
+/**
+ * Props to pass to the `<Image>` Server Component.
+ */
 export type ImageProps =
 	| ImageGenerateProps
 	| ImageDescribeProps

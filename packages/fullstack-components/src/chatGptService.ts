@@ -107,7 +107,7 @@ function selectBestModel(
 	if (format === 'JSON') {
 		/**
 		 * only gpt-4-1106-preview or gpt-3.5-turbo-1106 support JSON mode atm
-		 * @see https://platform.openai.com/docs/guides/text-generation/json-mode
+		 * @link https://platform.openai.com/docs/guides/text-generation/json-mode OpenAI JSON mode
 		 */
 		model = 'gpt-3.5-turbo-1106'
 	}

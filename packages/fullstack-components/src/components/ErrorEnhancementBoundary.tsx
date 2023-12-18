@@ -16,12 +16,16 @@ export type ErrorBoundaryProps = Omit<
 	Omit<ErrorEnhancementFallbackProps, 'error' | 'resetErrorBoundary'>
 
 /**
- * A smart error boundary that generates user friendly messages
+ * A smart error boundary Client Component that generates and displays user friendly messages.
+ * Consumes `useErrorEnhancement` and `ErrorEnhancementFallback` under the hood to generate and display the messages.
  */
-export function ErrorEnhancementBoundary({
-	children,
-	...rest
-}: ErrorBoundaryProps) {
+export function ErrorEnhancementBoundary(
+	/**
+	 * @link ErrorEnhancementFallbackProps
+	 */
+	props: ErrorBoundaryProps
+) {
+	const { children, ...rest } = props || {}
 	return (
 		<ReactErrorBoundary
 			fallbackRender={({ error, resetErrorBoundary }) => (
@@ -37,5 +41,3 @@ export function ErrorEnhancementBoundary({
 		</ReactErrorBoundary>
 	)
 }
-
-export default ErrorEnhancementBoundary

@@ -1,6 +1,6 @@
 'use client'
 
-import type { PromptResponse, PromptRequestBody } from './models'
+import type { PromptResponseBody, PromptRequestBody } from './models'
 import {
 	useRequest,
 	type UseRequestConsumerConfig,
@@ -8,21 +8,21 @@ import {
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 
 /**
- * Prompt client hook
+ * A client-side fetch handler hook that answers a `prompt` or an array of `messages` and returns the response as-is.
+ * @see `ApiUrlEnum.prompt`
  */
-export interface UsePromptParameters {
+export function usePrompt(
 	/**
-	 * @see `PromptRequestBody`
+	 * @link PromptRequestBody
 	 */
-	body: PromptRequestBody
+	body: PromptRequestBody,
+	/**
+	 * Fetch utility hook request options without the `fetcher`. Allows for overriding the default `request` config.
+	 * @link https://developer.mozilla.org/en-US/docs/Web/API/Request/Request
+	 */
 	config?: UseRequestConsumerConfig<PromptRequestBody>
-}
-
-export const usePrompt = <T = PromptResponse>(
-	body: UsePromptParameters['body'],
-	config?: UsePromptParameters['config']
-) => {
-	return useRequest<T>(ApiUrlEnum.prompt, {
+) {
+	return useRequest<PromptResponseBody>(ApiUrlEnum.prompt, {
 		body,
 		...config,
 	})

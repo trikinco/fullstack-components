@@ -1,6 +1,7 @@
-export class BlockRequestBody {
+export interface BlockRequestBody {
 	/**
 	 * A text description of the desired component.
+	 * @example 'A footer with copyright for this year with the company name Acme'
 	 */
 	prompt?: string
 }

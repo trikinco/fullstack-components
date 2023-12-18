@@ -3,8 +3,21 @@ import { OPENAI_API_KEY } from '../../utils/constants'
 import type { PromptRequestBody, PromptOptions } from './models'
 import type { ChatMessage } from '../../types/ChatMessage'
 
+/**
+ * Answers a `prompt` or an array of `messages` and returns the response as-is.
+ *
+ * Prompt Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
+ * @link https://nextjs.org/docs/app/building-your-application/data-fetching/patterns Next.js Data Fetching Patterns and Best Practices
+ * @returns {Promise<ChatGptCompletionResponse<string>>} response
+ */
 export async function getPrompt(
+	/**
+	 * @link PromptRequestBody
+	 */
 	request: PromptRequestBody,
+	/**
+	 * @link PromptOptions
+	 */
 	options?: PromptOptions
 ) {
 	'use server'
