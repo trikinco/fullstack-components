@@ -14,7 +14,7 @@ export type ChatGptCompletionResponse<T = string> = {
 	errorMessage?: string
 }
 
-export type ChatCompletionFormat = 'JSON'
+export type ChatCompletionFormat = 'JSON' | 'text'
 
 export type ChatCompletionsOptions = Omit<
 	OpenAI.ChatCompletionCreateParamsNonStreaming,

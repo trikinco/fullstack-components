@@ -56,7 +56,11 @@ const appRouteHandlerFactory: (
 			console.log('requestBody', requestBody)
 			const gptResponse = await client.handle(requestBody, options)
 
-			return NextResponse.json(gptResponse.responseText, res)
+			if (requestBody.format === 'JSON') {
+				return NextResponse.json(JSON.parse(gptResponse.responseText), res)
+			} else {
+				return NextResponse.json(gptResponse.responseText, res)
+			}
 		} catch (error) {
 			throw new PromptError(error)
 		}
@@ -83,8 +87,13 @@ const pageRouteHandlerFactory: (
 			console.log('Prompt PAGES RouteHandlerFactory')
 			res.setHeader('Cache-Control', 'no-store')
 			const requestBody = req.body as PromptRequestBody
-			const parsedError = await client.handle(requestBody, options)
-			res.json(JSON.parse(parsedError.responseText))
+			const gptResponse = await client.handle(requestBody, options)
+
+			if (requestBody.format === 'JSON') {
+				res.json(JSON.parse(gptResponse.responseText))
+			} else {
+				res.json(gptResponse.responseText)
+			}
 		} catch (error) {
 			throw new PromptError(error)
 		}
