@@ -74,12 +74,12 @@ export const TypeInfo = ({
 				<TitleComponent className="flex gap-2 m-0 scroll-mt-10" id={id}>
 					{name && <span className="font-bold">{name}</span>}
 					{type && (
-						<span className="text-sm font-mono my-auto text-slate-500">
+						<span className="text-sm font-mono font-normal my-auto text-slate-500 dark:text-slate-400">
 							{type}
 						</span>
 					)}
 					{required && (
-						<span className="text-sm font-mono my-auto text-red-600">
+						<span className="text-sm font-mono font-normal my-auto text-red-600">
 							required
 						</span>
 					)}

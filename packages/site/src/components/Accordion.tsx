@@ -47,7 +47,7 @@ export const Accordion = ({
 		<details {...rest}>
 			<summary
 				className={merge(
-					'[&::marker]:content-none [&::-webkit-details-marker]:hidden list-none appearance-none flex gap-2 mt-3 cursor-pointer text-sm text-slate-500 hover:text-black dark:hover:text-slate-600',
+					'[&::marker]:content-none [&::-webkit-details-marker]:hidden list-none appearance-none flex gap-2 mt-3 cursor-pointer text-sm text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300',
 					summaryClassName
 				)}
 				{...summaryRest}
