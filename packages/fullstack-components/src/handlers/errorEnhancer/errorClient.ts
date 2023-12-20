@@ -3,8 +3,21 @@ import { OPENAI_API_KEY } from '../../utils/constants'
 import type { ChatMessage } from '../../types/ChatMessage'
 import type { ErrorEnhancementRequestBody, ErrorParserOptions } from './models'
 
+/**
+ * Enhances the provided error with additional information.
+ *
+ * Error enhancement Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
+ * @link https://nextjs.org/docs/app/building-your-application/data-fetching/patterns Next.js Data Fetching Patterns and Best Practices
+ * @returns {Promise<ChatGptCompletionResponse<string>>} response
+ */
 export async function getErrorEnhancement(
+	/**
+	 * @link ErrorEnhancementRequestBody
+	 */
 	request: ErrorEnhancementRequestBody,
+	/**
+	 * @link ErrorParserOptions
+	 */
 	options?: ErrorParserOptions
 ) {
 	'use server'

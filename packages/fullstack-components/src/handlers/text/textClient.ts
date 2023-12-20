@@ -19,7 +19,23 @@ If the user's HTML text has HTML heading elements (h1, h2, h3 etc.) and your rew
 If the user asks you to shorten, reduce or otherwise summarize the text, make sure you REALLY SHORTEN the text. You are allowed to omit paragraphs to achieve this. You should retain at least one heading if present in the input (you can modify this), you can omit or shorten the remaining headings.
 `
 
-export async function getText(request: TextRequestBody, options?: TextOptions) {
+/**
+ * Rewrites, creates, edits and modifies text content for the web provided by the user.
+ *
+ * Text Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
+ * @link https://nextjs.org/docs/app/building-your-application/data-fetching/patterns Next.js Data Fetching Patterns and Best Practices
+ * @returns {Promise<ChatGptCompletionResponse<string>} JSON response
+ */
+export async function getText(
+	/**
+	 * @link TextRequestBody
+	 */
+	request: TextRequestBody,
+	/**
+	 * @link TextOptions
+	 */
+	options?: TextOptions
+) {
 	'use server'
 	console.log('handling `getText` request', request)
 	const content: ChatMessage['content'] = []

@@ -1,3 +1,4 @@
+import { TypeInfoToText } from '@/src/components/TypeInfo/TypeInfoToText'
 import { Image } from '@trikinco/fullstack-components'
 import { Example } from '@/src/components/Example'
 import { URL_HOST } from '@/src/utils/constants'
@@ -40,7 +41,7 @@ import { useImage } from '@trikinco/fullstack-components/client'
 
 ```jsx
 <Image
-  src="https://absolute-cat-url.jpg"
+  src="https://absolute-cat-url/tabbycat.jpg"
   showResult // Optional - to render the alt-text visually
   width={256}
   height={170}
@@ -214,3 +215,54 @@ const fscHandler = handleFSComponents(fscOptions)
 
 export { fscHandler as GET, fscHandler as POST }
 ```
+
+## API Reference
+
+<TypeInfoToText
+  path="handlers/image/models.d.ts"
+  name="ImageOptions"
+  description="Image API handler route options."
+/>
+
+<TypeInfoToText
+  path="handlers/image/models.d.ts"
+  name="ImageRequestBody"
+/>
+
+<TypeInfoToText
+  path="types/Image.d.ts"
+  name="ImageProps"
+  description="Props to pass to the `<Image>` Server Component."
+/>
+
+<TypeInfoToText
+  path="types/Image.d.ts"
+  name="ImageGenerateProps"
+/>
+
+<TypeInfoToText
+  path="types/Image.d.ts"
+  name="ImageDescribeProps"
+/>
+
+<TypeInfoToText path="components/Image/Image.d.ts" name="Image" />
+
+<TypeInfoToText
+  path="handlers/image/useImage.d.ts"
+  name="useImage"
+/>
+
+<TypeInfoToText
+  path="handlers/image/imageClient.d.ts"
+  name="getImage"
+/>
+
+<TypeInfoToText
+  path="handlers/image/getters.d.ts"
+  name="getEnhancedImage"
+/>
+
+<TypeInfoToText
+  path="handlers/image/fetchers.d.ts"
+  name="fetchImage"
+/>

@@ -20,9 +20,19 @@ export type ChatCompletionsOptions = Omit<
 	OpenAI.ChatCompletionCreateParamsNonStreaming,
 	'messages' | 'model'
 > & {
+	/**
+	 * @default `process.env.OPENAI_API_KEY`.
+	 */
 	openAIApiKey: string
-	/** Response format. Sets the `model` and `response_format` appropriately  */
+	/**
+	 * Response format which simplifies enabling JSON mode.
+	 * Sets the `model` and `response_format` appropriately.
+	 */
 	format?: ChatCompletionFormat
+	/**
+	 * ID of the model to use.
+	 * See the [model endpoint compatibility](https://platform.openai.com/docs/models/model-endpoint-compatibility) table for details on which models work with the Chat API.
+	 */
 	model?: OpenAI.ChatCompletionCreateParamsNonStreaming['model']
 }
 
@@ -97,7 +107,7 @@ function selectBestModel(
 	if (format === 'JSON') {
 		/**
 		 * only gpt-4-1106-preview or gpt-3.5-turbo-1106 support JSON mode atm
-		 * @see https://platform.openai.com/docs/guides/text-generation/json-mode
+		 * @link https://platform.openai.com/docs/guides/text-generation/json-mode OpenAI JSON mode
 		 */
 		model = 'gpt-3.5-turbo-1106'
 	}

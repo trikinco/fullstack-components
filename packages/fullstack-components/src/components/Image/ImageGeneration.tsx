@@ -6,6 +6,9 @@ import type { ImageGenerateProps } from '../../types/Image'
  * Shows a generated Image
  */
 export function ImageGeneration(
+	/**
+	 * @link ImageGenerateProps
+	 */
 	props: ImageGenerateProps & { response?: string }
 ) {
 	const {
@@ -39,5 +42,3 @@ export function ImageGeneration(
 		</>
 	)
 }
-
-export default ImageGeneration

@@ -1,56 +1,61 @@
-export class SelectRequestBody {
+export interface SelectRequestBody {
 	/**
-	 * Prompt for creating the select
+	 * A text description for creating the dropdown.
 	 * @example 'All the GMT time zones'
-	 * @example 'The nearest countries to Australia. Include a flag emoji in the label'
 	 */
 	prompt?: string
 	/**
-	 * What the purpose of the select is
+	 * A text description of the purpose of the dropdown.
 	 * @example 'Selecting your time zone'
-	 * @example 'Weekday selection'
 	 */
 	purpose?: string
 	/**
-	 * Additional context to pass to the prompt
+	 * A text description of additional context or information to help create the dropdown.
 	 * @example 'The time zone for Sydney should be selected'
-	 * @example 'Sort the list based on what's most popular'
 	 */
 	context?: string
 	/**
-	 * The number of items to aim for
+	 * The number of dropdown options or list items to create.
+	 * @example 10
 	 */
 	count?: number
 }
 
-export type SelectRequestOptions = Omit<SelectRequestBody, 'prompt'> &
-	Required<Pick<SelectRequestBody, 'prompt'>>
-
 export type SelectResponseItem = {
 	/**
-	 * Readable label for the option
+	 * Text to display in the dropdown option.
+	 * @example 'GMT+10:00 Brisbane, Melbourne, Sydney'
 	 */
 	label: string
 	/**
-	 * Value for the option
+	 * Text value to return when the option is selected.
+	 * @example 'Australia/Sydney'
 	 */
 	value: string
 	/**
-	 * Whether the option is selected
+	 * Whether the option is selected by default.
+	 * @example true
 	 */
 	selected?: true
 }
 
 export type SelectResponse = {
 	/**
-	 * An array of options to display in the dropdown
+	 * An array of options to list or display in a dropdown.
+	 * @example [{ label: 'GMT+10:00 Brisbane, Melbourne, Sydney', value: 'Australia/Sydney', selected: true }, { label: 'GMT+12:00 Auckland, Wellington', value: 'Pacific/Auckland' }, ...]
 	 */
 	content: Array<SelectResponseItem>
-	/** The overall associated label for the dropdown */
+	/**
+	 * The overall associated label for the dropdown.
+	 * @example 'Select Time Zone (GMT)'
+	 */
 	label: string
 }
 
 export type SelectOptions = {
+	/**
+	 * @default `process.env.OPENAI_API_KEY`.
+	 */
 	openAiApiKey?: string
 }
 

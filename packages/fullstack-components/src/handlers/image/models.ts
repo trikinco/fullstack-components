@@ -2,8 +2,16 @@ import OpenAI from 'openai'
 
 export type ImageGenerationOptions = Partial<OpenAI.ImageGenerateParams>
 
+/**
+ * Image generation or description request body. See OpenAI.ImageGenerateParams for full type information.
+ * @extends Partial<OpenAI.ImageGenerateParams>
+ * @link https://www.npmjs.com/package/openai `openai` for full `OpenAI.ImageGenerateParams` type information.
+ */
 export interface ImageRequestBody extends ImageGenerationOptions {
-	/** URL to image to describe */
+	/**
+	 * An absolute URL to the image to describe.
+	 * @example 'https://absolute-cat-url/tabbycat.jpg'
+	 */
 	src?: string
 }
 
@@ -12,6 +20,9 @@ export type ImageResponse<T> = T extends 1 | null | undefined
 	: string[]
 
 export type ImageOptions = {
+	/**
+	 * @default `process.env.OPENAI_API_KEY`.
+	 */
 	openAiApiKey?: string
 }
 

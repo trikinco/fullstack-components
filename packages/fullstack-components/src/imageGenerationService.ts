@@ -14,13 +14,19 @@ export type ImageGenerationOptions = Omit<
 	OpenAI.ImageGenerateParams,
 	'model' | 'prompt'
 > & {
+	/**
+	 * @default `process.env.OPENAI_API_KEY`.
+	 */
 	openAIApiKey: string
+	/**
+	 * The model to use for image generation.
+	 */
 	model?: OpenAI.ImageGenerateParams['model']
 }
 
 /**
  * Image generation service
- * Defaults to base64 data URIs
+ * @default base64 data URIs
  */
 export async function runImageGeneration(
 	prompt: string,

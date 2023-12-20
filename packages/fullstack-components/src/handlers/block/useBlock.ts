@@ -4,14 +4,26 @@ import { useId, useRef, useEffect } from 'react'
 import { fetchProcessedBlock } from './fetchers'
 
 /**
- * useBlock generates a React component based on a prompt
- * It uses `createRoot` to render it to an element with the returned `id`
+ * Generates a React component based on a `prompt`.
+ * Uses `createRoot` to mount the component to a browser DOM element assigned with the `id`.
  */
-export const useBlock = (
+export function useBlock(
+	/**
+	 * A text description of the desired component.
+	 * @example 'A footer with copyright for this year with the company name Acme'
+	 */
 	prompt: string,
-	/** Callback when errors are thrown. e.g show an error boundary */
-	onError?: (error: any) => void
-) => {
+	/**
+	 * Callback when errors are thrown. Used to e.g show an error boundary.
+	 * @example `(error) => showBoundary(error)`
+	 */
+	onError?: (
+		/**
+		 * The error object thrown by the Block.
+		 */
+		error: any
+	) => void
+) {
 	const id = useId()
 	// Just for avoiding multiple API calls in strict mode - this isn't really needed
 	const isEnabled = useRef(true)

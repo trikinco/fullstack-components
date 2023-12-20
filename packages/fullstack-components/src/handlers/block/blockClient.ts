@@ -35,8 +35,22 @@ example of EXPECTED output:
 }
 `
 
+/**
+ * Generates code for a React component based on the provided `BlockRequestBody`.
+ *
+ * Block Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
+ * @note The generated code is not bundled or guaranteed to be valid React code.
+ * @link https://nextjs.org/docs/app/building-your-application/data-fetching/patterns Next.js Data Fetching Patterns and Best Practices
+ * @returns {Promise<ChatGptCompletionResponse<string>>} Stringified JSON response
+ */
 export async function getBlock(
+	/**
+	 * @link BlockRequestBody
+	 */
 	request: BlockRequestBody,
+	/**
+	 * @link BlockOptions
+	 */
 	options?: BlockOptions
 ) {
 	'use server'

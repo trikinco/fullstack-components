@@ -1,3 +1,4 @@
+import { TypeInfoToText } from '@/src/components/TypeInfo/TypeInfoToText'
 import { Text } from '@trikinco/fullstack-components'
 import { Example } from '@/src/components/Example'
 import { URL_HOST } from '@/src/utils/constants'
@@ -209,3 +210,36 @@ const fscHandler = handleFSComponents(fscOptions)
 
 export { fscHandler as GET, fscHandler as POST }
 ```
+
+## API Reference
+
+<TypeInfoToText
+  path="handlers/text/models.d.ts"
+  name="TextOptions"
+  description="Text API handler route options."
+/>
+
+<TypeInfoToText
+  path="handlers/text/models.d.ts"
+  name="TextRequestBody"
+  description="Text request body."
+/>
+
+<TypeInfoToText path="components/Text.d.ts" name="TextProps" />
+
+<TypeInfoToText path="components/Text.d.ts" name="Text" />
+
+<TypeInfoToText
+  path="handlers/text/useText.d.ts"
+  name="useText"
+/>
+
+<TypeInfoToText
+  path="handlers/text/textClient.d.ts"
+  name="getText"
+/>
+
+<TypeInfoToText
+  path="handlers/text/fetchers.d.ts"
+  name="fetchText"
+/>

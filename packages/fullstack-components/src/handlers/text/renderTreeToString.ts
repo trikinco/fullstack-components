@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react'
 
 /**
- * Transforms a react tree to a HTML string
+ * Transforms a React tree to a HTML string.
+ * Works both on the server and client.
  */
 export async function renderTreeToString(content: ReactNode) {
 	// Server only

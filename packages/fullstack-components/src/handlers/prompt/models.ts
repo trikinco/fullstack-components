@@ -1,15 +1,27 @@
 import type { ChatMessage } from '../../types/ChatMessage'
 
-export class PromptRequestBody {
-	/** Used to send a simple `user` message to chat completion */
+export interface PromptRequestBody {
+	/**
+	 * A text description of the desired output.
+	 * Used to send a simple `user` message to chat completion.
+	 * @example 'A blog post about the best way to cook a steak'
+	 */
 	prompt?: string
-	/** Messages to send to chat completion. `messages` are inserted before `prompt` if both are provided. */
+	/**
+	 * A list of chat completion messages comprising a conversation.
+	 * `messages` are inserted before `prompt` if both are provided.
+	 * @example `[{ role: 'system', content: 'You are a professional chef and esteemed poet. You answer cooking questions with poetry and rhyme.' }, { role: 'user', content: 'What is the best way to cook a steak?'}]`
+	 * @link https://www.npmjs.com/package/openai `openai` for full `OpenAI.ChatCompletionMessageParam` type information.
+	 */
 	messages?: ChatMessage[]
 }
 
-export type PromptResponse = string
+export type PromptResponseBody = string
 
 export type PromptOptions = {
+	/**
+	 * @default `process.env.OPENAI_API_KEY`.
+	 */
 	openAiApiKey?: string
 }
 

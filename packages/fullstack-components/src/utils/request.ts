@@ -2,10 +2,19 @@ import { URL_HOST } from './constants'
 import type { RequestConfig } from '../types'
 export type { RequestConfig, RequestConfigOnly } from '../types'
 
+/**
+ * Fetch utility for calling internal Next.js API route handlers.
+ * Destructures the `body` from the `RequestConfig` and stringifies it.
+ */
 export const request = async <TResponse = unknown, Tbody = unknown>(
-	/** Relative API url */
+	/**
+	 * Relative API url
+	 */
 	url: string,
-	/** Fetch request config initialiser in addition to the `baseUrl` */
+	/**
+	 * Fetch request config initialiser in addition to the `baseUrl`
+	 * @link RequestConfig
+	 */
 	config?: RequestConfig<Tbody>
 ): Promise<TResponse> => {
 	const {

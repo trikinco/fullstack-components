@@ -1,41 +1,52 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/naming-convention */
 'use client'
 import type { HTMLAttributes, ReactNode } from 'react'
 import type { FallbackProps } from 'react-error-boundary'
 import { useErrorEnhancement } from '../handlers/errorEnhancer/useErrorEnhancement'
 import { IS_DEV } from '../utils'
 
-export interface ErrorEnhancementFallbackBaseProps
-	extends HTMLAttributes<HTMLDivElement> {
-	/** React tree to show while the error enhancement is loading */
+/**
+ * The fallback component to show in the error boundary when an error is thrown.
+ * @extends HTMLAttributes<HTMLDivElement> & FallbackProps
+ * @link https://www.npmjs.com/package/react-error-boundary `react-error-boundary` for `FallbackProps` type information.
+ */
+export interface ErrorEnhancementFallbackProps
+	extends HTMLAttributes<HTMLDivElement>,
+		FallbackProps {
+	/** React tree to show while the error enhancement is loading. */
 	fallback?: ReactNode
-	/** Additional context to pass to the error enhancement which may help with debugging */
+	/** Additional context to pass to the error enhancement which may help with debugging. */
 	errorContext?: string
-	/** Shows a button to reset the error boundary and retry the render */
+	/** Shows a button to reset the error boundary and retry the render. */
 	showResetBoundaryButton?: boolean
-	/** Label to display inside the reset `<button>` when `showResetBoundary` is true  */
+	/** Label to display inside the reset `<button>` when `showResetBoundaryButton` is true.  */
 	resetBoundaryButtonLabel?: ReactNode
-	/** Additional props to pass to the reset `<button>` */
+	/** Additional props to pass to the reset `<button>`. */
 	resetBoundaryButtonProps?: HTMLAttributes<HTMLButtonElement>
 }
 
-export type ErrorEnhancementFallbackProps = ErrorEnhancementFallbackBaseProps &
-	FallbackProps
-
 /**
- * A custom enhanced error fallback component to render inside a `react-error-boundary`
+ * A custom enhanced error fallback Client Component to render inside a `react-error-boundary`.
+ * Consumes `useErrorEnhancement` under the hood to generate the messages, then renders the UI to display them.
  */
-export function ErrorEnhancementFallback({
-	resetErrorBoundary,
-	resetBoundaryButtonLabel = 'Reset',
-	showResetBoundaryButton,
-	resetBoundaryButtonProps,
-	fallback,
-	error,
-	errorContext,
-	...rest
-}: ErrorEnhancementFallbackProps) {
+export function ErrorEnhancementFallback(
+	/**
+	 * @link ErrorEnhancementFallbackProps
+	 */
+	props: ErrorEnhancementFallbackProps
+) {
+	const {
+		resetErrorBoundary,
+		resetBoundaryButtonLabel = 'Reset',
+		showResetBoundaryButton,
+		resetBoundaryButtonProps,
+		fallback,
+		error,
+		errorContext,
+		...rest
+	} = props || {}
 	const { data, isLoading } = useErrorEnhancement({
 		errorContext,
 		errorMessage: error?.message,
@@ -89,5 +100,3 @@ export function ErrorEnhancementFallback({
 		</div>
 	)
 }
-
-export default ErrorEnhancementFallback

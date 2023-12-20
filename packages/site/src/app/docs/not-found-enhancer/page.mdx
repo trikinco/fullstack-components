@@ -1,3 +1,4 @@
+import { TypeInfoToText } from '@/src/components/TypeInfo/TypeInfoToText'
 import { Example } from '@/src/components/Example'
 import { NotFoundEnhancer } from './NotFoundEnhancer'
 import { URL_HOST } from '@/src/utils/constants'
@@ -129,3 +130,43 @@ export default function NotFound() {
   )
 }
 ```
+
+## API Reference
+
+<TypeInfoToText
+  path="handlers/notFoundEnhancer/models.d.ts"
+  name="NotFoundEnhancerOptions"
+  description="Not found enhancer API handler route options."
+/>
+
+<TypeInfoToText
+  path="handlers/notFoundEnhancer/models.d.ts"
+  name="NotFoundEnhancerRequestBody"
+  description="Not found enhancer request body."
+/>
+
+<TypeInfoToText
+  path="handlers/notFoundEnhancer/models.d.ts"
+  name="NotFoundEnhancerResponse"
+  description="Not found enhancer response body."
+/>
+
+<TypeInfoToText
+  path="handlers/notFoundEnhancer/useNotFoundEnhancement.d.ts"
+  name="useNotFoundEnhancement"
+/>
+
+<TypeInfoToText
+  path="handlers/notFoundEnhancer/notFoundEnhancerContentGenerator.d.ts"
+  name="getNotFoundContentGenerator"
+/>
+
+<TypeInfoToText
+  path="handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector.d.ts"
+  name="getNotFoundSitemapSelector"
+/>
+
+<TypeInfoToText
+  path="handlers/notFoundEnhancer/fetchers.d.ts"
+  name="fetchNotFoundEnhancement"
+/>

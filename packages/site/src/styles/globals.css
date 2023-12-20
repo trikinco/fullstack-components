@@ -8,7 +8,7 @@
 	--shiki-color-background: hsla(0, 0%, 98%, 1);
 	--shiki-token-constant: hsla(211, 100%, 42%, 1);
 	--shiki-token-string: hsla(133, 50%, 32%, 1);
-	--shiki-token-comment: hsla(0, 0%, 40%, 1);
+	--shiki-token-comment: hsla(215.38, 16.32%, 46.86%, 1);
 	--shiki-token-keyword: hsla(336, 65%, 45%, 1);
 	--shiki-token-parameter: hsla(30, 100%, 32%, 1);
 	--shiki-token-function: hsla(274, 71%, 43%, 1);
@@ -23,7 +23,7 @@
 	--shiki-color-background: transparent;
 	--shiki-token-constant: hsla(210, 100%, 66%, 1);
 	--shiki-token-string: hsla(131, 43%, 57%, 1);
-	--shiki-token-comment: hsla(0, 0%, 63%, 1);
+	--shiki-token-comment: hsla(215, 20.22%, 65.1%, 1);
 	--shiki-token-keyword: hsla(341, 90%, 67%, 1);
 	--shiki-token-parameter: hsla(35, 100%, 52%, 1);
 	--shiki-token-function: hsla(275, 80%, 71%, 1);
@@ -50,7 +50,7 @@ body {
 
 /* code block `title` (usually the file name) */
 [data-rehype-pretty-code-title] {
-	@apply ml-5 mt-4 text-slate-400;
+	@apply ml-5 mt-4 text-slate-500 dark:text-slate-400;
 }
 
 [data-highlighted-chars] {

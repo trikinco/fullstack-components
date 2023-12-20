@@ -27,7 +27,12 @@ function imageEvent<T extends ImageDescribeCallback | ImageGenerateCallback>(
  * - Describes an image by generating `alt` text if you provide an `src` URL and no `alt`.
  * - Otherwise renders as a regular `<Image>` from `next/image`.
  */
-export async function Image(props: ImageProps) {
+export async function Image(
+	/**
+	 * @link ImageProps
+	 */
+	props: ImageProps
+) {
 	const response = await getEnhancedImage(props)
 	const isClient = typeof window !== 'undefined'
 
@@ -67,5 +72,3 @@ export async function Image(props: ImageProps) {
 	// Regular Next image
 	return <NextImage src="" alt="" {...props} />
 }
-
-export default Image

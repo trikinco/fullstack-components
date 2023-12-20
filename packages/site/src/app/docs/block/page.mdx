@@ -1,3 +1,4 @@
+import { TypeInfoToText } from '@/src/components/TypeInfo/TypeInfoToText'
 import { Example } from '@/src/components/Example'
 import Blocks from './Blocks'
 import { URL_HOST } from '@/src/utils/constants'
@@ -95,3 +96,36 @@ const fscHandler = handleFSComponents(fscOptions)
 
 export { fscHandler as GET, fscHandler as POST }
 ```
+
+## API Reference
+
+<TypeInfoToText
+  path="handlers/block/models.d.ts"
+  name="BlockOptions"
+  description="Block API handler route options."
+/>
+
+<TypeInfoToText
+  path="handlers/block/models.d.ts"
+  name="BlockRequestBody"
+  description="Block request body."
+/>
+
+<TypeInfoToText path="components/Block.d.ts" name="BlockProps" />
+
+<TypeInfoToText path="components/Block.d.ts" name="Block" />
+
+<TypeInfoToText
+  path="handlers/block/useBlock.d.ts"
+  name="useBlock"
+/>
+
+<TypeInfoToText
+  path="handlers/block/blockClient.d.ts"
+  name="getBlock"
+/>
+
+<TypeInfoToText
+  path="handlers/block/fetchers.d.ts"
+  name="fetchBlock"
+/>

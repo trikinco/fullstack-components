@@ -1,3 +1,4 @@
+import { TypeInfoToText } from '@/src/components/TypeInfo/TypeInfoToText'
 import { Prompt } from '@trikinco/fullstack-components'
 import { Example } from '@/src/components/Example'
 import { URL_HOST } from '@/src/utils/constants'
@@ -157,3 +158,39 @@ const fscHandler = handleFSComponents(fscOptions)
 
 export { fscHandler as GET, fscHandler as POST }
 ```
+
+## API Reference
+
+<TypeInfoToText
+  path="handlers/prompt/models.d.ts"
+  name="PromptOptions"
+  description="Prompt API handler route options."
+/>
+
+<TypeInfoToText
+  path="handlers/prompt/models.d.ts"
+  name="PromptRequestBody"
+  description="Prompt request body."
+/>
+
+<TypeInfoToText
+  path="components/Prompt.d.ts"
+  name="PromptProps"
+/>
+
+<TypeInfoToText path="components/Prompt.d.ts" name="Prompt" />
+
+<TypeInfoToText
+  path="handlers/prompt/usePrompt.d.ts"
+  name="usePrompt"
+/>
+
+<TypeInfoToText
+  path="handlers/prompt/promptClient.d.ts"
+  name="getPrompt"
+/>
+
+<TypeInfoToText
+  path="handlers/prompt/fetchers.d.ts"
+  name="fetchPrompt"
+/>

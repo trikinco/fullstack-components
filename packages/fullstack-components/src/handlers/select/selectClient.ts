@@ -17,8 +17,21 @@ Make the dropdown options diverse and relevant for the given context
 Do not include the reasoning
 `
 
+/**
+ * Generates a list of options to list or display in a dropdown.
+ *
+ * Select Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
+ * @link https://nextjs.org/docs/app/building-your-application/data-fetching/patterns Next.js Data Fetching Patterns and Best Practices
+ * @returns {Promise<ChatGptCompletionResponse<string>>} JSON response
+ */
 export async function getSelect(
+	/**
+	 * @link SelectRequestBody
+	 */
 	request: SelectRequestBody,
+	/**
+	 * @link SelectOptions
+	 */
 	options?: SelectOptions
 ) {
 	'use server'

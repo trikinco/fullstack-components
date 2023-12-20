@@ -1,3 +1,4 @@
+import { TypeInfoToText } from '@/src/components/TypeInfo/TypeInfoToText'
 import { Form } from './Form'
 import { URL_HOST } from '@/src/utils/constants'
 import { routes } from '@/src/utils/routes'
@@ -125,3 +126,32 @@ const fscHandler = handleFSComponents(fscOptions)
 
 export { fscHandler as GET, fscHandler as POST }
 ```
+
+## API Reference
+
+<TypeInfoToText
+  path="handlers/htmlPage/models.d.ts"
+  name="HtmlPageOptions"
+  description="HTML page generator API handler route options."
+/>
+
+<TypeInfoToText
+  path="handlers/htmlPage/models.d.ts"
+  name="HtmlPageRequestBody"
+  description="HTML page generator request body."
+/>
+
+<TypeInfoToText
+  path="handlers/htmlPage/useHtmlPage.d.ts"
+  name="useHtmlPage"
+/>
+
+<TypeInfoToText
+  path="handlers/htmlPage/htmlPageClient.d.ts"
+  name="getHtmlPage"
+/>
+
+<TypeInfoToText
+  path="handlers/htmlPage/fetchers.d.ts"
+  name="fetchHtmlPage"
+/>
