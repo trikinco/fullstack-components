@@ -15,8 +15,14 @@ export function useBlock(
 	prompt: string,
 	/**
 	 * Callback when errors are thrown. Used to e.g show an error boundary.
+	 * @example `(error) => showBoundary(error)`
 	 */
-	onError?: (error: any) => void
+	onError?: (
+		/**
+		 * The error object thrown by the Block.
+		 */
+		error: any
+	) => void
 ) {
 	const id = useId()
 	// Just for avoiding multiple API calls in strict mode - this isn't really needed
