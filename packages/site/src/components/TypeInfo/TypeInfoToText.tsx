@@ -51,7 +51,7 @@ export const TypeInfoToText = async ({
 
 	return (
 		<div
-			className={merge('typedoc inline-flex flex-col w-full mb-8', className)}
+			className={merge('inline-flex flex-col w-full mb-8', className)}
 			{...rest}
 		>
 			<TypeInfo

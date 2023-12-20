@@ -7,6 +7,9 @@ import {
 
 export type ExtractedTagValue = string | number | boolean
 
+/**
+ * JSDoc tags that are extracted from a type
+ */
 export type ExtractedTags = {
 	note?: ExtractedTagValue
 	see?: ExtractedTagValue
@@ -32,7 +35,9 @@ export type ExtractedTypeInfo = {
 	properties?: ExtractedTypeInfo[] | undefined
 	/** Whether the type is required or optional */
 	required?: boolean
-	// tags
+	/**
+	 * Extracted JSdoc tags
+	 */
 	tags?: {
 		name: string
 		value: ExtractedTagValue
@@ -41,6 +46,9 @@ export type ExtractedTypeInfo = {
 
 type TaggableSchema = ICodeSchema & ExtractedTags
 
+/**
+ * Type guard that checks if a schema/type may have JSDoc tags
+ */
 export function isTaggableSchema(
 	schema?: TaggableSchema | null
 ): schema is TaggableSchema {
@@ -56,9 +64,15 @@ export function isTaggableSchema(
 	)
 }
 
+/**
+ * Cleans up a $ref value generated for a type by `@wix/typescript-schema-extract`
+ */
 const cleanRef = (ref?: string) =>
 	ref?.split('#').pop()?.split(' ').pop()?.split('!').pop()?.trim()
 
+/**
+ * Extracts and cleans up the type name from a type
+ */
 const getTypeName = (node: SchemaTypes) => {
 	const base = node['$ref']?.includes('#') ? '' : node['$ref']?.split('/').pop()
 	const oneOf = node.oneOf
@@ -96,6 +110,9 @@ const getTypeName = (node: SchemaTypes) => {
 	return type?.split('React.').pop() || type
 }
 
+/**
+ * Extracts JSDoc tags from a type comment
+ */
 const getItemTags = (item: ICodeSchema) => {
 	let tags: ExtractedTypeInfo['tags'] = []
 
@@ -118,6 +135,9 @@ const getItemTags = (item: ICodeSchema) => {
 	return tags
 }
 
+/**
+ * Extracts arguments from a function schema
+ */
 const getItemArguments = (item: ICodeSchema, typeName?: string) => {
 	let parameters = undefined
 
@@ -130,6 +150,9 @@ const getItemArguments = (item: ICodeSchema, typeName?: string) => {
 	return parameters
 }
 
+/**
+ * Extracts type info from a schema
+ */
 const getExtractedTypeInfo = (
 	item: ICodeSchema,
 	typeName?: string,
@@ -158,6 +181,9 @@ const getExtractedTypeInfo = (
 	}
 }
 
+/**
+ * Extracts type info from a d.ts file
+ */
 export async function getTypeDocs(
 	filePath: string,
 	typeName: string
@@ -165,8 +191,6 @@ export async function getTypeDocs(
 	const files = [filePath]
 	const linker = createLinker(files)
 	const schema = linker.flatten(files[0], typeName)
-
-	// Extract the type info
 	const data = getExtractedTypeInfo(schema, typeName)
 
 	return data

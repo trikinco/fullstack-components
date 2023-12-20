@@ -40,26 +40,7 @@ body {
 [data-rehype-pretty-code-fragment] {
 	font-variant-ligatures: none;
 	background-color: var(--shiki-color-background);
-	@apply relative overflow-hidden my-10 font-mono;
-}
-
-[data-rehype-pretty-code-fragment]:not(
-		.typedoc [data-rehype-pretty-code-fragment]
-	) {
-	@apply rounded-lg border border-slate-300 dark:border-white/20;
-}
-
-.typedoc [data-rehype-pretty-code-fragment] {
-	@apply mr-2;
-}
-
-.typedoc a code {
-	@apply underline;
-}
-
-.typedoc [data-rehype-pretty-code-fragment] code::before,
-.typedoc [data-rehype-pretty-code-fragment] code::after {
-	content: none;
+	@apply relative overflow-hidden my-10 font-mono rounded-lg border border-slate-300 dark:border-white/20;
 }
 
 /* hide copy button for code blocks with a `title` including `:nocopy` */
