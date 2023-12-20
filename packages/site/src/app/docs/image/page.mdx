@@ -1,4 +1,4 @@
-import { TypesToMdx } from '@/src/components/TypesToMdx'
+import { TypeInfoToText } from '@/src/components/TypeInfo/TypeInfoToText'
 import { Image } from '@trikinco/fullstack-components'
 import { Example } from '@/src/components/Example'
 import { URL_HOST } from '@/src/utils/constants'
@@ -218,42 +218,51 @@ export { fscHandler as GET, fscHandler as POST }
 
 ## API Reference
 
-<TypesToMdx
+<TypeInfoToText
   path="handlers/image/models.d.ts"
   name="ImageOptions"
   description="Image API handler route options."
 />
 
-<TypesToMdx
+<TypeInfoToText
   path="handlers/image/models.d.ts"
   name="ImageRequestBody"
 />
 
-<TypesToMdx
+<TypeInfoToText
   path="types/Image.d.ts"
   name="ImageProps"
   description="Props to pass to the `<Image>` Server Component."
 />
 
-<TypesToMdx path="types/Image.d.ts" name="ImageGenerateProps" />
+<TypeInfoToText
+  path="types/Image.d.ts"
+  name="ImageGenerateProps"
+/>
 
-<TypesToMdx path="types/Image.d.ts" name="ImageDescribeProps" />
+<TypeInfoToText
+  path="types/Image.d.ts"
+  name="ImageDescribeProps"
+/>
 
-<TypesToMdx path="components/Image/Image.d.ts" name="Image" />
+<TypeInfoToText path="components/Image/Image.d.ts" name="Image" />
 
-<TypesToMdx path="handlers/image/useImage.d.ts" name="useImage" />
+<TypeInfoToText
+  path="handlers/image/useImage.d.ts"
+  name="useImage"
+/>
 
-<TypesToMdx
+<TypeInfoToText
   path="handlers/image/imageClient.d.ts"
   name="getImage"
 />
 
-<TypesToMdx
+<TypeInfoToText
   path="handlers/image/getters.d.ts"
   name="getEnhancedImage"
 />
 
-<TypesToMdx
+<TypeInfoToText
   path="handlers/image/fetchers.d.ts"
   name="fetchImage"
 />

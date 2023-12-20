@@ -1,8 +1,9 @@
-import { type HTMLAttributes, type ReactNode, type ElementType } from 'react'
+import type { HTMLAttributes, ReactNode, ElementType } from 'react'
+import type { ExtractedTypeInfo } from '../../utils/getTypeDocs'
 import { merge } from '@trikinco/fullstack-components/utils'
-import { IconMenuAlt } from './Icons/IconMenuAlt'
-import { Accordion } from './Accordion'
-import { type ExtractedTypeInfo } from '../utils/getTypeDocs'
+import { TypeInfoTags } from './TypeInfoTags'
+import { IconMenuAlt } from '../Icons/IconMenuAlt'
+import { Accordion } from '../Accordion'
 
 export interface TypeInfoDetails
 	extends Omit<
@@ -44,6 +45,9 @@ export interface TypeInfoProps
 	component?: ElementType
 }
 
+/**
+ * Renders type information extracted from a .d.ts file with `getTypeDocs`
+ */
 export const TypeInfo = ({
 	name,
 	type,
@@ -54,6 +58,7 @@ export const TypeInfo = ({
 	children,
 	className,
 	tags,
+	id,
 	component: TitleComponent = 'p',
 	...rest
 }: TypeInfoProps) => {
@@ -66,7 +71,7 @@ export const TypeInfo = ({
 			{...rest}
 		>
 			{!hideName && (
-				<TitleComponent className="flex gap-2 m-0">
+				<TitleComponent className="flex gap-2 m-0 scroll-mt-10" id={id}>
 					{name && <span className="font-bold">{name}</span>}
 					{type && (
 						<span className="text-sm font-mono my-auto text-slate-500">
@@ -87,18 +92,7 @@ export const TypeInfo = ({
 				</span>
 			)}
 
-			{tags && tags.length > 0 && (
-				<ul className="not-prose">
-					{tags.map(({ name, value }) => (
-						<li key={name}>
-							<span className="font-bold text-[--shiki-token-keyword] mr-2">
-								{name}
-							</span>
-							{value}
-						</li>
-					))}
-				</ul>
-			)}
+			<TypeInfoTags tags={tags} />
 
 			{parameters && parameters.length > 0 && (
 				<Accordion

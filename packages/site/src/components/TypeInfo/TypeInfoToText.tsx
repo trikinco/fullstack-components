@@ -1,9 +1,9 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { TypeInfo, type TypeInfoDetails } from './TypeInfo'
-import { getTypeDocs } from '../utils/getTypeDocs'
+import { getTypeDocs } from '../../utils/getTypeDocs'
 
-export interface TypesToMdxProps
+export interface TypeInfoToTextProps
 	extends Omit<HTMLAttributes<HTMLDivElement>, 'title'>,
 		Omit<TypeInfoDetails, 'name'> {
 	children?: ReactNode
@@ -30,7 +30,10 @@ export interface TypesToMdxProps
 	basePath: string
 }
 
-export const TypesToMdx = async ({
+/**
+ * Extracts type information from a .d.ts file with `getTypeDocs` and renders it
+ */
+export const TypeInfoToText = async ({
 	basePath = '../fullstack-components/dist/',
 	path: filePath,
 	name,
@@ -41,7 +44,7 @@ export const TypesToMdx = async ({
 	children,
 	className,
 	...rest
-}: TypesToMdxProps) => {
+}: TypeInfoToTextProps) => {
 	const path = basePath + filePath
 	const { properties, parameters, ...schema } = await getTypeDocs(path, name)
 	const hasParameters = parameters && parameters?.length > 0
