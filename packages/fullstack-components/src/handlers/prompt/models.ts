@@ -14,6 +14,17 @@ export interface PromptRequestBody {
 	 * @link https://www.npmjs.com/package/openai `openai` for full `OpenAI.ChatCompletionMessageParam` type information.
 	 */
 	messages?: ChatMessage[]
+	/**
+	 * Enforces the response format to 'text' or 'JSON'.
+	 *
+	 * When the format is `text`, the model generates a string of text.
+	 *
+	 * When the format is `JSON`:
+	 * - Enables JSON mode which constrains the model to only generate strings that parse into a valid JSON object.
+	 * - Adds 'Return JSON' to an initial system message to avoid the API returning an error.
+	 * @link https://platform.openai.com/docs/guides/text-generation/json-mode OpenAI JSON mode
+	 */
+	format?: 'text' | 'JSON'
 }
 
 export type PromptResponseBody = string

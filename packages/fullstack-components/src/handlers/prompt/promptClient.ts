@@ -24,6 +24,13 @@ export async function getPrompt(
 	console.log('handling `getPrompt` request', request)
 	const messages: ChatMessage[] = []
 
+	if (request.format === 'JSON') {
+		messages.push({
+			role: 'system',
+			content: 'Return JSON',
+		})
+	}
+
 	if (request.messages) {
 		messages.push(...request.messages)
 	}
@@ -37,6 +44,7 @@ export async function getPrompt(
 
 	return await runChatCompletion(messages, {
 		openAIApiKey: options?.openAiApiKey || OPENAI_API_KEY,
+		format: request.format,
 	})
 }
 
