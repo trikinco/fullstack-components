@@ -7,7 +7,7 @@ export const fontBase = Space_Grotesk({
 
 export const fontMono = Space_Mono({
 	subsets: ['latin'],
-	weight: '400',
+	weight: ['400', '700'],
 	variable: '--font-mono',
 })
 
