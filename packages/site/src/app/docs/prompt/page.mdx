@@ -1,5 +1,6 @@
 import { TypeInfoToText } from '@/src/components/TypeInfo/TypeInfoToText'
 import { Prompt } from '@trikinco/fullstack-components'
+import UsePrompt from './UsePrompt'
 import { Example } from '@/src/components/Example'
 import { URL_HOST } from '@/src/utils/constants'
 import { routes } from '@/src/utils/routes'
@@ -78,28 +79,38 @@ The response can be wrapped in an element by using the `as` prop.
 In addition, this allows you to pass in any of the standard HTML attributes as expected by that element type.
 
 <Example>
-  <Prompt prompt="How big is the moon?" as="div" />
+  <Prompt
+    prompt="How big is the moon?"
+    as="h3"
+    className="text-xl"
+  />
 </Example>
 
 ```jsx /as="div"/
 <Prompt
   prompt="How big is the moon?"
-  as="div"
-  className="rounded-md overflow-hidden p-6 bg-sky-200 text-sky-800 text-xl"
+  as="h3"
+  className="text-xl"
 />
 ```
 
 ## `usePrompt` hook
 
-`usePrompt` is a utility hook that allows for full access to the same features as `Prompt`.
+`usePrompt` is a utility hook that allows for full access to the same features as `Prompt`, in addition to the ability to enable JSON mode with the `format` option.
+
+<Example>
+  <UsePrompt />
+</Example>
 
 ```jsx
 'use client'
-
 import { usePrompt } from '@trikinco/fullstack-components/client'
 
 export default function Page() {
   const { isLoading, data } = usePrompt({
+    // Enable JSON mode
+    format: 'JSON',
+    // Prompt. You can also define the desired response JSON schema here.
     prompt: 'What is the longest river in the world?',
   })
 
@@ -107,7 +118,7 @@ export default function Page() {
     return 'Loading...'
   }
 
-  return <div className="max-w-prose">{data}</div>
+  return <div className="max-w-prose">{JSON.stringify(data)}</div>
 }
 ```
 
