@@ -46,16 +46,15 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 				)}
 				{...rest}
 			>
-				<Link href="/" className="rounded-full focus-ring">
-					<IconLogo
-						className="w-6 h-6 md:w-10 md:h-10"
-						width={40}
-						height={40}
-					/>
+				<Link
+					href="/"
+					className="rounded-full focus-ring font-mono font-bold lowercase text-xs sm:text-base dark:text-white"
+				>
+					{NAME_SHORT}
 				</Link>
 				{children}
 
-				<div className="flex gap-6 ml-auto">
+				<div className="flex gap-3 sm:gap-6 ml-auto">
 					<ThemeSwitcher />
 					<Link
 						href={URL_NPM}
