@@ -1,6 +1,7 @@
 import { type HTMLAttributes, type ReactNode, type ElementType } from 'react'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { IconMenuAlt } from './Icons/IconMenuAlt'
+import { Accordion } from './Accordion'
 import { type ExtractedTypeInfo } from '../utils/getTypeDocs'
 
 export interface TypeInfoDetails
@@ -100,21 +101,21 @@ export const TypeInfo = ({
 			)}
 
 			{parameters && parameters.length > 0 && (
-				<details>
-					<summary className="[&::marker]:content-none flex gap-2 mt-3 cursor-pointer text-sm text-slate-500 hover:text-black dark:hover:text-slate-600">
-						<IconMenuAlt width={20} height={20} /> Parameters
-					</summary>
-
-					<div className="mt-3 border rounded-md border-slate-200 dark:border-slate-800">
-						{parameters.map((param, i) => (
-							<TypeInfo
-								key={i}
-								className="p-6 first-of-type:border-t-0"
-								{...param}
-							/>
-						))}
-					</div>
-				</details>
+				<Accordion
+					label={
+						<>
+							<IconMenuAlt width={20} height={20} /> Parameters
+						</>
+					}
+				>
+					{parameters.map((param, i) => (
+						<TypeInfo
+							key={i}
+							className="p-6 first-of-type:border-t-0"
+							{...param}
+						/>
+					))}
+				</Accordion>
 			)}
 			{children}
 		</div>
