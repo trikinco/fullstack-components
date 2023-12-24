@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 
 /**
- * Gets a file to send to OpenAi from the local filesystem or from a buffer.
+ * Gets a file from the local filesystem public dir or from a buffer to send to OpenAI in the format that OpenAI API expects.
  */
 export function getApiFile(
 	file: ArrayBuffer | string | undefined,
@@ -25,5 +25,5 @@ export function getApiFile(
 		})
 	}
 
-	return fs.createReadStream(path.join(process.cwd(), file))
+	return fs.createReadStream(path.join(process.cwd(), 'public', file))
 }

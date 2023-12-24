@@ -33,7 +33,7 @@ export interface TranscriptProps extends HTMLAttributes<HTMLElement> {
 	 * Audio file, or the path to the audio file to transcribe.
 	 * @note transcription can only be done with audio files.
 	 */
-	file?: ArrayBuffer | string
+	src?: ArrayBuffer | string
 	/**
 	 * Full file name including file extension of the audio file to transcribe.
 	 * @note if this is removed, the API call will fail.
@@ -64,7 +64,7 @@ export async function transcribe(
 	/**
 	 * Audio file, or the path to the audio file to transcribe.
 	 */
-	file?: ArrayBuffer | string,
+	src?: ArrayBuffer | string,
 	options?: Pick<
 		TranscriptProps,
 		'format' | 'type' | 'name' | 'model' | 'language' | 'prompt'
@@ -72,16 +72,16 @@ export async function transcribe(
 ) {
 	const {
 		type = 'audio/mpeg',
-		format,
-		name,
-		model,
-		language,
+		format = 'json',
+		model = 'whisper-1',
+		language = 'en',
 		prompt,
+		name,
 	} = options || {}
 	let content: fs.ReadStream | FileLike | undefined
 
 	try {
-		content = getApiFile(file, type, name)
+		content = getApiFile(src, type, name)
 	} catch {
 		return 'Error: Failed to load file to transcribe.'
 	}
@@ -119,7 +119,7 @@ export async function Transcript<C extends ElementType = typeof defaultElement>(
 	const {
 		children,
 		as,
-		file,
+		src,
 		format,
 		type,
 		name,
@@ -128,7 +128,7 @@ export async function Transcript<C extends ElementType = typeof defaultElement>(
 		prompt,
 		...rest
 	} = props || {}
-	const text = await transcribe(file, {
+	const text = await transcribe(src, {
 		format,
 		type,
 		name,

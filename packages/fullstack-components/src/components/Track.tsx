@@ -11,9 +11,9 @@ import { toBase64Url } from '../utils/toBase64Url'
  * @link AudioTranscriptionModeRequestBody
  */
 export interface TrackProps
-	extends DetailedHTMLProps<
-		TrackHTMLAttributes<HTMLTrackElement>,
-		HTMLTrackElement
+	extends Omit<
+		DetailedHTMLProps<TrackHTMLAttributes<HTMLTrackElement>, HTMLTrackElement>,
+		'src'
 	> {
 	/**
 	 * ID of the model to use.
@@ -27,6 +27,13 @@ export interface TrackProps
 	 * @default 'en'
 	 */
 	language?: OpenAI.Audio.Transcriptions.TranscriptionCreateParams['language']
+	/**
+	 * An optional text to guide the model's style or continue a previous audio
+	 * segment. The prompt should match the audio language.
+	 * @default `vtt ${kind} for this ${media} file`
+	 * @link https://platform.openai.com/docs/guides/speech-to-text/prompting
+	 */
+	prompt?: OpenAI.Audio.Transcriptions.TranscriptionCreateParams['prompt']
 	/**
 	 * The type of media to which the text track belongs.
 	 * @default 'audio'
@@ -70,7 +77,7 @@ export interface TrackProps
 	 * Audio file, or the path to the audio file to transcribe.
 	 * @note transcription can only be done with audio files.
 	 */
-	file?: ArrayBuffer | string
+	src?: ArrayBuffer | string
 }
 
 /**
@@ -80,24 +87,25 @@ export async function caption(
 	/**
 	 * Audio file, or the path to the audio file to transcribe.
 	 */
-	file?: ArrayBuffer | string,
+	src?: ArrayBuffer | string,
 	options?: Pick<
 		TrackProps,
-		'kind' | 'type' | 'media' | 'name' | 'model' | 'language'
+		'kind' | 'type' | 'media' | 'name' | 'model' | 'language' | 'prompt'
 	>
 ) {
 	const {
 		kind,
 		type = 'audio/mpeg',
 		media = 'audio',
+		model = 'whisper-1',
+		language = 'en',
+		prompt,
 		name,
-		model,
-		language,
 	} = options || {}
 	let content: fs.ReadStream | FileLike | undefined
 
 	try {
-		content = getApiFile(file, type, name)
+		content = getApiFile(src, type, name)
 	} catch {
 		return ''
 	}
@@ -108,10 +116,10 @@ export async function caption(
 
 	const { responseText } = await getAudio({
 		mode: 'transcription',
+		prompt: prompt ?? `vtt ${kind} for this ${media} file`,
 		content,
 		model,
 		language,
-		prompt: `vtt ${kind} for this ${media} file`,
 		// eslint-disable-next-line @typescript-eslint/naming-convention
 		response_format: 'vtt',
 	})
@@ -140,11 +148,20 @@ export async function Track(
 		media,
 		name,
 		model,
+		prompt,
 		language,
-		file,
+		src: file,
 		...rest
 	} = props || {}
-	const src = await caption(file, { kind, type, media, name, model, language })
+	const src = await caption(file, {
+		kind,
+		type,
+		media,
+		name,
+		model,
+		language,
+		prompt,
+	})
 
 	return <track src={src} kind={kind} label="English" srcLang="en" {...rest} />
 }

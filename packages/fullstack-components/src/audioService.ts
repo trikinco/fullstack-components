@@ -51,10 +51,14 @@ export type AudioOptions = (
 export async function runAudioService(
 	options: AudioOptions
 ): Promise<AudioTextResponse | AudioFileResponse> {
-	console.log('Running audio service')
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const { openAIApiKey, ...request } = options
+	console.log('Running audio service', request)
 
 	try {
 		const response = await getAudioRequest(options)
+
+		console.log('getAudioRequest response', response)
 
 		if (options.mode === 'speech') {
 			const res = response as Awaited<ReturnType<OpenAI.Audio.Speech['create']>>

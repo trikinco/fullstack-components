@@ -105,9 +105,7 @@ export async function Audio<C extends ElementType = typeof defaultElement>(
 ) {
 	const {
 		disclosure = (
-			<small className="text-xs">
-				This audio is AI-generated and not a human voice.
-			</small>
+			<small>This audio is AI-generated and not a human voice.</small>
 		),
 		as: Component = defaultElement,
 		noCaption,
@@ -126,7 +124,7 @@ export async function Audio<C extends ElementType = typeof defaultElement>(
 		<>
 			<Component {...rest}>
 				<source src={src} type={type} />
-				{!noCaption && <Track file={file} />}
+				{!noCaption && <Track src={file} default />}
 			</Component>
 			{disclosure}
 		</>
