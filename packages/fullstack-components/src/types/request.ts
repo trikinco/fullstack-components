@@ -12,6 +12,12 @@ export interface RequestConfig<TBody = unknown>
 	 * The fetch request body.
 	 */
 	body?: TBody
+	/**
+	 * Request response parsing type.
+	 * `blob` returns a blob URL.
+	 * @default 'json'
+	 */
+	responseType?: 'json' | 'blob'
 }
 
 /**

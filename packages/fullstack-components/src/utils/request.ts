@@ -20,6 +20,7 @@ export const request = async <TResponse = unknown, Tbody = unknown>(
 	const {
 		baseUrl = URL_HOST,
 		body,
+		responseType = 'json',
 		method = 'POST',
 		headers = {
 			//eslint-disable-next-line @typescript-eslint/naming-convention
@@ -34,6 +35,11 @@ export const request = async <TResponse = unknown, Tbody = unknown>(
 		body: body ? JSON.stringify(body) : undefined,
 		...rest,
 	})
+
+	if (responseType === 'blob') {
+		const blob = await response.blob()
+		return URL.createObjectURL(blob) as unknown as TResponse
+	}
 
 	return (await response.json()) as TResponse
 }

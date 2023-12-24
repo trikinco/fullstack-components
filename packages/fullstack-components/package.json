@@ -69,6 +69,7 @@
 	"dependencies": {
 		"clsx": "2.0.0",
 		"encoding": "0.1.13",
+		"he": "1.2.0",
 		"next": "14.0.1",
 		"openai": "4.19.0",
 		"react": "18.2.0",
@@ -78,6 +79,7 @@
 		"tailwind-merge": "2.0.0"
 	},
 	"devDependencies": {
+		"@types/he": "1.2.3",
 		"@types/node": "20",
 		"@types/react": "18.2.31",
 		"@types/react-dom": "18.2.14",

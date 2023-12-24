@@ -17,6 +17,8 @@ import selectHandler, { HandleSelect } from './handlers/select/selectHandler'
 import { SelectClient } from './handlers/select/selectClient'
 import textHandler, { HandleText } from './handlers/text/textHandler'
 import { TextClient } from './handlers/text/textClient'
+import audioHandler, { HandleAudio } from './handlers/audio/audioHandler'
+import { AudioClient } from './handlers/audio/audioClient'
 import htmlPageHandler, {
 	HandleHtmlPage,
 } from './handlers/htmlPage/htmlPageHandler'
@@ -32,6 +34,7 @@ const handlePromptRequest = promptHandler(new PromptClient())
 const handleBlockRequest = blockHandler(new BlockClient())
 const handleImageRequest = imageHandler(new ImageClient())
 const handleSelectRequest = selectHandler(new SelectClient())
+const handleAudioRequest = audioHandler(new AudioClient())
 const handleTextRequest = textHandler(new TextClient())
 const handleHtmlPageRequest = htmlPageHandler(new HtmlPageClient())
 
@@ -40,6 +43,7 @@ export type FullstackComponentsServer = {
 	handleErrorRequest: HandleErrorParser
 	handlePromptRequest: HandlePrompt
 	handleTextRequest: HandleText
+	handleAudioRequest: HandleAudio
 	handleSelectRequest: HandleSelect
 	handleImageRequest: HandleImage
 	handleBlockRequest: HandleBlock
@@ -54,6 +58,7 @@ export function _init(): FullstackComponentsServer {
 		handleErrorRequest,
 		handlePromptRequest,
 		handleTextRequest,
+		handleAudioRequest,
 		handleSelectRequest,
 		handleImageRequest,
 		handleBlockRequest,

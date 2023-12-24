@@ -31,7 +31,8 @@ export type ChatCompletionsOptions = Omit<
 	format?: ChatCompletionFormat
 	/**
 	 * ID of the model to use.
-	 * See the [model endpoint compatibility](https://platform.openai.com/docs/models/model-endpoint-compatibility) table for details on which models work with the Chat API.
+	 * See the model endpoint compatibility table for details on which models work with the Chat API.
+	 * @link https://platform.openai.com/docs/models/model-endpoint-compatibility
 	 */
 	model?: OpenAI.ChatCompletionCreateParamsNonStreaming['model']
 }
