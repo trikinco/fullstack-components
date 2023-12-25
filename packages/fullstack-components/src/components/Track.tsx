@@ -1,10 +1,13 @@
 import type OpenAI from 'openai'
 import type { FileLike } from 'openai/uploads'
 import type { DetailedHTMLProps, TrackHTMLAttributes } from 'react'
+import { transformVTT, type Cue } from '../handlers/audio/audioVttParser'
 import fs from 'fs'
 import { getAudio } from '../handlers/audio/audioClient'
 import { getApiFile } from '../utils/getApiFile'
 import { toBase64Url } from '../utils/toBase64Url'
+
+export type { Cue } from '../handlers/audio/audioVttParser'
 
 /**
  * Props to pass to the `<Track>` Server Component.
@@ -78,6 +81,10 @@ export interface TrackProps
 	 * @note transcription can only be done with audio files.
 	 */
 	src?: ArrayBuffer | string
+	/**
+	 * A function that allows for transforming the cues before they are added to the track.
+	 */
+	transform?: (cues: Cue[]) => Cue[]
 }
 
 /**
@@ -90,10 +97,18 @@ export async function caption(
 	src?: ArrayBuffer | string,
 	options?: Pick<
 		TrackProps,
-		'kind' | 'type' | 'media' | 'name' | 'model' | 'language' | 'prompt'
+		| 'kind'
+		| 'type'
+		| 'media'
+		| 'name'
+		| 'model'
+		| 'language'
+		| 'prompt'
+		| 'transform'
 	>
 ) {
 	const {
+		transform,
 		kind,
 		type = 'audio/mpeg',
 		media = 'audio',
@@ -124,10 +139,16 @@ export async function caption(
 		response_format: 'vtt',
 	})
 
+	let vttText = responseText
+
+	if (transform) {
+		vttText = transformVTT(responseText, transform)
+	}
+
 	/**
 	 * @consideration return a stream instead of a string
 	 */
-	return toBase64Url(responseText, 'text/vtt')
+	return toBase64Url(vttText, 'text/vtt')
 }
 
 /**
@@ -143,6 +164,7 @@ export async function Track(
 	props: TrackProps
 ) {
 	const {
+		transform,
 		kind = 'captions',
 		type,
 		media,
@@ -154,6 +176,7 @@ export async function Track(
 		...rest
 	} = props || {}
 	const src = await caption(file, {
+		transform,
 		kind,
 		type,
 		media,
