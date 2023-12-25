@@ -1,0 +1,266 @@
+import { TypeInfoToText } from '@/src/components/TypeInfo/TypeInfoToText'
+import { Example } from '@/src/components/Example'
+import { URL_HOST } from '@/src/utils/constants'
+import { routes } from '@/src/utils/routes'
+import {
+  Audio,
+  Track,
+  Transcript,
+} from '@trikinco/fullstack-components'
+import CenteredTrackCues from './CenteredTrackCues'
+
+export const metadata = {
+  title:
+    'Audio - AI Text to Speech and Speech to Text Components',
+  description:
+    'Generate speech or transcribe audio with AI. Includes Server Components, custom hooks and more.',
+  alternates: {
+    canonical: `${new URL(routes.audio, URL_HOST)}`,
+  },
+}
+
+# Audio
+
+Generate speech from text or transcribe audio to text. Includes multiple Server Components, custom hooks and more.
+
+```jsx
+import { handleAudioRequest } from '@trikinco/fullstack-components'
+import { getAudio } from '@trikinco/fullstack-components'
+import { fetchAudio } from '@trikinco/fullstack-components/client'
+import { Audio } from '@trikinco/fullstack-components/client'
+import { Track } from '@trikinco/fullstack-components/client'
+import { Transcript } from '@trikinco/fullstack-components/client'
+import { useAudio } from '@trikinco/fullstack-components/client'
+import { useAudioSource } from '@trikinco/fullstack-components/client'
+```
+
+## Server Components
+
+**Note, file size constraints**: the `Audio` and `Track` Server Components currently transform the response body to base64 data URLs.
+This affects the maximum file size that can be generated.
+Data URLs are used to inline the data instead of storing the audio and caption files on the server. This may change in the future.
+
+If you want to store the files yourself, you can build your own Server Components using the `getAudio` utility function.
+
+### `Audio` component
+
+Creates an audio file from text `content` or a React tree. Also generates VTT captions for the audio file for accessibility.
+
+<Example>
+  <Audio
+    disclosure={
+      <small className="block italic text-xs mt-2">
+        This audio is AI-generated and not a human voice.
+      </small>
+    }
+    controls
+  >
+    <h2>Hey there my friend, how are you?</h2>
+    <p>
+      With Fullstack Components you can easily build Next.js
+      applications powered by AI. The set of tools includes Server
+      Components, custom hooks and much more!
+    </p>
+    <p>
+      In this example, I'm using the <code>Audio</code> component
+      to generate speech from text. You can read more about it in
+      the documentation below.
+    </p>
+    <p>See you around!</p>
+  </Audio>
+</Example>
+
+```jsx
+<Audio controls>
+  <h2>Hey there my friend, how are you?</h2>
+  <p>
+    With Fullstack Components you can easily build Next.js
+    applications powered by AI. The set of tools includes Server
+    Components, custom hooks and much more!
+  </p>
+  <p>
+    In this example, I'm using the <code>Audio</code> component to
+    generate speech from text. You can read more about it in the
+    documentation below.
+  </p>
+  <p>See you around!</p>
+</Audio>
+```
+
+### `Track` component
+
+Creates VTT captions from an audio file.
+
+<Example>
+  <CenteredTrackCues />
+</Example>
+
+```jsx {12}
+// Using a video element here
+// to visibly show the captions.
+// `Audio` Server Component already uses `Track`.
+<video
+  controls
+  className="aspect-video w-full [&::cue]:text-base"
+>
+  <source
+    src="/my-super-original-podcast.mp3"
+    type="audio/mpeg"
+  />
+  <Track src="/my-super-original-podcast.mp3" default />
+</video>
+```
+
+### `Transcript` component
+
+Transcribes an audio file to text.
+
+<Example>
+  <Transcript
+    src="/assets/audio-speech.mp3"
+    as="p"
+    className="text-lg"
+  />
+</Example>
+
+```jsx
+<Transcript
+  src="/my-super-original-podcast.mp3"
+  as="p"
+  className="text-lg"
+/>
+```
+
+## `useAudio` hook
+
+`useAudio` is a utility hook that allows for full access to the same features as `getAudio`, in addition to the ability to control the audio file playback.
+
+```jsx
+'use client'
+import { useAudio } from '@trikinco/fullstack-components/client'
+
+export default function Page() {
+  const {
+    play,
+    pause,
+    setPlayBackRate,
+    isLoading,
+    data,
+    audioRef,
+  } = useAudio({
+    mode: 'speech',
+    content: "Hey there, what's up?",
+  })
+
+  if (isLoading) {
+    return 'Loading...'
+  }
+
+  return (
+    <div>
+      <audio ref={audioRef} controls>
+        <source src={data} type="audio/mpeg" />
+      </audio>
+      <div className="flex gap-3">
+        <button onClick={() => play()}>Play</button>
+        <button onClick={() => pause()}>Pause</button>
+        <button onClick={() => setPlayBackRate(1)}>1.0x</button>
+        <button onClick={() => setPlayBackRate(2)}>2.0x</button>
+      </div>
+    </div>
+  )
+}
+```
+
+## Setup
+
+Add `audio: handleAudioRequest()` to the [API handler route](/docs/get-started/#setup).
+
+```ts title="app/api/fsutils/[...fscomponents]/route.ts"
+import {
+  handleFSComponents,
+  handleAudioRequest,
+  type FSCOptions,
+} from '@trikinco/fullstack-components'
+
+const fscOptions: FSCOptions = {
+  audio: handleAudioRequest({
+    openAiApiKey: process.env.OPENAI_API_KEY || '',
+  }),
+  // Additional options and handlers...
+}
+
+const fscHandler = handleFSComponents(fscOptions)
+
+export { fscHandler as GET, fscHandler as POST }
+```
+
+## API Reference
+
+<TypeInfoToText
+  path="handlers/audio/models.d.ts"
+  name="AudioOptions"
+  description="Audio API handler route options."
+/>
+
+<TypeInfoToText
+  path="handlers/audio/models.d.ts"
+  name="AudioRequestBody"
+  description="Audio request body."
+/>
+
+<TypeInfoToText
+  path="types/audio.d.ts"
+  name="AudioSpeechModeRequestBody"
+  description="Audio request body when using `speech` mode to generate audio from text."
+/>
+
+<TypeInfoToText
+  path="types/audio.d.ts"
+  name="AudioTranscriptionModeRequestBody"
+  description="Audio request body when using `transcript` mode to generate text from audio."
+/>
+
+<TypeInfoToText
+  path="types/audio.d.ts"
+  name="AudioTranslationModeRequestBody"
+  description="Audio request body when using `translation` mode to translate audio into English."
+/>
+
+<TypeInfoToText path="components/Audio.d.ts" name="AudioProps" />
+
+<TypeInfoToText path="components/Audio.d.ts" name="Audio" />
+
+<TypeInfoToText path="components/Track.d.ts" name="TrackProps" />
+
+<TypeInfoToText path="components/Track.d.ts" name="Track" />
+
+<TypeInfoToText
+  path="components/Transcript.d.ts"
+  name="TranscriptProps"
+/>
+
+<TypeInfoToText
+  path="components/Transcript.d.ts"
+  name="Transcript"
+/>
+
+<TypeInfoToText
+  path="handlers/audio/useAudio.d.ts"
+  name="useAudio"
+/>
+
+<TypeInfoToText
+  path="handlers/audio/useAudioSource.d.ts"
+  name="useAudioSource"
+/>
+
+<TypeInfoToText
+  path="handlers/audio/audioClient.d.ts"
+  name="getAudio"
+/>
+
+<TypeInfoToText
+  path="handlers/audio/fetchers.d.ts"
+  name="fetchAudio"
+/>

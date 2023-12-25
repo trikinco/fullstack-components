@@ -7,6 +7,7 @@ export const ApiUrlEnum = {
 	image: '/api/fsutils/image',
 	block: '/api/fsutils/block',
 	text: '/api/fsutils/text',
+	audio: '/api/fsutils/audio',
 } as const
 
 export default ApiUrlEnum

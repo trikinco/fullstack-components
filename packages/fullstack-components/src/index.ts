@@ -11,6 +11,7 @@ import type { HandleImage } from './handlers/image/imageHandler'
 import type { HandleSelect } from './handlers/select/selectHandler'
 import type { HandleText } from './handlers/text/textHandler'
 import type { HandleHtmlPage } from './handlers/htmlPage/htmlPageHandler'
+import type { HandleAudio } from './handlers/audio/audioHandler'
 
 // Because we use a cache and use clients,
 // we may want to create a singleton for the library
@@ -28,6 +29,10 @@ function getInstance(): FullstackComponentsServer {
 }
 
 // export the handler instances rather than the handler functions
+
+const handleAudioRequest: HandleAudio = ((...args: Parameters<HandleAudio>) =>
+	getInstance().handleAudioRequest(...args)) as HandleAudio
+
 const handlePromptRequest: HandlePrompt = ((
 	...args: Parameters<HandlePrompt>
 ) => getInstance().handlePromptRequest(...args)) as HandlePrompt
@@ -59,6 +64,7 @@ const handleNotFoundEnhancement: HandleNotFoundEnhancement = ((
 	getInstance().handleNotFoundEnhancement(...args)) as HandleNotFoundEnhancement
 
 const handleFSComponents = handlerFactory({
+	handleAudio: handleAudioRequest,
 	handleText: handleTextRequest,
 	handleSelect: handleSelectRequest,
 	handleImage: handleImageRequest,
@@ -70,12 +76,16 @@ const handleFSComponents = handlerFactory({
 })
 
 // Server components
+export { Audio } from './components/Audio'
+export { Track, Cue } from './components/Track'
+export { Transcript } from './components/Transcript'
 export { Prompt } from './components/Prompt'
 export { Image } from './components/Image/Image'
 export { Select } from './components/Select'
 export { Text } from './components/Text'
 
 // Public library API for server
+export { AudioClient, getAudio } from './handlers/audio/audioClient'
 export { TextClient, getText } from './handlers/text/textClient'
 export { SelectClient, getSelect } from './handlers/select/selectClient'
 export { PromptClient, getPrompt } from './handlers/prompt/promptClient'
@@ -99,6 +109,8 @@ export { BlockClient, getBlock } from './handlers/block/blockClient'
 // Public library types
 export { ChatGptCompletionResponse } from './chatGptService'
 export { ImageGenerationResponse } from './imageGenerationService'
+export { AudioTextResponse as AudioResponse } from './audioService'
+export * from './handlers/audio/models'
 export * from './handlers/errorEnhancer/models'
 export * from './handlers/notFoundEnhancer/models'
 export * from './handlers/prompt/models'
@@ -111,6 +123,7 @@ export { AppRouteHandlerContext } from './nextjs-handlers'
 
 export {
 	getInstance,
+	handleAudioRequest,
 	handleTextRequest,
 	handleSelectRequest,
 	handleImageRequest,

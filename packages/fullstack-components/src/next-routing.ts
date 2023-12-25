@@ -33,6 +33,7 @@ const defaultAppRouterOnError: AppRouterOnError = (_req, error) => {
  * @ignore
  */
 export default function handlerFactory({
+	handleAudio,
 	handleSelect,
 	handleText,
 	handleImage,
@@ -46,6 +47,7 @@ export default function handlerFactory({
 		| NextApiHandler<void>
 		| AppRouteHandler => {
 		const customHandlers: ApiHandlers = {
+			audio: handleAudio,
 			text: handleText,
 			select: handleSelect,
 			image: handleImage,

@@ -16,7 +16,7 @@ export const routes = {
 	block: '/docs/block',
 	htmlPage: '/docs/html-page-generator',
 	getStarted: '/docs/get-started',
-	chat: '/docs/chat-toolkit',
+	audio: '/docs/audio',
 	errors: '/docs/error-enhancer',
 	image: '/docs/image',
 	notFound: '/docs/not-found-enhancer',
@@ -183,24 +183,19 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 		),
 	},
 	{
-		title: 'Chat',
-		href: routes.chat,
-		children:
-			'Everything you need to create fully integrated, custom chat experiences.',
+		title: 'Audio',
+		href: routes.audio,
+		children: 'Generate speech or transcribe audio with AI.',
 		image: {
 			src: imageChat,
 			alt: 'Wedge',
 			...imageSize,
 		},
-		header: (
-			<Chip className="bg-orange-100 border-orange-200 dark:bg-orange-950 dark:border-orange-900">
-				Demo
-			</Chip>
-		),
 		footer: (
 			<>
-				<Chip>Component</Chip>
-				<Chip>Hook</Chip>
+				<Chip>Components</Chip>
+				<Chip>Hooks</Chip>
+				<Chip>Utils</Chip>
 			</>
 		),
 	},

@@ -64,11 +64,13 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 					<div className="mb-3 font-normal text-gray-700 dark:text-gray-300">
 						{children}
 					</div>
-
-					{footer && (
-						<div className="w-full flex gap-2 mt-auto pt-2">{footer}</div>
-					)}
 				</div>
+
+				{footer && (
+					<div className="w-full flex flex-wrap gap-2 mt-auto pt-2">
+						{footer}
+					</div>
+				)}
 			</div>
 		</Component>
 	)

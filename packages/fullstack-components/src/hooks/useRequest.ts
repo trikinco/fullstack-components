@@ -74,9 +74,9 @@ export const useRequest = <TResponse = unknown, Tbody = unknown>(
 		setIsLoading(true)
 
 		try {
-			const json = await requestData<TResponse, Tbody>(url, requestConfig)
+			const content = await requestData<TResponse, Tbody>(url, requestConfig)
 
-			setData(json)
+			setData(content)
 			setError(null) // eslint-disable-line unicorn/no-null
 			setIsError(false)
 		} catch (error) {
@@ -105,6 +105,15 @@ export const useRequest = <TResponse = unknown, Tbody = unknown>(
 			void fetchData()
 		}
 	}, [url, isEnabled])
+
+	// Clean up any object URLs created by the `blob` response `type`.
+	useEffect(() => {
+		return () => {
+			if (data && requestConfig.responseType === 'blob') {
+				URL.revokeObjectURL(data as string)
+			}
+		}
+	}, [])
 
 	return { isLoading, isError, error, data, refetch }
 }

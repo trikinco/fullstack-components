@@ -2,6 +2,8 @@ import type { HTMLAttributes, ReactNode } from 'react'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { TypeInfo, type TypeInfoDetails } from './TypeInfo'
 import { getTypeDocs } from '../../utils/getTypeDocs'
+import { IconMenuAlt } from '../Icons/IconMenuAlt'
+import { Accordion } from '../Accordion'
 
 export interface TypeInfoToTextProps
 	extends Omit<HTMLAttributes<HTMLDivElement>, 'title'>,
@@ -67,7 +69,13 @@ export const TypeInfoToText = async ({
 			/>
 
 			{!hasParameters && properties && properties.length > 0 && (
-				<div className="flex flex-col">
+				<Accordion
+					label={
+						<>
+							<IconMenuAlt width={20} height={20} /> Properties
+						</>
+					}
+				>
 					{properties.map(
 						({ name, type, required, description, parameters, tags }) => (
 							<TypeInfo
@@ -78,10 +86,11 @@ export const TypeInfoToText = async ({
 								description={description}
 								parameters={parameters}
 								tags={tags}
+								className="p-6 first-of-type:border-t-0"
 							/>
 						)
 					)}
-				</div>
+				</Accordion>
 			)}
 		</div>
 	)

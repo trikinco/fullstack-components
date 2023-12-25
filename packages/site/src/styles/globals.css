@@ -54,7 +54,11 @@ body {
 }
 
 [data-highlighted-chars] {
-	@apply rounded-md bg-slate-100 dark:bg-slate-700;
+	@apply rounded-md bg-slate-800/10 dark:bg-slate-800;
+}
+
+[data-highlighted-line] {
+	@apply rounded-md bg-slate-800/10 dark:bg-slate-800;
 }
 
 .bg-pattern {

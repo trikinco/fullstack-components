@@ -14,8 +14,10 @@ import type { HandleImage } from '../handlers/image/imageHandler'
 import type { HandleSelect } from '../handlers/select/selectHandler'
 import type { HandleText } from '../handlers/text/textHandler'
 import type { HandleHtmlPage } from '../handlers/htmlPage/htmlPageHandler'
+import type { HandleAudio } from '../handlers/audio/audioHandler'
 
 export type FactoryHandlers = {
+	handleAudio: HandleAudio
 	handleSelect: HandleSelect
 	handleText: HandleText
 	handleImage: HandleImage
