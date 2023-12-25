@@ -6,7 +6,7 @@ export interface ExampleProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode
 	/** Label above the example output. Default: 'Live Example' */
 	label?: string
-	/** toggles the `not-prose` className on the wrapper to avoid text styles when not needed  */
+	/** removes the `not-prose` className on the wrapper style fonts as prose  */
 	isProse?: boolean
 }
 
