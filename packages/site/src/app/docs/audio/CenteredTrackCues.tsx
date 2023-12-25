@@ -9,7 +9,10 @@ export default function CenteredTrackCues() {
 	}
 
 	return (
-		<video controls className="aspect-video w-full [&::cue]:text-base">
+		<video
+			controls
+			className="aspect-video w-full [&::cue]:text-xs sm:[&::cue]:text-base [&::cue]:whitespace-normal"
+		>
 			<source src="/assets/audio-speech.mp3#t=0.1" type="audio/mpeg" />
 			<Track src="/assets/audio-speech.mp3" transform={modifyCues} default />
 		</video>

@@ -71,7 +71,10 @@ export const TypeInfo = ({
 			{...rest}
 		>
 			{!hideName && (
-				<TitleComponent className="flex gap-2 m-0 scroll-mt-10" id={id}>
+				<TitleComponent
+					className="flex flex-wrap gap-2 m-0 scroll-mt-10"
+					id={id}
+				>
 					{name && <span className="font-bold">{name}</span>}
 					{type && (
 						<span className="text-sm font-mono font-normal my-auto text-slate-500 dark:text-slate-400">
