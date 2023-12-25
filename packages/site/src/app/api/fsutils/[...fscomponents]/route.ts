@@ -8,6 +8,7 @@ import {
 	handleErrorRequest,
 	handleHtmlPageRequest,
 	handleNotFoundEnhancement,
+	handleAudioRequest,
 	type FSCOptions,
 } from '@trikinco/fullstack-components'
 
@@ -16,6 +17,7 @@ const config = {
 }
 
 const fscOptions: FSCOptions = {
+	audio: handleAudioRequest(config),
 	prompt: handlePromptRequest(config),
 	errorEnhancer: handleErrorRequest({
 		...config,
