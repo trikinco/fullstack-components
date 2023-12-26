@@ -130,7 +130,7 @@ export const ColorPicker = ({
 	)
 
 	return (
-		<>
+		<div>
 			<input name={inputName} value={pickedColors} hidden readOnly />
 			{portal ? (
 				<Portal id={ID_DIALOG_PORTAL}>
@@ -160,14 +160,14 @@ export const ColorPicker = ({
 					<span className="flex flex-col items-start gap-1">
 						{labelPicked && <span className="text-sm">{labelPicked}</span>}
 
-						<span className="font-bold" id={describedById}>
+						<span className="font-bold dark:text-white" id={describedById}>
 							{labelPick}
 						</span>
 					</span>
 				</button>
 			</div>
 
-			{multiple && (
+			{multiple && pickedColors.length > 0 && (
 				<div className="flex flex-wrap gap-3">
 					{pickedColors.map((color) => (
 						<ColorPickerButton
@@ -179,6 +179,6 @@ export const ColorPicker = ({
 					))}
 				</div>
 			)}
-		</>
+		</div>
 	)
 }

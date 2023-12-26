@@ -64,7 +64,7 @@ export function FormBody({ state, refetch }: FormBodyProps) {
 					{/* eslint-enable */}
 				</div>
 
-				<div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+				<div className="flex flex-col gap-6 sm:flex-row sm:items-center">
 					<ColorPicker
 						onChange={(values) => setColors(values as string)}
 						max={5}
