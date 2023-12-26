@@ -27,6 +27,7 @@ export const PreviewCode = ({
 	return (
 		<div className="relative">
 			<Tabs
+				hideTabs={!code}
 				tabs={[
 					{
 						id: `${id}-preview`,

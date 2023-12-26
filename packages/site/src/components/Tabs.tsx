@@ -35,6 +35,10 @@ export interface TabProps {
 
 export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode
+	/**
+	 * Hide the tab buttons
+	 */
+	hideTabs?: boolean
 	tabs: TabProps[]
 }
 
@@ -43,7 +47,13 @@ export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
  * Uses auto-activation of tabs.
  * @see {@link https://www.w3.org/WAI/ARIA/apg/patterns/tabs/ Tabs Pattern}
  */
-export const Tabs = ({ className, tabs, children, ...rest }: TabsProps) => {
+export const Tabs = ({
+	className,
+	tabs,
+	hideTabs,
+	children,
+	...rest
+}: TabsProps) => {
 	const tabsId = useId()
 	const getId = useCallback(
 		(id: string, i: number) => `${tabsId}-${id}-${i}`,
@@ -85,35 +95,37 @@ export const Tabs = ({ className, tabs, children, ...rest }: TabsProps) => {
 
 	return (
 		<div className="flex flex-col gap-3">
-			<div className="flex items-center justify-end">
-				<div
-					className={merge(
-						'flex space-x-1 rounded-lg bg-slate-100 dark:bg-black p-0.5'
-					)}
-					role="tablist"
-					aria-orientation="horizontal"
-				>
-					{tabs.map(({ id, label, icon, disabled }, i) => {
-						const tabId = getId(id, i)
-						const isSelected = selectedTab === tabId
+			{!hideTabs && (
+				<div className="flex items-center justify-end">
+					<div
+						className={merge(
+							'flex space-x-1 rounded-lg bg-slate-100 dark:bg-black p-0.5'
+						)}
+						role="tablist"
+						aria-orientation="horizontal"
+					>
+						{tabs.map(({ id, label, icon, disabled }, i) => {
+							const tabId = getId(id, i)
+							const isSelected = selectedTab === tabId
 
-						return (
-							<Tab
-								key={`${tabId}-${label}`}
-								id={`${tabId}-label`}
-								tabId={tabId}
-								selected={isSelected}
-								onClick={() => setSelectedTab(tabId)}
-								onKeyDown={handleRovingFocus(tabId)}
-								icon={icon}
-								disabled={disabled}
-							>
-								{label}
-							</Tab>
-						)
-					})}
+							return (
+								<Tab
+									key={`${tabId}-${label}`}
+									id={`${tabId}-label`}
+									tabId={tabId}
+									selected={isSelected}
+									onClick={() => setSelectedTab(tabId)}
+									onKeyDown={handleRovingFocus(tabId)}
+									icon={icon}
+									disabled={disabled}
+								>
+									{label}
+								</Tab>
+							)
+						})}
+					</div>
 				</div>
-			</div>
+			)}
 
 			<div
 				className={merge(
