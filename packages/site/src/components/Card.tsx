@@ -30,7 +30,7 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 	return (
 		<Component
 			className={merge(
-				'relative w-full flex flex-col grow sm:max-w-lg p-4 bg-white border-2 border-gray-200 rounded-lg shadow sm:p-8 dark:bg-slate-900 dark:border-slate-800 focus-ring',
+				'relative w-full flex flex-col grow sm:max-w-lg p-4 bg-white border border-gray-200 rounded-lg sm:p-8 dark:bg-slate-900 dark:border-slate-800 focus-ring',
 				className
 			)}
 			{...rest}
