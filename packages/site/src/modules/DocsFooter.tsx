@@ -4,13 +4,14 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { routesDocsMeta } from '@/src/utils/routes'
+import { IconChevronLeft } from '../components/Icons/IconChevronLeft'
 
 export interface DocsFooterProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode
 }
 
 const linkStyles =
-	'font-bold rounded-sm focus-ring text-blue-600 dark:text-blue-400 hover:underline'
+	'inline-flex items-center gap-1 font-bold rounded-sm focus-ring text-blue-600 dark:text-blue-400 hover:underline'
 
 /**
  * Docs footer navigation
@@ -27,13 +28,14 @@ export default function DocsFooter({ children, className }: DocsFooterProps) {
 
 			{prevItem && (
 				<Link className={merge('mr-auto', linkStyles)} href={prevItem.href}>
-					&lsaquo; {prevItem.title}
+					<IconChevronLeft width={20} height={20} /> {prevItem.title}
 				</Link>
 			)}
 
 			{nextItem && (
 				<Link className={merge('ml-auto', linkStyles)} href={nextItem.href}>
-					{nextItem.title} &rsaquo;
+					{nextItem.title}{' '}
+					<IconChevronLeft width={20} height={20} className="rotate-180" />
 				</Link>
 			)}
 		</footer>
