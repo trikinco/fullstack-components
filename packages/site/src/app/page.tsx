@@ -77,7 +77,10 @@ export default function Home() {
 			<div className="grid gap-6 lg:grid-cols-2 lg:mb-24 max-w-6xl">
 				<PageHeader
 					className="prose dark:prose-invert"
-					headingProps={{ className: 'text-4xl sm:text-6xl' }}
+					headingProps={{
+						className:
+							'text-4xl sm:text-5xl xl:text-6xl mt-6 mb-6 xl:mt-0 sm:mb-3',
+					}}
 					title={
 						<>
 							Build websites by
@@ -90,12 +93,12 @@ export default function Home() {
 						</>
 					}
 				>
-					<p className="mt-6 text-lg text-slate-600 max-w-3xl mx-auto dark:text-slate-300">
+					<p className="mt-6 text-lg max-w-3xl mx-auto text-slate-600 dark:text-white">
 						<strong className="dark:text-[#00FCCE]">{NAME_SHORT}</strong> is an
 						AI-powered library for Next.js that turns words into fully
 						integrated components, like magic.
 					</p>
-					<p className="text-lg text-slate-600 max-w-3xl mx-auto dark:text-slate-300">
+					<p className="text-sm sm:text-base max-w-3xl mx-auto text-slate-600 dark:text-white">
 						Responsible, customizable and open source.
 					</p>
 					<div className="mt-8 flex grow items-center gap-6">

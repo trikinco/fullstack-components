@@ -73,7 +73,7 @@ export const Dialog = ({
 				aria-label={title}
 				aria-describedby={describedById}
 				// 0 border and padding to handle backdrop clicking the correct target
-				className={merge('border-0 p-0', className)}
+				className={merge('border-0 p-0 m-0', className)}
 				{...rest}
 			>
 				<form
@@ -90,7 +90,7 @@ export const Dialog = ({
 						<button
 							formMethod="dialog"
 							className={merge(
-								'ml-auto bg-white/80 text-black border border-1 border-white/90 sticky top-3 right-0 py-2 px-6 z-50 rounded-md focus-ring',
+								'shrink-0 ml-auto bg-white/80 text-black border border-1 border-white/90 sticky top-3 right-0 py-1 sm:py-2 px-3 sm:px-6 z-50 rounded-md focus-ring text-sm sm:text-base',
 								closeClassName
 							)}
 							onClick={() => dialogRef?.current?.close()}

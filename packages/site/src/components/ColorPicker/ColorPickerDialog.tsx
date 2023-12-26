@@ -63,13 +63,13 @@ export const ColorPickerDialog = memo(function ColorPickerDialog({
 				describedById={describedById}
 				focusInitialRef={focusInitialRef}
 				focusReturnRef={focusReturnRef}
-				className="backdrop-blur-md bg-black/20 h-screen w-full max-w-full max-h-screen"
+				className="backdrop-blur-md bg-black/20 w-full max-w-full h-screen max-h-dvh sm:max-h-lvh"
 				formProps={{
 					className: 'md:max-w-5xl',
 					onSubmit: (e) => e.stopPropagation(),
 				}}
 			>
-				<div className="min-w-full w-full grid gap-2 grid-cols-11">
+				<div className="min-w-full w-full grid gap-0.5 sm:gap-2 grid-cols-11">
 					{colors.map(({ name, values }) =>
 						values.map((value) => {
 							const colors = selectedColors || []
@@ -99,7 +99,7 @@ export const ColorPickerDialog = memo(function ColorPickerDialog({
                                             peer 
                                             bg-${color} disabled:opacity-80
                                             cursor-pointer disabled:cursor-not-allowed
-                                            appearance-none rounded-md w-full h-12
+                                            appearance-none rounded-md w-full h-8 sm:h-12
                                             focus:z-10 hover:z-10 
                                             border border-1 border-white/10  
                                             hover:outline-white/50 
