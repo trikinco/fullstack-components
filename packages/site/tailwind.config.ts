@@ -9,22 +9,6 @@ const config: Config = {
 			sans: ['var(--font-base)', ...defaultTheme.fontFamily.sans],
 			mono: ['var(--font-mono)', ...defaultTheme.fontFamily.mono],
 		},
-		extend: {
-			animation: {
-				typewriter: 'typing 2s steps(30, end)',
-				writing: 'caret 1.5s step-end infinite',
-			},
-			keyframes: {
-				typing: {
-					'0%': { width: '0' },
-					'100%': { width: '100%' },
-				},
-				caret: {
-					'0%, 100%': { background: 'transparent' },
-					'50%': { background: 'currentcolor' },
-				},
-			},
-		},
 	},
 	plugins: [require('@tailwindcss/typography')],
 	safelist: [
