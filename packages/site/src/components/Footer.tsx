@@ -90,7 +90,7 @@ export const Footer = ({ children, className, ...rest }: FooterProps) => {
 					</div>
 				</div>
 			</footer>
-			<div className="flex gap-3 justify-between text-sm p-6 bg-white/20 dark:bg-black border-t border-slate-950/10 dark:border-transparent">
+			<div className="hidden md:flex gap-3 justify-between text-sm p-6 bg-white/20 dark:bg-black border-t border-slate-950/10 dark:border-transparent">
 				<p>
 					<strong>
 						<Link className="focus-ring" href={URL_GITHUB}>

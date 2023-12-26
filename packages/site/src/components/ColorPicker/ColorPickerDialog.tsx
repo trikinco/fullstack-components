@@ -63,7 +63,7 @@ export const ColorPickerDialog = memo(function ColorPickerDialog({
 				describedById={describedById}
 				focusInitialRef={focusInitialRef}
 				focusReturnRef={focusReturnRef}
-				className="backdrop-blur-md bg-black/20 w-full max-w-full h-screen max-h-lvh"
+				className="backdrop-blur-md bg-black/20 w-full max-w-full h-screen max-h-dvh sm:max-h-lvh"
 				formProps={{
 					className: 'md:max-w-5xl',
 					onSubmit: (e) => e.stopPropagation(),
