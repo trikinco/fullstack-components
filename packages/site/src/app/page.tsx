@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { Main } from '@/src/components/Main'
 import { Card } from '@/src/components/Card'
-import { PageHeader } from '@/src/components/PageHeader'
 import {
 	NAME_SHORT,
 	NAME_DESCRIPTION,
@@ -11,10 +10,9 @@ import {
 	URL_RELEASES,
 	URL_DISCUSSIONS,
 } from '@/src/utils/constants'
-import { Button } from '@/src/components/Elements/Button'
-import { IconPlay } from '@/src/components/Icons/IconPlay'
 import { routes, routesDocsMeta, routesCardsMeta } from '@/src/utils/routes'
 import { JsonSchema } from '@/src/modules/JsonSchema'
+import { Hero } from '@/src/modules/Hero'
 
 export const metadata = {
 	alternates: {
@@ -75,50 +73,7 @@ export default function Home() {
 				]}
 			/>
 			<div className="grid gap-6 lg:grid-cols-2 lg:mb-24 max-w-6xl">
-				<PageHeader
-					className="prose dark:prose-invert"
-					headingProps={{
-						className:
-							'text-4xl sm:text-5xl xl:text-6xl mt-6 mb-6 xl:mt-0 sm:mb-3',
-					}}
-					title={
-						<>
-							Build websites by
-							<br />
-							<span className="inline-flex justify-start">
-								<span className="overflow-hidden leading-tight whitespace-nowrap my-0 mr-auto motion-safe:animate-typewriter motion-safe:after:w-[3px] motion-safe:after:h-[70%] motion-safe:after:inline-flex motion-safe:after:animate-writing">
-									writing prompts.
-								</span>
-							</span>
-						</>
-					}
-				>
-					<p className="mt-6 text-lg max-w-3xl mx-auto text-slate-600 dark:text-white">
-						<strong className="dark:text-[#00FCCE]">{NAME_SHORT}</strong> is an
-						AI-powered library for Next.js that turns words into fully
-						integrated components, like magic.
-					</p>
-					<p className="text-sm sm:text-base max-w-3xl mx-auto text-slate-600 dark:text-white">
-						Responsible, customizable and open source.
-					</p>
-					<div className="mt-8 flex grow items-center gap-6">
-						<Button as={Link} href={routes.getStarted}>
-							Get started
-						</Button>
-						<Button
-							as={Link}
-							href={routes.examples}
-							color="secondary"
-							variant="outlined"
-						>
-							<IconPlay width={20} height={20} className="mr-2" />
-							Try it live
-						</Button>
-					</div>
-				</PageHeader>
-				{/* <div className="flex grow items-center justify-center gap-6">
-					Some cool gif, demonstration or illustration goes here
-				</div> */}
+				<Hero />
 			</div>
 
 			<section>
