@@ -28,33 +28,35 @@ export default function DocsNav({ children, className }: DocsNavProps) {
 			>
 				Skip to the main content
 			</SkipLink>
-			<ul className="flex flex-col gap-2">
+			<ul className="flex flex-col gap-2 break-words">
 				{routesMeta.map(({ title, href, isTitle }) => {
 					const isCurrentPage = pathname === href
 
 					return (
-						<li
-							key={href}
-							className={merge(
-								'flex',
-								isCurrentPage &&
-									'text-blue-600 dark:text-blue-400 font-bold before:content-["·"] before:mr-2'
-							)}
-						>
-							<Link
-								id={isTitle ? ID_DOCS_NAV : undefined}
-								href={href}
+						<li key={href}>
+							<span
 								className={merge(
-									'w-full rounded-sm focus-ring hover:text-black focus-visible:text-black dark:hover:text-white hover:underline',
-									isCurrentPage
-										? 'text-blue-600 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-400 font-bold'
-										: 'text-black/60 dark:text-white/60',
-									isTitle && 'text-black dark:text-white font-bold text-lg mb-3'
+									'flex',
+									isCurrentPage &&
+										'text-blue-600 dark:text-blue-400 font-bold before:content-["·"] before:mr-2'
 								)}
-								aria-current={isCurrentPage ? 'page' : undefined}
 							>
-								{title}
-							</Link>
+								<Link
+									id={isTitle ? ID_DOCS_NAV : undefined}
+									href={href}
+									className={merge(
+										'w-full rounded-sm focus-ring hover:text-black focus-visible:text-black dark:focus-visible:text-white dark:hover:text-white hover:underline',
+										isCurrentPage
+											? 'text-blue-600 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-400 font-bold'
+											: 'text-black/60 dark:text-white/60',
+										isTitle &&
+											'text-black dark:text-white font-bold text-lg mb-3'
+									)}
+									aria-current={isCurrentPage ? 'page' : undefined}
+								>
+									{title}
+								</Link>
+							</span>
 						</li>
 					)
 				})}

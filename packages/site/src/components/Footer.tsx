@@ -8,6 +8,7 @@ import {
 	URL_GITHUB,
 	URL_NPM,
 	URL_DISCUSSIONS,
+	ID_FOOTER,
 } from '../utils/constants'
 import { IconGitHub } from './Icons/IconGitHub'
 import { IconNpm } from './Icons/IconNpm'
@@ -22,6 +23,7 @@ export const Footer = ({ children, className, ...rest }: FooterProps) => {
 	return (
 		<>
 			<footer
+				id={ID_FOOTER}
 				className={merge(
 					'pt-12 md:py-12 sm:pb-6 md:px-6 mt-10 bg-white dark:bg-slate-950 border-t border-slate-950/10 dark:border-white/10',
 					className

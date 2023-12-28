@@ -4,6 +4,7 @@ import { merge } from '@trikinco/fullstack-components/utils'
 import { TypeInfoTags } from './TypeInfoTags'
 import { IconMenuAlt } from '../Icons/IconMenuAlt'
 import { Accordion } from '../Accordion'
+import { TypeInfoTitle } from './TypeInfoTitle'
 
 export interface TypeInfoDetails
 	extends Omit<
@@ -71,22 +72,13 @@ export const TypeInfo = ({
 			{...rest}
 		>
 			{!hideName && (
-				<TitleComponent
-					className="flex flex-wrap gap-2 m-0 scroll-mt-10"
+				<TypeInfoTitle
 					id={id}
-				>
-					{name && <span className="font-bold">{name}</span>}
-					{type && (
-						<span className="text-sm font-mono font-normal my-auto text-slate-500 dark:text-slate-400">
-							{type}
-						</span>
-					)}
-					{required && (
-						<span className="text-sm font-mono font-normal my-auto text-red-600">
-							required
-						</span>
-					)}
-				</TitleComponent>
+					name={name}
+					type={type}
+					required={required}
+					component={TitleComponent}
+				/>
 			)}
 
 			{description && (

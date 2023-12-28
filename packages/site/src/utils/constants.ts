@@ -33,3 +33,14 @@ export const META_AUTHORS = [
 export const ID_DIALOG_PORTAL = 'dialog-portal'
 export const ID_MAIN = 'main-content'
 export const ID_DOCS_NAV = 'docs-nav'
+export const ID_DOCS_TOC = 'docs-toc'
+export const ID_FOOTER = 'footer'
+
+// Toc config
+export const TOC_HEADINGS: ('h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6')[] = [
+	'h2',
+	'h3',
+	'h4',
+	'h5',
+	'h6',
+]

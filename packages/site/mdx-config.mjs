@@ -16,7 +16,15 @@ export const remarkPlugins = [remarkGfm]
  */
 export const rehypePlugins = [
 	rehypeSlug,
-	[rehypeAutolinkHeadings, { behavior: 'append' }],
+	[
+		rehypeAutolinkHeadings,
+		{
+			behavior: 'wrap',
+			properties: {
+				className: 'heading-link',
+			},
+		},
+	],
 	/**
 	 * Pre-processing for enabling copy code buttons
 	 *
