@@ -49,13 +49,19 @@ Example output:
 </urlset>
 ```
 
-Ensure your sitemap is accessible at `/sitemap.xml` in your application, and proceed to the next step.
+Ensure your sitemap is accessible at `/sitemap.xml` in your application, and continue to the next step.
 
 ### Step 2: Configure the API handler route
 
-In the API handler route, add the following configuration to use the `useNotFoundEnhancement` hook shown later.
+In the [API handler route](/docs/get-started#step-2-add-the-api-handler-route), add the following configuration to use the `useNotFoundEnhancement` hook shown later.
 
 ```ts title="app/api/fsutils/[...fscomponents]/route.ts"
+import {
+  handleFSComponents,
+  handleNotFoundEnhancement,
+  type FSCOptions,
+} from '@trikinco/fullstack-components'
+
 export const POST = handleFSComponents({
   notFoundEnhancer: handleNotFoundEnhancement({
     // used to inspect the sitemap

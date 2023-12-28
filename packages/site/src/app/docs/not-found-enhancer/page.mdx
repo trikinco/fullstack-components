@@ -27,53 +27,23 @@ import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
 
 ## `useNotFoundEnhancement` hook
 
+The `useNotFoundEnhancement` hook is a React hook that can be used to fetch the `not found` enhancement data from the API handler.
+
+See [Usage](/docs/usage) for a full example on making your own `NotFoundEnhancer` component.
+
 <Example>
   <NotFoundEnhancer />
 </Example>
 
-## Setup
-
-### Step 1: Configure the API handler
-
-In the API handler file, you should add the following configuration to use this component.
-
-**Not Found Enhancer requires configuration of the API handler.**
-
-**Note:** not all features require configuration, so read the documentation for each.
-
-```ts title="app/api/fsutils/[...fscomponents]/route.ts"
-import {
-  handleFSComponents,
-  handleNotFoundEnhancement,
-  type FSCOptions,
-} from '@trikinco/fullstack-components'
-
-const fscOptions: FSCOptions = {
-  // Configure one or more handlers
-  notFoundEnhancer: handleNotFoundEnhancement({
-    openAiApiKey: process.env.OPENAI_API_KEY || '',
-    siteUrl: process.env.NEXT_PUBLIC_HOST || '',
-  }),
-  // ...Add more handlers here
-}
-
-const fscHandler = handleFSComponents(fscOptions)
-
-export { fscHandler as GET, fscHandler as POST }
-```
-
-### Step 2: Create a new client component in your Next.js app
-
-The key is to use the `useNotFoundEnhancement` hook to get the data from the API endpoint.
-
-```tsx title="components/NotFoundEnhancer.tsx"
+```tsx {7}
 'use client'
 
 import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
 import Link from 'next/link'
 
-export function NotFoundEnhancer() {
+export default function Page() {
   const { data, isLoading } = useNotFoundEnhancement()
+
   const hasUrlSuggestions =
     data?.bestAlternateUrls && data.bestAlternateUrls.length > 0
 
@@ -82,22 +52,18 @@ export function NotFoundEnhancer() {
   }
 
   return (
-    <div>
+    <div className="mt-6">
       <p>{data?.generatedContent}</p>
       {hasUrlSuggestions && (
         <>
-          <p className="font-bold mt-3" id="url-suggestions">
+          <p className="font-bold">
             Try one of these pages instead:
           </p>
-          <ul aria-labelledby="url-suggestions">
-            {data?.bestAlternateUrls.map((url, i) => (
-              <li key={i}>
-                <Link href={url} className="block underline">
-                  {url}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {data?.bestAlternateUrls.map((url, i) => (
+            <Link href={url} key={i} className="block">
+              {url}
+            </Link>
+          ))}
         </>
       )}
       {!hasUrlSuggestions && (
@@ -111,25 +77,31 @@ export function NotFoundEnhancer() {
 }
 ```
 
-### Step 3: Create a `not-found` page
+## Setup
 
-- Using the Next.js App Router: Create a [`not-found.tsx` page](https://nextjs.org/docs/app/api-reference/file-conventions/not-found) in your app.
-- Using the Next.js Pages Router: [Create a `404.tsx` page](https://nextjs.org/docs/pages/building-your-application/routing/custom-error#404-page) in your app.
+Add `notFoundEnhancer: handleNotFoundEnhancement()` to the [API handler route](/docs/get-started/#setup).
 
-```tsx title="app/not-found.tsx or pages/404.tsx"
-import Link from 'next/link'
+```ts title="app/api/fsutils/[...fscomponents]/route.ts"
+import {
+  handleFSComponents,
+  handleNotFoundEnhancement,
+  type FSCOptions,
+} from '@trikinco/fullstack-components'
 
-export default function NotFound() {
-  return (
-    <div>
-      <h2>Not Found</h2>
-      <p>Could not find requested resource</p>
-      <Link href="/">Return Home</Link>
-      <NotFoundEnhancer />
-    </div>
-  )
+const fscOptions: FSCOptions = {
+  notFoundEnhancer: handleNotFoundEnhancement({
+    openAiApiKey: process.env.OPENAI_API_KEY || '',
+    siteUrl: process.env.NEXT_PUBLIC_HOST || '',
+  }),
+  // Additional options and handlers...
 }
+
+const fscHandler = handleFSComponents(fscOptions)
+
+export { fscHandler as GET, fscHandler as POST }
 ```
+
+**Not Found Enhancer requires configuration of the API handler and a sitemap available at `/sitemap.xml`.**
 
 ## API Reference
 
