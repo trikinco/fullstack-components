@@ -2,11 +2,7 @@ import { TypeInfoToText } from '@/src/components/TypeInfo/TypeInfoToText'
 import { Example } from '@/src/components/Example'
 import { URL_HOST } from '@/src/utils/constants'
 import { routes } from '@/src/utils/routes'
-import {
-  Audio,
-  Track,
-  Transcript,
-} from '@trikinco/fullstack-components'
+import { Audio, Transcript } from '@trikinco/fullstack-components'
 import CenteredTrackCues from './CenteredTrackCues'
 
 export const metadata = {
@@ -26,10 +22,10 @@ Generate speech from text or transcribe audio to text. Includes multiple Server 
 ```jsx
 import { handleAudioRequest } from '@trikinco/fullstack-components'
 import { getAudio } from '@trikinco/fullstack-components'
+import { Audio } from '@trikinco/fullstack-components'
+import { Track } from '@trikinco/fullstack-components'
+import { Transcript } from '@trikinco/fullstack-components'
 import { fetchAudio } from '@trikinco/fullstack-components/client'
-import { Audio } from '@trikinco/fullstack-components/client'
-import { Track } from '@trikinco/fullstack-components/client'
-import { Transcript } from '@trikinco/fullstack-components/client'
 import { useAudio } from '@trikinco/fullstack-components/client'
 import { useAudioSource } from '@trikinco/fullstack-components/client'
 ```
