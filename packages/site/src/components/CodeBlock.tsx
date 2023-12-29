@@ -35,7 +35,7 @@ export const CodeBlock = ({
 
 			{!!noCopy && (
 				<ButtonCopy
-					className="absolute top-4 right-4 invisible group-hover:visible group-focus-within:visible focus:visible"
+					className="absolute top-3.5 right-3.5 invisible group-hover:visible group-focus-within:visible focus:visible"
 					text={raw}
 					data-copy
 				/>

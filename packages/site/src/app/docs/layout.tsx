@@ -2,10 +2,16 @@ import type { ReactNode } from 'react'
 import Main from '@/src/components/Main'
 import Prose from '@/src/components/Prose'
 import DocsNav from '@/src/modules/DocsNav'
+import DocsToc from '@/src/modules/DocsToc'
 import { ID_MAIN } from '@/src/utils/constants'
 import DocsFooter from '@/src/modules/DocsFooter'
+import { routesDocs } from '@/src/utils/routes'
+import { getTocMarkupByRoutes } from '@/src/utils/getTocMarkupByRoutes'
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default async function Layout({ children }: { children: ReactNode }) {
+	// Prebuild TOC markup for each docs page
+	const tocMarkupByRoutes = await getTocMarkupByRoutes(routesDocs)
+
 	return (
 		<Main
 			as="div"
@@ -16,11 +22,15 @@ export default function Layout({ children }: { children: ReactNode }) {
 			<Prose
 				as="main"
 				id={ID_MAIN}
-				className="col-span-full md:col-start-3 md:col-end-12"
+				className="col-span-full md:col-start-3 md:col-end-11"
 			>
 				{children}
 			</Prose>
-			<DocsFooter className="w-full lg:w-auto col-span-full md:col-start-3 md:col-end-12" />
+			<DocsToc
+				className="hidden lg:sticky lg:top-32 lg:right-0 lg:flex w-full max-w-prose mx-auto lg:mx-0 lg:col-start-11 lg:col-span-2"
+				tocMarkupByRoutes={tocMarkupByRoutes}
+			/>
+			<DocsFooter className="w-full lg:w-auto col-span-full md:col-start-3 md:col-end-11" />
 		</Main>
 	)
 }

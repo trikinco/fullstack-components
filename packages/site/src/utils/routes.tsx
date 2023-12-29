@@ -12,10 +12,14 @@ import imageChat from '../../public/images/Wedge.png'
 import { URL_DISCUSSIONS, URL_GITHUB } from './constants'
 
 export const routes = {
+	examples: '/examples',
+	// Docs introduction
 	docs: '/docs',
+	getStarted: '/docs/get-started',
+	usage: '/docs/usage',
+	// Docs features
 	block: '/docs/block',
 	htmlPage: '/docs/html-page-generator',
-	getStarted: '/docs/get-started',
 	audio: '/docs/audio',
 	errors: '/docs/error-enhancer',
 	image: '/docs/image',
@@ -23,8 +27,11 @@ export const routes = {
 	prompt: '/docs/prompt',
 	select: '/docs/select',
 	text: '/docs/text',
-	examples: '/examples',
 }
+
+const { docs, examples, ...restRoutes } = routes
+
+export const routesDocs = restRoutes
 
 type RoutesWithMeta = Omit<CardProps, 'title'> & {
 	title: string
@@ -57,15 +64,14 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 			</>
 		),
 	},
+
 	{
-		title: 'Error Enhancer',
-		href: routes.errors,
-		children:
-			'AI-Powered Error Enhancer. Debug and make sense of technical errors.',
+		title: 'Text',
+		href: routes.text,
+		children: 'AI transforms, creates or modifies text, markdown or HTML.',
 		image: {
-			src: imageError,
-			alt: 'Cone',
-			priority: true,
+			src: imageText,
+			alt: 'Cube',
 			...imageSize,
 		},
 		footer: (
@@ -77,56 +83,18 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 		),
 	},
 	{
-		title: 'Not Found Enhancer',
-		href: routes.notFound,
-		children: (
-			<>
-				AI-Powered <i>Page Not Found</i>. Get help finding the page you were
-				looking for.
-			</>
-		),
+		title: 'Audio',
+		href: routes.audio,
+		children: 'Generate speech or transcribe audio with AI.',
 		image: {
-			src: imageNotFound,
-			alt: 'Disc',
-			priority: true,
+			src: imageChat,
+			alt: 'Wedge',
 			...imageSize,
 		},
 		footer: (
 			<>
-				<Chip>Hook</Chip>
-				<Chip>Utils</Chip>
-			</>
-		),
-	},
-	{
-		title: 'HTML Page',
-		href: routes.htmlPage,
-		children: 'AI-Powered HTML page generation. Designs and codes full pages.',
-		image: {
-			src: imageHtmlPage,
-			alt: 'MobiusStrip',
-			...imageSize,
-		},
-		footer: (
-			<>
-				<Chip>Hook</Chip>
-				<Chip>Utils</Chip>
-			</>
-		),
-	},
-	{
-		title: 'Block',
-		href: routes.block,
-		children: 'AI React Components. Prompt goes in, component comes out.',
-		image: {
-			src: imageBlock,
-			alt: 'A wireframe cube',
-			...imageSize,
-		},
-		footer: (
-			<>
-				<Chip>Component</Chip>
-				<Chip>Hook</Chip>
+				<Chip>Components</Chip>
+				<Chip>Hooks</Chip>
 				<Chip>Utils</Chip>
 			</>
 		),
@@ -166,12 +134,12 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 		),
 	},
 	{
-		title: 'Text',
-		href: routes.text,
-		children: 'AI transforms, creates or modifies text, markdown or HTML.',
+		title: 'Block',
+		href: routes.block,
+		children: 'AI React Components. Prompt goes in, component comes out.',
 		image: {
-			src: imageText,
-			alt: 'Cube',
+			src: imageBlock,
+			alt: 'A wireframe cube',
 			...imageSize,
 		},
 		footer: (
@@ -183,18 +151,58 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 		),
 	},
 	{
-		title: 'Audio',
-		href: routes.audio,
-		children: 'Generate speech or transcribe audio with AI.',
+		title: 'HTML Page',
+		href: routes.htmlPage,
+		children: 'AI-Powered HTML page generation. Designs and codes full pages.',
 		image: {
-			src: imageChat,
-			alt: 'Wedge',
+			src: imageHtmlPage,
+			alt: 'MobiusStrip',
 			...imageSize,
 		},
 		footer: (
 			<>
-				<Chip>Components</Chip>
-				<Chip>Hooks</Chip>
+				<Chip>Hook</Chip>
+				<Chip>Utils</Chip>
+			</>
+		),
+	},
+	{
+		title: 'Not Found Enhancer',
+		href: routes.notFound,
+		children: (
+			<>
+				AI-Powered <i>Page Not Found</i>. Get help finding the page you were
+				looking for.
+			</>
+		),
+		image: {
+			src: imageNotFound,
+			alt: 'Disc',
+			priority: true,
+			...imageSize,
+		},
+		footer: (
+			<>
+				<Chip>Hook</Chip>
+				<Chip>Utils</Chip>
+			</>
+		),
+	},
+	{
+		title: 'Error Enhancer',
+		href: routes.errors,
+		children:
+			'AI-Powered Error Enhancer. Debug and make sense of technical errors.',
+		image: {
+			src: imageError,
+			alt: 'Cone',
+			priority: true,
+			...imageSize,
+		},
+		footer: (
+			<>
+				<Chip>Component</Chip>
+				<Chip>Hook</Chip>
 				<Chip>Utils</Chip>
 			</>
 		),
@@ -205,6 +213,10 @@ export const routesDocsMeta: RoutesWithMeta[] = [
 	{
 		title: 'Get started',
 		href: routes.getStarted,
+	},
+	{
+		title: 'Usage',
+		href: routes.usage,
 	},
 	...routesCardsMeta,
 ]

@@ -1,0 +1,156 @@
+import {
+  URL_HOST,
+  NAME_SHORT,
+  NAME_LONG,
+  NAME_LIB,
+} from '@/src/utils/constants'
+import { routes } from '@/src/utils/routes'
+
+export const metadata = {
+  title: 'Usage',
+  description: `Learn the basics of working with ${NAME_LONG}`,
+  alternates: {
+    canonical: `${new URL(routes.usage, URL_HOST)}`,
+  },
+}
+
+# Usage
+
+Learn the basics of working with {NAME_LIB}.
+
+## Quickstart
+
+After [installation](/docs/get-started#installation), this takes you through making a **`NotFoundEnhancer` Component** that uses your sitemap to find the closest matching page to the "not found" URL. It also uses the contents of your website URLs to create a helpful message for users.
+
+### Step 1: Generate a sitemap
+
+In Next.js 14, you can generate a `sitemap.xml` in a few different ways. For this simple scenario, consider placing a static file in the app directory or using a `sitemap.(js|ts)` file for dynamic generation.
+For more information, see the [Next.js documentation](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap).
+
+Alternatively, consider using the [`next-sitemap`](https://www.npmjs.com/package/next-sitemap) NPM package for easy sitemap creation.
+
+Example output:
+
+```xml title="public/sitemap.xml"
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://localhost:3000</loc>
+    <lastmod>2023-12-25T16:21:41.757Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>http://localhost:3000/about-me</loc>
+    <lastmod>2023-12-25T16:21:41.757Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>
+```
+
+Ensure your sitemap is accessible at `/sitemap.xml` in your application, and continue to the next step.
+
+### Step 2: Configure the API handler route
+
+In the [API handler route](/docs/get-started#step-2-add-the-api-handler-route), add the following configuration to use the `useNotFoundEnhancement` hook shown later.
+
+```ts title="app/api/fsutils/[...fscomponents]/route.ts"
+import {
+  handleFSComponents,
+  handleNotFoundEnhancement,
+  type FSCOptions,
+} from '@trikinco/fullstack-components'
+
+export const POST = handleFSComponents({
+  notFoundEnhancer: handleNotFoundEnhancement({
+    // used to inspect the sitemap
+    siteUrl: process.env.NEXT_PUBLIC_HOST || '',
+    // used to generate the contents
+    openAiApiKey: process.env.OPENAI_API_KEY || '',
+  }),
+  // ...Any other handlers
+})
+```
+
+**Not Found Enhancer requires configuration of the API handler.** Not all features require configuration, so read the documentation for each feature.
+
+### Step 3: Create the client component
+
+The core part of the functionality is using the `useNotFoundEnhancement` hook to get the data from the API endpoint.
+
+```tsx title="components/NotFoundEnhancer.tsx"
+'use client'
+
+import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
+import Link from 'next/link'
+
+export function NotFoundEnhancer() {
+  const { data, isLoading } = useNotFoundEnhancement()
+  const hasUrlSuggestions =
+    data?.bestAlternateUrls && data.bestAlternateUrls.length > 0
+
+  if (!data || isLoading) {
+    return <p>Please wait, checking for other solutions...</p>
+  }
+
+  return (
+    <div className="mt-6">
+      <p>{data?.generatedContent}</p>
+      {hasUrlSuggestions && (
+        <>
+          <p className="font-bold">
+            Try one of these pages instead:
+          </p>
+          {data?.bestAlternateUrls.map((url, i) => (
+            <Link href={url} key={i} className="block">
+              {url}
+            </Link>
+          ))}
+        </>
+      )}
+      {!hasUrlSuggestions && (
+        <p>
+          Sorry we couldn't find additional pages for you to try
+          this time.
+        </p>
+      )}
+    </div>
+  )
+}
+```
+
+### Step 4: Create a `not-found` page
+
+- Using the Next.js App Router: Create a [`not-found.tsx` page](https://nextjs.org/docs/app/api-reference/file-conventions/not-found) in your app.
+- Using the Next.js Pages Router: [Create a `404.tsx` page](https://nextjs.org/docs/pages/building-your-application/routing/custom-error#404-page) in your app.
+
+```tsx {2,10} title="pages/404.tsx or app/not-found.tsx"
+import Link from 'next/link'
+import { NotFoundEnhancer } from '@/components/NotFoundEnhancer'
+
+export default function NotFoundPage() {
+  return (
+    <main>
+      <h1>Not Found</h1>
+      <p>Could not find requested resource</p>
+      <Link href="/">Return Home</Link>
+      <NotFoundEnhancer />
+    </main>
+  )
+}
+```
+
+Now that you've set up the `NotFoundEnhancer`, try visiting a URL in your application that doesn't exist to see it in action.
+
+For example, navigate to [http://localhost:3000/about-123](http://localhost:3000/about-123), or any other URL that doesn't exist in your application.
+
+If everything works correctly you'll notice how the `NotFoundEnhancer` dynamically enhances your application's 'Not Found' page.
+
+**Keep in mind**, the more pages your Next.js application has in its sitemap, the more effectively the `NotFoundEnhancer` works, providing a richer user experience.
+
+## What's next?
+
+Congratulations on starting your journey with {NAME_SHORT}! You've taken the first steps towards seamlessly integrating AI capabilities into your Next.js applications.
+
+This guide is just the beginning. Explore the docs to see examples of features that will enhance your development experience.

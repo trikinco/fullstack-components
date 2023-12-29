@@ -24,20 +24,22 @@ export default function DocsFooter({ children, className }: DocsFooterProps) {
 
 	return (
 		<footer className={merge('flex gap-6 justify-between py-6', className)}>
-			{children}
+			<div className="w-full max-w-prose mx-auto flex flex-wrap">
+				{children}
 
-			{prevItem && (
-				<Link className={merge('mr-auto', linkStyles)} href={prevItem.href}>
-					<IconChevronLeft width={20} height={20} /> {prevItem.title}
-				</Link>
-			)}
+				{prevItem && (
+					<Link className={merge('mr-auto', linkStyles)} href={prevItem.href}>
+						<IconChevronLeft width={20} height={20} /> {prevItem.title}
+					</Link>
+				)}
 
-			{nextItem && (
-				<Link className={merge('ml-auto', linkStyles)} href={nextItem.href}>
-					{nextItem.title}{' '}
-					<IconChevronLeft width={20} height={20} className="rotate-180" />
-				</Link>
-			)}
+				{nextItem && (
+					<Link className={merge('ml-auto', linkStyles)} href={nextItem.href}>
+						{nextItem.title}{' '}
+						<IconChevronLeft width={20} height={20} className="rotate-180" />
+					</Link>
+				)}
+			</div>
 		</footer>
 	)
 }

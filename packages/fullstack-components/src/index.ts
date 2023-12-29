@@ -30,34 +30,70 @@ function getInstance(): FullstackComponentsServer {
 
 // export the handler instances rather than the handler functions
 
+/**
+ * The API handler for `Audio` functionality.
+ * @example audio: handleAudioRequest(config)
+ */
 const handleAudioRequest: HandleAudio = ((...args: Parameters<HandleAudio>) =>
 	getInstance().handleAudioRequest(...args)) as HandleAudio
 
+/**
+ * The API handler for `Prompt` functionality.
+ * @example prompt: handlePromptRequest(config)
+ */
 const handlePromptRequest: HandlePrompt = ((
 	...args: Parameters<HandlePrompt>
 ) => getInstance().handlePromptRequest(...args)) as HandlePrompt
 
+/**
+ * The API handler for `Image` functionality.
+ * @example image: handleImageRequest(config)
+ */
 const handleImageRequest: HandleImage = ((...args: Parameters<HandleImage>) =>
 	getInstance().handleImageRequest(...args)) as HandleImage
 
+/**
+ * The API handler for `Text` functionality.
+ * @example text: handleTextRequest(config)
+ */
 const handleTextRequest: HandleText = ((...args: Parameters<HandleText>) =>
 	getInstance().handleTextRequest(...args)) as HandleText
 
+/**
+ * The API handler for `Select` functionality.
+ * @example select: handleSelectRequest(config)
+ */
 const handleSelectRequest: HandleSelect = ((
 	...args: Parameters<HandleSelect>
 ) => getInstance().handleSelectRequest(...args)) as HandleSelect
 
+/**
+ * The API handler for `Block` functionality.
+ * @example block: handleBlockRequest(config)
+ */
 const handleBlockRequest: HandleBlock = ((...args: Parameters<HandleBlock>) =>
 	getInstance().handleBlockRequest(...args)) as HandleBlock
 
+/**
+ * The API handler for `HtmlPage` functionality.
+ * @example htmlPage: handleHtmlPageRequest(config)
+ */
 const handleHtmlPageRequest: HandleHtmlPage = ((
 	...args: Parameters<HandleHtmlPage>
 ) => getInstance().handleHtmlPageRequest(...args)) as HandleHtmlPage
 
+/**
+ * The API handler for `ErrorEnhancement` functionality.
+ * @example errorEnhancer: handleErrorRequest(config)
+ */
 const handleErrorRequest: HandleErrorParser = ((
 	...args: Parameters<HandleErrorParser>
 ) => getInstance().handleErrorRequest(...args)) as HandleErrorParser
 
+/**
+ * The API handler for `NotFoundEnhancement` functionality.
+ * @example notFoundEnhancer: handleNotFoundEnhancement(config)
+ */
 const handleNotFoundEnhancement: HandleNotFoundEnhancement = ((
 	...args: Parameters<HandleNotFoundEnhancement>
 ) =>

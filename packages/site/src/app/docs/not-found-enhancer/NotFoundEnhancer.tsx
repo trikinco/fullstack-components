@@ -34,7 +34,7 @@ export function NotFoundEnhancer() {
 			)}
 			{!hasUrlSuggestions && (
 				<p>
-					Sorry we couldn&amp;t find additional pages for you to try this time.
+					Sorry we couldn&apos;t find additional pages for you to try this time.
 				</p>
 			)}
 		</div>
