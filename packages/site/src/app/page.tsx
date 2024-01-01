@@ -79,7 +79,9 @@ export default function Home() {
 			<section>
 				<header className="grid text-center sm:text-left gap-6 w-full max-w-6xl mb-6 lg:mb-12">
 					<h2 className="text-2xl font-bold">
-						Check out the docs with live&nbsp;examples&nbsp;✨
+						<Link href={routes.docs}>
+							Check out the docs with live&nbsp;examples&nbsp;✨
+						</Link>
 					</h2>
 				</header>
 
