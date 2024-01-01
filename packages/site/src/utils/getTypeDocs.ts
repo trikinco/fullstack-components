@@ -33,6 +33,10 @@ export type ExtractedTypeInfo = {
 	 * Each individual prop for nested types
 	 */
 	properties?: ExtractedTypeInfo[] | undefined
+	/**
+	 * Return values if the type is a function
+	 */
+	returns?: ExtractedTypeInfo | string | undefined
 	/** Whether the type is required or optional */
 	required?: boolean
 	/**
@@ -83,7 +87,7 @@ const getTypeName = (node: SchemaTypes) => {
 
 	const union = node.enum?.join(' | ')
 
-	const type =
+	let type =
 		union ||
 		base ||
 		(node.type as string) ||
@@ -96,10 +100,15 @@ const getTypeName = (node: SchemaTypes) => {
 		cleanRef(node['$ref']) ||
 		''
 
+	// Use a switch here if more cases are added
+	if (type === 'PromiseConstructor') {
+		type = 'Promise'
+	}
+
 	// Combine the type with any generic arguments into a single string
 	if (node.genericArguments?.length) {
 		const genericArguments = node.genericArguments
-			?.map((item) => cleanRef(item['$ref']))
+			?.map((item) => cleanRef(item['$ref']) || item.type)
 			.filter(Boolean)
 
 		if (genericArguments?.length) {
@@ -169,6 +178,19 @@ const getExtractedTypeInfo = (
 	const properties = Object.entries(item.properties || {}).map(([key, value]) =>
 		getExtractedTypeInfo(value, key, item)
 	)
+	let returns: ExtractedTypeInfo | string | undefined =
+		isFunctionSchema(item) && item.returns
+			? getExtractedTypeInfo(item.returns, typeName, schema)
+			: undefined
+
+	if (
+		isFunctionSchema(item) &&
+		item.returns &&
+		returns?.properties &&
+		returns.properties.length === 0
+	) {
+		returns = getTypeName(item.returns)
+	}
 
 	return {
 		name,
@@ -177,6 +199,7 @@ const getExtractedTypeInfo = (
 		parameters,
 		properties,
 		required,
+		returns,
 		tags,
 	}
 }

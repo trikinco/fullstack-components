@@ -43,6 +43,10 @@ body {
 	@apply relative overflow-hidden my-10 font-mono rounded-lg border border-slate-300 dark:border-white/20;
 }
 
+.typeinfo [data-rehype-pretty-code-fragment] {
+	@apply my-3;
+}
+
 [data-rehype-pretty-code-fragment] code {
 	@apply text-sm leading-6;
 }
@@ -97,6 +101,10 @@ body {
 
 .toc-level-1 {
 	@apply my-3;
+}
+
+.toc-level-2 {
+	@apply ml-3;
 }
 
 .toc-item {

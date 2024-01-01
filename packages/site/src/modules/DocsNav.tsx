@@ -29,7 +29,7 @@ export default function DocsNav({ children, className }: DocsNavProps) {
 				Skip to the main content
 			</SkipLink>
 			<ul className="flex flex-col gap-2 break-words">
-				{routesMeta.map(({ title, href, isTitle }) => {
+				{routesMeta.map(({ title, href, isTitle, hasDivider }) => {
 					const isCurrentPage = pathname === href
 
 					return (
@@ -38,7 +38,9 @@ export default function DocsNav({ children, className }: DocsNavProps) {
 								className={merge(
 									'flex',
 									isCurrentPage &&
-										'text-blue-600 dark:text-blue-400 font-bold before:content-["·"] before:mr-2'
+										'text-blue-600 dark:text-blue-400 font-bold before:content-["·"] before:mr-2',
+									hasDivider &&
+										'mb-3 pb-3 border-b border-slate-200 dark:border-slate-800'
 								)}
 							>
 								<Link
