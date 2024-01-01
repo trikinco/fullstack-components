@@ -18,13 +18,6 @@ export const metadata = {
 These enhancement tools uses your sitemap to find the closest matching page to the `not found` URL.
 It also uses the contents of your website URL's to create a helpful message for your end-user.
 
-```jsx
-import { handleNotFoundEnhancement } from '@trikinco/fullstack-components'
-import { getNotFoundEnhancement } from '@trikinco/fullstack-components'
-import { fetchNotFoundEnhancement } from '@trikinco/fullstack-components/client'
-import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
-```
-
 ## `useNotFoundEnhancement` hook
 
 The `useNotFoundEnhancement` hook is a React hook that can be used to fetch the `not found` enhancement data from the API handler.
@@ -105,6 +98,8 @@ export { fscHandler as GET, fscHandler as POST }
 
 ## API Reference
 
+### Types
+
 <TypeInfoToText
   path="handlers/notFoundEnhancer/models.d.ts"
   name="NotFoundEnhancerOptions"
@@ -124,21 +119,55 @@ export { fscHandler as GET, fscHandler as POST }
 />
 
 <TypeInfoToText
+  path="chatGptService.d.ts"
+  name="ChatGptCompletionResponse"
+  description="The response body for `getNotFoundContentGenerator` and `getNotFoundSitemapSelector`."
+/>
+
+### Hooks
+
+<TypeInfoToText
   path="handlers/notFoundEnhancer/useNotFoundEnhancement.d.ts"
   name="useNotFoundEnhancement"
-/>
+>
+
+```jsx
+import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>
+
+### Utilities
 
 <TypeInfoToText
   path="handlers/notFoundEnhancer/notFoundEnhancerContentGenerator.d.ts"
   name="getNotFoundContentGenerator"
-/>
+>
+
+```jsx
+import { getNotFoundContentGenerator } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
 
 <TypeInfoToText
   path="handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector.d.ts"
   name="getNotFoundSitemapSelector"
-/>
+>
+
+```jsx
+import { getNotFoundSitemapSelector } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
 
 <TypeInfoToText
   path="handlers/notFoundEnhancer/fetchers.d.ts"
   name="fetchNotFoundEnhancement"
-/>
+>
+
+```jsx
+import { fetchNotFoundEnhancement } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>

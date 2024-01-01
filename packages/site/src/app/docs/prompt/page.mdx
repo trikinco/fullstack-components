@@ -19,14 +19,6 @@ export const metadata = {
 The `Prompt` component and its counterparts `usePrompt` and `getPrompt` are the most basic building blocks for AI-powered components.
 They accept a text `prompt` and arrays of `messages` and return the data as-is.
 
-```jsx
-import { handlePromptRequest } from '@trikinco/fullstack-components'
-import { getPrompt } from '@trikinco/fullstack-components'
-import { Prompt } from '@trikinco/fullstack-components'
-import { fetchPrompt } from '@trikinco/fullstack-components/client'
-import { usePrompt } from '@trikinco/fullstack-components/client'
-```
-
 ## `Prompt` Server Component
 
 ### Passing a single `prompt`
@@ -122,19 +114,6 @@ export default function Page() {
 }
 ```
 
-## Utilities
-
-- `getPrompt`: Runs any prompt.
-  - 'use server'
-  - Third-party API request only
-  - Can be used to make Server Components and functionality
-  - Returns `ChatGptCompletionResponse`
-- `fetchPrompt`: Runs any prompt.
-  - 'use client'
-  - Internal Next.js API request and third-party request
-  - Can be used to make Client Components and functionality
-  - Returns `string`
-
 ```jsx title="Server Component"
 import { getPrompt } from '@trikinco/fullstack-components'
 
@@ -172,6 +151,8 @@ export { fscHandler as GET, fscHandler as POST }
 
 ## API Reference
 
+### Types
+
 <TypeInfoToText
   path="handlers/prompt/models.d.ts"
   name="PromptOptions"
@@ -185,23 +166,59 @@ export { fscHandler as GET, fscHandler as POST }
 />
 
 <TypeInfoToText
+  path="chatGptService.d.ts"
+  name="ChatGptCompletionResponse"
+  description="The response body for `getPrompt`."
+/>
+
+### Components
+
+<TypeInfoToText
   path="components/Prompt.d.ts"
   name="PromptProps"
 />
 
-<TypeInfoToText path="components/Prompt.d.ts" name="Prompt" />
+<TypeInfoToText path="components/Prompt.d.ts" name="Prompt">
+  
+  ```tsx 
+  import { Prompt } from '@trikinco/fullstack-components' 
+  ```
+
+</TypeInfoToText>
+
+### Hooks
 
 <TypeInfoToText
   path="handlers/prompt/usePrompt.d.ts"
   name="usePrompt"
-/>
+>
+
+```tsx
+import { usePrompt } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>
+
+### Utilities
 
 <TypeInfoToText
   path="handlers/prompt/promptClient.d.ts"
   name="getPrompt"
-/>
+>
+
+```tsx
+import { getPrompt } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
 
 <TypeInfoToText
   path="handlers/prompt/fetchers.d.ts"
   name="fetchPrompt"
-/>
+>
+ 
+  ```tsx 
+  import { fetchPrompt } from '@trikinco/fullstack-components/client' 
+  ```
+
+</TypeInfoToText>

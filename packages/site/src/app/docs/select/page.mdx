@@ -18,14 +18,6 @@ export const metadata = {
 
 A smart dropdown component that creates, labels and sorts all its own options.
 
-```jsx
-import { handleSelectRequest } from '@trikinco/fullstack-components'
-import { getSelect } from '@trikinco/fullstack-components'
-import { Select } from '@trikinco/fullstack-components'
-import { fetchSelect } from '@trikinco/fullstack-components/client'
-import { useSelect } from '@trikinco/fullstack-components/client'
-```
-
 ## `Select` Server Component
 
 <Example>
@@ -83,18 +75,7 @@ export default function Page() {
 }
 ```
 
-## Utilities
-
-- `getSelect`: Generates lists of items.
-  - 'use server'
-  - Third-party API request only
-  - Can be used to make Server Components and functionality
-  - Returns `ChatGptCompletionResponse`
-- `fetchSelect`: Generates lists of items. Transforms `content` react trees to a HTML string.
-  - 'use client'
-  - Internal Next.js API request and third-party request
-  - Can be used to make Client Components and functionality
-  - Returns `SelectResponse`
+## Custom Server Component with `getSelect`
 
 ```jsx title="Server Component"
 import { getSelect } from '@trikinco/fullstack-components'
@@ -153,14 +134,9 @@ const fscHandler = handleFSComponents(fscOptions)
 export { fscHandler as GET, fscHandler as POST }
 ```
 
-2. Import and use the `Select` component, or the `useSelect` hook from `/client`.
-
-```jsx
-import { Select } from '@trikinco/fullstack-components'
-import { useSelect } from '@trikinco/fullstack-components/client'
-```
-
 ## API Reference
+
+### Types
 
 <TypeInfoToText
   path="handlers/select/models.d.ts"
@@ -175,23 +151,65 @@ import { useSelect } from '@trikinco/fullstack-components/client'
 />
 
 <TypeInfoToText
+  path="handlers/select/models.d.ts"
+  name="SelectResponse"
+  description="Select response body."
+/>
+
+<TypeInfoToText
+  path="chatGptService.d.ts"
+  name="ChatGptCompletionResponse"
+  description="The response body for `getSelect`."
+/>
+
+### Components
+
+<TypeInfoToText
   path="components/Select.d.ts"
   name="SelectProps"
 />
 
-<TypeInfoToText path="components/Select.d.ts" name="Select" />
+<TypeInfoToText path="components/Select.d.ts" name="Select" >
+
+```jsx
+import { Select } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
+
+### Hooks
 
 <TypeInfoToText
   path="handlers/select/useSelect.d.ts"
   name="useSelect"
-/>
+>
+
+```jsx
+import { useSelect } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>
+
+### Utilities
 
 <TypeInfoToText
   path="handlers/select/selectClient.d.ts"
   name="getSelect"
-/>
+>
+
+```jsx
+import { getSelect } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
 
 <TypeInfoToText
   path="handlers/select/fetchers.d.ts"
   name="fetchSelect"
-/>
+>
+
+```jsx
+import { fetchSelect } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>

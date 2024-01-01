@@ -17,15 +17,6 @@ export const metadata = {
 
 A smart image component that either describes a known image, generates an image based on a prompt, or behaves just like a regular `next/image`.
 
-```jsx
-import { handleImageRequest } from '@trikinco/fullstack-components'
-import { getImage } from '@trikinco/fullstack-components'
-import { getEnhancedImage } from '@trikinco/fullstack-components'
-import { Image } from '@trikinco/fullstack-components'
-import { fetchImage } from '@trikinco/fullstack-components/client'
-import { useImage } from '@trikinco/fullstack-components/client'
-```
-
 ## `Image` Server Component
 
 ### Describing an image
@@ -155,24 +146,6 @@ export default function Page() {
 }
 ```
 
-## Utilities
-
-- `getImage`: Generates or describes image/s.
-  - 'use server'
-  - Third-party API request only
-  - Can be used to make Server Components and functionality
-  - Returns `ChatGptCompletionResponse` | `ImageGenerationResponse`
-- `getEnhancedImage`: Generates or describes one image. Accepts all the props of the `Image` component.
-  - 'use server'
-  - Third-party API request only
-  - Can be used to make Server Components and functionality
-  - Returns `string` | `string[]` | `''` (and logs a development warning if `alt` and no `prompt` was passed)
-- `fetchImage`: Generates or describes image/s.
-  - 'use client'
-  - Internal Next.js API request and third-party request
-  - Can be used to make Client Components and functionality
-  - Returns `string` | `string[]`
-
 ```jsx title="Server Component"
 import { getImage } from '@trikinco/fullstack-components'
 
@@ -218,6 +191,8 @@ export { fscHandler as GET, fscHandler as POST }
 
 ## API Reference
 
+### Types
+
 <TypeInfoToText
   path="handlers/image/models.d.ts"
   name="ImageOptions"
@@ -228,6 +203,20 @@ export { fscHandler as GET, fscHandler as POST }
   path="handlers/image/models.d.ts"
   name="ImageRequestBody"
 />
+
+<TypeInfoToText
+  path="imageGenerationService.d.ts"
+  name="ImageGenerationResponse"
+  description="The response body for `getImage`."
+/>
+
+<TypeInfoToText
+  path="chatGptService.d.ts"
+  name="ChatGptCompletionResponse"
+  description="The response body for `getImage` and `getEnhancedImage` when describing an image."
+/>
+
+### Components
 
 <TypeInfoToText
   path="types/Image.d.ts"
@@ -245,24 +234,58 @@ export { fscHandler as GET, fscHandler as POST }
   name="ImageDescribeProps"
 />
 
-<TypeInfoToText path="components/Image/Image.d.ts" name="Image" />
+<TypeInfoToText path="components/Image/Image.d.ts" name="Image">
+
+```jsx
+import { Image } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
+
+### Hooks
 
 <TypeInfoToText
   path="handlers/image/useImage.d.ts"
   name="useImage"
-/>
+>
+
+```jsx
+import { useImage } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>
+
+### Utilities
 
 <TypeInfoToText
   path="handlers/image/imageClient.d.ts"
   name="getImage"
-/>
+>
+
+```jsx
+import { getImage } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
 
 <TypeInfoToText
   path="handlers/image/getters.d.ts"
   name="getEnhancedImage"
-/>
+>
+
+```jsx
+import { getEnhancedImage } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
 
 <TypeInfoToText
   path="handlers/image/fetchers.d.ts"
   name="fetchImage"
-/>
+>
+
+```jsx
+import { fetchImage } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>

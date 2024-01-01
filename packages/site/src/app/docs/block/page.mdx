@@ -17,15 +17,6 @@ export const metadata = {
 
 Blocks are individual React components that are generated and mounted on the fly, and all you need is a `prompt`.
 
-```jsx
-import { handleBlockRequest } from '@trikinco/fullstack-components'
-import { getBlock } from '@trikinco/fullstack-components'
-import { fetchBlock } from '@trikinco/fullstack-components/client'
-import { fetchProcessedBlock } from '@trikinco/fullstack-components/client'
-import { Block } from '@trikinco/fullstack-components/client'
-import { useBlock } from '@trikinco/fullstack-components/client'
-```
-
 ## `Block` Client Component
 
 <Example className="w-full xl:w-auto xl:-mx-10 2xl:-mx-28">
@@ -56,24 +47,6 @@ export default function Page() {
 }
 ```
 
-## Utilities
-
-- `getBlock`: Generates a tree of React components.
-  - 'use server'
-  - Third-party API request only
-  - Can be used to make Server Components and functionality
-  - Returns `ChatGptCompletionResponse`
-- `fetchBlock`: Generates a tree of React components.
-  - 'use client'
-  - Internal Next.js API request and third-party request
-  - Can be used to make Client Components and functionality
-  - Returns `string` (unparsed `BlockResult`)
-- `fetchProcessedBlock`: Generates and mounts a tree of React components. Calls `fetchBlock`, parses response and mounts the React tree to a node with the passed-in `id`.
-  - 'use client'
-  - Internal Next.js API request and third-party request
-  - Can be used to make Client Components and functionality
-  - Returns `BlockResult`
-
 ## Setup
 
 Add `block: handleBlockRequest()` to the [API handler route](/docs/get-started/#setup).
@@ -99,6 +72,8 @@ export { fscHandler as GET, fscHandler as POST }
 
 ## API Reference
 
+### Types
+
 <TypeInfoToText
   path="handlers/block/models.d.ts"
   name="BlockOptions"
@@ -111,21 +86,74 @@ export { fscHandler as GET, fscHandler as POST }
   description="Block request body."
 />
 
+<TypeInfoToText
+  path="handlers/block/models.d.ts"
+  name="BlockResult"
+  description="Block result after processing."
+/>
+
+<TypeInfoToText
+  path="chatGptService.d.ts"
+  name="ChatGptCompletionResponse"
+  description="The response body for `getBlock`."
+/>
+
+### Components
+
 <TypeInfoToText path="components/Block.d.ts" name="BlockProps" />
 
-<TypeInfoToText path="components/Block.d.ts" name="Block" />
+<TypeInfoToText path="components/Block.d.ts" name="Block">
+
+```jsx
+import { Block } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>
+
+### Hooks
 
 <TypeInfoToText
   path="handlers/block/useBlock.d.ts"
   name="useBlock"
-/>
+>
+
+```jsx
+import { useBlock } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>
+
+### Utilities
 
 <TypeInfoToText
   path="handlers/block/blockClient.d.ts"
   name="getBlock"
-/>
+>
+
+```jsx
+import { getBlock } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
 
 <TypeInfoToText
   path="handlers/block/fetchers.d.ts"
   name="fetchBlock"
-/>
+>
+
+```jsx
+import { fetchBlock } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>
+
+<TypeInfoToText
+  path="handlers/block/fetchers.d.ts"
+  name="fetchProcessedBlock"
+>
+
+```jsx
+import { fetchProcessedBlock } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>
