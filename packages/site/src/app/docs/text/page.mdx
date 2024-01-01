@@ -17,14 +17,6 @@ export const metadata = {
 
 Rewrite, simplify or create text. Handles plain text, markdown and HTML.
 
-```jsx
-import { handleTextRequest } from '@trikinco/fullstack-components'
-import { getText } from '@trikinco/fullstack-components'
-import { Text } from '@trikinco/fullstack-components'
-import { fetchText } from '@trikinco/fullstack-components/client'
-import { useText } from '@trikinco/fullstack-components/client'
-```
-
 ## `Text` Server Component
 
 ### Rewriting text
@@ -160,19 +152,6 @@ const { isLoading, data } = useText({
 })
 ```
 
-## Utilities
-
-- `getText`: Generates modified or new text. Only accepts `content` as a string / stringified HTML.
-  - 'use server'
-  - Third-party API request only
-  - Can be used to make Server Components and functionality
-  - Returns `ChatGptCompletionResponse`
-- `fetchText`: Generates modified or new text. Transforms `content` react trees to a HTML string.
-  - 'use client'
-  - Internal Next.js API request and third-party request
-  - Can be used to make Client Components and functionality
-  - Returns `TextResponse`
-
 ```jsx title="Server Component"
 import { getText } from '@trikinco/fullstack-components'
 
@@ -213,6 +192,8 @@ export { fscHandler as GET, fscHandler as POST }
 
 ## API Reference
 
+### Types
+
 <TypeInfoToText
   path="handlers/text/models.d.ts"
   name="TextOptions"
@@ -225,21 +206,63 @@ export { fscHandler as GET, fscHandler as POST }
   description="Text request body."
 />
 
+<TypeInfoToText
+  path="handlers/text/models.d.ts"
+  name="TextResponse"
+  description="Text response body."
+/>
+
+<TypeInfoToText
+  path="chatGptService.d.ts"
+  name="ChatGptCompletionResponse"
+  description="The response body for `getText`."
+/>
+
+### Components
+
 <TypeInfoToText path="components/Text.d.ts" name="TextProps" />
 
-<TypeInfoToText path="components/Text.d.ts" name="Text" />
+<TypeInfoToText path="components/Text.d.ts" name="Text">
+
+```tsx
+import { Text } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
+
+### Hooks
 
 <TypeInfoToText
   path="handlers/text/useText.d.ts"
   name="useText"
-/>
+>
+
+```tsx
+import { useText } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>
+
+### Utilities
 
 <TypeInfoToText
   path="handlers/text/textClient.d.ts"
   name="getText"
-/>
+>
+
+```tsx
+import { getText } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
 
 <TypeInfoToText
   path="handlers/text/fetchers.d.ts"
   name="fetchText"
-/>
+>
+
+```tsx
+import { fetchText } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>

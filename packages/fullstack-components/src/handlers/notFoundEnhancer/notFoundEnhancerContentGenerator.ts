@@ -14,7 +14,7 @@ export type ChatMessage = {
 /**
  * Uses the contents of your website URLs to create a helpful message that solves the user's intent or problem.
  *
- * Not Found Enhancement message Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
+ * Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
  * @link https://nextjs.org/docs/app/building-your-application/data-fetching/patterns Next.js Data Fetching Patterns and Best Practices
  */
 export async function getNotFoundContentGenerator(

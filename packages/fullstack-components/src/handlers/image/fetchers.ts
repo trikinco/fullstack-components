@@ -5,9 +5,11 @@ import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
 import type { ImageRequestBody } from './models'
 
 /**
- * Generates one or more images or describes a single image based on the provided `ImageRequestBody`. When generating an image returns a single image URL or an array of image URLs if `n` is > 1.
+ * Generates one or more images or describes a single image based on the provided `ImageRequestBody`.
  *
- * Image generation and description client-side fetch handler that calls the internal Next.js API route handler, then the third-party API. Best used for Client Components and functionality.
+ * When generating an image returns a single image URL or an array of image URLs if `n` is > 1.
+ *
+ * Client-side fetch handler that calls the internal Next.js API route handler, then the third-party API. Best used for Client Components and functionality.
  * @see `ApiUrlEnum.image`
  */
 export function fetchImage(
@@ -20,12 +22,15 @@ export function fetchImage(
 	 * @link https://developer.mozilla.org/en-US/docs/Web/API/Request/Request
 	 */
 	config?: RequestConfigOnly
-): ReturnType<typeof request<string, ImageRequestBody>>
+): Promise<string>
 export function fetchImage(
 	body: ImageRequestBody & { n: number },
 	config?: RequestConfigOnly
-): ReturnType<typeof request<string[], ImageRequestBody>>
-export function fetchImage(body: ImageRequestBody, config?: RequestConfigOnly) {
+): Promise<string[]>
+export function fetchImage(
+	body: ImageRequestBody,
+	config?: RequestConfigOnly
+): Promise<string | string[]> {
 	return request(ApiUrlEnum.image, {
 		body,
 		...config,

@@ -27,8 +27,6 @@ export interface PromptRequestBody {
 	format?: 'text' | 'JSON'
 }
 
-export type PromptResponseBody = string
-
 export type PromptOptions = {
 	/**
 	 * @default `process.env.OPENAI_API_KEY`.

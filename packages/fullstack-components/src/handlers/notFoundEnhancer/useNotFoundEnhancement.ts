@@ -26,7 +26,28 @@ export function useNotFoundEnhancement(
 	 * @link https://developer.mozilla.org/en-US/docs/Web/API/Request/Request
 	 */
 	config?: UseRequestConsumerConfig<NotFoundEnhancerRequestBody>
-) {
+): {
+	/**
+	 * Fetch loading state. `true` if the fetch is in progress.
+	 */
+	isLoading: boolean
+	/**
+	 * Fetch error state. `true` if an error occurred.
+	 */
+	isError: boolean
+	/**
+	 * Fetch error object if `isError` is `true`
+	 */
+	error: unknown
+	/**
+	 * Fetch response data if the fetch was successful.
+	 */
+	data: NotFoundEnhancerResponse | undefined
+	/**
+	 * Refetches the data.
+	 */
+	refetch: () => void
+} {
 	return useRequest<NotFoundEnhancerResponse>(ApiUrlEnum.notFoundEnhancer, {
 		body: {
 			requestedUrl: typeof window !== 'undefined' && window.location.href,

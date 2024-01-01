@@ -9,7 +9,7 @@ import { TypeInfoTitle } from './TypeInfoTitle'
 export interface TypeInfoDetails
 	extends Omit<
 		ExtractedTypeInfo,
-		'name' | 'description' | 'parameters' | 'properties'
+		'name' | 'description' | 'parameters' | 'returns'
 	> {
 	/**
 	 * Name of the type or interface to extract.
@@ -40,6 +40,10 @@ export interface TypeInfoProps
 	 */
 	parameters?: TypeInfoDetails[]
 	/**
+	 * Return types
+	 */
+	returns?: TypeInfoDetails | string
+	/**
 	 * The title component type
 	 * @default 'p''
 	 */
@@ -56,6 +60,7 @@ export const TypeInfo = ({
 	hideName,
 	description,
 	parameters,
+	returns,
 	children,
 	className,
 	tags,
@@ -81,6 +86,8 @@ export const TypeInfo = ({
 				/>
 			)}
 
+			{children}
+
 			{description && (
 				<span className="not-prose whitespace-pre-wrap [font-variant-ligatures:none] [&>*]:m-0">
 					{description}
@@ -88,7 +95,6 @@ export const TypeInfo = ({
 			)}
 
 			<TypeInfoTags tags={tags} />
-
 			{parameters && parameters.length > 0 && (
 				<Accordion
 					label={
@@ -106,7 +112,36 @@ export const TypeInfo = ({
 					))}
 				</Accordion>
 			)}
-			{children}
+			{returns &&
+				typeof returns !== 'string' &&
+				returns.properties &&
+				returns.properties.length > 0 && (
+					<Accordion
+						label={
+							<>
+								<IconMenuAlt width={20} height={20} /> Returns
+							</>
+						}
+					>
+						{returns.properties.map((param, i) => (
+							<TypeInfo
+								key={i}
+								className="p-6 first-of-type:border-t-0"
+								{...param}
+							/>
+						))}
+					</Accordion>
+				)}
+			{returns && typeof returns === 'string' && (
+				<div className="mt-3">
+					<span className="font-bold text-[--shiki-token-keyword] mr-2">
+						returns
+					</span>
+					<span className="not-prose whitespace-pre-wrap [font-variant-ligatures:none] [&>*]:m-0">
+						{returns}
+					</span>
+				</div>
+			)}
 		</div>
 	)
 }

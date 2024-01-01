@@ -14,7 +14,7 @@ export type ChatMessage = {
 /**
  * Finds the best alternative urls from the sitemap that could be what the user really wanted with their requested url.
  *
- * Not Found Enhancement best alternate urls Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
+ * Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
  * @link https://nextjs.org/docs/app/building-your-application/data-fetching/patterns Next.js Data Fetching Patterns and Best Practices
  */
 export async function getNotFoundSitemapSelector(

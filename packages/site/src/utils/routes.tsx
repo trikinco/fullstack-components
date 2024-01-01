@@ -17,6 +17,7 @@ export const routes = {
 	docs: '/docs',
 	getStarted: '/docs/get-started',
 	usage: '/docs/usage',
+	concepts: '/docs/concepts',
 	// Docs features
 	block: '/docs/block',
 	htmlPage: '/docs/html-page-generator',
@@ -37,6 +38,7 @@ type RoutesWithMeta = Omit<CardProps, 'title'> & {
 	title: string
 	href: string
 	isTitle?: boolean
+	hasDivider?: boolean
 }
 
 const imageSize = {
@@ -217,6 +219,11 @@ export const routesDocsMeta: RoutesWithMeta[] = [
 	{
 		title: 'Usage',
 		href: routes.usage,
+	},
+	{
+		title: 'Concepts',
+		href: routes.concepts,
+		hasDivider: true,
 	},
 	...routesCardsMeta,
 ]

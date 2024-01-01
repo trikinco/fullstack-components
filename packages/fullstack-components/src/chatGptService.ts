@@ -7,10 +7,27 @@ import type { ChatMessage } from './types/ChatMessage'
 // instead
 //import { encode } from 'gpt-3-encoder'
 
-export type ChatGptCompletionResponse<T = string> = {
-	responseText: T
+export type ChatGptCompletionResponse = {
+	/**
+	 * The response text extracted from the completion message content.
+	 */
+	responseText: string
+	/**
+	 * Total number of tokens used in the request (prompt + completion).
+	 */
 	tokensUsed: number
+	/**
+	 * The reason the chat stopped. This will be `stop` if the model
+	 * hit a natural stop point or a provided stop sequence, `length` if the maximum
+	 * number of tokens specified in the request was reached, `content_filter` if
+	 * content was omitted due to a flag from our content filters, `tool_calls` if the
+	 * model called a tool, or `function_call` (deprecated) if the model called a
+	 * function.
+	 */
 	finishReason?: string
+	/**
+	 * The error message if there was an error.
+	 */
 	errorMessage?: string
 }
 

@@ -1,4 +1,7 @@
-import { runChatCompletion } from '../../chatGptService'
+import {
+	type ChatGptCompletionResponse,
+	runChatCompletion,
+} from '../../chatGptService'
 import { OPENAI_API_KEY } from '../../utils/constants'
 import type { ChatMessage } from '../../types/ChatMessage'
 import type { SelectRequestBody, SelectOptions } from './models'
@@ -20,9 +23,8 @@ Do not include the reasoning
 /**
  * Generates a list of options to list or display in a dropdown.
  *
- * Select Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
+ * Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
  * @link https://nextjs.org/docs/app/building-your-application/data-fetching/patterns Next.js Data Fetching Patterns and Best Practices
- * @returns {Promise<ChatGptCompletionResponse<string>>} JSON response
  */
 export async function getSelect(
 	/**
@@ -33,7 +35,7 @@ export async function getSelect(
 	 * @link SelectOptions
 	 */
 	options?: SelectOptions
-) {
+): Promise<ChatGptCompletionResponse> {
 	'use server'
 	console.log('handling `getSelect` request', request)
 	const content: ChatMessage['content'] = []

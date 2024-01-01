@@ -6,7 +6,7 @@ export interface NotFoundEnhancerRequestBody {
 	requestedUrl?: string
 }
 
-export type NotFoundEnhancerResponse = {
+export interface NotFoundEnhancerResponse {
 	/**
 	 * A helpful message derived from inspecting the `requestedUrl` and sitemap.
 	 * @example 'This page does not exist, if you are looking for the about page, you can find it at https://example.com/about'

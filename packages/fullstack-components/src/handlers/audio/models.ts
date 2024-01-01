@@ -9,11 +9,6 @@ export type AudioRequestBody =
 	| AudioTranscriptionModeRequestBody
 	| AudioTranslationModeRequestBody
 
-/**
- * Transcription or translation text, or speech audio file blob URL.
- */
-export type AudioResponseBody = string
-
 export type AudioOptions = {
 	/**
 	 * @default `process.env.OPENAI_API_KEY`.

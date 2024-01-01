@@ -48,12 +48,15 @@ export const TypeInfoToText = async ({
 	...rest
 }: TypeInfoToTextProps) => {
 	const path = basePath + filePath
-	const { properties, parameters, ...schema } = await getTypeDocs(path, name)
+	const { properties, parameters, returns, ...schema } = await getTypeDocs(
+		path,
+		name
+	)
 	const hasParameters = parameters && parameters?.length > 0
 
 	return (
 		<div
-			className={merge('inline-flex flex-col w-full mb-8', className)}
+			className={merge('typeinfo inline-flex flex-col w-full mb-8', className)}
 			{...rest}
 		>
 			<TypeInfo
@@ -63,10 +66,13 @@ export const TypeInfoToText = async ({
 				description={description || schema.description}
 				tags={schema.tags}
 				parameters={parameters}
+				returns={returns}
 				className="border-t-0"
-				component="h3"
+				component="h4"
 				id={name}
-			/>
+			>
+				{children}
+			</TypeInfo>
 
 			{!hasParameters && properties && properties.length > 0 && (
 				<Accordion

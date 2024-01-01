@@ -16,13 +16,6 @@ export const metadata = {
 
 AI-Powered HTML page generator utilities that designs and codes user interfaces.
 
-```jsx
-import { handleHtmlPageRequest } from '@trikinco/fullstack-components'
-import { getHtmlPage } from '@trikinco/fullstack-components'
-import { fetchHtmlPage } from '@trikinco/fullstack-components/client'
-import { useHtmlPage } from '@trikinco/fullstack-components/client'
-```
-
 The below HTML page generator and preview is an example of the kinds of interfaces and interactions you can build with `useHtmlPage`.
 
 <p className="ml-3 mb-3 mt-6 text-sm font-bold font-mono">{`Live Example`}</p>
@@ -30,12 +23,12 @@ The below HTML page generator and preview is an example of the kinds of interfac
 
 ## `useHtmlPage` hook
 
-```jsx
+```jsx title="Client Component"
 'use client'
 
 import { useHtmlPage } from '@trikinco/fullstack-components/client'
 
-export default function Document() {
+export default function Page() {
   const { isLoading, data } = useHtmlPage({
     /**
      * Description of what you want to create
@@ -74,18 +67,7 @@ export default function Document() {
 }
 ```
 
-## Utilities
-
-- `getHtmlPage`: Generates a HTML document.
-  - 'use server'
-  - Third-party API request only
-  - Can be used to make Server Components and functionality
-  - Returns `ChatGptCompletionResponse`
-- `fetchHtmlPage`: Generates a HTML document.
-  - 'use client'
-  - Internal Next.js API request and third-party request
-  - Can be used to make Client Components and functionality
-  - Returns `string`
+## Custom Server Component with `getHtmlPage`
 
 ```jsx title="Server Component"
 import { getHtmlPage } from '@trikinco/fullstack-components'
@@ -129,6 +111,8 @@ export { fscHandler as GET, fscHandler as POST }
 
 ## API Reference
 
+### Types
+
 <TypeInfoToText
   path="handlers/htmlPage/models.d.ts"
   name="HtmlPageOptions"
@@ -142,16 +126,44 @@ export { fscHandler as GET, fscHandler as POST }
 />
 
 <TypeInfoToText
+  path="chatGptService.d.ts"
+  name="ChatGptCompletionResponse"
+  description="The response body for `getHtmlPage`."
+/>
+
+### Hooks
+
+<TypeInfoToText
   path="handlers/htmlPage/useHtmlPage.d.ts"
   name="useHtmlPage"
-/>
+>
+
+```jsx
+import { useHtmlPage } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>
+
+### Utilities
 
 <TypeInfoToText
   path="handlers/htmlPage/htmlPageClient.d.ts"
   name="getHtmlPage"
-/>
+>
+
+```jsx
+import { getHtmlPage } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
 
 <TypeInfoToText
   path="handlers/htmlPage/fetchers.d.ts"
   name="fetchHtmlPage"
-/>
+>
+
+```jsx
+import { fetchHtmlPage } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>

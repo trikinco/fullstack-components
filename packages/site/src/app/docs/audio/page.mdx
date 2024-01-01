@@ -19,24 +19,7 @@ export const metadata = {
 
 Generate speech from text or transcribe audio to text. Includes multiple Server Components, custom hooks and more.
 
-```jsx
-import { handleAudioRequest } from '@trikinco/fullstack-components'
-import { getAudio } from '@trikinco/fullstack-components'
-import { Audio } from '@trikinco/fullstack-components'
-import { Track } from '@trikinco/fullstack-components'
-import { Transcript } from '@trikinco/fullstack-components'
-import { fetchAudio } from '@trikinco/fullstack-components/client'
-import { useAudio } from '@trikinco/fullstack-components/client'
-import { useAudioSource } from '@trikinco/fullstack-components/client'
-```
-
 ## Server Components
-
-**Note, file size constraints**: the `Audio` and `Track` Server Components currently transform the response body to base64 data URLs.
-This affects the maximum file size that can be generated.
-Data URLs are used to inline the data instead of storing the audio and caption files on the server. This may change in the future.
-
-If you want to store the files yourself, you can build your own Server Components using the `getAudio` utility function.
 
 ### `Audio` component
 
@@ -82,6 +65,12 @@ Creates an audio file from text `content` or a React tree. Also generates VTT ca
   <p>See you around!</p>
 </Audio>
 ```
+
+**Note, file size constraints**: the `Audio` and `Track` Server Components currently transform the response body to base64 data URLs.
+This affects the maximum file size that can be generated.
+Data URLs are used to inline the data instead of storing the audio and caption files on the server. This may change in the future.
+
+If you want to store the files yourself, you can build your own Server Components using the `getAudio` utility function.
 
 ### `Track` component
 
@@ -193,6 +182,8 @@ export { fscHandler as GET, fscHandler as POST }
 
 ## API Reference
 
+### Types
+
 <TypeInfoToText
   path="handlers/audio/models.d.ts"
   name="AudioOptions"
@@ -223,13 +214,44 @@ export { fscHandler as GET, fscHandler as POST }
   description="Audio request body when using `translation` mode to translate audio into English."
 />
 
+<TypeInfoToText
+  path="handlers/audio/audioClient.d.ts"
+  name="GetAudioResponse"
+/>
+
+<TypeInfoToText
+  path="audioService.d.ts"
+  name="AudioTextResponse"
+  description="Audio response when using `transcription` or `translation` mode."
+/>
+
+<TypeInfoToText
+  path="audioService.d.ts"
+  name="AudioFileResponse"
+  description="Audio response when using `speech` mode."
+/>
+
+### Components
+
 <TypeInfoToText path="components/Audio.d.ts" name="AudioProps" />
 
-<TypeInfoToText path="components/Audio.d.ts" name="Audio" />
+<TypeInfoToText path="components/Audio.d.ts" name="Audio">
+
+```jsx
+import { Audio } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
 
 <TypeInfoToText path="components/Track.d.ts" name="TrackProps" />
 
-<TypeInfoToText path="components/Track.d.ts" name="Track" />
+<TypeInfoToText path="components/Track.d.ts" name="Track">
+
+```jsx
+import { Track } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
 
 <TypeInfoToText
   path="components/Transcript.d.ts"
@@ -239,24 +261,58 @@ export { fscHandler as GET, fscHandler as POST }
 <TypeInfoToText
   path="components/Transcript.d.ts"
   name="Transcript"
-/>
+>
+
+```jsx
+import { Transcript } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
+
+### Hooks
 
 <TypeInfoToText
   path="handlers/audio/useAudio.d.ts"
   name="useAudio"
-/>
+>
+
+```jsx
+import { useAudio } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>
 
 <TypeInfoToText
   path="handlers/audio/useAudioSource.d.ts"
   name="useAudioSource"
-/>
+>
+
+```jsx
+import { useAudioSource } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>
+
+### Utilities
 
 <TypeInfoToText
   path="handlers/audio/audioClient.d.ts"
   name="getAudio"
-/>
+>
+
+```jsx
+import { getAudio } from '@trikinco/fullstack-components'
+```
+
+</TypeInfoToText>
 
 <TypeInfoToText
   path="handlers/audio/fetchers.d.ts"
   name="fetchAudio"
-/>
+>
+
+```jsx
+import { fetchAudio } from '@trikinco/fullstack-components/client'
+```
+
+</TypeInfoToText>
