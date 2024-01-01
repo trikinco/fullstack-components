@@ -1,4 +1,7 @@
-import { runChatCompletion } from '../../chatGptService'
+import {
+	type ChatGptCompletionResponse,
+	runChatCompletion,
+} from '../../chatGptService'
 import { OPENAI_API_KEY } from '../../utils/constants'
 import type { ChatMessage } from '../../types/ChatMessage'
 import type { TextRequestBody, TextOptions } from './models'
@@ -22,9 +25,8 @@ If the user asks you to shorten, reduce or otherwise summarize the text, make su
 /**
  * Rewrites, creates, edits and modifies text content for the web provided by the user.
  *
- * Text Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
+ * Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
  * @link https://nextjs.org/docs/app/building-your-application/data-fetching/patterns Next.js Data Fetching Patterns and Best Practices
- * @returns {Promise<ChatGptCompletionResponse<string>} JSON response
  */
 export async function getText(
 	/**
@@ -35,7 +37,7 @@ export async function getText(
 	 * @link TextOptions
 	 */
 	options?: TextOptions
-) {
+): Promise<ChatGptCompletionResponse> {
 	'use server'
 	console.log('handling `getText` request', request)
 	const content: ChatMessage['content'] = []

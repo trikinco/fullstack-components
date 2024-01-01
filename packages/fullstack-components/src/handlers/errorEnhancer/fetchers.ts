@@ -9,9 +9,8 @@ import type {
 /**
  * Enhances the provided error with additional information.
  *
- * Error enhancement client-side fetch handler that calls the internal Next.js API route handler, then the third-party API. Best used for Client Components and functionality.
+ * Client-side fetch handler that calls the internal Next.js API route handler, then the third-party API. Best used for Client Components and functionality.
  * @see `ApiUrlEnum.errorEnhancer`
- * @returns {Promise<ErrorEnhancementResponse>} JSON response
  */
 export function fetchErrorEnhancement(
 	/**
@@ -23,7 +22,7 @@ export function fetchErrorEnhancement(
 	 * @link https://developer.mozilla.org/en-US/docs/Web/API/Request/Request
 	 */
 	config?: RequestConfigOnly
-) {
+): Promise<ErrorEnhancementResponse> {
 	return request<ErrorEnhancementResponse>(ApiUrlEnum.errorEnhancer, {
 		body,
 		...config,

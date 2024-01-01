@@ -23,7 +23,16 @@ export function useBlock(
 		 */
 		error: any
 	) => void
-) {
+): {
+	/**
+	 * `id` used to attach to the DOM element to mount the component in.
+	 */
+	id: string
+	/**
+	 * Loads the block content into the DOM element with the `id`.
+	 */
+	loadBlock: () => Promise<void>
+} {
 	const id = useId()
 	// Just for avoiding multiple API calls in strict mode - this isn't really needed
 	const isEnabled = useRef(true)

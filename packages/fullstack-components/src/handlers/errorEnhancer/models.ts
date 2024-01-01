@@ -23,7 +23,7 @@ export interface ErrorEnhancementRequestBody {
 	stackTrace?: string
 }
 
-export type ErrorEnhancementResponse = {
+export interface ErrorEnhancementResponse {
 	/**
 	 * A helpful text message explaining the error to a non-technical user.
 	 */

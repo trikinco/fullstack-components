@@ -8,15 +8,33 @@ import type {
 } from './types/audio'
 
 export type AudioResponseBase = {
+	/**
+	 * Total number of tokens used in the request (prompt + completion).
+	 */
 	tokensUsed?: number
+	/**
+	 * The reason the audio creation, transcription, or translation stopped.
+	 */
 	finishReason?: string
+	/**
+	 * The error message if there was an error.
+	 */
 	errorMessage?: string
 }
 
+/**
+ * Audio response when using `transcription` or `translation` mode.
+ */
 export interface AudioTextResponse extends AudioResponseBase {
+	/**
+	 * The response text when using `transcription` or `translation` mode.
+	 */
 	responseText: string
 }
 
+/**
+ * Audio response when using `speech` mode.
+ */
 export interface AudioFileResponse extends AudioResponseBase {
 	/**
 	 * The audio file as an ArrayBuffer.

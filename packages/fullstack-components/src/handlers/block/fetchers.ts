@@ -1,14 +1,14 @@
 'use client'
 import { request, type RequestConfigOnly } from '../../utils/request'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
-import type { BlockRequestBody, BlockResponse, BlockResult } from './models'
+import type { BlockRequestBody, BlockResult } from './models'
 
 /**
  * Generates code for a React component based on the provided `BlockRequestBody`.
  *
- * Block client-side fetch handler that calls the internal Next.js API route handler, then the third-party API. Best used for Client Components and functionality.
+ * Client-side fetch handler that calls the internal Next.js API route handler, then the third-party API. Best used for Client Components and functionality.
+ *
  * @see `ApiUrlEnum.block`
- * @returns {Promise<BlockResponse>} Stringified JSON response
  */
 export async function fetchBlock(
 	/**
@@ -20,8 +20,8 @@ export async function fetchBlock(
 	 * @link https://developer.mozilla.org/en-US/docs/Web/API/Request/Request
 	 */
 	config?: RequestConfigOnly
-) {
-	return request<BlockResponse>(ApiUrlEnum.block, {
+): Promise<string> {
+	return request<string>(ApiUrlEnum.block, {
 		body,
 		...config,
 	})
@@ -29,11 +29,12 @@ export async function fetchBlock(
 
 /**
  * Generates the code for a React component based on the provided `BlockRequestBody` and processes the response then mounts the component in the DOM element with the specified `id`.
+ *
  * Uses `fetchBlock` under the hood to generate and fetch the block, then uses `esm.sh/build` to process the response and mount the component.
  *
- * Block client-side fetch handler that calls the internal Next.js API route handler, then the third-party API. Best used for Client Components and functionality.
+ * Client-side fetch handler that calls the internal Next.js API route handler, then the third-party API. Best used for Client Components and functionality.
+ *
  * @see `ApiUrlEnum.block`
- * @returns {Promise<BlockResult>} JSON response
  */
 export async function fetchProcessedBlock(
 	/**

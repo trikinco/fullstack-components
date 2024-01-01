@@ -2,7 +2,7 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, type RefObject } from 'react'
 
 /**
  * A client-side audio file handler with some basic utilities for controlling audio file playback.
@@ -13,7 +13,46 @@ export function useAudioSource(
 	 * Enables connecting the audio source to the audio context when the audio file is loaded and the `audioRef` is set.
 	 */
 	isEnabled: boolean
-) {
+): {
+	/**
+	 * Plays the audio file.
+	 */
+	play: () => void
+	/**
+	 * Pauses the audio file.
+	 */
+	pause: () => void
+	/**
+	 * Sets the audio playback rate / speed.
+	 */
+	setPlayBackRate: (playBackRate: number) => void
+	/**
+	 * Sets the audio context.
+	 * @link https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
+	 */
+	setAudioContext: (audioContext: AudioContext) => void
+	/**
+	 * Sets the audio source.
+	 * @link https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrackAudioSourceNode
+	 */
+	setAudioSource: (audioSource: MediaElementAudioSourceNode) => void
+	/**
+	 * The audio context.
+	 */
+	audioContext: AudioContext | null
+	/**
+	 * The audio source.
+	 */
+	audioSource: MediaElementAudioSourceNode | null
+	/**
+	 * The audio element ref.
+	 */
+	audioRef: RefObject<HTMLAudioElement>
+	/**
+	 * The audio playback rate / speed.
+	 */
+	playBackRate: number
+} {
 	const audioRef = useRef<HTMLAudioElement>(null)
 	const [playBackRate, setPlayBackRate] = useState(1)
 	const [audioContext, setAudioContext] = useState<AudioContext | null>(null)
@@ -55,14 +94,43 @@ export function useAudioSource(
 	}
 
 	return {
+		/**
+		 * Starts playing the audio file.
+		 */
 		play,
+		/**
+		 * Pauses the audio file.
+		 */
 		pause,
+		/**
+		 * Sets the audio playback rate / speed.
+		 */
 		setPlayBackRate,
+		/**
+		 * Sets the audio context.
+		 * @link https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
+		 */
 		setAudioContext,
+		/**
+		 * Sets the audio source.
+		 * @link https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrackAudioSourceNode
+		 */
 		setAudioSource,
+		/**
+		 * The audio context.
+		 */
 		audioContext,
+		/**
+		 * The audio source.
+		 */
 		audioSource,
+		/**
+		 * The audio element ref.
+		 */
 		audioRef,
+		/**
+		 * The audio playback rate / speed.
+		 */
 		playBackRate,
 	}
 }

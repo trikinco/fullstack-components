@@ -7,14 +7,19 @@ import { OPENAI_API_KEY } from '../../utils/constants'
 import { type AudioRequestBody, type AudioOptions, AudioError } from './models'
 import type { AudioMode } from '../../types/audio'
 
-type GetAudioResponse<T extends AudioMode> = T extends 'speech'
+/**
+ * The response type depends on the `mode`.
+ * `speech` return `AudioFileResponse`
+ * `transcription` and `translation` return `AudioTextResponse`
+ */
+export type GetAudioResponse<T extends AudioMode> = T extends 'speech'
 	? AudioFileResponse
 	: AudioTextResponse
 
 /**
  * Depending on the `mode`, `speech` generates audio files from text or `transcriptions` and `translations` generates text from audio.
  *
- * Audio Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
+ * Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
  * @link https://nextjs.org/docs/app/building-your-application/data-fetching/patterns Next.js Data Fetching Patterns and Best Practices
  */
 export async function getAudio<T extends AudioMode>(

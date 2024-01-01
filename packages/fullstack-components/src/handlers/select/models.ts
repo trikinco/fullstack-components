@@ -21,7 +21,7 @@ export interface SelectRequestBody {
 	count?: number
 }
 
-export type SelectResponseItem = {
+export interface SelectResponseItem {
 	/**
 	 * Text to display in the dropdown option.
 	 * @example 'GMT+10:00 Brisbane, Melbourne, Sydney'
@@ -39,7 +39,7 @@ export type SelectResponseItem = {
 	selected?: true
 }
 
-export type SelectResponse = {
+export interface SelectResponse {
 	/**
 	 * An array of options to list or display in a dropdown.
 	 * @example [{ label: 'GMT+10:00 Brisbane, Melbourne, Sydney', value: 'Australia/Sydney', selected: true }, { label: 'GMT+12:00 Auckland, Wellington', value: 'Pacific/Auckland' }, ...]

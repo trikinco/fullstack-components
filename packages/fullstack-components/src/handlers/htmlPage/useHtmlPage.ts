@@ -1,6 +1,6 @@
 'use client'
 
-import type { HtmlPageResponse, HtmlPageRequestBody } from './models'
+import type { HtmlPageRequestBody } from './models'
 import {
 	useRequest,
 	type UseRequestConsumerConfig,
@@ -23,13 +23,34 @@ export function useHtmlPage(
 	 * @link https://developer.mozilla.org/en-US/docs/Web/API/Request/Request
 	 */
 	config?: UseRequestConsumerConfig<HtmlPageRequestBody>
-) {
+): {
+	/**
+	 * Fetch loading state. `true` if the fetch is in progress.
+	 */
+	isLoading: boolean
+	/**
+	 * Fetch error state. `true` if an error occurred.
+	 */
+	isError: boolean
+	/**
+	 * Fetch error object if `isError` is `true`
+	 */
+	error: unknown
+	/**
+	 * Fetch response data if the fetch was successful.
+	 */
+	data: string | undefined
+	/**
+	 * Refetches the data.
+	 */
+	refetch: () => void
+} {
 	const isPrefersDark =
 		typeof window !== 'undefined' &&
 		window.matchMedia('(prefers-color-scheme: dark)').matches
 	const themePreference = isPrefersDark ? 'dark' : 'light'
 
-	return useRequest<HtmlPageResponse>(ApiUrlEnum.htmlPage, {
+	return useRequest<string>(ApiUrlEnum.htmlPage, {
 		body: {
 			theme: themePreference,
 			...body,

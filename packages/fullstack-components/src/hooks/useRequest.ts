@@ -33,6 +33,32 @@ export type UseRequestConsumerConfig<Tbody = unknown> = Omit<
 	'fetcher'
 >
 
+/**
+ * Fetch utility hook return type.
+ */
+export type UseRequestReturn<TResponse = unknown> = {
+	/**
+	 * Fetch loading state. `true` if the fetch is in progress.
+	 */
+	isLoading: boolean
+	/**
+	 * Fetch error state. `true` if an error occurred.
+	 */
+	isError: boolean
+	/**
+	 * Fetch error object if `isError` is `true`
+	 */
+	error: unknown
+	/**
+	 * Fetch response data if the fetch was successful.
+	 */
+	data: TResponse | undefined
+	/**
+	 * Refetches the data.
+	 */
+	refetch: () => void
+}
+
 const requestData = <TResponse = unknown, Tbody = unknown>(
 	/** Relative API url */
 	url: string,
@@ -60,7 +86,7 @@ export const useRequest = <TResponse = unknown, Tbody = unknown>(
 	 * @link UseRequestConfig
 	 */
 	config: UseRequestConfig<TResponse, Tbody>
-) => {
+): UseRequestReturn<TResponse> => {
 	const { isEnabled = true, ...requestConfig } = config
 	const isEnabledReference = useRef(isEnabled)
 	const [data, setData] = useState<TResponse | undefined>()
@@ -115,5 +141,11 @@ export const useRequest = <TResponse = unknown, Tbody = unknown>(
 		}
 	}, [])
 
-	return { isLoading, isError, error, data, refetch }
+	return {
+		isLoading,
+		isError,
+		error,
+		data,
+		refetch,
+	}
 }

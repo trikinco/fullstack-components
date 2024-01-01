@@ -26,8 +26,6 @@ export interface HtmlPageRequestBody {
 	html?: string
 }
 
-export type HtmlPageResponse = string
-
 export type HtmlPageOptions = {
 	/**
 	 * @default `process.env.OPENAI_API_KEY`.

@@ -3,7 +3,9 @@ import OpenAI from 'openai'
 export type ImageGenerationOptions = Partial<OpenAI.ImageGenerateParams>
 
 /**
- * Image generation or description request body. See OpenAI.ImageGenerateParams for full type information.
+ * Image generation or description request body.
+ * See OpenAI.ImageGenerateParams for full type information.
+ *
  * @extends Partial<OpenAI.ImageGenerateParams>
  * @link https://www.npmjs.com/package/openai `openai` for full `OpenAI.ImageGenerateParams` type information.
  */

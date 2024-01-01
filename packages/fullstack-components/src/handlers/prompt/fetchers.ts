@@ -1,14 +1,13 @@
 'use client'
 import { request, type RequestConfigOnly } from '../../utils/request'
 import { ApiUrlEnum } from '../../enums/ApiUrlEnum'
-import type { PromptResponseBody, PromptRequestBody } from './models'
+import type { PromptRequestBody } from './models'
 
 /**
  * Answers a `prompt` or an array of `messages` and returns the response as-is.
  *
- * Prompt client-side fetch handler that calls the internal Next.js API route handler, then the third-party API. Best used for Client Components and functionality.
+ * Client-side fetch handler that calls the internal Next.js API route handler, then the third-party API. Best used for Client Components and functionality.
  * @see `ApiUrlEnum.prompt`
- * @returns {Promise<PromptResponseBody>} JSON response
  */
 export function fetchPrompt(
 	/**
@@ -20,6 +19,6 @@ export function fetchPrompt(
 	 * @link https://developer.mozilla.org/en-US/docs/Web/API/Request/Request
 	 */
 	config?: RequestConfigOnly
-) {
-	return request<PromptResponseBody>(ApiUrlEnum.prompt, { body, ...config })
+): Promise<string> {
+	return request<string>(ApiUrlEnum.prompt, { body, ...config })
 }

@@ -8,7 +8,7 @@ import type { TextParameters, TextResponse } from './models'
 /**
  * Rewrites, creates, edits and modifies text content for the web provided by the user. Handles plain text `content` or transforms React trees to a HTML string. Transforms numeric `grade` values to a string ordinal, e.g. `1` to `1st-grade`.
  *
- * Text generation client-side fetch handler that calls the internal Next.js API route handler, then the third-party API. Best used for Client Components and functionality.
+ * Client-side fetch handler that calls the internal Next.js API route handler, then the third-party API. Best used for Client Components and functionality.
  * @see `ApiUrlEnum.text`
  */
 export async function fetchText(

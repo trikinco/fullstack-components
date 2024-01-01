@@ -74,7 +74,7 @@ export type TextOptions = {
 	openAiApiKey?: string
 }
 
-export type TextResponse = {
+export interface TextResponse {
 	/**
 	 * The content type of the re/written content.
 	 * @example 'HTML'

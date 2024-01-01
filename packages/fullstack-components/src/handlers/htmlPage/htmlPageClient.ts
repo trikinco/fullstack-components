@@ -1,4 +1,7 @@
-import { runChatCompletion } from '../../chatGptService'
+import {
+	type ChatGptCompletionResponse,
+	runChatCompletion,
+} from '../../chatGptService'
 import { OPENAI_API_KEY } from '../../utils/constants'
 import { getHtmlFromChatResponseText } from './htmlPageParser'
 import type { ChatMessage } from '../../types/ChatMessage'
@@ -38,10 +41,9 @@ You use images from Unsplash, placehold.co (or similar) or colored rectangles
 /**
  * Generates a website based on the provided `HtmlPageRequestBody`.
  *
- * HtmlPage Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
+ * Server Action that calls the third-party API directly on the server. This avoids calling the Next.js API route handler allowing for performant Server Components.
  * @note uses the `gpt-4-vision-preview` model and returns a maximum of 4096 output tokens
  * @link https://nextjs.org/docs/app/building-your-application/data-fetching/patterns Next.js Data Fetching Patterns and Best Practices
- * @returns {Promise<ChatGptCompletionResponse<string>>} Stringified JSON response
  */
 export async function getHtmlPage(
 	/**
@@ -52,7 +54,7 @@ export async function getHtmlPage(
 	 * @link HtmlPageOptions
 	 */
 	options?: HtmlPageOptions
-) {
+): Promise<ChatGptCompletionResponse> {
 	'use server'
 	console.log('handling `getHtmlPage` request')
 
