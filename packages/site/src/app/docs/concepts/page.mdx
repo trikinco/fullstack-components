@@ -1,0 +1,56 @@
+import {
+  URL_HOST,
+  NAME_LONG,
+  NAME_LIB,
+} from '@/src/utils/constants'
+import { routes } from '@/src/utils/routes'
+
+export const metadata = {
+  title: 'Concepts',
+  description: `Learn the core concepts of ${NAME_LONG}`,
+  alternates: {
+    canonical: `${new URL(routes.concepts, URL_HOST)}`,
+  },
+}
+
+# Concepts
+
+Learn some of the core concepts of {NAME_LIB}.
+
+## Getters vs fetchers
+
+All library functionality include one or more **getters** and **fetchers**, as prefixed by `get` and `fetch` respectively.
+The difference between the two is where they can be used, and where the third-party API request is made.
+
+In short:
+
+- **getters can only be used on the _server_.**
+- **fetchers can only be used on the _client_.**
+
+### Getters: Server
+
+Getters are [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) that call the third-party API [directly on the server](https://nextjs.org/docs/app/building-your-application/data-fetching/patterns#fetching-data-on-the-server). This avoids calling the Next.js [API handler route](/docs/get-started/#setup) and reduces the back-and-forth communication between client and server.
+
+Use getters to make [Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components) and other server functionality.
+
+- `'use server'`
+- Third-party API requests only
+- Imported from the library root
+
+```ts title="Getter import example"
+import { getPrompt } from '@trikinco/fullstack-components'
+```
+
+### Fetchers: Client
+
+Fetchers are asynchronous functions that call the internal Next.js [API handler route](/docs/get-started/#setup), then the third-party API.
+
+Use fetchers to make [Client Components](https://nextjs.org/docs/app/building-your-application/rendering/client-components) and other browser functionality.
+
+- `'use client'`
+- Internal Next.js API request, then third-party API requests
+- Imported from the `/client` directory
+
+```ts /client/ title="Fetcher import example"
+import { fetchPrompt } from '@trikinco/fullstack-components/client'
+```
