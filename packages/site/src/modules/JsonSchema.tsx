@@ -2,13 +2,13 @@ export interface JsonSchemaProps {
 	/** item type */
 	type: string
 	/** item name */
-	name: string
+	name?: string
 	/** item description - short */
-	description: string
+	description?: string
 	/** absolute URL */
-	url: string
+	url?: string
 	/** `@id` */
-	id: string
+	id?: string
 	[key: string]: any
 }
 
