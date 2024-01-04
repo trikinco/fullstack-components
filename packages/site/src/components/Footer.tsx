@@ -37,20 +37,20 @@ export const Footer = ({ children, className, ...rest }: FooterProps) => {
 						</Link>
 						<Link
 							href={URL_NPM}
-							className="text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full focus-ring"
+							className="text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full focus-ring print:hidden"
 						>
 							<span className="sr-only">{NAME_SHORT} on NPM</span>
 							<IconNpm className="w-8" width={32} height={20} />
 						</Link>
 						<Link
 							href={URL_GITHUB}
-							className="ml-auto block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300 rounded-full focus-ring"
+							className="ml-auto block text-slate-400 hover:text-slate-500 dark:hover:text-slate-300 rounded-full focus-ring print:hidden"
 						>
 							<span className="sr-only">{NAME_SHORT} on GitHub</span>
 							<IconGitHub width={20} height={20} />
 						</Link>
 					</div>
-					<div className="flex flex-col gap-2 px-6">
+					<div className="flex flex-col gap-2 px-6 print:hidden">
 						<h3 className="font-bold mb-2">Resources</h3>
 						{routesFooterMeta.map(({ href, title }) => (
 							<Link

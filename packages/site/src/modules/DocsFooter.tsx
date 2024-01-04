@@ -23,7 +23,12 @@ export default function DocsFooter({ children, className }: DocsFooterProps) {
 	const nextItem = routesDocsMeta?.[current + 1]
 
 	return (
-		<footer className={merge('flex gap-6 justify-between py-6', className)}>
+		<footer
+			className={merge(
+				'flex gap-6 justify-between py-6 print:hidden',
+				className
+			)}
+		>
 			<div className="w-full max-w-prose mx-auto flex flex-wrap">
 				{children}
 

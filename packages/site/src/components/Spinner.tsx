@@ -20,7 +20,7 @@ export const Spinner = ({
 			<svg
 				aria-hidden="true"
 				className={merge(
-					'w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600 dark:fill-white',
+					'w-8 h-8 text-slate-200 animate-spin dark:text-slate-600 fill-blue-600 dark:fill-white',
 					children && 'mb-3',
 					classNameSpinner
 				)}
