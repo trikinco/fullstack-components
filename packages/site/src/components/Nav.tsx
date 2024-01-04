@@ -1,10 +1,16 @@
-import type { HTMLAttributes, ReactNode } from 'react'
+'use client'
+import { Suspense, type HTMLAttributes, type ReactNode } from 'react'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { merge } from '@trikinco/fullstack-components/utils'
-import { NAME_SHORT, URL_GITHUB, URL_NPM } from '../utils/constants'
-import { IconGitHub } from './Icons/IconGitHub'
-import { IconNpm } from './Icons/IconNpm'
-import { ThemeSwitcher } from '@/src/modules/ThemeSwitcher'
+import { NAME_SHORT, URL_GITHUB, URL_NPM } from '@/src/utils/constants'
+import { IconGitHub } from '@/src/components/Icons/IconGitHub'
+import { IconNpm } from '@/src/components/Icons/IconNpm'
+import { ThemeSwitcher } from '@/src/modules/Theme/ThemeSwitcher'
+
+const LazySearch = dynamic(() => import('../modules/Search/FlexSearch'), {
+	ssr: false,
+})
 
 export interface NavProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode
@@ -13,23 +19,26 @@ export interface NavProps extends HTMLAttributes<HTMLDivElement> {
 export const Nav = ({ children, className, ...rest }: NavProps) => {
 	return (
 		<nav
-			style={{ marginTop: '-1px' }}
 			className={merge(
-				'flex sticky top-0 left-0 backdrop-blur-md items-center p-6 z-20 border-b border-slate-950/5 dark:border-white/10',
+				'flex sticky top-0 left-0 backdrop-blur-md items-center p-6 z-20 border-b border-slate-950/5 dark:border-white/10 print:hidden',
 				className
 			)}
 			{...rest}
 		>
 			<Link
 				href="/"
-				className="rounded-full focus-ring font-mono font-bold lowercase text-xs sm:text-base dark:text-white"
+				className="rounded-full focus-ring font-mono font-bold lowercase text-xs sm:text-base dark:text-white z-30"
 			>
 				{NAME_SHORT}
 			</Link>
+
 			{children}
 
 			<div className="flex gap-3 sm:gap-6 ml-auto">
-				<ThemeSwitcher />
+				<Suspense fallback={null}>
+					<LazySearch className="hidden md:block" />
+				</Suspense>
+				<ThemeSwitcher className="flex flex-col justify-center" />
 				<Link
 					href={URL_NPM}
 					className="inline-flex items-center text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-full focus-ring"
