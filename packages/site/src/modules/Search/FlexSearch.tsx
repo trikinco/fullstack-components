@@ -1,3 +1,4 @@
+'use client'
 import { Search, type SearchProps } from '@/src/modules/Search/Search'
 import { useFlexSearch } from '@/src/modules/Search/useFlexSearch'
 

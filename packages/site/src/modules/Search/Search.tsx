@@ -1,3 +1,4 @@
+'use client'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { SearchInput } from '@/src/modules/Search/SearchInput'
 import { SearchOptions } from '@/src/modules/Search/SearchOptions'

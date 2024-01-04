@@ -1,3 +1,4 @@
+'use client'
 import { useState, useCallback } from 'react'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { HighlightMatches } from '@/src/modules/Search/HighlightMatches'

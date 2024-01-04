@@ -71,12 +71,12 @@ export const SearchOptions = ({
 				</li>
 			)
 		case 'results':
-			return results.map(({ route, prefix, children, id }, i) => (
+			return results.map(({ route, prefix, children, ...result }, i) => (
 				<li
-					key={id}
+					key={result.id}
 					role="option"
 					aria-selected={i === activeResult}
-					className={merge('mx-2.5 [&>div]:first:mt-0')}
+					className="mx-2.5 [&>div]:first:mt-0"
 					id={`${id}-option-${i}`}
 				>
 					{prefix}

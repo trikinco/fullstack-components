@@ -25,37 +25,6 @@ export type StructuredPageContent = {
 }
 
 /**
- * Parses an mdx page and returns searchable structured content
- */
-export async function structureMdxContent(
-	text: string,
-	id: string,
-	route: string
-): Promise<StructuredPageContent> {
-	const file = await unified()
-		.use(parse, { fragment: true })
-		.use(rehype)
-		.use(rehypeAutolinkHeadings)
-		.use(rehypeSlug)
-		.use(gfm)
-		.use(stringify)
-		.process(text)
-
-	const htmlString = file.toString()
-	// Ensure we only use the content after the first header to ignore unprocessed .mdx imports
-	const html = htmlString.slice(htmlString.match(/<h1[^>]*>/)?.index ?? 0)
-	const body = parseHtmlString(html).body
-	const { title, content } = structurePage(body)
-
-	return {
-		id,
-		title,
-		route,
-		content,
-	}
-}
-
-/**
  * Create structured data for search from a virtual DOM body
  */
 function structurePage(body: HTMLElement) {
@@ -88,6 +57,37 @@ function structurePage(body: HTMLElement) {
 
 	return {
 		title,
+		content,
+	}
+}
+
+/**
+ * Parses an mdx page and returns searchable structured content
+ */
+export async function structureMdxContent(
+	text: string,
+	id: string,
+	route: string
+): Promise<StructuredPageContent> {
+	const file = await unified()
+		.use(parse, { fragment: true })
+		.use(rehype)
+		.use(rehypeAutolinkHeadings)
+		.use(rehypeSlug)
+		.use(gfm)
+		.use(stringify)
+		.process(text)
+
+	const htmlString = file.toString()
+	// Ensure we only use the content after the first header to ignore unprocessed .mdx imports
+	const html = htmlString.slice(htmlString.match(/<h1[^>]*>/)?.index ?? 0)
+	const body = parseHtmlString(html).body
+	const { title, content } = structurePage(body)
+
+	return {
+		id,
+		title,
+		route,
 		content,
 	}
 }
