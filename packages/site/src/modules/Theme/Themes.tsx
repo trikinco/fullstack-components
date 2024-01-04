@@ -3,7 +3,7 @@ import { memo } from 'react'
 import { IconThemeSystem } from '@/src/components/Icons/IconThemeSystem'
 import { IconThemeDark } from '@/src/components/Icons/IconThemeDark'
 import { IconThemeLight } from '@/src/components/Icons/IconThemeLight'
-import ThemeIcon from './ThemeIcon'
+import ThemeIcon from '@/src/modules/Theme/ThemeIcon'
 
 export interface ThemesProps {
 	id: string
