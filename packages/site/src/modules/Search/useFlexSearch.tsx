@@ -270,7 +270,7 @@ export function useFlexSearch({
 	 */
 	const preload = useCallback(
 		async (active: boolean) => {
-			if (active && !indexes[locale]) {
+			if (active && !indexes?.[locale]) {
 				setLoading(true)
 
 				try {
@@ -295,7 +295,7 @@ export function useFlexSearch({
 			return
 		}
 
-		if (!indexes[locale]) {
+		if (!indexes?.[locale]) {
 			setLoading(true)
 
 			try {
