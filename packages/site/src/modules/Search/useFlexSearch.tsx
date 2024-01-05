@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { HighlightMatches } from '@/src/modules/Search/HighlightMatches'
 import FlexSearch from 'flexsearch'
-import { getMdxPagesContent } from '@/src/utils/search'
+import { getMdxPagesContent } from '@/src/modules/Search/actions'
 import type { SearchResultItem, SearchResult } from '@/src/types/Search'
 
 export interface UseFlexSearchProps {
