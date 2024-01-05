@@ -1,5 +1,5 @@
 'use client'
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { HighlightMatches } from '@/src/modules/Search/HighlightMatches'
 import FlexSearch from 'flexsearch'
@@ -67,82 +67,86 @@ export const getSearchIndexes = async (
 	basePath: string,
 	locale: string
 ): Promise<void> => {
-	const searchData = await getMdxPagesContent({ basePath, pathname: 'docs' })
-	let pageId = 0
+	try {
+		const searchData = await getMdxPagesContent({ basePath, pathname: 'docs' })
+		let pageId = 0
 
-	const pageIndex: PageIndex = new FlexSearch.Document({
-		cache: 100,
-		tokenize: 'full',
-		document: {
-			id: 'id',
-			index: 'content',
-			store: ['title'],
-		},
-		context: {
-			resolution: 9,
-			depth: 2,
-			bidirectional: true,
-		},
-	})
+		const pageIndex: PageIndex = new FlexSearch.Document({
+			cache: 100,
+			tokenize: 'full',
+			document: {
+				id: 'id',
+				index: 'content',
+				store: ['title'],
+			},
+			context: {
+				resolution: 9,
+				depth: 2,
+				bidirectional: true,
+			},
+		})
 
-	const sectionIndex: SectionIndex = new FlexSearch.Document({
-		cache: 100,
-		tokenize: 'full',
-		document: {
-			id: 'id',
-			index: 'content',
-			tag: 'pageId',
-			store: ['title', 'content', 'url', 'display'],
-		},
-		context: {
-			resolution: 9,
-			depth: 2,
-			bidirectional: true,
-		},
-	})
+		const sectionIndex: SectionIndex = new FlexSearch.Document({
+			cache: 100,
+			tokenize: 'full',
+			document: {
+				id: 'id',
+				index: 'content',
+				tag: 'pageId',
+				store: ['title', 'content', 'url', 'display'],
+			},
+			context: {
+				resolution: 9,
+				depth: 2,
+				bidirectional: true,
+			},
+		})
 
-	for (const { title, route, content } of searchData) {
-		let pageContent = ''
-		++pageId
+		for (const { title, route, content } of searchData) {
+			let pageContent = ''
+			++pageId
 
-		for (const {
-			id: sectionId,
-			title: sectionTitle,
-			content: paragraphs,
-		} of content) {
-			const contentTitle = sectionTitle || title
-			const url = route + (sectionId ? '#' + sectionId : '')
+			for (const {
+				id: sectionId,
+				title: sectionTitle,
+				content: paragraphs,
+			} of content) {
+				const contentTitle = sectionTitle || title
+				const url = route + (sectionId ? '#' + sectionId : '')
 
-			sectionIndex.add({
-				id: url,
-				url,
-				pageId: `page_${pageId}`,
-				title: contentTitle,
-				content: contentTitle,
-				...(paragraphs[0] && { display: paragraphs[0] }),
-			})
-
-			for (let i = 0; i < paragraphs.length; i++) {
 				sectionIndex.add({
-					id: `${url}_${i}`,
+					id: url,
 					url,
 					pageId: `page_${pageId}`,
 					title: contentTitle,
-					content: paragraphs[i],
+					content: contentTitle,
+					...(paragraphs[0] && { display: paragraphs[0] }),
 				})
+
+				for (let i = 0; i < paragraphs.length; i++) {
+					sectionIndex.add({
+						id: `${url}_${i}`,
+						url,
+						pageId: `page_${pageId}`,
+						title: contentTitle,
+						content: paragraphs[i],
+					})
+				}
+
+				pageContent += ` ${title} ${paragraphs.join('')}`
 			}
 
-			pageContent += ` ${title} ${paragraphs.join('')}`
+			pageIndex.add({
+				id: pageId,
+				title,
+				content: pageContent,
+			})
 		}
 
-		pageIndex.add({
-			id: pageId,
-			title,
-			content: pageContent,
-		})
+		indexes[locale] = [pageIndex, sectionIndex]
+	} catch (error) {
+		throw new Error(`Could not get search indexes: ${error}`)
 	}
-
-	indexes[locale] = [pageIndex, sectionIndex]
 }
 
 export function useFlexSearch({
@@ -269,22 +273,20 @@ export function useFlexSearch({
 	/**
 	 * Preload search indexes
 	 */
-	const preload = useCallback(
-		async (active: boolean) => {
-			if (active && !indexes?.[locale]) {
-				setLoading(true)
+	const preload = async (active: boolean) => {
+		if (active && !indexes?.[locale]) {
+			setLoading(true)
 
-				try {
-					await loadSearchIndexes(basePath, locale)
-				} catch (e) {
-					setError(true)
-				} finally {
-					setLoading(false)
-				}
+			try {
+				await loadSearchIndexes(basePath, locale)
+			} catch (error) {
+				setError(true)
+				throw new Error(`Could not preload search indexes: ${error}`)
+			} finally {
+				setLoading(false)
 			}
-		},
-		[locale, basePath]
-	)
+		}
+	}
 
 	/**
 	 * Handles changing the search input
@@ -301,8 +303,11 @@ export function useFlexSearch({
 
 			try {
 				await loadSearchIndexes(basePath, locale)
-			} catch (e) {
+			} catch (error) {
 				setError(true)
+				throw new Error(
+					`Could not load search indexes on query "${value}": ${error}`
+				)
 			} finally {
 				setLoading(false)
 			}

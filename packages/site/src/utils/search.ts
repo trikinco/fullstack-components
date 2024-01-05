@@ -108,13 +108,19 @@ export async function getMdxPagesContent({
 	const path = join(process.cwd(), basePath, pathname)
 	const pages = findInDir(path, filter)
 
-	const contentPromises = pages.map(async (page) => {
-		const route = page.split(basePath)?.pop()?.replace('/page.mdx', '') || ''
-		const id = page.replace('/page.mdx', '').split('/').pop() || ''
-		const text = fs.readFileSync(page, 'utf8')
+	try {
+		const contentPromises = pages.map(async (page) => {
+			const route = page.split(basePath)?.pop()?.replace('/page.mdx', '') || ''
+			const id = page.replace('/page.mdx', '').split('/').pop() || ''
+			const text = fs.readFileSync(page, 'utf8')
 
-		return await structureMdxContent(text, id, route)
-	})
+			return await structureMdxContent(text, id, route)
+		})
 
-	return await Promise.all(contentPromises)
+		return await Promise.all(contentPromises)
+	} catch (error) {
+		throw new Error(
+			`Could not get MDX pages content for ${basePath}, ${pathname}: ${error}`
+		)
+	}
 }
