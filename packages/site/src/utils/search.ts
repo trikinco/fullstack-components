@@ -1,5 +1,5 @@
 'use server'
-import fs from 'fs'
+import { promises as fs } from 'fs'
 import { join } from 'path'
 import { unified } from 'unified'
 import parse from 'remark-parse'
@@ -100,19 +100,21 @@ export async function getMdxPagesContent({
 	basePath = 'src/app',
 	pathname,
 	filter = /\.mdx?$/,
+	cwd = process.cwd(),
 }: {
 	basePath?: string
 	pathname: string
 	filter?: RegExp
+	cwd?: string
 }) {
-	const path = join(process.cwd(), basePath, pathname)
+	const path = join(cwd, basePath, pathname)
 	const pages = findInDir(path, filter)
 
 	try {
 		const contentPromises = pages.map(async (page) => {
 			const route = page.split(basePath)?.pop()?.replace('/page.mdx', '') || ''
 			const id = page.replace('/page.mdx', '').split('/').pop() || ''
-			const text = fs.readFileSync(page, 'utf8')
+			const text = await fs.readFile(page, 'utf8')
 
 			return await structureMdxContent(text, id, route)
 		})

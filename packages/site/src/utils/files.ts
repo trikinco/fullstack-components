@@ -9,7 +9,7 @@ export function findInDir(
 	filter: RegExp,
 	fileList: string[] = []
 ) {
-	const files = fs.readdirSync(dir)
+	const files = fs.readdirSync(dir, 'utf8')
 
 	files.forEach((file) => {
 		const filePath = join(dir, file)
