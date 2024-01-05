@@ -1,6 +1,6 @@
 'use server'
 import { promises as fs } from 'fs'
-import { join } from 'path'
+import { resolve, join } from 'path'
 import { unified } from 'unified'
 import parse from 'remark-parse'
 import gfm from 'remark-gfm'
@@ -107,7 +107,7 @@ export async function getMdxPagesContent({
 	filter?: RegExp
 	cwd?: string
 }) {
-	const path = join(cwd, basePath, pathname)
+	const path = resolve(join(cwd, basePath, pathname))
 	const pages = findInDir(path, filter)
 
 	try {
