@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { HighlightMatches } from '@/src/modules/Search/HighlightMatches'
 import FlexSearch from 'flexsearch'
-import { getMdxPagesContent } from '@/src/modules/Search/actions'
 import type { SearchResultItem, SearchResult } from '@/src/types/Search'
 
 export interface UseFlexSearchProps {
@@ -56,19 +55,22 @@ export const loadSearchIndexes = (
 		return loadSearchIndexesPromises.get(key)!
 	}
 
-	const promise = getSearchIndexes(basePath, locale)
+	const promise = getSearchIndexes(locale)
 
 	loadSearchIndexesPromises.set(key, promise)
 
 	return promise
 }
 
-export const getSearchIndexes = async (
-	basePath: string,
-	locale: string
-): Promise<void> => {
+export const getSearchIndexes = async (locale: string): Promise<void> => {
 	try {
-		const searchData = await getMdxPagesContent({ basePath, pathname: 'docs' })
+		/**
+		 * pages json data generated at build time
+		 * @see 'scripts/search.js'
+		 */
+		const response = await fetch('/pages.json')
+		const searchData = await response.json()
+
 		let pageId = 0
 
 		const pageIndex: PageIndex = new FlexSearch.Document({

@@ -5,7 +5,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
-		"build": "next build --debug && next-sitemap",
+		"build": "node scripts/search.js && next build --debug && next-sitemap",
 		"start": "next start",
 		"lint": "next lint",
 		"test:e2e": "playwright test",
