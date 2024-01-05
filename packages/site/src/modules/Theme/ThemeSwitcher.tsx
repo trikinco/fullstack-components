@@ -1,40 +1,38 @@
 'use client'
-import { useState, useEffect, useId, useRef } from 'react'
+import { useState, useId, useRef, type HTMLAttributes } from 'react'
 import { useTheme } from 'next-themes'
+import { merge } from '@trikinco/fullstack-components/utils'
 import { useAnchorCoords } from '@/src/hooks/useAnchorCoords'
 import { Dialog } from '@/src/components/Dialog'
-import { Themes } from '@/src/modules/Themes'
+import { Themes } from '@/src/modules/Theme/Themes'
 import { IconClose } from '@/src/components/Icons/IconClose'
-import { ThemeIcon } from '@/src/modules/ThemeIcon'
+import { ThemeIcon } from '@/src/modules/Theme/ThemeIcon'
+import { useIsMounted } from '@/src/hooks/useIsMounted'
 
-export const ThemeSwitcher = () => {
+export type ThemeSwitcherProps = HTMLAttributes<HTMLDivElement>
+
+export const ThemeSwitcher = ({ className, ...rest }: ThemeSwitcherProps) => {
 	const id = useId()
 	const [open, setOpen] = useState(false)
 	const focusReturnRef = useRef<HTMLButtonElement>(null)
 	const coords = useAnchorCoords(focusReturnRef, open)
-	const [mounted, setMounted] = useState(false)
+	const isMounted = useIsMounted()
 	const { theme, setTheme } = useTheme()
 
-	// Avoid hydration mismatch
-	useEffect(() => {
-		setMounted(true)
-	}, [])
-
-	if (!mounted) {
-		return null
+	// Avoid hydration mismatch and reserve the space
+	if (!isMounted) {
+		return <div className="inline-block ml-auto w-7 h-5 px-1" />
 	}
 
 	return (
-		<div className="relative flex flex-col">
+		<div className={merge('relative', className)} {...rest}>
 			<button
 				ref={focusReturnRef}
 				type="button"
 				className="group/theme inline-flex gap-2 tracking-wide text-sm mb-1 px-1 ml-auto text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-md focus-ring"
 				onClick={() => setOpen(true)}
 			>
-				<span className="transition-opacity opacity-0 group-hover/theme:opacity-100 group-focus-visible/theme:opacity-100">
-					Theme
-				</span>
+				<span className="sr-only">Theme</span>
 				<ThemeIcon theme={theme} />
 			</button>
 			<Dialog

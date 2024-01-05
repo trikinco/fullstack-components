@@ -19,6 +19,9 @@ next.lock
 # sitemap
 public/sitemap.xml
 
+# docs search data
+public/pages.json
+
 # production
 /build
 
