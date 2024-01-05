@@ -1,6 +1,6 @@
 'use server'
-import { promises as fs } from 'fs'
-import { resolve, join } from 'path'
+import fs from 'fs'
+import { join } from 'path'
 import { unified } from 'unified'
 import parse from 'remark-parse'
 import gfm from 'remark-gfm'
@@ -9,7 +9,6 @@ import rehype from 'remark-rehype'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import { parseHtmlString } from '@/src/utils/html'
-import { findInDir } from '@/src/utils/files'
 
 type StructuredSection = {
 	id: string
@@ -99,7 +98,7 @@ export async function structureMdxContent(
 export async function getMdxPagesContent({
 	basePath = 'src/app',
 	pathname,
-	filter = /\.mdx?$/,
+	filter = /\.tsx?$/,
 	cwd = process.cwd(),
 }: {
 	basePath?: string
@@ -107,17 +106,19 @@ export async function getMdxPagesContent({
 	filter?: RegExp
 	cwd?: string
 }) {
-	const path = resolve(join(cwd, basePath, pathname))
-	const pages = findInDir(path, filter)
-
 	try {
-		const contentPromises = pages.map(async (page) => {
-			const route = page.split(basePath)?.pop()?.replace('/page.mdx', '') || ''
-			const id = page.replace('/page.mdx', '').split('/').pop() || ''
-			const text = await fs.readFile(page, 'utf8')
+		const contentPromises = fs
+			.readdirSync(join(cwd, basePath, pathname), 'utf8')
+			.filter((path) => !filter.test(path))
+			.map(async (page) => {
+				const route = join(pathname, page)
+				const text = fs.readFileSync(
+					join(cwd, basePath, pathname, page, 'page.mdx'),
+					'utf8'
+				)
 
-			return await structureMdxContent(text, id, route)
-		})
+				return await structureMdxContent(text, page, route)
+			})
 
 		return await Promise.all(contentPromises)
 	} catch (error) {
