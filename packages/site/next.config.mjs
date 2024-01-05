@@ -11,9 +11,12 @@ const withMDX = createMDX({ options: { remarkPlugins, rehypePlugins } })
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	// experimental: {
-	// 	urlImports: ['https://esm.sh/'],
-	// },
+	experimental: {
+		// urlImports: ['https://esm.sh/'],
+		outputFileTracingIncludes: {
+			'/**/*': ['./src/app/docs/**/*'],
+		},
+	},
 	// just used for testing useEffect works as expected
 	// reactStrictMode: false,
 	// The Rust-based mdx compiler is commented out as it doesn't support remark and rehype plugins yet
