@@ -1,4 +1,6 @@
 import { CodeBlock } from '../components/CodeBlock'
+import { Example } from '../components/Example'
+import { TypeInfoToText } from '../components/TypeInfo/TypeInfoToText'
 
 /**
  * Default components to use for
@@ -6,4 +8,6 @@ import { CodeBlock } from '../components/CodeBlock'
  */
 export const defaultComponents = {
 	pre: CodeBlock,
+	Example,
+	TypeInfoToText,
 }
