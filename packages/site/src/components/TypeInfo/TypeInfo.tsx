@@ -145,3 +145,5 @@ export const TypeInfo = ({
 		</div>
 	)
 }
+
+export default TypeInfo

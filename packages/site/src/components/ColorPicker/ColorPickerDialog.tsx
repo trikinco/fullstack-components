@@ -121,3 +121,5 @@ export const ColorPickerDialog = memo(function ColorPickerDialog({
 		</Suspense>
 	)
 })
+
+export default ColorPickerDialog

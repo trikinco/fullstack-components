@@ -18,3 +18,5 @@ export const Chip = ({ children, className, ...rest }: ChipProps) => {
 		</div>
 	)
 }
+
+export default Chip

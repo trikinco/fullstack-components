@@ -54,3 +54,5 @@ export const TypeInfoTags = ({
 		</div>
 	)
 }
+
+export default TypeInfoTags

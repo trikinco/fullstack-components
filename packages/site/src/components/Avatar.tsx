@@ -49,3 +49,5 @@ export const Avatar = ({
 		</Link>
 	)
 }
+
+export default Avatar

@@ -41,3 +41,5 @@ export const Example = <C extends ElementType = typeof defaultElement>({
 		</div>
 	)
 }
+
+export default Example

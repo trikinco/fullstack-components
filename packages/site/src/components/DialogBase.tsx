@@ -24,3 +24,5 @@ export const DialogBase = ({ children, ...rest }: DialogBaseProps) => {
 		</div>
 	)
 }
+
+export default DialogBase

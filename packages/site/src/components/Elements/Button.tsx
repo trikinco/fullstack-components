@@ -39,3 +39,5 @@ export const Button = <C extends ElementType = typeof defaultElement>({
 		</Component>
 	)
 }
+
+export default Button

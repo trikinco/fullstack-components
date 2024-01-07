@@ -90,3 +90,5 @@ export const Accordion = ({
 		</details>
 	)
 }
+
+export default Accordion

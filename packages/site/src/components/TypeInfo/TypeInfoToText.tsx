@@ -35,7 +35,7 @@ export interface TypeInfoToTextProps
 /**
  * Extracts type information from a .d.ts file with `getTypeDocs` and renders it
  */
-export const TypeInfoToText = async ({
+export const TypeInfoToText = ({
 	basePath = '../fullstack-components/dist/',
 	path: filePath,
 	name,
@@ -48,10 +48,7 @@ export const TypeInfoToText = async ({
 	...rest
 }: TypeInfoToTextProps) => {
 	const path = basePath + filePath
-	const { properties, parameters, returns, ...schema } = await getTypeDocs(
-		path,
-		name
-	)
+	const { properties, parameters, returns, ...schema } = getTypeDocs(path, name)
 	const hasParameters = parameters && parameters?.length > 0
 
 	return (
@@ -69,7 +66,7 @@ export const TypeInfoToText = async ({
 				returns={returns}
 				className="border-t-0"
 				component="h4"
-				id={name}
+				id={name.toLowerCase()}
 			>
 				{children}
 			</TypeInfo>
@@ -101,3 +98,5 @@ export const TypeInfoToText = async ({
 		</div>
 	)
 }
+
+export default TypeInfoToText

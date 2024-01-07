@@ -43,3 +43,5 @@ export const CodeBlock = ({
 		</div>
 	)
 }
+
+export default CodeBlock

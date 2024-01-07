@@ -207,10 +207,10 @@ const getExtractedTypeInfo = (
 /**
  * Extracts type info from a d.ts file
  */
-export async function getTypeDocs(
+export function getTypeDocs(
 	filePath: string,
 	typeName: string
-): Promise<ExtractedTypeInfo> {
+): ExtractedTypeInfo {
 	const files = [filePath]
 	const linker = createLinker(files)
 	const schema = linker.flatten(files[0], typeName)
@@ -218,3 +218,5 @@ export async function getTypeDocs(
 
 	return data
 }
+
+export default getTypeDocs
