@@ -8,7 +8,7 @@ export interface ProseProps extends HTMLAttributes<HTMLDivElement> {
 
 export const defaultElement = 'div'
 
-export default function Prose<C extends ElementType = typeof defaultElement>({
+export function Prose<C extends ElementType = typeof defaultElement>({
 	as,
 	children,
 	className,
@@ -28,3 +28,5 @@ export default function Prose<C extends ElementType = typeof defaultElement>({
 		</Component>
 	)
 }
+
+export default Prose

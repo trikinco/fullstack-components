@@ -75,3 +75,5 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 		</Component>
 	)
 }
+
+export default Card

@@ -52,3 +52,5 @@ export const ColorPickerButton = ({
 		</div>
 	)
 }
+
+export default ColorPickerButton

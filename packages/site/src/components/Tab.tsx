@@ -74,3 +74,5 @@ export const Tab = ({
 		</button>
 	)
 }
+
+export default Tab

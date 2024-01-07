@@ -110,3 +110,5 @@ export const Footer = ({ children, className, ...rest }: FooterProps) => {
 		</>
 	)
 }
+
+export default Footer

@@ -69,3 +69,5 @@ export const TextRewriteControls = ({
 		</>
 	)
 }
+
+export default TextRewriteControls

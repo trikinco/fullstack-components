@@ -57,3 +57,5 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 		</nav>
 	)
 }
+
+export default Nav

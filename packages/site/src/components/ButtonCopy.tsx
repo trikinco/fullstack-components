@@ -45,3 +45,5 @@ export const ButtonCopy = ({ className, text, ...rest }: ButtonCopyProps) => {
 		</button>
 	)
 }
+
+export default ButtonCopy

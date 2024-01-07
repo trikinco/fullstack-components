@@ -3,7 +3,7 @@
 import { useRef, type HTMLAttributes } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
 import { merge } from '@trikinco/fullstack-components/utils'
-import { generateHtmlPage } from '../docs/html-page-generator/action'
+import { generateHtmlPage } from '@/src/app/docs/html-page-generator/action'
 import { Button } from '@/src/components/Elements/Button'
 import { Input } from '@/src/components/Elements/Input'
 import { Label } from '@/src/components/Elements/Label'

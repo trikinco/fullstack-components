@@ -69,3 +69,5 @@ export const TypeInfoTitle = <C extends ElementType = typeof defaultElement>({
 		</TitleComponent>
 	)
 }
+
+export default TypeInfoTitle

@@ -28,3 +28,5 @@ export const PageHeader = ({
 		</header>
 	)
 }
+
+export default PageHeader
