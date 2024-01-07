@@ -1,16 +1,12 @@
 'use client'
-import { Suspense, type HTMLAttributes, type ReactNode } from 'react'
+import type { HTMLAttributes, ReactNode } from 'react'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { NAME_SHORT, URL_GITHUB, URL_NPM } from '@/src/utils/constants'
 import { IconGitHub } from '@/src/components/Icons/IconGitHub'
 import { IconNpm } from '@/src/components/Icons/IconNpm'
 import { ThemeSwitcher } from '@/src/modules/Theme/ThemeSwitcher'
-
-const LazySearch = dynamic(() => import('../modules/Search/FlexSearch'), {
-	ssr: false,
-})
+import { FlexSearch } from '@/src/modules/Search/FlexSearch'
 
 export interface NavProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode
@@ -34,10 +30,8 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 
 			{children}
 
-			<div className="flex gap-3 sm:gap-6 ml-auto">
-				<Suspense fallback={null}>
-					<LazySearch className="hidden md:block" />
-				</Suspense>
+			<div className="flex gap-3 sm:gap-6 ml-auto min-h-9">
+				<FlexSearch className="hidden md:block" />
 				<ThemeSwitcher className="flex flex-col justify-center" />
 				<Link
 					href={URL_NPM}
