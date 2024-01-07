@@ -5,13 +5,23 @@
  * The 'pages.json' file is fetched (and cached) when users
  * interact with the search bar.
  */
-const fs = require('fs')
-const { join } = require('path')
-const { JSDOM } = require('jsdom')
+import fs from 'fs'
+import { join } from 'path'
+import { JSDOM } from 'jsdom'
+import { unified } from 'unified'
+import parse from 'remark-parse'
+import gfm from 'remark-gfm'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import slug from 'rehype-slug'
+import stringify from 'rehype-stringify'
+import rehype from 'remark-rehype'
+import mdx from 'remark-mdx'
+import { visit } from 'unist-util-visit'
 
-const DOCS_DIR = 'docs'
-const PAGES_PATH = join(__dirname, '../src/app', DOCS_DIR)
-const EXPORT_PATH = join(__dirname, '../public', 'pages.json')
+const DOCS_DIR = '/docs'
+const LIB_PATH = join(process.cwd(), '../fullstack-components')
+const PAGES_PATH = join(process.cwd(), 'src/app', DOCS_DIR)
+const EXPORT_PATH = join(process.cwd(), 'public', 'pages.json')
 
 /**
  * Parse a html string to HTML
@@ -60,26 +70,88 @@ function structurePage(body) {
 	}
 }
 
+// Helper function to convert attributes to props
+function getProps(attributes) {
+	const props = {}
+	attributes.forEach((attribute) => {
+		props[attribute.name] = attribute.value
+	})
+	return props
+}
+
+/**
+ * Extracts type information from TypeInfoToText components
+ */
+function extractTypeInfo({ getTypeDocs }) {
+	return (tree) => {
+		visit(tree, 'mdxJsxFlowElement', (node, index, parent) => {
+			if (node.name === 'TypeInfoToText') {
+				const {
+					path,
+					name: typeName,
+					description: typeDesc,
+				} = getProps(node.attributes)
+
+				const { name, description = typeDesc } = getTypeDocs(
+					join(LIB_PATH, 'dist', path),
+					typeName
+				)
+
+				// @consideration: add properties and parameters
+				parent.children.splice(
+					index,
+					1,
+					{
+						type: 'heading',
+						depth: 4,
+						attributes: {
+							id: name,
+						},
+						children: [
+							{
+								type: 'text',
+								value: name,
+							},
+						],
+					},
+					{
+						type: 'text',
+						value: '\n',
+					},
+					...node.children,
+					{
+						type: 'text',
+						value: '\n',
+					},
+					{
+						type: 'paragraph',
+						children: [
+							{
+								type: 'text',
+								value: description,
+							},
+						],
+					}
+				)
+			}
+		})
+	}
+}
+
 /**
  * Parses an mdx page and returns searchable structured content
  */
 async function structureMdxContent(text, id, route) {
-	// ESM modules must be dynamically imported
-	const unified = (await import('unified')).unified
-	const parse = (await import('remark-parse')).default
-	const gfm = (await import('remark-gfm')).default
-	const stringify = (await import('rehype-stringify')).default
-	const rehype = (await import('remark-rehype')).default
-	const rehypeSlug = (await import('rehype-slug')).default
-	const rehypeAutolinkHeadings = (await import('rehype-autolink-headings'))
-		.default
+	const getTypeDocs = (await import('../src/utils/getTypeDocs')).default
 
 	const file = await unified()
 		.use(parse, { fragment: true })
+		.use(extractTypeInfo, { getTypeDocs })
 		.use(rehype)
 		.use(rehypeAutolinkHeadings)
-		.use(rehypeSlug)
+		.use(slug)
 		.use(gfm)
+		.use(mdx)
 		.use(stringify)
 		.process(text)
 
@@ -87,6 +159,7 @@ async function structureMdxContent(text, id, route) {
 	// Ensure we only use the content after the first header to ignore unprocessed .mdx imports
 	const html = htmlString.slice(htmlString.match(/<h1[^>]*>/)?.index ?? 0)
 	const body = parseHtmlString(html).body
+
 	const { title, content } = structurePage(body)
 
 	return {
