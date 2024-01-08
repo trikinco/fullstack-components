@@ -324,7 +324,6 @@ export function useFlexSearch({
 		results,
 		search,
 		preload,
-		doSearch,
 		handleChange,
 	}
 }

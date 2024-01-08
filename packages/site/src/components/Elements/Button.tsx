@@ -29,7 +29,7 @@ export const Button = <C extends ElementType = typeof defaultElement>({
 			className={merge(
 				'no-underline bg-slate-900 disabled:bg-slate-700 hover:bg-slate-700 focus-ring text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto dark:bg-white dark:disabled:bg-white/90 dark:hover:bg-white/90 dark:text-slate-900 dark:highlight-white/20',
 				color === 'secondary' &&
-					'bg-transparent hover:bg-white/20 text-slate-900 dark:bg-slate-900 dark:hover:bg-white/20 dark:text-white',
+					'bg-transparent hover:bg-white/20 text-slate-900 dark:bg-slate-950 dark:hover:bg-white/20 dark:text-white',
 				variant === 'outlined' && 'border-2 border-slate-900 dark:border-white',
 				className
 			)}
