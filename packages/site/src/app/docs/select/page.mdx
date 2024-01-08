@@ -24,7 +24,7 @@ A smart dropdown component that creates, labels and sorts all its own options.
     context="The time zone for Sydney should be selected"
   />
 </Example>
-```jsx
+```tsx
 <Select
   prompt="Selecting a time zone in GMT"
   context="The time zone for Sydney should be selected"
@@ -40,7 +40,7 @@ Useful for generating lists or when creating custom dropdown components.
   <UseSelect />
 </Example>
 
-```jsx
+```tsx
 'use client'
 
 import { useSelect } from '@trikinco/fullstack-components/client'
@@ -75,7 +75,7 @@ export default function Page() {
 
 ## Custom Server Component with `getSelect`
 
-```jsx title="Server Component"
+```tsx title="Server Component"
 import { getSelect } from '@trikinco/fullstack-components'
 
 export default async function Page() {
@@ -169,7 +169,7 @@ export { fscHandler as GET, fscHandler as POST }
 
 <TypeInfoToText path="components/Select.d.ts" name="Select" >
 
-```jsx
+```tsx
 import { Select } from '@trikinco/fullstack-components'
 ```
 
@@ -182,7 +182,7 @@ import { Select } from '@trikinco/fullstack-components'
   name="useSelect"
 >
 
-```jsx
+```tsx
 import { useSelect } from '@trikinco/fullstack-components/client'
 ```
 
@@ -195,7 +195,7 @@ import { useSelect } from '@trikinco/fullstack-components/client'
   name="getSelect"
 >
 
-```jsx
+```tsx
 import { getSelect } from '@trikinco/fullstack-components'
 ```
 
@@ -206,7 +206,7 @@ import { getSelect } from '@trikinco/fullstack-components'
   name="fetchSelect"
 >
 
-```jsx
+```tsx
 import { fetchSelect } from '@trikinco/fullstack-components/client'
 ```
 

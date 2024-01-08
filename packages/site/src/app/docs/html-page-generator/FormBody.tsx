@@ -76,7 +76,11 @@ export function FormBody({ state, refetch }: FormBodyProps) {
 						{pending ? (
 							<>
 								Creating page{' '}
-								<IconLoader className="ml-2" width={20} height={20} />
+								<IconLoader
+									className="ml-2 animate-spin"
+									width={20}
+									height={20}
+								/>
 							</>
 						) : (
 							<>

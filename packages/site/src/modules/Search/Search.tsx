@@ -46,7 +46,7 @@ export function Search({
 			{/* Search backdrop */}
 			{shouldShowList && (
 				<div
-					className="fixed m-0 w-full h-screen top-0 left-0 z-10 bg-white/30 dark:bg-slate-950/30"
+					className="fixed m-0 w-full h-screen top-0 left-0 z-10 bg-black/10"
 					onClick={() => setIsShown(false)}
 				/>
 			)}

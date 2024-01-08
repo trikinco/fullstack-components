@@ -37,23 +37,32 @@ body {
 }
 
 /* outer code blocks */
-[data-rehype-pretty-code-fragment] {
+[data-rehype-pretty-code-figure] {
 	font-variant-ligatures: none;
 	background-color: var(--shiki-color-background);
 	@apply relative overflow-hidden my-10 font-mono rounded-lg border border-slate-300 dark:border-white/20;
 }
 
-.typeinfo [data-rehype-pretty-code-fragment] {
+.typeinfo [data-rehype-pretty-code-figure] {
 	@apply my-3;
 }
 
-[data-rehype-pretty-code-fragment] code {
+[data-rehype-pretty-code-figure] code {
 	@apply text-sm leading-6;
 }
 
+[data-rehype-pretty-code-figure] [data-line] {
+	@apply pr-5;
+}
+
 /* hide copy button for code blocks with a `title` including `:nocopy` */
-[data-rehype-pretty-code-fragment]:has([data-copy='false']) [data-copy] {
+[data-rehype-pretty-code-figure]:has([data-copy='false']) [data-copy] {
 	@apply hidden;
+}
+
+/* Styles nested code blocks or code blocks inside PreviewCode */
+pre [data-rehype-pretty-code-figure] {
+	@apply my-0 p-5 border-none overflow-auto;
 }
 
 /* code block `title` (usually the file name) */

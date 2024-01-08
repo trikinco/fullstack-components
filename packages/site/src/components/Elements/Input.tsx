@@ -10,7 +10,10 @@ export function Input({ className, ...rest }: InputProps) {
 	return (
 		<input
 			className={merge(
-				'p-3 rounded-md border text-black bg-white dark:text-white dark:bg-slate-800 border-white/10 w-full focus-ring',
+				'p-3 rounded-md w-full focus-ring',
+				'border border-slate-100 dark:border-white/10',
+				'bg-white dark:bg-slate-800',
+				'text-black dark:text-white',
 				className
 			)}
 			type="text"

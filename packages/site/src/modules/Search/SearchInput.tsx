@@ -72,7 +72,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
 					ref={ref}
 					spellCheck={false}
 					className={merge(
-						'block w-full appearance-none rounded-lg pl-3 pr-3 md:pr-12 py-2 transition-colors',
+						'block w-full appearance-none rounded-md pl-3 pr-3 md:pr-12 py-2 transition-colors',
 						'text-base md:text-sm',
 						'bg-black/[.05] dark:bg-slate-50/10',
 						'focus:bg-white dark:focus:bg-slate-900',
@@ -96,6 +96,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
 					type="search"
 					placeholder="Search documentation..."
 					role="combobox"
+					maxLength={100}
 					aria-controls={id}
 					aria-expanded={isFocused}
 					aria-activedescendant={`${id}-option-${activeResult}`}

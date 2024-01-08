@@ -28,7 +28,7 @@ A smart image component that either describes a known image, generates an image 
   />
 </Example>
 
-```jsx
+```tsx
 <Image
   src="https://absolute-cat-url/tabbycat.jpg"
   showResult // Optional - to render the alt-text visually
@@ -47,7 +47,7 @@ A smart image component that either describes a known image, generates an image 
   />
 </Example>
 
-```jsx
+```tsx
 <Image
   prompt="A photograph of a cat wearing a cowboy hat"
   model="dall-e-3"
@@ -66,7 +66,7 @@ A smart image component that either describes a known image, generates an image 
   />
 </Example>
 
-```jsx
+```tsx
 <Image
   src="/images/MobiusStrip.png"
   alt="A white coiling mobius strip"
@@ -79,13 +79,13 @@ A smart image component that either describes a known image, generates an image 
 
 `useImage` is a utility hook that allows for full access to the same features as `Image`, in addition to being able to generate multiple images.
 
-```jsx
+```tsx
 import { useImage } from '@trikinco/fullstack-components/client'
 ```
 
 ### `useImage` image description with `src`
 
-```jsx
+```tsx
 'use client'
 
 import { useImage } from '@trikinco/fullstack-components/client'
@@ -113,7 +113,7 @@ export default function Page() {
 
 ### `useImage` image generation of multiple images with `prompt` and `n`
 
-```jsx
+```tsx
 'use client'
 
 import { useImage } from '@trikinco/fullstack-components/client'
@@ -144,7 +144,7 @@ export default function Page() {
 }
 ```
 
-```jsx title="Server Component"
+```tsx title="Server Component"
 import { getImage } from '@trikinco/fullstack-components'
 
 export default async function Page() {
@@ -234,7 +234,7 @@ export { fscHandler as GET, fscHandler as POST }
 
 <TypeInfoToText path="components/Image/Image.d.ts" name="Image">
 
-```jsx
+```tsx
 import { Image } from '@trikinco/fullstack-components'
 ```
 
@@ -247,7 +247,7 @@ import { Image } from '@trikinco/fullstack-components'
   name="useImage"
 >
 
-```jsx
+```tsx
 import { useImage } from '@trikinco/fullstack-components/client'
 ```
 
@@ -260,7 +260,7 @@ import { useImage } from '@trikinco/fullstack-components/client'
   name="getImage"
 >
 
-```jsx
+```tsx
 import { getImage } from '@trikinco/fullstack-components'
 ```
 
@@ -271,7 +271,7 @@ import { getImage } from '@trikinco/fullstack-components'
   name="getEnhancedImage"
 >
 
-```jsx
+```tsx
 import { getEnhancedImage } from '@trikinco/fullstack-components'
 ```
 
@@ -282,7 +282,7 @@ import { getEnhancedImage } from '@trikinco/fullstack-components'
   name="fetchImage"
 >
 
-```jsx
+```tsx
 import { fetchImage } from '@trikinco/fullstack-components/client'
 ```
 

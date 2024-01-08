@@ -25,7 +25,7 @@ They accept a text `prompt` and arrays of `messages` and return the data as-is.
   <Prompt prompt="What's the longest river in the world?" />
 </Example>
 
-```jsx
+```tsx
 <Prompt prompt="What's the longest river in the world?" />
 ```
 
@@ -47,7 +47,7 @@ They accept a text `prompt` and arrays of `messages` and return the data as-is.
   />
 </Example>
 
-```jsx
+```tsx
 <Prompt
   messages={[
     {
@@ -76,7 +76,7 @@ In addition, this allows you to pass in any of the standard HTML attributes as e
   />
 </Example>
 
-```jsx /as="div"/
+```tsx /as="div"/
 <Prompt
   prompt="How big is the moon?"
   as="h3"
@@ -92,7 +92,7 @@ In addition, this allows you to pass in any of the standard HTML attributes as e
   <UsePrompt />
 </Example>
 
-```jsx
+```tsx
 'use client'
 import { usePrompt } from '@trikinco/fullstack-components/client'
 
@@ -112,7 +112,7 @@ export default function Page() {
 }
 ```
 
-```jsx title="Server Component"
+```tsx title="Server Component"
 import { getPrompt } from '@trikinco/fullstack-components'
 
 export default async function Page() {

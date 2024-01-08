@@ -21,7 +21,7 @@ Blocks are individual React components that are generated and mounted on the fly
   <Blocks />
 </Example>
 
-```jsx
+```tsx
 <Block
   prompt="A navbar with a modern SVG logo, the title 'myProject' and some links. Dark bg, light text."
   fallback={<p>Creating navbar component...</p>}
@@ -33,7 +33,7 @@ Blocks are individual React components that are generated and mounted on the fly
 
 `useBlock` is a utility hook that allows for access to similar features as `Block`.
 
-```jsx
+```tsx
 'use client'
 
 import { useBlock } from '@trikinco/fullstack-components/client'
@@ -102,7 +102,7 @@ export { fscHandler as GET, fscHandler as POST }
 
 <TypeInfoToText path="components/Block.d.ts" name="Block">
 
-```jsx
+```tsx
 import { Block } from '@trikinco/fullstack-components/client'
 ```
 
@@ -115,7 +115,7 @@ import { Block } from '@trikinco/fullstack-components/client'
   name="useBlock"
 >
 
-```jsx
+```tsx
 import { useBlock } from '@trikinco/fullstack-components/client'
 ```
 
@@ -128,7 +128,7 @@ import { useBlock } from '@trikinco/fullstack-components/client'
   name="getBlock"
 >
 
-```jsx
+```tsx
 import { getBlock } from '@trikinco/fullstack-components'
 ```
 
@@ -139,7 +139,7 @@ import { getBlock } from '@trikinco/fullstack-components'
   name="fetchBlock"
 >
 
-```jsx
+```tsx
 import { fetchBlock } from '@trikinco/fullstack-components/client'
 ```
 
@@ -150,7 +150,7 @@ import { fetchBlock } from '@trikinco/fullstack-components/client'
   name="fetchProcessedBlock"
 >
 
-```jsx
+```tsx
 import { fetchProcessedBlock } from '@trikinco/fullstack-components/client'
 ```
 

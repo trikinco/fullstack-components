@@ -1,4 +1,4 @@
-import { CodeBlock } from '../components/CodeBlock'
+import { Code } from '../components/Code'
 import { Example } from '../components/Example'
 import { TypeInfoToText } from '../components/TypeInfo/TypeInfoToText'
 
@@ -7,7 +7,7 @@ import { TypeInfoToText } from '../components/TypeInfo/TypeInfoToText'
  * Remote and local mdx
  */
 export const defaultComponents = {
-	pre: CodeBlock,
+	pre: Code,
 	Example,
 	TypeInfoToText,
 }

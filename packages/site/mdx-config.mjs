@@ -3,6 +3,7 @@ import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrettyCode from 'rehype-pretty-code'
 import { visit } from 'unist-util-visit'
+import theme from './src/assets/themes/css-variables.json' assert { type: 'json' }
 
 /**
  * - remark-gfm to add support for GitHub Flavored Markdown
@@ -63,7 +64,8 @@ export const rehypePlugins = [
 		 * @see {@link https://github.com/shikijs/shiki/blob/main/docs/themes.md#theming-with-css-variables theming with CSS variables}
 		 */
 		{
-			theme: 'css-variables',
+			theme,
+			keepBackground: false,
 		},
 	],
 	/**

@@ -47,7 +47,7 @@ Creates an audio file from text `content` or a React tree. Also generates VTT ca
   </Audio>
 </Example>
 
-```jsx
+```tsx
 <Audio controls>
   <h2>Hey there my friend, how are you?</h2>
   <p>
@@ -78,7 +78,7 @@ Creates VTT captions from an audio file.
   <CenteredTrackCues />
 </Example>
 
-```jsx {12}
+```tsx {12}
 // Using a video element here
 // to visibly show the captions.
 // `Audio` Server Component already uses `Track`.
@@ -106,7 +106,7 @@ Transcribes an audio file to text.
   />
 </Example>
 
-```jsx
+```tsx
 <Transcript
   src="/my-super-original-podcast.mp3"
   as="p"
@@ -118,7 +118,7 @@ Transcribes an audio file to text.
 
 `useAudio` is a utility hook that allows for full access to the same features as `getAudio`, in addition to the ability to control the audio file playback.
 
-```jsx
+```tsx
 'use client'
 import { useAudio } from '@trikinco/fullstack-components/client'
 
@@ -235,7 +235,7 @@ export { fscHandler as GET, fscHandler as POST }
 
 <TypeInfoToText path="components/Audio.d.ts" name="Audio">
 
-```jsx
+```tsx
 import { Audio } from '@trikinco/fullstack-components'
 ```
 
@@ -245,7 +245,7 @@ import { Audio } from '@trikinco/fullstack-components'
 
 <TypeInfoToText path="components/Track.d.ts" name="Track">
 
-```jsx
+```tsx
 import { Track } from '@trikinco/fullstack-components'
 ```
 
@@ -261,7 +261,7 @@ import { Track } from '@trikinco/fullstack-components'
   name="Transcript"
 >
 
-```jsx
+```tsx
 import { Transcript } from '@trikinco/fullstack-components'
 ```
 
@@ -274,7 +274,7 @@ import { Transcript } from '@trikinco/fullstack-components'
   name="useAudio"
 >
 
-```jsx
+```tsx
 import { useAudio } from '@trikinco/fullstack-components/client'
 ```
 
@@ -285,7 +285,7 @@ import { useAudio } from '@trikinco/fullstack-components/client'
   name="useAudioSource"
 >
 
-```jsx
+```tsx
 import { useAudioSource } from '@trikinco/fullstack-components/client'
 ```
 
@@ -298,7 +298,7 @@ import { useAudioSource } from '@trikinco/fullstack-components/client'
   name="getAudio"
 >
 
-```jsx
+```tsx
 import { getAudio } from '@trikinco/fullstack-components'
 ```
 
@@ -309,7 +309,7 @@ import { getAudio } from '@trikinco/fullstack-components'
   name="fetchAudio"
 >
 
-```jsx
+```tsx
 import { fetchAudio } from '@trikinco/fullstack-components/client'
 ```
 

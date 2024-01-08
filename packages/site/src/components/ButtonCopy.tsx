@@ -34,6 +34,7 @@ export const ButtonCopy = ({ className, text, ...rest }: ButtonCopyProps) => {
 			disabled={isCopied}
 			aria-label={label}
 			onClick={copy}
+			type="button"
 			{...rest}
 		>
 			{isCopied ? (
