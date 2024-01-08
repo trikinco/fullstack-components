@@ -1,7 +1,7 @@
 import { Chip } from '@/src/components/Chip'
 import { IconRefresh } from '@/src/components/Icons/IconRefresh'
 import { Spinner } from '@/src/components/Spinner'
-import { PreviewCode } from '../components/PreviewCode'
+import { PreviewCode } from '@/src/components/PreviewCode'
 
 export interface HTMLPageProps {
 	/** Refetch with current form values */
@@ -63,7 +63,7 @@ export function HTMLPage({
 				)}
 			</PreviewCode>
 
-			<div className="flex gap-3">
+			<div className="relative flex gap-3 z-10">
 				{(!!state || isError) && (
 					<button
 						disabled={isLoading}

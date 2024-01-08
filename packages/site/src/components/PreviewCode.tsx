@@ -6,12 +6,15 @@ import {
 } from 'react-error-boundary'
 import { IconEye } from './Icons/IconEye'
 import { IconCode } from './Icons/IconCode'
-import { CodeBlock } from './CodeBlock'
+import { Code } from './Code'
+import { CodeHighlight } from './CodeHighlight'
 
 export interface PreviewCodeProps extends ErrorBoundaryPropsWithFallback {
 	children?: ReactNode
 	/** the code to preview and show */
 	code?: string | null
+	/** language of the code. used for highlighting */
+	lang?: string
 	/** accessible label for the preview iframe */
 	title: string
 }
@@ -19,10 +22,12 @@ export interface PreviewCodeProps extends ErrorBoundaryPropsWithFallback {
 export const PreviewCode = ({
 	title,
 	code,
+	lang = 'html',
 	fallback,
 	children,
 }: PreviewCodeProps) => {
 	const id = useId()
+	const mdCode = code ? '```' + lang + '\n' + code + '\n' + '```' : ''
 
 	return (
 		<div className="relative">
@@ -61,9 +66,7 @@ export const PreviewCode = ({
 						disabled: !code,
 						children: (
 							<div className="aspect-square md:aspect-video rounded-lg shadow-lg overflow-auto bg-[--shiki-color-background] border border-slate-300 dark:border-white/20">
-								<CodeBlock noCopy raw={code || ''}>
-									{code}
-								</CodeBlock>
+								<CodeHighlight noCopy raw={code || ''} code={mdCode} />
 							</div>
 						),
 					},

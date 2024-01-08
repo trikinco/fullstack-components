@@ -45,7 +45,7 @@ Rewrite, simplify or create text. Handles plain text, markdown and HTML.
 </Text>
 </Example>
 
-```jsx title="Text rewrite example"
+```tsx title="Text rewrite example"
 <Text
   prompt="Summarize to one or two short paragraphs"
   grade={5}
@@ -88,7 +88,7 @@ Rewrite, simplify or create text. Handles plain text, markdown and HTML.
   </Text>
 </Example>
 
-```jsx title="Text creation example"
+```tsx title="Text creation example"
 <Text
   prompt="Write a poem"
   grade={5}
@@ -102,7 +102,7 @@ Rewrite, simplify or create text. Handles plain text, markdown and HTML.
 
 ## `useText` hook
 
-```jsx
+```tsx
 'use client'
 
 import { useText } from '@trikinco/fullstack-components/client'
@@ -132,7 +132,7 @@ export default function Page() {
 
 `useText` also accepts a tree of components in `content`. Note that only static HTML is returned.
 
-```jsx title="useText with HTML"
+```tsx title="useText with HTML"
 const { isLoading, data } = useText({
   prompt: 'Simplify and shorten this text',
   content: (
@@ -150,7 +150,7 @@ const { isLoading, data } = useText({
 })
 ```
 
-```jsx title="Server Component"
+```tsx title="Server Component"
 import { getText } from '@trikinco/fullstack-components'
 
 export default async function Page() {
