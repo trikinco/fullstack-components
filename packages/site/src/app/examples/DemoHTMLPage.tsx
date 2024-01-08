@@ -41,7 +41,7 @@ export function FormBody({ state }: FormBodyProps) {
 								What do you want to create? ✨
 							</Label>
 							<Input
-								className="border border-gray-200 dark:bg-white dark:text-black"
+								className="border border-gray-200 dark:border-gray-200 dark:bg-white dark:text-black"
 								id="prompt"
 								name="prompt"
 								placeholder="A modern login form..."

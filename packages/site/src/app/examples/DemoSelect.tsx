@@ -49,7 +49,7 @@ export default function Page() {
 					Your name
 				</Label>
 				<Input
-					className="border border-gray-200 dark:bg-white dark:text-black"
+					className="border border-gray-200 dark:border-gray-200 dark:bg-white dark:text-black"
 					id="name"
 					name="name"
 					minLength={1}
