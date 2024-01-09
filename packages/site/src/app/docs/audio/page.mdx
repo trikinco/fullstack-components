@@ -2,6 +2,7 @@ import { URL_HOST } from '@/src/utils/constants'
 import { routes } from '@/src/utils/routes'
 import { Audio, Transcript } from '@trikinco/fullstack-components'
 import CenteredTrackCues from './CenteredTrackCues'
+import GetAudio from './GetAudio'
 
 export const metadata = {
   title:
@@ -15,13 +16,15 @@ export const metadata = {
 
 # Audio
 
-Generate speech from text or transcribe audio to text. Includes multiple Server Components, custom hooks and more.
+Generate speech from text, and transcribe audio into text or create accessible [WebVTT](https://www.w3.org/TR/webvtt1/) captions.
 
 ## Server Components
 
-### `Audio` component
+### `<Audio>` Server Component
 
-Creates an audio file from text `content` or a React tree. Also generates VTT captions for the audio file for accessibility.
+Creates an audio file from text `content` or a React tree. The component also generates WebVTT captions for the audio file to improve accessibility.
+
+Consumes `<Track>` for generating the captions, unless the `noCaption` prop is `true`.
 
 <Example>
   <Audio
@@ -64,13 +67,13 @@ Creates an audio file from text `content` or a React tree. Also generates VTT ca
 </Audio>
 ```
 
-**Note, file size constraints**: the `Audio` and `Track` Server Components currently transform the response body to base64 data URLs.
-This affects the maximum file size that can be generated.
+**Note on file size constraints**: the `<Audio>` and `<Track>` Server Components currently transform the response body to base64 data URLs and this affects the maximum file size that can be generated.
+
 Data URLs are used to inline the data instead of storing the audio and caption files on the server. This may change in the future.
 
 If you want to store the files yourself, you can build your own Server Components using the `getAudio` utility function.
 
-### `Track` component
+### `<Track>` Server Component
 
 Creates VTT captions from an audio file.
 
@@ -79,9 +82,9 @@ Creates VTT captions from an audio file.
 </Example>
 
 ```tsx {12}
-// Using a video element here
+// Using a video element for this demo
 // to visibly show the captions.
-// `Audio` Server Component already uses `Track`.
+// The `<Audio>` Server Component already uses `<Track>`.
 <video
   controls
   className="aspect-video w-full [&::cue]:text-base"
@@ -94,7 +97,7 @@ Creates VTT captions from an audio file.
 </video>
 ```
 
-### `Transcript` component
+### `<Transcript>` Server Component
 
 Transcribes an audio file to text.
 
@@ -118,7 +121,7 @@ Transcribes an audio file to text.
 
 `useAudio` is a utility hook that allows for full access to the same features as `getAudio`, in addition to the ability to control the audio file playback.
 
-```tsx
+```tsx {5-15}
 'use client'
 import { useAudio } from '@trikinco/fullstack-components/client'
 
@@ -151,6 +154,38 @@ export default function Page() {
         <button onClick={() => setPlayBackRate(2)}>2.0x</button>
       </div>
     </div>
+  )
+}
+```
+
+## Custom Server Component with `getAudio`
+
+<Example>
+  <GetAudio />
+</Example>
+
+```tsx {4-8} title="Server Component"
+import { getAudio } from '@trikinco/fullstack-components'
+
+export default async function Page() {
+  const { responseFile, contentType } = await getAudio({
+    mode: 'speech',
+    content: 'It is Wednesday my dudes',
+    voice: 'onyx',
+  })
+
+  const base64String =
+    Buffer.from(responseFile).toString('base64')
+
+  if (!base64String) return 'No reminders.'
+
+  return (
+    <a
+      href={`data:${contentType};base64,${base64String}`}
+      download
+    >
+      Download reminder
+    </a>
   )
 }
 ```
