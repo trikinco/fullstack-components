@@ -16,7 +16,7 @@ export const metadata = {
 
 A smart dropdown component that creates, labels and sorts all its own options.
 
-## `Select` Server Component
+## `<Select>` Server Component
 
 <Example>
   <Select
@@ -33,14 +33,13 @@ A smart dropdown component that creates, labels and sorts all its own options.
 
 ## `useSelect` hook
 
-`useSelect` is a utility hook that allows for full access to Select generation data.
-Useful for generating lists or when creating custom dropdown components.
+`useSelect` is a utility hook that lets you generate options for custom dropdown components or any list type content.
 
 <Example>
   <UseSelect />
 </Example>
 
-```tsx
+```tsx {6-10}
 'use client'
 
 import { useSelect } from '@trikinco/fullstack-components/client'
@@ -75,7 +74,7 @@ export default function Page() {
 
 ## Custom Server Component with `getSelect`
 
-```tsx title="Server Component"
+```tsx {4-8} title="Server Component"
 import { getSelect } from '@trikinco/fullstack-components'
 
 export default async function Page() {

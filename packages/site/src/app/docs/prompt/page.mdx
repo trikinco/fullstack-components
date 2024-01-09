@@ -1,5 +1,6 @@
 import { Prompt } from '@trikinco/fullstack-components'
 import UsePrompt from './UsePrompt'
+import UsePromptJSON from './UsePromptJSON'
 import { URL_HOST } from '@/src/utils/constants'
 import { routes } from '@/src/utils/routes'
 
@@ -14,10 +15,10 @@ export const metadata = {
 
 # Prompt
 
-The `Prompt` component and its counterparts `usePrompt` and `getPrompt` are the most basic building blocks for AI-powered components.
-They accept a text `prompt` and arrays of `messages` and return the data as-is.
+The `<Prompt>` Server Component and its counterparts `usePrompt` and `getPrompt` are the most basic building blocks for AI-powered components.
+They accept a text `prompt` or arrays of `messages` and return the response as-is.
 
-## `Prompt` Server Component
+## `<Prompt>` Server Component
 
 ### Passing a single `prompt`
 
@@ -88,7 +89,7 @@ In addition, this allows you to pass in any of the standard HTML attributes as e
 
 `usePrompt` is a utility hook that allows for full access to the same features as `Prompt`, in addition to the ability to enable JSON mode with the `format` option.
 
-<Example>
+<Example lazy>
   <UsePrompt />
 </Example>
 
@@ -98,9 +99,6 @@ import { usePrompt } from '@trikinco/fullstack-components/client'
 
 export default function Page() {
   const { isLoading, data } = usePrompt({
-    // Enable JSON mode
-    format: 'JSON',
-    // Prompt. You can also define the desired response JSON schema here.
     prompt: 'What is the longest river in the world?',
   })
 
@@ -108,11 +106,48 @@ export default function Page() {
     return 'Loading...'
   }
 
-  return <div className="max-w-prose">{JSON.stringify(data)}</div>
+  return <p>{data}</p>
 }
 ```
 
-```tsx title="Server Component"
+### `usePrompt` in JSON mode with a strict schema
+
+<Example isProse lazy>
+  <UsePromptJSON />
+</Example>
+
+```tsx {8,11} title="Specifying a JSON schema"
+'use client'
+import { usePrompt } from '@trikinco/fullstack-components/client'
+
+export default function Page() {
+  // Optional, type variable to infer the return type for `data`
+  const { isLoading, data } = usePrompt<{ rivers: string[] }>({
+    // Required, JSON mode
+    format: 'JSON',
+    prompt: `
+    What are the 5 longest rivers in the world?
+    Return JSON: {"rivers": string[]}
+    `,
+    // 👆 Specifying the schema in the prompt is required.
+    // You can play around with the wording.
+  })
+
+  if (isLoading) {
+    return 'Loading...'
+  }
+
+  return (
+    <ol>
+      {data?.rivers.map((river) => <li key={river}>{river}</li>)}
+    </ol>
+  )
+}
+```
+
+## Custom Server Component with `getPrompt`
+
+```tsx {4-6} title="Server Component"
 import { getPrompt } from '@trikinco/fullstack-components'
 
 export default async function Page() {
@@ -120,7 +155,7 @@ export default async function Page() {
     prompt: 'Tell me about TailwindCSS',
   })
 
-  return <div>{responseText}</div>
+  return <p>{responseText}</p>
 }
 ```
 

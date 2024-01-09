@@ -13,9 +13,9 @@ export const metadata = {
 
 # Image
 
-A smart image component that either describes a known image, generates an image based on a prompt, or behaves just like a regular `next/image`.
+A smart image component that either outputs text descriptions of an image, generates an image based on a prompt, or behaves just like a regular `next/image`.
 
-## `Image` Server Component
+## `<Image>` Server Component
 
 ### Describing an image
 
@@ -28,7 +28,7 @@ A smart image component that either describes a known image, generates an image 
   />
 </Example>
 
-```tsx
+```tsx title="Generating alt text from an image"
 <Image
   src="https://absolute-cat-url/tabbycat.jpg"
   showResult // Optional - to render the alt-text visually
@@ -47,8 +47,9 @@ A smart image component that either describes a known image, generates an image 
   />
 </Example>
 
-```tsx
+```tsx title="Creating an image from a prompt"
 <Image
+  // The prompt is also used for the `alt` unless specified
   prompt="A photograph of a cat wearing a cowboy hat"
   model="dall-e-3"
   size="1024x1024"
@@ -56,6 +57,12 @@ A smart image component that either describes a known image, generates an image 
 ```
 
 ### Fallback To Standard `next/image`
+
+`<Image>` also works great even if you specify `src`, `alt` and no `prompt`.
+
+This is useful for cases where you might be dynamically setting props, and want to ensure that you'll always be able to fall back and display your images as expected.
+
+See the [Next.js `<Image>` documentation](https://nextjs.org/docs/pages/api-reference/components/image) for more information.
 
 <Example>
   <Image
@@ -66,7 +73,7 @@ A smart image component that either describes a known image, generates an image 
   />
 </Example>
 
-```tsx
+```tsx title="Usage as a regular image"
 <Image
   src="/images/MobiusStrip.png"
   alt="A white coiling mobius strip"
@@ -77,15 +84,11 @@ A smart image component that either describes a known image, generates an image 
 
 ## `useImage` hook
 
-`useImage` is a utility hook that allows for full access to the same features as `Image`, in addition to being able to generate multiple images.
-
-```tsx
-import { useImage } from '@trikinco/fullstack-components/client'
-```
+A utility hook that allows for full access to the same features as `Image`, in addition to being able to generate multiple images.
 
 ### `useImage` image description with `src`
 
-```tsx
+```tsx {6-8}
 'use client'
 
 import { useImage } from '@trikinco/fullstack-components/client'
@@ -103,17 +106,13 @@ export default function Page() {
     return 'Could not describe image'
   }
 
-  return (
-    <div className="rounded-md overflow-hidden p-6 bg-sky-200 text-sky-800 text-xl">
-      {data}
-    </div>
-  )
+  return <span>{data}</span>
 }
 ```
 
 ### `useImage` image generation of multiple images with `prompt` and `n`
 
-```tsx
+```tsx {6-9}
 'use client'
 
 import { useImage } from '@trikinco/fullstack-components/client'
@@ -144,13 +143,18 @@ export default function Page() {
 }
 ```
 
-```tsx title="Server Component"
+## Custom Server Component with `getImage`
+
+```tsx {4-10} title="Server Component"
 import { getImage } from '@trikinco/fullstack-components'
 
 export default async function Page() {
   const { responseText } = await getImage({
-    prompt:
-      'An ethereal landscape in a far away fantasy land, natural light, golden hour',
+    prompt: `
+    An ethereal landscape in a far away fantasy land, 
+    natural light, 
+    golden hour
+    `,
   })
 
   return (

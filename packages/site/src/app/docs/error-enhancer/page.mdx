@@ -2,6 +2,7 @@ import { ErrorHTTPPreview } from './ErrorHTTPPreview'
 import { ClientErrors } from './ClientErrors'
 import { URL_HOST } from '@/src/utils/constants'
 import { routes } from '@/src/utils/routes'
+import ErrorEnhancementFallbackDemo from './ErrorEnhancementFallbackDemo'
 
 export const metadata = {
   title: 'Error Enhancer - AI-Powered Smart Error Boundary',
@@ -14,13 +15,101 @@ export const metadata = {
 
 # Error Enhancer
 
-These error enhancement tools can be used to show users a user-friendly message parsed from an `Error` object, or an in-dept debugging message for developers.
+These error enhancement tools analyze information from an `Error` object, providing users with helpful insights and offering developers in-depth debugging assistance.
+
+## `<ErrorEnhancementBoundary>` Client Component
+
+A smart [error boundary](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary) Client Component that parses an `Error` object and stack trace, then generates and displays messages aimed to help users and developers.
+
+- In **development** the component shows in-depth debugging help for developers.
+- In **production** the component shows user-friendly messages.
+
+Consumes [`react-error-boundary`](https://www.npmjs.com/package/react-error-boundary), `useErrorEnhancement` and `<ErrorEnhancementFallback>` under the hood to generate and display the enhanced error messages.
+
+### Handling client errors with `<ErrorEnhancementBoundary>`
+
+<ClientErrors />
+
+```tsx title="Client Component"
+'use client'
+
+import { ErrorEnhancementBoundary } from '@trikinco/fullstack-components/client'
+
+export default function ComponentThatMayThrow() {
+  return (
+    <ErrorEnhancementBoundary
+      fallback={
+        <p>Generating a user-friendly error message...</p>
+      }
+    >
+      <Button
+        onClick={() => {
+          throwsCowbellOrError()
+        }}
+      >
+        Howdy 🤠
+      </Button>
+    </ErrorEnhancementBoundary>
+  )
+}
+```
+
+## `<ErrorEnhancementFallback>` Client Component
+
+A Client Component to render inside your own [error boundary](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary) or a [`react-error-boundary`](https://www.npmjs.com/package/react-error-boundary). `<ErrorEnhancementFallback>` handles enhancing error messages and rendering the information.
+
+Consumes `useErrorEnhancement` under the hood to generate and display the enhanced error messages.
+
+<Example lazy>
+  <ErrorEnhancementFallbackDemo />
+</Example>
+
+```tsx
+'use client'
+import { ErrorEnhancementFallback } from '@trikinco/fullstack-components/client'
+
+export default function Page() {
+  return (
+    <ErrorEnhancementFallback
+      error={new Error('Failed to get more cowbell')}
+      resetErrorBoundary={() => null}
+    />
+  )
+}
+```
+
+### Usage with `react-error-boundary`
+
+The most common use for `<ErrorEnhancementFallback>` is inside an error boundary, where the error to parse must be passed down for it to generate messages.
+
+```tsx {9-13}
+'use client'
+import { ErrorBoundary } from 'react-error-boundary'
+
+export default function SmartBoundary(props) {
+  const { children, ...rest } = props || {}
+  return (
+    <ErrorBoundary
+      fallbackRender={({ error, resetErrorBoundary }) => (
+        // Handles enhancing errors and rendering UI
+        <ErrorEnhancementFallback
+          error={error}
+          resetErrorBoundary={resetErrorBoundary}
+          {...rest}
+        />
+      )}
+    >
+      {children}
+    </ErrorBoundary>
+  )
+}
+```
 
 ## `useErrorEnhancement` hook
 
-```tsx
-import { useErrorEnhancement } from '@trikinco/fullstack-components/client'
-```
+A client-side hook for parsing information from an `Error` object or other source and creating helpful messages for users and developers.
+
+See [ErrorEnhancementRequestBody](#errorenhancementrequestbody) for available parameters.
 
 ### Handling network errors with the `useErrorEnhancement` hook
 
@@ -63,6 +152,10 @@ export default function Page({ error }) {
   const { isLoading, data } = useErrorEnhancement({
     errorMessage: error?.message,
     stackTrace: error?.stack,
+    // Optional
+    // Contextual info which may help with debugging.
+    errorContext:
+      'The endpoint handling /users is down for maintenance',
   })
 
   if (isLoading) {
@@ -77,40 +170,6 @@ export default function Page({ error }) {
       <p>{data?.message}</p>
       <p>{data?.developmentModeContext}</p>
     </div>
-  )
-}
-```
-
-## `ErrorEnhancementBoundary` Client Component
-
-```tsx
-import { ErrorEnhancementBoundary } from '@trikinco/fullstack-components/client'
-```
-
-### Handling client errors with `ErrorEnhancementBoundary`
-
-<ClientErrors />
-
-```tsx title="Client Component"
-'use client'
-
-import { ErrorEnhancementBoundary } from '@trikinco/fullstack-components/client'
-
-export default function ComponentThatMayThrow() {
-  return (
-    <ErrorEnhancementBoundary
-      fallback={
-        <p>Generating a user-friendly error message...</p>
-      }
-    >
-      <Button
-        onClick={() => {
-          throwsCowbellOrError()
-        }}
-      >
-        Howdy 🤠
-      </Button>
-    </ErrorEnhancementBoundary>
   )
 }
 ```
@@ -131,9 +190,10 @@ const fscOptions: FSCOptions = {
     openAiApiKey: process.env.OPENAI_API_KEY || '',
     appContext: 'http web app',
     /**
-     * `isProd` overrides the output of `developmentModeContext`
-     * messages that are typically only shown when
-     * `process.env.NODE_ENV === 'development'`
+     * Overrides the output of `developmentModeContext` messages are
+     * shown when `process.env.NODE_ENV === 'development'`.
+     *
+     * See below for more info.
      */
     isProd: true,
   }),
@@ -144,6 +204,11 @@ const fscHandler = handleFSComponents(fscOptions)
 
 export { fscHandler as GET, fscHandler as POST }
 ```
+
+### `isProd`
+
+- Omitting `isProd`, `isProd: undefined` or `isProd: false` shows developer debugging messages if `process.env.NODE_ENV === 'development'`
+- `isProd: true` shows user-friendly messages regardless of `process.env.NODE_ENV`
 
 ## API Reference
 

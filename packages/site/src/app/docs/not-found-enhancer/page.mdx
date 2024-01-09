@@ -82,6 +82,7 @@ import {
 const fscOptions: FSCOptions = {
   notFoundEnhancer: handleNotFoundEnhancement({
     openAiApiKey: process.env.OPENAI_API_KEY || '',
+    // Required
     siteUrl: process.env.NEXT_PUBLIC_HOST || '',
   }),
   // Additional options and handlers...
@@ -92,7 +93,10 @@ const fscHandler = handleFSComponents(fscOptions)
 export { fscHandler as GET, fscHandler as POST }
 ```
 
-**Not Found Enhancer requires configuration of the API handler and a sitemap available at `/sitemap.xml`.**
+**Not Found Enhancer requires:**
+
+- Configuration of the API handler route with your `siteUrl`
+- A sitemap available at `/sitemap.xml`
 
 ## API Reference
 
