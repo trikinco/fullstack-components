@@ -174,10 +174,10 @@ export default async function Page() {
     voice: 'onyx',
   })
 
+  if (!responseFile) return 'No reminders.'
+
   const base64String =
     Buffer.from(responseFile).toString('base64')
-
-  if (!base64String) return 'No reminders.'
 
   return (
     <a

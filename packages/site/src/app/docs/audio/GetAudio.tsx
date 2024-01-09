@@ -7,9 +7,9 @@ export default async function Page() {
 		voice: 'onyx',
 	})
 
-	const base64String = Buffer.from(responseFile).toString('base64')
+	if (!responseFile) return 'No reminders.'
 
-	if (!base64String) return 'No reminders.'
+	const base64String = Buffer.from(responseFile).toString('base64')
 
 	return (
 		<a href={`data:${contentType};base64,${base64String}`} download>
