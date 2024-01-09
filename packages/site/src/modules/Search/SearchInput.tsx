@@ -59,6 +59,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
 			value,
 			id,
 			className,
+			placeholder,
 			activeResult,
 			isFocused,
 			isMounted,
@@ -94,7 +95,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
 						setIsFocused(false)
 					}}
 					type="search"
-					placeholder="Search documentation..."
+					placeholder={placeholder}
 					role="combobox"
 					maxLength={100}
 					aria-controls={id}

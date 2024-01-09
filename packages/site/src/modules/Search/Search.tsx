@@ -7,6 +7,10 @@ import { useSearch, type UseSearchProps } from './useSearch'
 export interface SearchProps extends UseSearchProps {
 	className?: string
 	/**
+	 * The search input placeholder
+	 */
+	placeholder?: string
+	/**
 	 * Search input on active
 	 */
 	onActive?: (active: boolean) => void
@@ -19,6 +23,7 @@ export function Search({
 	onChange,
 	onActive,
 	className,
+	placeholder,
 	value,
 	loading,
 	error,
@@ -56,6 +61,7 @@ export function Search({
 					ref={inputRef}
 					id={id}
 					value={value}
+					placeholder={placeholder}
 					isFocused={isFocused}
 					isMounted={isMounted}
 					activeResult={activeResult}

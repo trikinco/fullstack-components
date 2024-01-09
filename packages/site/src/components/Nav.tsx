@@ -1,5 +1,5 @@
 'use client'
-import type { HTMLAttributes, ReactNode } from 'react'
+import type { HTMLAttributes, ReactNode, ElementRef } from 'react'
 import Link from 'next/link'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { NAME_SHORT, URL_GITHUB, URL_NPM } from '@/src/utils/constants'
@@ -7,16 +7,23 @@ import { IconGitHub } from '@/src/components/Icons/IconGitHub'
 import { IconNpm } from '@/src/components/Icons/IconNpm'
 import { ThemeSwitcher } from '@/src/modules/Theme/ThemeSwitcher'
 import { FlexSearch } from '@/src/modules/Search/FlexSearch'
+import useIsStuck from '@/src/hooks/useIsStuck'
 
 export interface NavProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode
 }
 
 export const Nav = ({ children, className, ...rest }: NavProps) => {
+	const { ref, isStuck } = useIsStuck<ElementRef<'nav'>>()
+
 	return (
 		<nav
+			ref={ref}
 			className={merge(
-				'flex sticky top-0 left-0 backdrop-blur-md items-center p-6 z-20 border-b border-slate-950/5 dark:border-white/10 print:hidden',
+				'flex sticky top-[-1px] left-0 backdrop-blur-md items-center p-6 2xl:mb-8 z-20 print:hidden',
+				'transition-colors ease-in-out',
+				'border-b border-slate-950/5 dark:border-white/10 2xl:border-transparent 2xl:dark:border-transparent',
+				isStuck && '2xl:border-slate-950/5 2xl:dark:border-white/10',
 				className
 			)}
 			{...rest}
@@ -31,7 +38,10 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 			{children}
 
 			<div className="flex gap-3 sm:gap-6 ml-auto min-h-9">
-				<FlexSearch className="hidden md:block" />
+				<FlexSearch
+					placeholder="Search documentation..."
+					className="hidden md:block"
+				/>
 				<ThemeSwitcher className="flex flex-col justify-center" />
 				<Link
 					href={URL_NPM}
