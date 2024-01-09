@@ -15,7 +15,7 @@ export const metadata = {
 
 Rewrite, simplify or create text. Handles plain text, markdown and HTML.
 
-## `Text` Server Component
+## `<Text>` Server Component
 
 ### Rewriting text
 
@@ -41,7 +41,7 @@ Rewrite, simplify or create text. Handles plain text, markdown and HTML.
   by Hermitian operators. The position operator X and momentum operator P do not
   commute, but rather satisfy the canonical commutation relation.
   </p>
-  <p>Given a quantum state, the Born rule lets us compute expectation values for both X and P, and moreover for powers of them</p>
+  <p>Given a quantum state, the Born rule lets us compute expectation values for both X and P, and moreover for powers of them.</p>
 </Text>
 </Example>
 
@@ -70,7 +70,7 @@ Rewrite, simplify or create text. Handles plain text, markdown and HTML.
   <p>
     Given a quantum state, the Born rule lets us compute
     expectation values for both X and P, and moreover for powers
-    of them
+    of them.
   </p>
 </Text>
 ```
@@ -102,7 +102,7 @@ Rewrite, simplify or create text. Handles plain text, markdown and HTML.
 
 ## `useText` hook
 
-```tsx
+```tsx {6-18}
 'use client'
 
 import { useText } from '@trikinco/fullstack-components/client'
@@ -114,10 +114,11 @@ export default function Page() {
     grade: 5,
     max: 250,
     content: `
-        One consequence of the basic quantum formalism is the uncertainty principle.
-        In its most familiar form, this states that no preparation of a quantum
-        particle can imply simultaneously precise predictions both for a measurement
-        of its position and for a measurement of its momentum.
+        One consequence of the basic quantum formalism is the uncertainty 
+        principle. In its most familiar form, this states that no 
+        preparation of a quantum particle can imply simultaneously 
+        precise predictions both for a measurement of its position 
+        and for a measurement of its momentum.
         `,
   })
 
@@ -130,7 +131,7 @@ export default function Page() {
 }
 ```
 
-`useText` also accepts a tree of components in `content`. Note that only static HTML is returned.
+`useText` also accepts a tree of React components in `content`. Note that only static HTML is returned.
 
 ```tsx title="useText with HTML"
 const { isLoading, data } = useText({
@@ -150,7 +151,9 @@ const { isLoading, data } = useText({
 })
 ```
 
-```tsx title="Server Component"
+## Custom Server Component with `getText`
+
+```tsx {4-8} title="Server Component"
 import { getText } from '@trikinco/fullstack-components'
 
 export default async function Page() {
