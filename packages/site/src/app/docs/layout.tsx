@@ -15,22 +15,22 @@ export default async function Layout({ children }: { children: ReactNode }) {
 
 	return (
 		<>
-			<Breadcrumbs className="px-6 py-3 " />
 			<Main
 				as="div"
 				id="content"
 				className="items-start lg:justify-center lg:mx-auto lg:max-w-screen-2xl lg:grid lg:grid-rows-none lg:grid-cols-12"
 			>
-				<DocsNav className="hidden lg:sticky lg:top-32 lg:left-0 lg:flex w-full max-w-prose mx-auto lg:mx-0 lg:col-start-1 lg:col-end-3" />
+				<DocsNav className="row-start-1 row-end-3 hidden lg:sticky lg:top-32 lg:left-0 lg:flex w-full max-w-prose mx-auto lg:mx-0 lg:col-start-1 lg:col-end-3" />
+				<Breadcrumbs className="row-start-1 py-3 md:py-0 lg:mb-2 w-full max-w-prose mx-auto col-span-full md:col-start-3 md:col-end-11" />
 				<Prose
 					as="main"
 					id={ID_MAIN}
-					className="col-span-full md:col-start-3 md:col-end-11"
+					className="row-start-2 col-span-full md:col-start-3 md:col-end-11"
 				>
 					{children}
 				</Prose>
 				<DocsToc
-					className="hidden lg:sticky lg:top-32 lg:right-0 lg:flex w-full max-w-prose mx-auto lg:mx-0 lg:col-start-11 lg:col-span-2"
+					className="row-start-1 row-end-3 hidden lg:sticky lg:top-32 lg:right-0 lg:flex w-full max-w-prose mx-auto lg:mx-0 lg:col-start-11 lg:col-span-2"
 					tocMarkupByRoutes={tocMarkupByRoutes}
 				/>
 				<DocsFooter className="w-full lg:w-auto col-span-full md:col-start-3 md:col-end-11" />

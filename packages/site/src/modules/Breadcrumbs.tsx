@@ -41,10 +41,7 @@ export function Breadcrumbs({ children, className }: BreadcrumbsProps) {
 					},
 				}))}
 			/>
-			<nav
-				className={merge('lg:hidden print:hidden', className)}
-				aria-label="Breadcrumb"
-			>
+			<nav className={merge('print:hidden', className)} aria-label="Breadcrumb">
 				<ol className="flex gap-2 max-w-prose mx-auto">
 					<li className="text-sm text-slate-600 dark:text-slate-400">
 						<Link href="/">Home</Link>

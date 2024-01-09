@@ -19,7 +19,10 @@ export function Prose<C extends ElementType = typeof defaultElement>({
 	return (
 		<Component
 			className={merge(
-				'w-full mx-auto prose dark:prose-invert prose-h1:text-3xl md:prose-h1:text-5xl prose-headings:scroll-mt-32 prose-h1:font-bold prose-h1:mb-3 focus-visible:prose-a:outline focus-visible:prose-a:outline-2 focus-visible:prose-a:outline-offset-2 focus-visible:prose-a:rounded-sm',
+				'w-full mx-auto prose dark:prose-invert',
+				'prose-h1:text-3xl md:prose-h1:text-5xl prose-h1:mb-3 md:prose-h1:mb-6 lg:prose-h1:mb-8',
+				'prose-headings:scroll-mt-32 prose-headings:text-pretty',
+				'focus-visible:prose-a:outline focus-visible:prose-a:outline-2 focus-visible:prose-a:outline-offset-2 focus-visible:prose-a:rounded-sm',
 				className
 			)}
 			{...rest}

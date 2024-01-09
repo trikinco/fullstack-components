@@ -71,11 +71,11 @@ pre [data-rehype-pretty-code-figure] {
 }
 
 [data-highlighted-chars] {
-	@apply rounded-md bg-slate-800/10 dark:bg-slate-800;
+	@apply rounded-md bg-slate-400/10 dark:bg-slate-800;
 }
 
 [data-highlighted-line] {
-	@apply rounded-md bg-slate-800/10 dark:bg-slate-800;
+	@apply bg-slate-400/10 dark:bg-slate-800;
 }
 
 .bg-pattern {
@@ -126,6 +126,14 @@ pre [data-rehype-pretty-code-figure] {
 
 .toc-active {
 	@apply font-bold text-blue-600 dark:text-blue-400;
+}
+
+.prose h1 > .heading-link {
+	@apply font-bold;
+}
+
+.prose h1 + p {
+	@apply text-lg text-pretty;
 }
 
 .heading-link {
