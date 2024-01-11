@@ -94,7 +94,6 @@ export default function Home() {
 								width={28}
 								height={28}
 								className="inline w-6 h-6 lg:w-7 lg:h-7 mr-1 text-pink-500"
-								aria-hidden="true"
 							/>
 							<strong className="font-bold">AI-powered building blocks</strong>
 						</span>{' '}
@@ -104,7 +103,6 @@ export default function Home() {
 								width={28}
 								height={28}
 								className="inline w-6 h-6 lg:w-7 lg:h-7 mr-1 text-blue-500 dark:text-primary"
-								aria-hidden="true"
 							/>
 							<strong className="font-bold">developers</strong>
 						</span>
@@ -114,7 +112,6 @@ export default function Home() {
 								width={28}
 								height={28}
 								className="inline w-6 h-6 lg:w-7 lg:h-7 mr-1 text-pink-500"
-								aria-hidden="true"
 							/>
 							<strong className="font-bold">intelligent features</strong>
 						</span>{' '}
@@ -126,7 +123,6 @@ export default function Home() {
 									width={28}
 									height={28}
 									className="inline w-6 h-6 lg:w-7 lg:h-7 mr-1 text-blue-500 dark:text-primary"
-									aria-hidden="true"
 								/>
 								<strong className="font-bold">live&nbsp;examples.</strong>
 							</span>
