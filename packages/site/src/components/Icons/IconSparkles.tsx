@@ -2,7 +2,7 @@ import type { SVGAttributes } from 'react'
 import { merge } from '@trikinco/fullstack-components/utils'
 
 /**
- * https://www.svgrepo.com/collection/dazzleLine-icons/
+ * https://www.svgrepo.com/collection/dazzle-line-icons/
  */
 export const IconSparkles = ({
 	className,
