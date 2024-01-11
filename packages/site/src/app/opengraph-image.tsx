@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og'
-import { NAME_SHORT, NAME_DESCRIPTION } from '../utils/constants'
+import { NAME_SHORT, NAME_DESCRIPTION } from '@/src/utils/constants'
 
 // Route segment config
 export const runtime = 'edge'

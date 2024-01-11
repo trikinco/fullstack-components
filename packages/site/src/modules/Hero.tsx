@@ -2,56 +2,63 @@
 
 import { TypeAnimation } from 'react-type-animation'
 import Link from 'next/link'
-import { PageHeader } from '@/src/components/PageHeader'
+import { merge } from '@trikinco/fullstack-components/utils'
+import { PageHeader, type PageHeaderProps } from '@/src/components/PageHeader'
 import { NAME_SHORT } from '@/src/utils/constants'
 import { Button } from '@/src/components/Elements/Button'
 import { IconPlay } from '@/src/components/Icons/IconPlay'
 import { routes } from '@/src/utils/routes'
 
-export function Hero() {
+export type HeroProps = PageHeaderProps
+
+export function Hero({ className }: HeroProps) {
 	return (
 		<PageHeader
-			className="prose dark:prose-invert"
+			className={className}
 			headingProps={{
-				className: 'text-4xl sm:text-5xl xl:text-6xl mt-6 mb-6 xl:mt-0 sm:mb-3',
+				className: merge('text-4xl sm:text-5xl xl:text-6xl mt-6 xl:mt-0 mb-0'),
 			}}
 			title={
 				<>
-					<span className="sr-only">Build websites by writing prompts.</span>
+					<span className="sr-only">
+						Build your next idea by writing prompts.
+					</span>
 					<TypeAnimation
 						aria-hidden="true"
 						className="block break-all whitespace-pre-line h-[86px] sm:h-[109px] xl:h-[137px]"
 						preRenderFirstString
 						speed={30}
-						deletionSpeed={20}
+						deletionSpeed={50}
 						sequence={[
-							'Build websites by \nwriting prompts.',
+							'Build your next idea \nby writing prompts.',
 							700,
-							'Build websites by \nusing AI.',
-							3000,
-							'Build websites by \nusing <Prompt />',
+							'Build your product \nby using AI.',
+							1600,
+							'Build your website \nby using <Prompt />',
 							1250,
-							'Build websites by \nusing <Audio />',
+							'Build your blog \nwith <Audio />',
 							1400,
-							'Build websites by \nusing <Text />',
+							'Build your app \nby using <Text />',
 							1300,
-							'Build websites by \nusing <Image />',
-							3000,
-							'Build websites by \nwriting prompts.',
+							'Build your platform \nwith <Image />',
+							1600,
+							'Build your next idea \nby using AI.',
 						]}
 					/>
 				</>
 			}
 		>
-			<p className="mt-6 text-lg max-w-3xl mx-auto text-slate-600 dark:text-white">
-				<strong className="dark:text-[#00FCCE]">{NAME_SHORT}</strong> is an
-				AI-powered library for Next.js that turns words into fully integrated
-				components, like magic.
+			<p className="mt-6 text-lg sm:text-xl lg:text-2xl max-w-3xl text-slate-600 dark:text-white text-balance">
+				<strong className="font-bold text-black dark:text-primary">
+					{NAME_SHORT}
+				</strong>{' '}
+				is an AI-powered library for Next.js that helps you build your great
+				ideas from end-to-end.
 			</p>
-			<p className="text-sm sm:text-base max-w-3xl mx-auto text-slate-600 dark:text-white">
+			<p className="text-sm sm:text-base max-w-3xl mt-6 mb-0 text-slate-600 dark:text-white">
 				Responsible, customizable and open source.
 			</p>
-			<div className="mt-8 flex grow items-center gap-6">
+			<div className="mt-10 sm:mt-12 flex grow items-center gap-6">
 				<Button as={Link} href={routes.getStarted}>
 					Get started
 				</Button>
