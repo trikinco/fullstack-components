@@ -1,5 +1,23 @@
 ![Fullstack Components - Build websites by writing prompts](https://github.com/trikinco/fullstack-components/raw/main/packages/site/public/images/repo-header-dark.png)
 
+<p align="center" style="align: center;">
+    <a aria-label="GitHub Actions Workflow Status" href="https://github.com/trikinco/fullstack-components/actions">
+        <img src="https://img.shields.io/github/actions/workflow/status/trikinco/fullstack-components/publishToNpm.yaml?style=for-the-badge" alt="" />
+    </a>
+    <a aria-label="GitHub License" href="https://github.com/trikinco/fullstack-components/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/trikinco/fullstack-components?style=for-the-badge" alt="GitHub License" />
+    </a>
+    <a aria-label="TypeScript" href="https://www.npmjs.com/package/@trikinco/fullstack-components">
+        <img src="https://img.shields.io/badge/TypeScript-blue?style=for-the-badge" alt="TypeScript" />
+    </a>
+    <a aria-label="NPM Version" href="https://www.npmjs.com/package/@trikinco/fullstack-components?activeTab=versions">
+        <img src="https://img.shields.io/npm/v/%40trikinco%2Ffullstack-components?style=for-the-badge" alt="NPM Version" />
+    </a>
+    <a aria-label="Semantic Release" href="https://github.com/trikinco/fullstack-components/releases">
+        <img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=for-the-badge" alt="Semantic Release" />
+    </a>
+</p>
+
 # [Fullstack Components](https://fullstack-components.vercel.app)
 
 Fullstack Components is a library of AI-powered building blocks for Next.js that help you build your great ideas from end-to-end.
