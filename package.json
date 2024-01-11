@@ -1,7 +1,7 @@
 {
 	"name": "@trikinco/fullstack-components-root",
 	"version": "1.0.1",
-	"description": "AI-powered fullstack components",
+	"description": "AI-powered building blocks for Next.js",
 	"private": true,
 	"type": "module",
 	"license": "MIT",
@@ -10,7 +10,7 @@
 		"type": "git",
 		"url": "https://github.com/trikinco/fullstack-components.git"
 	},
-	"author": "Trikin Co",
+	"author": "trikinco",
 	"engines": {
 		"node": ">=v18.17.1",
 		"pnpm": ">=8.7.1"
