@@ -1,0 +1,50 @@
+import { Cards } from '@/src/modules/Cards'
+import { FlexSearch } from '@/src/modules/Search/FlexSearch'
+import {
+  routes,
+  routesDocsIntroMeta,
+  routesCardsMeta,
+} from '@/src/utils/routes'
+import {
+  URL_HOST,
+  NAME_SHORT,
+  NAME_LONG,
+} from '@/src/utils/constants'
+
+export const metadata = {
+  title: `Documentation for ${NAME_SHORT}`,
+  description: `Documentation and an overview of ${NAME_LONG} and its features`,
+  alternates: {
+    canonical: `${new URL(routes.docs, URL_HOST)}`,
+  },
+}
+
+# Documentation
+
+`fullstack-components` is a library of AI-powered building blocks that make it easy to build smarter Next.js applications from end-to-end.
+
+<FlexSearch
+  label="Search documentation"
+  placeholder={`Try searching "Get started"`}
+  className="not-prose md:hidden"
+  hideKey
+  isSolo
+/>
+
+## Overview
+
+`fullstack-components` lets you **work securely with AI** in these ways:
+
+- **Server and Client Components** to get you up and running in no-time.
+- **Functions** to help you performantly fetch data [on the server](https://nextjs.org/docs/app/building-your-application/data-fetching/patterns#fetching-data-on-the-server) and [on the client](https://nextjs.org/docs/app/building-your-application/routing/route-handlers).
+- **Hooks and utilities** that bridge the gaps between components and functions.
+
+This lets you **easily build custom components and functionality**, or use pre-built ones with all the features you need.
+
+## Introduction
+
+<Cards routes={routesDocsIntroMeta} hasFullWidth />
+
+## Features
+
+<Cards routes={routesCardsMeta} allFullWidth />
