@@ -29,7 +29,7 @@ export const ThemeSwitcher = ({ className, ...rest }: ThemeSwitcherProps) => {
 			<button
 				ref={focusReturnRef}
 				type="button"
-				className="group/theme inline-flex gap-2 tracking-wide text-sm mb-1 px-1 ml-auto text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-md focus-ring"
+				className="group/theme inline-flex gap-2 tracking-wide text-sm mb-1 ml-auto text-slate-400 hover:text-slate-500 dark:hover:text-slate-200 rounded-md focus-ring"
 				onClick={() => setOpen(true)}
 			>
 				<span className="sr-only">Theme</span>
