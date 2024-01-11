@@ -5,7 +5,7 @@ import { routes } from '@/src/utils/routes'
 export const metadata = {
   title: 'Image - AI Image Generation And Visual Descriptions',
   description:
-    'Create images with prompts or generate image descriptions.',
+    'Create visuals with prompts and use vision tools to describe or extract details from images.',
   alternates: {
     canonical: `${new URL(routes.image, URL_HOST)}`,
   },
@@ -13,9 +13,11 @@ export const metadata = {
 
 # Image
 
-A smart image component that either outputs text descriptions of an image, generates an image based on a prompt, or behaves just like a regular `next/image`.
+Create visuals with prompts and use vision tools to describe or extract details from images.
 
 ## `<Image>` Server Component
+
+A smart image component that either outputs text descriptions of an image, generates an image based on a prompt, or behaves just like a regular `next/image`.
 
 ### Describing an image
 
@@ -170,7 +172,7 @@ export default async function Page() {
 
 ## Setup
 
-Add `image: handleImageRequest()` to the [API handler route](/docs/get-started/#setup).
+Add `image: handleImageRequest()` to the [API route handler](/docs/get-started/#setup).
 
 ```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
@@ -198,7 +200,7 @@ export { fscHandler as GET, fscHandler as POST }
 <TypeInfoToText
   path="handlers/image/models.d.ts"
   name="ImageOptions"
-  description="Image API handler route options."
+  description="Image API route handler options."
 />
 
 <TypeInfoToText

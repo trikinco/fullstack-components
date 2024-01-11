@@ -15,7 +15,7 @@ export const metadata = {
 
 # Get started with Fullstack Components
 
-`@trikinco/fullstack-components` is a library of React components, hooks and utilities that make it easy to build Next.js applications powered by AI.
+Start using [AI-powered building blocks](/docs) to create your next great idea from end-to-end.
 
 ## Installation
 
@@ -25,8 +25,8 @@ npm install @trikinco/fullstack-components
 
 ## Requirements
 
-- `next>=13` (both App and Pages Routers are supported)
-- Your own [OpenAI API key](https://platform.openai.com/docs/overview)
+- `next>=13`, supporting both App and Pages Routers.
+- Your own [OpenAI API key](https://platform.openai.com/docs/overview).
 
 ## Setup
 
@@ -34,28 +34,34 @@ If you're using Next.js 13 you must [enable server actions](https://nextjs.org/d
 
 ### Step 1: Add environment variables
 
+These [environment variables](https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables) are **required** to use the OpenAI API and to let you call your own internal Next.js [API route handler](#step-3-configure-the-api-route-handler).
+
 ```sh title=".env.local"
 OPENAI_API_KEY=<key>
 NEXT_PUBLIC_HOST=<url>
 ```
 
-_Read more about adding [environment variables](https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables) to your project._
+1. **Replace `<key>`** with your [OpenAI API key](https://platform.openai.com/docs/overview)
+1. **Replace `<url>`** with the full URL of your project. e.g `http://localhost:3000` for local development and `https://example.com` for production
 
-- Replace `<key>` with your [OpenAI API key](https://platform.openai.com/docs/overview)
-- Replace `<url>` with the full root URL of your project. e.g `http://localhost:3000` for local development and `https://example.com` for production
+### Step 2: Add the API route handler
 
-### Step 2: Add the API handler route
+A new [catch-all dynamic route](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#catch-all-segments) with an API [route handler](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) in your Next.js app will handle all the endpoints needed by `fullstack-components`.
 
-Create a new [dynamic route](https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes) with an API handler route in your Next.js app. The file will handle all the API endpoints needed by `fullstack-components` to serve data to components, hooks and other utilities.
+These endpoints are needed for all [client-side functionality](/docs/concepts#getters-vs-fetchers) to serve data to components, hooks and other utilities.
 
-Depending on which router you use in Next.js, the location of the API handler route will differ:
+#### Adding the route handler file
 
-- Using the Next.js **App Router**: `app/api/fsutils/[...fscomponents]/route.ts`
-- Using the Next.js **Pages Router**: `pages/api/fsutils/[...fscomponents].ts`
+Depending on which router you use in Next.js, the location of the new API route handler will differ:
 
-### Step 3: Configure the API handler route
+- **App Router**: `app/api/fsutils/[...fscomponents]/route.ts`
+- **Pages Router**: `pages/api/fsutils/[...fscomponents].ts`
 
-As an example, let's set up the API handler for the `Image` component by adding `image: handleImageRequest()`.
+E.g when using the App Router, add the `fsutils/[...fscomponents]` folders to `app/api`, and a new `route.ts` file to the `[...fscomponents]` folder.
+
+### Step 3: Configure the API route handler
+
+As an example, let's set up the API route handler for the `<Image>` component by adding `image: handleImageRequest()`.
 
 ```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
@@ -76,6 +82,12 @@ export { fscHandler as GET, fscHandler as POST }
 
 _All requests to `/api/fsutils/*`(image, prompt, notFoundEnhancer, etc.) will automatically be handled by `fullstack-components`, as long as you've added the appropriate handler._
 
+Now that you've added the image handler you'll be able to call `/api/fsutils/image` from Client Components, hooks and [`fetchers`](/docs/concepts#fetchers-client).
+
+For using Server Components and [`getters`](/docs/concepts#getters-server) API route handlers are not necessary.
+
+#### Note on API route handlers
+
 All handlers can be imported from `@trikinco/fullstack-components` and are prefixed with `handle`.
 
 **Handlers examples:**
@@ -83,3 +95,5 @@ All handlers can be imported from `@trikinco/fullstack-components` and are prefi
 - image: **handleImageRequest**
 - htmlPage: **handleHtmlPageRequest**
 - notFoundEnhancer: **handleNotFoundEnhancement**
+
+View the documentation for each feature for more details about each handler.

@@ -5,7 +5,7 @@ import { routes } from '@/src/utils/routes'
 export const metadata = {
   title: 'Text - Enhance, Create And Simplify Your Text With AI',
   description:
-    'Rewrite, simplify or create text. Handles plain text, markdown and HTML',
+    'Rewrite, create, edit and modify text content in multiple formats.',
   alternates: {
     canonical: `${new URL(routes.text, URL_HOST)}`,
   },
@@ -13,9 +13,11 @@ export const metadata = {
 
 # Text
 
-Rewrite, simplify or create text. Handles plain text, markdown and HTML.
+Rewrite, create, edit and modify text content in multiple formats.
 
 ## `<Text>` Server Component
+
+Handles a text string or a React tree with content to rewrite or use for creating new content. Returns plain text, markdown or HTML.
 
 ### Rewriting text
 
@@ -170,7 +172,7 @@ export default async function Page() {
 
 ## Setup
 
-Add `text: handleTextRequest()` to the [API handler route](/docs/get-started/#setup).
+Add `text: handleTextRequest()` to the [API route handler](/docs/get-started/#setup).
 
 ```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
@@ -198,7 +200,7 @@ export { fscHandler as GET, fscHandler as POST }
 <TypeInfoToText
   path="handlers/text/models.d.ts"
   name="TextOptions"
-  description="Text API handler route options."
+  description="Text API route handler options."
 />
 
 <TypeInfoToText

@@ -20,7 +20,7 @@ Generate speech from text, and transcribe audio into text or create accessible [
 
 ## Server Components
 
-### `<Audio>` Server Component
+### `<Audio>`
 
 Creates an audio file from text `content` or a React tree. The component also generates WebVTT captions for the audio file to improve accessibility.
 
@@ -73,7 +73,7 @@ Data URLs are used to inline the data instead of storing the audio and caption f
 
 If you want to store the files yourself, you can build your own Server Components using the `getAudio` utility function.
 
-### `<Track>` Server Component
+### `<Track>`
 
 Creates VTT captions from an audio file.
 
@@ -97,7 +97,7 @@ Creates VTT captions from an audio file.
 </video>
 ```
 
-### `<Transcript>` Server Component
+### `<Transcript>`
 
 Transcribes an audio file to text.
 
@@ -192,7 +192,7 @@ export default async function Page() {
 
 ## Setup
 
-Add `audio: handleAudioRequest()` to the [API handler route](/docs/get-started/#setup).
+Add `audio: handleAudioRequest()` to the [API route handler](/docs/get-started/#setup).
 
 ```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
@@ -220,7 +220,7 @@ export { fscHandler as GET, fscHandler as POST }
 <TypeInfoToText
   path="handlers/audio/models.d.ts"
   name="AudioOptions"
-  description="Audio API handler route options."
+  description="Audio API route handler options."
 />
 
 <TypeInfoToText
