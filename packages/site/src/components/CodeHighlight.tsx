@@ -9,7 +9,7 @@ export interface CodeHighlightProps extends HTMLAttributes<HTMLPreElement> {
 	raw?: string
 	/** markdown code */
 	code?: string
-	/** whether the copy button should be hidden */
+	/** `true` disables the copy code button */
 	noCopy?: boolean
 }
 

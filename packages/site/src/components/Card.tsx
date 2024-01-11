@@ -14,6 +14,8 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 	children,
 	header,
 	footer,
+	isFullWidth,
+	variant = 'default',
 	component: TitleComponent = 'h2',
 	...rest
 }: AsComponent<C, CardProps>) => {
@@ -30,7 +32,12 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 	return (
 		<Component
 			className={merge(
-				'relative w-full flex flex-col grow sm:max-w-lg p-4 bg-white border border-gray-200 rounded-lg sm:p-8 dark:bg-slate-900 dark:border-slate-800 focus-ring',
+				'relative w-full flex flex-col grow sm:max-w-lg p-4 sm:p-8 border rounded-lg',
+				variant === 'default' &&
+					'bg-white border-gray-200 dark:bg-slate-900 dark:border-slate-800',
+				variant === 'primary' &&
+					'bg-blue-500 dark:bg-blue-700 border-black/10 dark:border-white/10',
+				'focus-ring',
 				className
 			)}
 			{...rest}
@@ -41,11 +48,19 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 				</div>
 			)}
 
-			<div className="flex flex-wrap gap-3 items-center grow sm:flex-nowrap sm:flex-col relative">
+			<div
+				className={merge(
+					'relative',
+					'flex flex-wrap gap-3 grow',
+					!isFullWidth && 'sm:flex-col sm:flex-nowrap items-center'
+				)}
+			>
 				{src && (
 					<Image
 						className={merge(
-							'w-28 h-28 sm:mx-auto sm:w-auto sm:h-auto invert dark:invert-0 hover:mix-blend-hard-light',
+							'w-28 h-28',
+							'invert dark:invert-0 hover:mix-blend-hard-light z-10',
+							!isFullWidth && 'sm:mx-auto sm:w-auto sm:h-auto',
 							imgClassName
 						)}
 						src={src}
@@ -56,22 +71,38 @@ export const Card = <C extends ElementType = typeof defaultElement>({
 					/>
 				)}
 
-				<div className="flex flex-col flex-1">
-					<TitleComponent className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+				<div className="flex flex-col flex-1 my-auto z-10">
+					<TitleComponent
+						className={merge(
+							'mb-2 text-2xl font-bold tracking-tight',
+							variant === 'default'
+								? 'text-gray-900 dark:text-white'
+								: 'text-white'
+						)}
+					>
 						{title}
 					</TitleComponent>
 
-					<div className="mb-3 font-normal text-gray-700 dark:text-gray-300">
+					<div
+						className={merge(
+							'font-normal',
+							variant === 'default'
+								? 'text-gray-700 dark:text-gray-300'
+								: 'text-white',
+							!!footer && 'mb-3'
+						)}
+					>
 						{children}
 					</div>
 				</div>
 
 				{footer && (
-					<div className="w-full flex flex-wrap gap-2 mt-auto pt-2">
+					<div className="w-full flex flex-wrap gap-2 mt-auto pt-2 z-10">
 						{footer}
 					</div>
 				)}
 			</div>
+			<div className="bg-noise pointer-events-none absolute inset-0" />
 		</Component>
 	)
 }
