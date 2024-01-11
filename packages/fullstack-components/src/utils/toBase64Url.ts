@@ -1,5 +1,6 @@
 /**
  * Converts text content or array buffer files to base64 string URLs
+ * @example return value 'data:audio/mpeg;base64,V0VCvdSBhc...'
  */
 export function toBase64Url(
 	content: string | ArrayBuffer | undefined,
