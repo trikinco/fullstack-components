@@ -1,11 +1,13 @@
 import { ImageResponse } from 'next/og'
-import { NAME_SHORT, NAME_DESCRIPTION } from '@/src/utils/constants'
+import { NAME_DESCRIPTION } from '@/src/utils/constants'
+
+const TITLE = 'Get started with Fullstack Components'
 
 // Route segment config
 export const runtime = 'edge'
 
 // Image metadata
-export const alt = `${NAME_SHORT} ${NAME_DESCRIPTION}`
+export const alt = `${TITLE} ${NAME_DESCRIPTION}`
 export const size = {
 	width: 1200,
 	height: 630,
@@ -26,7 +28,7 @@ export const contentType = 'image/png'
  */
 export default async function Image() {
 	const spaceGroteskBold = fetch(
-		new URL('../assets/fonts/SpaceGroteskBold.ttf', import.meta.url)
+		new URL('../../../assets/fonts/SpaceGroteskBold.ttf', import.meta.url)
 	).then((res) => res.arrayBuffer())
 
 	return new ImageResponse(
@@ -45,7 +47,7 @@ export default async function Image() {
 					justifyContent: 'center',
 				}}
 			>
-				<span style={{ fontSize: 110, maxWidth: '60%' }}>{NAME_SHORT}</span>
+				<span style={{ fontSize: 86 }}>{TITLE}</span>
 				<span style={{ fontSize: 56, marginTop: '1em' }}>
 					{NAME_DESCRIPTION}
 				</span>

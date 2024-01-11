@@ -5,7 +5,7 @@ import { routes } from '@/src/utils/routes'
 export const metadata = {
   title: 'Not Found Enhancer - Help Users Find Their Way',
   description:
-    'AI-Powered Page Not Found. Get help finding the page you were looking for.',
+    'AI-Powered Page Not Found. Help visitors find what they were looking for and use the contents of your website to create helpful suggestions and messages.',
   alternates: {
     canonical: `${new URL(routes.notFound, URL_HOST)}`,
   },
@@ -13,28 +13,26 @@ export const metadata = {
 
 # Not Found Enhancer
 
-These enhancement tools uses your sitemap to find the closest matching page to the `not found` URL.
-It also uses the contents of your website URL's to create a helpful message for your end-user.
+Help visitors find what they were looking for and use the contents of your website URLs to create helpful suggestions and messages.
 
 ## `useNotFoundEnhancement` hook
 
-The `useNotFoundEnhancement` hook is a React hook that can be used to fetch the `not found` enhancement data from the API handler.
+The `useNotFoundEnhancement` hook is used to [scan your sitemap](/docs/usage#step-1-generate-a-sitemap) and fetch the `not found` enhancement data from the API route handler.
 
-See [Usage](/docs/usage) for a full example on making your own `NotFoundEnhancer` component.
+See [Usage](/docs/usage) for a full example on making your own `<NotFoundEnhancer>` component.
 
 <Example lazy>
   <NotFoundEnhancer />
 </Example>
 
-```tsx {7}
+```tsx {3,7,18,26-30} title="components/NotFoundEnhancer.tsx"
 'use client'
 
 import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
 import Link from 'next/link'
 
-export default function Page() {
+export function NotFoundEnhancer() {
   const { data, isLoading } = useNotFoundEnhancement()
-
   const hasUrlSuggestions =
     data?.bestAlternateUrls && data.bestAlternateUrls.length > 0
 
@@ -44,12 +42,15 @@ export default function Page() {
 
   return (
     <div className="mt-6">
+      {/* A helpful message derived from inspecting the `requestedUrl` and sitemap. */}
       <p>{data?.generatedContent}</p>
+
       {hasUrlSuggestions && (
         <>
           <p className="font-bold">
             Try one of these pages instead:
           </p>
+          {/* A list of the most likely suitable URLs for the visitor to navigate to. */}
           {data?.bestAlternateUrls.map((url, i) => (
             <Link href={url} key={i} className="block">
               {url}
@@ -57,6 +58,7 @@ export default function Page() {
           ))}
         </>
       )}
+
       {!hasUrlSuggestions && (
         <p>
           Sorry we couldn't find additional pages for you to try
@@ -70,9 +72,14 @@ export default function Page() {
 
 ## Setup
 
-Add `notFoundEnhancer: handleNotFoundEnhancement()` to the [API handler route](/docs/get-started/#setup).
+Add `notFoundEnhancer: handleNotFoundEnhancement()` to the [API route handler](/docs/get-started/#setup).
 
-```ts title="app/api/fsutils/[...fscomponents]/route.ts"
+### Required
+
+- A `siteUrl` added to the API route handler.
+- [A sitemap available at `/sitemap.xml`](/docs/usage#step-1-generate-a-sitemap).
+
+```ts {16} title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
   handleFSComponents,
   handleNotFoundEnhancement,
@@ -82,7 +89,12 @@ import {
 const fscOptions: FSCOptions = {
   notFoundEnhancer: handleNotFoundEnhancement({
     openAiApiKey: process.env.OPENAI_API_KEY || '',
-    // Required
+    /**
+     * Required.
+     * Full URL of your project.
+     * @example local development 'http://localhost:3000'
+     * @example production 'https://example.com'
+     */
     siteUrl: process.env.NEXT_PUBLIC_HOST || '',
   }),
   // Additional options and handlers...
@@ -93,10 +105,7 @@ const fscHandler = handleFSComponents(fscOptions)
 export { fscHandler as GET, fscHandler as POST }
 ```
 
-**Not Found Enhancer requires:**
-
-- Configuration of the API handler route with your `siteUrl`
-- A sitemap available at `/sitemap.xml`
+See more details about [adding environment variables](/docs/get-started/#step-1-add-environment-variables)
 
 ## API Reference
 
@@ -105,7 +114,7 @@ export { fscHandler as GET, fscHandler as POST }
 <TypeInfoToText
   path="handlers/notFoundEnhancer/models.d.ts"
   name="NotFoundEnhancerOptions"
-  description="Not found enhancer API handler route options."
+  description="Not found enhancer API route handler options."
 />
 
 <TypeInfoToText

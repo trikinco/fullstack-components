@@ -6,7 +6,7 @@ import { routes } from '@/src/utils/routes'
 export const metadata = {
   title: 'Select - Smart AI-Powered Dropdowns And Lists',
   description:
-    'A smart dropdown component that creates, labels and sorts all its own options.',
+    'Generate, sort, select and label content in dropdowns or lists. Including a smart dropdown component that creates all of its own options.',
   alternates: {
     canonical: `${new URL(routes.select, URL_HOST)}`,
   },
@@ -14,9 +14,11 @@ export const metadata = {
 
 # Select
 
-A smart dropdown component that creates, labels and sorts all its own options.
+Generate, sort, select and label content in dropdowns or lists.
 
 ## `<Select>` Server Component
+
+A smart dropdown component that creates all of its own options.
 
 <Example>
   <Select
@@ -110,7 +112,7 @@ export default async function Page() {
 
 ## Setup
 
-Add `select: handleSelectRequest()` to the [API handler route](/docs/get-started/#setup).
+Add `select: handleSelectRequest()` to the [API route handler](/docs/get-started/#setup).
 
 ```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
@@ -138,7 +140,7 @@ export { fscHandler as GET, fscHandler as POST }
 <TypeInfoToText
   path="handlers/select/models.d.ts"
   name="SelectOptions"
-  description="Select API handler route options."
+  description="Select API route handler options."
 />
 
 <TypeInfoToText

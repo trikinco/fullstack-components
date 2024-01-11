@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss'
 import defaultTheme from 'tailwindcss/defaultTheme'
+import defaultColors from 'tailwindcss/colors'
 
 const config: Config = {
 	darkMode: ['class'],
@@ -8,6 +9,10 @@ const config: Config = {
 		fontFamily: {
 			sans: ['var(--font-base)', ...defaultTheme.fontFamily.sans],
 			mono: ['var(--font-mono)', ...defaultTheme.fontFamily.mono],
+		},
+		colors: {
+			primary: '#00FCCE',
+			...defaultColors,
 		},
 	},
 	plugins: [require('@tailwindcss/typography'), require('autoprefixer')],

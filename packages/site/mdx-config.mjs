@@ -49,10 +49,8 @@ export const rehypePlugins = [
 
 			const meta = codeEl.data?.meta?.trim()
 
-			if (!/\bnoCopy/.test(meta)) {
-				node.noCopy = true
-			}
-
+			// Disable copying if `noCopy` has been added to the code block meta string
+			node.noCopy = /\bnoCopy/.test(meta)
 			node.raw = codeEl.children?.[0].value
 		})
 	},
@@ -76,8 +74,8 @@ export const rehypePlugins = [
 	() => (tree) => {
 		visit(tree, (node) => {
 			if (node?.type !== 'element') return
-			if (node?.tagName !== 'div') return
-			if (!('data-rehype-pretty-code-fragment' in node.properties)) return
+			if (node?.tagName !== 'figure') return
+			if (!('data-rehype-pretty-code-figure' in node.properties)) return
 
 			for (const child of node.children) {
 				if (child.tagName === 'pre') {

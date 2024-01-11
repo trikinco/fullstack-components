@@ -15,13 +15,16 @@ export function NotFoundEnhancer() {
 
 	return (
 		<div>
+			{/* A helpful message derived from inspecting the `requestedUrl` and sitemap. */}
 			<p>{data?.generatedContent}</p>
+
 			{hasUrlSuggestions && (
 				<>
 					<p className="font-bold mt-3" id="url-suggestions">
 						Try one of these pages instead:
 					</p>
 					<ul aria-labelledby="url-suggestions">
+						{/* A list of the most likely suitable URLs for the visitor to navigate to. */}
 						{data?.bestAlternateUrls.map((url, i) => (
 							<li key={i}>
 								<Link href={url} className="block underline">
@@ -32,6 +35,7 @@ export function NotFoundEnhancer() {
 					</ul>
 				</>
 			)}
+
 			{!hasUrlSuggestions && (
 				<p>
 					Sorry we couldn&apos;t find additional pages for you to try this time.

@@ -9,7 +9,7 @@ import imageImage from '../../public/images/Asterisk.png'
 import imageSelect from '../../public/images/DiamondSlim.png'
 import imageText from '../../public/images/Cube.png'
 import imageChat from '../../public/images/Wedge.png'
-import { URL_DISCUSSIONS, URL_GITHUB } from './constants'
+import { NAME_SHORT, URL_DISCUSSIONS, URL_GITHUB } from './constants'
 
 export const routes = {
 	examples: '/examples',
@@ -30,14 +30,15 @@ export const routes = {
 	text: '/docs/text',
 }
 
-const { docs, examples, ...restRoutes } = routes
+const { examples, ...restRoutes } = routes
 
 export const routesDocs = restRoutes
 
-type RoutesWithMeta = Omit<CardProps, 'title'> & {
+export type RoutesWithMeta = Omit<CardProps, 'title'> & {
 	title: string
 	href: string
 	isTitle?: boolean
+	isFullWidth?: boolean
 	hasDivider?: boolean
 }
 
@@ -203,7 +204,7 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 		},
 		footer: (
 			<>
-				<Chip>Component</Chip>
+				<Chip>Components</Chip>
 				<Chip>Hook</Chip>
 				<Chip>Utils</Chip>
 			</>
@@ -211,20 +212,29 @@ export const routesCardsMeta: RoutesWithMeta[] = [
 	},
 ]
 
-export const routesDocsMeta: RoutesWithMeta[] = [
+export const routesDocsIntroMeta: RoutesWithMeta[] = [
 	{
 		title: 'Get started',
 		href: routes.getStarted,
+		isFullWidth: true,
+		children: `Install and get started with ${NAME_SHORT}.`,
+		variant: 'primary',
 	},
 	{
 		title: 'Usage',
 		href: routes.usage,
+		children: `Quickstart usage example to learn the basics.`,
 	},
 	{
 		title: 'Concepts',
 		href: routes.concepts,
 		hasDivider: true,
+		children: `Core concepts, getters vs fetchers and import paths.`,
 	},
+]
+
+export const routesDocsMeta: RoutesWithMeta[] = [
+	...routesDocsIntroMeta,
 	...routesCardsMeta,
 ]
 

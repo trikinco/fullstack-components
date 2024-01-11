@@ -40,7 +40,7 @@ export const Nav = ({ children, className, ...rest }: NavProps) => {
 			<div className="flex gap-3 sm:gap-6 ml-auto min-h-9">
 				<FlexSearch
 					placeholder="Search documentation..."
-					className="hidden md:block"
+					className="hidden md:block md:w-64"
 				/>
 				<ThemeSwitcher className="flex flex-col justify-center" />
 				<Link

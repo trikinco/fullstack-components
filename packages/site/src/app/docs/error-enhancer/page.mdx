@@ -15,9 +15,11 @@ export const metadata = {
 
 # Error Enhancer
 
-These error enhancement tools analyze information from an `Error` object, providing users with helpful insights and offering developers in-depth debugging assistance.
+Analyze information from an `Error` object, providing users with helpful insights and offering developers in-depth debugging assistance.
 
-## `<ErrorEnhancementBoundary>` Client Component
+## Client Components
+
+### `<ErrorEnhancementBoundary>`
 
 A smart [error boundary](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary) Client Component that parses an `Error` object and stack trace, then generates and displays messages aimed to help users and developers.
 
@@ -26,7 +28,7 @@ A smart [error boundary](https://react.dev/reference/react/Component#catching-re
 
 Consumes [`react-error-boundary`](https://www.npmjs.com/package/react-error-boundary), `useErrorEnhancement` and `<ErrorEnhancementFallback>` under the hood to generate and display the enhanced error messages.
 
-### Handling client errors with `<ErrorEnhancementBoundary>`
+#### Handling client errors with `<ErrorEnhancementBoundary>`
 
 <ClientErrors />
 
@@ -54,7 +56,7 @@ export default function ComponentThatMayThrow() {
 }
 ```
 
-## `<ErrorEnhancementFallback>` Client Component
+### `<ErrorEnhancementFallback>`
 
 A Client Component to render inside your own [error boundary](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary) or a [`react-error-boundary`](https://www.npmjs.com/package/react-error-boundary). `<ErrorEnhancementFallback>` handles enhancing error messages and rendering the information.
 
@@ -78,7 +80,7 @@ export default function Page() {
 }
 ```
 
-### Usage with `react-error-boundary`
+#### Usage with `react-error-boundary`
 
 The most common use for `<ErrorEnhancementFallback>` is inside an error boundary, where the error to parse must be passed down for it to generate messages.
 
@@ -176,7 +178,7 @@ export default function Page({ error }) {
 
 ## Setup
 
-Add `errorEnhancer: handleErrorRequest()` to the [API handler route](/docs/get-started/#setup).
+Add `errorEnhancer: handleErrorRequest()` to the [API route handler](/docs/get-started/#setup).
 
 ```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
@@ -217,7 +219,7 @@ export { fscHandler as GET, fscHandler as POST }
 <TypeInfoToText
   path="handlers/errorEnhancer/models.d.ts"
   name="ErrorParserOptions"
-  description="Error enhancer API handler route options."
+  description="Error enhancer API route handler options."
 />
 
 <TypeInfoToText

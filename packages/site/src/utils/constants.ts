@@ -11,7 +11,7 @@ export const IS_DEV = process.env.NODE_ENV === 'development'
 export const NAME_LONG = 'AI-Powered Fullstack Components'
 export const NAME_SHORT = 'Fullstack Components'
 export const NAME_LIB = '@trikinco/fullstack-components'
-export const NAME_DESCRIPTION = 'AI-powered library for Next.js'
+export const NAME_DESCRIPTION = 'AI-powered building blocks for Next.js'
 export const URL_NPM =
 	'https://www.npmjs.com/package/@trikinco/fullstack-components'
 export const URL_GITHUB = 'https://github.com/trikinco/fullstack-components'

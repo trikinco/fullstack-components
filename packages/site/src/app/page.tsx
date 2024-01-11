@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { Main } from '@/src/components/Main'
-import { Card } from '@/src/components/Card'
 import {
 	NAME_SHORT,
 	NAME_DESCRIPTION,
@@ -13,6 +12,12 @@ import {
 import { routes, routesDocsMeta, routesCardsMeta } from '@/src/utils/routes'
 import { JsonSchema } from '@/src/modules/JsonSchema'
 import { Hero } from '@/src/modules/Hero'
+import { Cards } from '@/src/modules/Cards'
+import { IconSparkles } from '@/src/components/Icons/IconSparkles'
+import { IconCode } from '@/src/components/Icons/IconCode'
+import { IconEye } from '@/src/components/Icons/IconEye'
+import { IconPlay } from '@/src/components/Icons/IconPlay'
+import { merge } from '@trikinco/fullstack-components/utils'
 
 export const metadata = {
 	alternates: {
@@ -72,38 +77,64 @@ export default function Home() {
 					},
 				]}
 			/>
-			<div className="grid gap-6 lg:grid-cols-2 lg:mb-24 max-w-6xl">
-				<Hero />
-			</div>
 
-			<section>
-				<header className="grid text-center sm:text-left gap-6 w-full max-w-6xl mb-6 lg:mb-12">
-					<h2 className="text-2xl font-bold">
+			<Hero className="w-full max-w-6xl mb-0" />
+
+			<section className="mt-16 lg:mt-20 2xl:mt-32">
+				<header
+					className={merge(
+						'mb-6 lg:mb-12 2xl:mb-16',
+						'grid gap-6 xl:gap-8',
+						'w-full max-w-6xl'
+					)}
+				>
+					<h2 className="relative z-10 text-2xl sm:text-3xl !leading-[1.4] text-pretty">
+						<span className="whitespace-nowrap">
+							<IconSparkles
+								width={28}
+								height={28}
+								className="inline w-6 h-6 lg:w-7 lg:h-7 mr-1 text-pink-500"
+								aria-hidden="true"
+							/>
+							<strong className="font-bold">AI-powered building blocks</strong>
+						</span>{' '}
+						for{' '}
+						<span className="whitespace-nowrap">
+							<IconCode
+								width={28}
+								height={28}
+								className="inline w-6 h-6 lg:w-7 lg:h-7 mr-1 text-blue-500 dark:text-primary"
+								aria-hidden="true"
+							/>
+							<strong className="font-bold">developers</strong>
+						</span>
+						, a toolkit to embed{' '}
+						<span className="whitespace-nowrap">
+							<IconEye
+								width={28}
+								height={28}
+								className="inline w-6 h-6 lg:w-7 lg:h-7 mr-1 text-pink-500"
+								aria-hidden="true"
+							/>
+							<strong className="font-bold">intelligent features</strong>
+						</span>{' '}
+						in your product{' '}
 						<Link href={routes.docs}>
-							Check out the docs with live&nbsp;examples&nbsp;✨
+							and <span className="underline">docs</span> with{' '}
+							<span className="whitespace-nowrap">
+								<IconPlay
+									width={28}
+									height={28}
+									className="inline w-6 h-6 lg:w-7 lg:h-7 mr-1 text-blue-500 dark:text-primary"
+									aria-hidden="true"
+								/>
+								<strong className="font-bold">live&nbsp;examples.</strong>
+							</span>
 						</Link>
 					</h2>
 				</header>
 
-				<div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 w-full max-w-6xl">
-					{routesCardsMeta.map(
-						({ href, title, image, header, footer, children }) => (
-							<article key={href} className="flex">
-								<Card
-									as={Link}
-									href={href}
-									title={title}
-									image={image}
-									header={header}
-									footer={footer}
-									component="h3"
-								>
-									<p className="text-sm sm:text-base">{children}</p>
-								</Card>
-							</article>
-						)
-					)}
-				</div>
+				<Cards routes={routesCardsMeta} className="md:grid-cols-3" />
 			</section>
 		</Main>
 	)

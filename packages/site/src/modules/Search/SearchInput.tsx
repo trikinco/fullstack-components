@@ -28,9 +28,13 @@ export interface SearchInputProps
 	 */
 	setIsFocused: (value: SetStateAction<boolean>) => void
 	/**
-	 * Accessible id, used to connect aria attributes as a combobox
+	 * Id for the search input, used to connect it to a <label>
 	 */
 	id: string
+	/**
+	 * Hides the hotkey
+	 */
+	hideKey?: boolean
 	/**
 	 * Whether the component is focused
 	 */
@@ -57,7 +61,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
 			setIsFocused,
 			children,
 			value,
-			id,
+			hideKey,
 			className,
 			placeholder,
 			activeResult,
@@ -96,15 +100,10 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
 					}}
 					type="search"
 					placeholder={placeholder}
-					role="combobox"
-					maxLength={100}
-					aria-controls={id}
-					aria-expanded={isFocused}
-					aria-activedescendant={`${id}-option-${activeResult}`}
 					{...rest}
 				/>
 
-				{isMounted && (
+				{!hideKey && isMounted && (
 					<kbd
 						className={merge(
 							'absolute my-1.5 px-1.5 select-none right-2',

@@ -15,10 +15,11 @@ export const metadata = {
 
 # Prompt
 
-The `<Prompt>` Server Component and its counterparts `usePrompt` and `getPrompt` are the most basic building blocks for AI-powered components.
-They accept a text `prompt` or arrays of `messages` and return the response as-is.
+Use [prompt engineering](https://platform.openai.com/docs/guides/prompt-engineering) to do tasks, get responses and generate data.
 
 ## `<Prompt>` Server Component
+
+The most basic building block for AI-powered applications that handles a text `prompt` or arrays of `messages` and return the response as-is.
 
 ### Passing a single `prompt`
 
@@ -161,7 +162,7 @@ export default async function Page() {
 
 ## Setup
 
-Add `prompt: handlePromptRequest()` to the [API handler route](/docs/get-started/#setup).
+Add `prompt: handlePromptRequest()` to the [API route handler](/docs/get-started/#setup).
 
 ```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
@@ -189,7 +190,7 @@ export { fscHandler as GET, fscHandler as POST }
 <TypeInfoToText
   path="handlers/prompt/models.d.ts"
   name="PromptOptions"
-  description="Prompt API handler route options."
+  description="Prompt API route handler options."
 />
 
 <TypeInfoToText

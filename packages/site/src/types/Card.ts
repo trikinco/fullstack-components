@@ -1,10 +1,5 @@
 import type { ImageProps } from 'next/image'
-import type {
-	HTMLAttributes,
-	ElementType,
-	ReactNode,
-	ImgHTMLAttributes,
-} from 'react'
+import type { HTMLAttributes, ElementType, ReactNode } from 'react'
 
 export interface CardProps
 	extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
@@ -13,6 +8,8 @@ export interface CardProps
 	children?: ReactNode
 	header?: ReactNode
 	footer?: ReactNode
+	isFullWidth?: boolean
+	variant?: 'default' | 'primary'
 	component?: ElementType
 }
 

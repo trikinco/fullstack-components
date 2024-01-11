@@ -44,15 +44,6 @@ const nextConfig = {
 			},
 		],
 	},
-	async redirects() {
-		return [
-			{
-				source: '/docs',
-				destination: '/docs/get-started',
-				permanent: true,
-			},
-		]
-	},
 }
 
 // Merge MDX config with Next.js config

@@ -25,7 +25,7 @@ In short:
 
 ### Getters: Server
 
-Getters are [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) that call the third-party API [directly on the server](https://nextjs.org/docs/app/building-your-application/data-fetching/patterns#fetching-data-on-the-server). This avoids calling the Next.js [API handler route](/docs/get-started/#setup) and reduces the back-and-forth communication between client and server.
+Getters are [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) that call the third-party API [directly on the server](https://nextjs.org/docs/app/building-your-application/data-fetching/patterns#fetching-data-on-the-server). This avoids calling the Next.js [API route handler](/docs/get-started/#setup) and reduces the back-and-forth communication between client and server.
 
 Use getters to make [Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components) and other server functionality.
 
@@ -39,7 +39,7 @@ import { getPrompt } from '@trikinco/fullstack-components'
 
 ### Fetchers: Client
 
-Fetchers are asynchronous functions that call the internal Next.js [API handler route](/docs/get-started/#setup), then the third-party API.
+Fetchers are asynchronous functions that call the internal Next.js [API route handler](/docs/get-started/#setup), then the third-party API.
 
 Use fetchers to make [Client Components](https://nextjs.org/docs/app/building-your-application/rendering/client-components) and other browser functionality.
 

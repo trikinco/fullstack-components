@@ -6,7 +6,7 @@ export interface CodeProps extends HTMLAttributes<HTMLPreElement> {
 	children?: ReactNode
 	/** raw node contents */
 	raw?: string
-	/** whether the copy button should be hidden */
+	/** `true` disables the copy code button */
 	noCopy?: boolean
 }
 
@@ -27,7 +27,7 @@ export const Code = ({
 				className={merge(
 					'not-prose [font-variant-ligatures:none]',
 					'border-none',
-					'p-5 rounded-lg overflow-auto',
+					'p-3 sm:p-5 rounded-lg overflow-auto',
 					'focus-ring focus-visible:outline-offset-[-2px]',
 					className
 				)}
@@ -36,7 +36,7 @@ export const Code = ({
 				{children}
 			</pre>
 
-			{!!noCopy && (
+			{!noCopy && (
 				<ButtonCopy
 					className="absolute top-3.5 right-3.5 invisible group-hover:visible group-focus-within:visible focus:visible"
 					text={raw}

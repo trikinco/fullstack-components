@@ -15,13 +15,17 @@ Learn the basics of working with `fullstack-components`.
 
 ## Quickstart
 
-After [installation](/docs/get-started#installation), this takes you through making a **`NotFoundEnhancer` Component** that uses your sitemap to find the closest matching page to the "not found" URL. It also uses the contents of your website URLs to create a helpful message for users.
+After [installation](/docs/get-started#installation), this page takes you through making a **`<NotFoundEnhancer>` Component** that uses your sitemap to find the closest matching page to the "not found" URL.
+
+The component also uses the contents of your website URLs to create helpful messages for visitors.
 
 ### Step 1: Generate a sitemap
 
-In Next.js 14, you can generate a `sitemap.xml` in a few different ways. For this simple scenario, consider placing a static file in the app directory or using a `sitemap.(js|ts)` file for dynamic generation.
+You need a sitemap so that `<NotFoundEnhancer>` can scan it and suggest alternative pages to visit.
 
-For more information on generating a sitemap, see the [Next.js documentation](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap).
+#### Add a static `sitemap.xml` or generate it dynamically
+
+In Next.js 14, you can [generate a `sitemap.xml`](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap) in a few different ways. For this simple scenario, consider placing a static file in the app directory or using a `sitemap.(js|ts)` file for dynamic generation.
 
 Alternatively, consider using the [`next-sitemap`](https://www.npmjs.com/package/next-sitemap) NPM package for easy sitemap creation.
 
@@ -47,35 +51,45 @@ Example output:
 
 Ensure your sitemap is accessible at `/sitemap.xml` in your application, and continue to the next step.
 
-### Step 2: Configure the API handler route
+### Step 2: Configure the API route handler
 
-In the [API handler route](/docs/get-started#step-2-add-the-api-handler-route), add the following configuration to use the `useNotFoundEnhancement` hook shown later.
+In the [API route handler](/docs/get-started#step-2-add-the-api-route-handler), add the following configuration to use the `useNotFoundEnhancement` hook shown later.
 
-```ts title="app/api/fsutils/[...fscomponents]/route.ts"
+```ts {16} title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
   handleFSComponents,
   handleNotFoundEnhancement,
   type FSCOptions,
 } from '@trikinco/fullstack-components'
 
-export const POST = handleFSComponents({
+const fscOptions: FSCOptions = {
   notFoundEnhancer: handleNotFoundEnhancement({
-    // used to inspect the sitemap
-    siteUrl: process.env.NEXT_PUBLIC_HOST || '',
-    // used to generate the contents
     openAiApiKey: process.env.OPENAI_API_KEY || '',
+    /**
+     * Required.
+     * Full URL of your project.
+     * @example local development 'http://localhost:3000'
+     * @example production 'https://example.com'
+     */
+    siteUrl: process.env.NEXT_PUBLIC_HOST || '',
   }),
-  // ...Any other handlers
-})
+  // Additional options and handlers...
+}
+
+const fscHandler = handleFSComponents(fscOptions)
+
+export { fscHandler as GET, fscHandler as POST }
 ```
 
-**Not Found Enhancer requires configuration of the API handler.** Not all features require configuration, so read the documentation for each feature.
+Remember to [add `NEXT_PUBLIC_HOST` to your `.env`](/docs/get-started#step-1-add-environment-variables) file, or inline in `handleNotFoundEnhancement`.
+
+**Not Found Enhancer requires configuration of the API handler route.** Not all features require configuration, so read the documentation for each feature.
 
 ### Step 3: Create the client component
 
-The core part of the functionality is using the `useNotFoundEnhancement` hook to get the data from the API endpoint.
+The core part of the functionality is using the `useNotFoundEnhancement` hook to get the data you'll need.
 
-```tsx title="components/NotFoundEnhancer.tsx"
+```tsx {3,7,18,26-30} title="components/NotFoundEnhancer.tsx"
 'use client'
 
 import { useNotFoundEnhancement } from '@trikinco/fullstack-components/client'
@@ -92,12 +106,15 @@ export function NotFoundEnhancer() {
 
   return (
     <div className="mt-6">
+      {/* A helpful message derived from inspecting the `requestedUrl` and sitemap. */}
       <p>{data?.generatedContent}</p>
+
       {hasUrlSuggestions && (
         <>
           <p className="font-bold">
             Try one of these pages instead:
           </p>
+          {/* A list of the most likely suitable URLs for the visitor to navigate to. */}
           {data?.bestAlternateUrls.map((url, i) => (
             <Link href={url} key={i} className="block">
               {url}
@@ -105,6 +122,7 @@ export function NotFoundEnhancer() {
           ))}
         </>
       )}
+
       {!hasUrlSuggestions && (
         <p>
           Sorry we couldn't find additional pages for you to try
@@ -137,16 +155,20 @@ export default function NotFoundPage() {
 }
 ```
 
-Now that you've set up the `NotFoundEnhancer`, try visiting a URL in your application that doesn't exist to see it in action.
+Now that you've created the `not-found` page and added the `<NotFoundEnhancer>`, try visiting a URL in your application that doesn't exist to see it in action.
+
+### Testing it out
 
 For example, navigate to [http://localhost:3000/about-123](http://localhost:3000/about-123), or any other URL that doesn't exist in your application.
 
-If everything works correctly you'll notice how the `NotFoundEnhancer` dynamically enhances your application's 'Not Found' page.
+If everything works correctly you'll notice how the `<NotFoundEnhancer>` dynamically enhances your application's 'Not Found' page.
 
-**Keep in mind**, the more pages your Next.js application has in its sitemap, the more effectively the `NotFoundEnhancer` works, providing a richer user experience.
+### Keep in mind
+
+The more pages your Next.js application has in its sitemap, the more effectively the `<NotFoundEnhancer>` works, providing a richer user experience.
 
 ## What's next?
 
-Congratulations on starting your journey with Fullstack Components! You've taken the first steps towards seamlessly integrating AI capabilities into your Next.js applications.
+**Congratulations on starting your journey with Fullstack Components!** 🎉
 
-This guide is just the beginning. Explore the docs to see examples of features that will enhance your development experience.
+You've taken the first steps towards seamlessly integrating AI capabilities into your projects. Explore the docs to discover more features that will enhance your development experience.

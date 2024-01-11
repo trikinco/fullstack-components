@@ -1,7 +1,7 @@
 {
 	"name": "@trikinco/fullstack-components",
 	"version": "1.0.13",
-	"description": "AI-powered library for Next.js",
+	"description": "AI-powered building blocks for Next.js",
 	"author": "trikinco",
 	"license": "MIT",
 	"homepage": "https://fullstack-components.vercel.app",

@@ -13,9 +13,11 @@ export const metadata = {
 
 # Block
 
-Block generates and mounts a React component at runtime based on a `prompt` text description.
+Generate, build, mount and handle React components at runtime with text descriptions.
 
 ## `<Block>` Client Component
+
+Generates and mounts a React component at runtime based on a `prompt` text description.
 
 <Example className="w-full xl:w-auto xl:-mx-10 2xl:-mx-28">
   <Blocks />
@@ -47,7 +49,7 @@ export default function Page() {
 
 ## Setup
 
-Add `block: handleBlockRequest()` to the [API handler route](/docs/get-started/#setup).
+Add `block: handleBlockRequest()` to the [API route handler](/docs/get-started/#setup).
 
 ```ts title="app/api/fsutils/[...fscomponents]/route.ts"
 import {
@@ -75,7 +77,7 @@ export { fscHandler as GET, fscHandler as POST }
 <TypeInfoToText
   path="handlers/block/models.d.ts"
   name="BlockOptions"
-  description="Block API handler route options."
+  description="Block API route handler options."
 />
 
 <TypeInfoToText

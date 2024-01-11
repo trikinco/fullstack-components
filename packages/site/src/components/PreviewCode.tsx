@@ -66,7 +66,7 @@ export const PreviewCode = ({
 						disabled: !code,
 						children: (
 							<div className="aspect-square md:aspect-video rounded-lg shadow-lg overflow-auto bg-[--shiki-color-background] border border-slate-300 dark:border-white/20">
-								<CodeHighlight noCopy raw={code || ''} code={mdCode} />
+								<CodeHighlight raw={code || ''} code={mdCode} />
 							</div>
 						),
 					},
