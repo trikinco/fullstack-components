@@ -22,6 +22,7 @@ export function Prose<C extends ElementType = typeof defaultElement>({
 				'w-full mx-auto prose dark:prose-invert',
 				'prose-h1:text-3xl md:prose-h1:text-5xl prose-h1:mb-3 md:prose-h1:mb-6 lg:prose-h1:mb-8',
 				'prose-headings:scroll-mt-32 prose-headings:text-pretty',
+				'prose-code:break-words',
 				'focus-visible:prose-a:outline focus-visible:prose-a:outline-2 focus-visible:prose-a:outline-offset-2 focus-visible:prose-a:rounded-sm',
 				className
 			)}
