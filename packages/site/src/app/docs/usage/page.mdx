@@ -13,15 +13,47 @@ export const metadata = {
 
 Learn the basics of working with `fullstack-components`.
 
+## Styling
+
+Fullstack Components uses [Tailwind](https://www.npmjs.com/package/tailwindcss) as the default styling engine, but it's an optional dependency. This allows you to use whatever styling approach you prefer.
+
+### Customizing styles with Tailwind
+
+When using Tailwind to customize component styles, it's recommended to use the `merge` utility to safely combine CSS classes without style conflicts.
+
+```tsx
+import { merge } from '@trikinco/fullstack-components/utils'
+```
+
+`merge` combines [`tailwind-merge`](https://www.npmjs.com/package/tailwind-merge) and [`clsx`](https://www.npmjs.com/package/clsx) to allow for efficient and flexible overrides.
+
+```tsx {9-12} title="merge example"
+import { Select } from '@trikinco/fullstack-components'
+import { merge } from '@trikinco/fullstack-components/utils'
+
+export default async function Page() {
+  return (
+    <Select
+      prompt="The Fellowship Of The Ring"
+      context="Playable character for a LOTR game"
+      className={merge(
+        'bg-blue-800 dark:bg-blue-300',
+        'dark:text-black border-none rounded-xl'
+      )}
+    />
+  )
+}
+```
+
 ## Quickstart
 
-After [installation](/docs/get-started#installation), this page takes you through making a **`<NotFoundEnhancer>` Component** that uses your sitemap to find the closest matching page to the "not found" URL.
+After [installing](/docs/get-started#installation), this page takes you through making a **`<NotFoundEnhancer>` Component** that uses your sitemap to find the closest matching page to the "not found" / `404` URL.
 
 The component also uses the contents of your website URLs to create helpful messages for visitors.
 
 ### Step 1: Generate a sitemap
 
-You need a sitemap so that `<NotFoundEnhancer>` can scan it and suggest alternative pages to visit.
+You need a sitemap that the `<NotFoundEnhancer>` can scan in order to suggest alternative pages to navigate to.
 
 #### Add a static `sitemap.xml` or generate it dynamically
 
@@ -85,7 +117,7 @@ Remember to [add `NEXT_PUBLIC_HOST` to your `.env`](/docs/get-started#step-1-add
 
 **Not Found Enhancer requires configuration of the API handler route.** Not all features require configuration, so read the documentation for each feature.
 
-### Step 3: Create the client component
+### Step 3: Create the Client Component
 
 The core part of the functionality is using the `useNotFoundEnhancement` hook to get the data you'll need.
 
