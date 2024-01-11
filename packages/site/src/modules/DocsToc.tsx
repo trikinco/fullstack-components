@@ -29,7 +29,6 @@ export default function DocsToc({
 	const [activeId, setActiveId] = useState('')
 	const tableOfContens = tocMarkupByRoutes[pathname]
 
-	//
 	useEffect(() => {
 		const active = document.querySelector('.toc-active')
 		if (!active) {
@@ -67,6 +66,8 @@ export default function DocsToc({
 
 		return () => observerRef.current?.disconnect()
 	}, [])
+
+	if (!tableOfContens) return null
 
 	return (
 		<nav
