@@ -15,6 +15,7 @@ export const NAME_DESCRIPTION = 'AI-powered building blocks for Next.js'
 export const URL_NPM =
 	'https://www.npmjs.com/package/@trikinco/fullstack-components'
 export const URL_GITHUB = 'https://github.com/trikinco/fullstack-components'
+export const URL_GITHUB_EDIT = `${URL_GITHUB}/edit/main/packages/site/src/app`
 export const URL_DISCUSSIONS =
 	'https://github.com/trikinco/fullstack-components/discussions'
 export const URL_LICENSE =
