@@ -30,7 +30,7 @@ export const routes = {
 	text: '/docs/text',
 }
 
-const { docs, examples, ...restRoutes } = routes
+const { examples, ...restRoutes } = routes
 
 export const routesDocs = restRoutes
 

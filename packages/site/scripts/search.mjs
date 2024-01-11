@@ -180,8 +180,9 @@ async function getMdxPagesContent(pathname) {
 			.readdirSync(pathname, 'utf8')
 			.filter((path) => !/\.tsx?$/.test(path))
 			.map(async (page) => {
-				const route = join(DOCS_DIR, page)
-				const text = fs.readFileSync(join(pathname, page, 'page.mdx'), 'utf8')
+				const slug = page.replace(/page\.mdx$/, '')
+				const route = join(DOCS_DIR, slug)
+				const text = fs.readFileSync(join(pathname, slug, 'page.mdx'), 'utf8')
 
 				return await structureMdxContent(text, page, route)
 			})
