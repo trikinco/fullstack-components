@@ -88,40 +88,48 @@ export default function Home() {
 						'w-full max-w-6xl'
 					)}
 				>
-					<h2 className="relative z-10 text-2xl sm:text-3xl xl:text-4xl !leading-[1.4] text-pretty">
-						<IconSparkles
-							width={28}
-							height={28}
-							className="inline w-6 h-6 lg:w-7 lg:h-7 mr-1 text-pink-500"
-							aria-hidden="true"
-						/>
-						<strong className="font-bold">AI-powered building blocks</strong>{' '}
+					<h2 className="relative z-10 text-2xl sm:text-3xl !leading-[1.4] text-pretty">
+						<span className="whitespace-nowrap">
+							<IconSparkles
+								width={28}
+								height={28}
+								className="inline w-6 h-6 lg:w-7 lg:h-7 mr-1 text-pink-500"
+								aria-hidden="true"
+							/>
+							<strong className="font-bold">AI-powered building blocks</strong>
+						</span>{' '}
 						for{' '}
-						<IconCode
-							width={28}
-							height={28}
-							className="inline w-6 h-6 lg:w-7 lg:h-7 mr-1 text-blue-500 dark:text-primary"
-							aria-hidden="true"
-						/>
-						<strong className="font-bold">developers</strong>, a toolkit to
-						embed{' '}
-						<IconEye
-							width={28}
-							height={28}
-							className="inline w-6 h-6 lg:w-7 lg:h-7 mr-1 text-pink-500"
-							aria-hidden="true"
-						/>
-						<strong className="font-bold">intelligent features</strong> in your
-						product{' '}
-						<Link href={routes.docs}>
-							and <span className="underline">docs</span> with{' '}
-							<IconPlay
+						<span className="whitespace-nowrap">
+							<IconCode
 								width={28}
 								height={28}
 								className="inline w-6 h-6 lg:w-7 lg:h-7 mr-1 text-blue-500 dark:text-primary"
 								aria-hidden="true"
 							/>
-							<strong className="font-bold">live&nbsp;examples.</strong>
+							<strong className="font-bold">developers</strong>
+						</span>
+						, a toolkit to embed{' '}
+						<span className="whitespace-nowrap">
+							<IconEye
+								width={28}
+								height={28}
+								className="inline w-6 h-6 lg:w-7 lg:h-7 mr-1 text-pink-500"
+								aria-hidden="true"
+							/>
+							<strong className="font-bold">intelligent features</strong>
+						</span>{' '}
+						in your product{' '}
+						<Link href={routes.docs}>
+							and <span className="underline">docs</span> with{' '}
+							<span className="whitespace-nowrap">
+								<IconPlay
+									width={28}
+									height={28}
+									className="inline w-6 h-6 lg:w-7 lg:h-7 mr-1 text-blue-500 dark:text-primary"
+									aria-hidden="true"
+								/>
+								<strong className="font-bold">live&nbsp;examples.</strong>
+							</span>
 						</Link>
 					</h2>
 				</header>
