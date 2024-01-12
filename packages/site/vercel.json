@@ -2,7 +2,7 @@
 	"version": 2,
 	"functions": {
 		"src/app/**/*": {
-			"maxDuration": 30
+			"maxDuration": 60
 		}
 	}
 }
