@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
-import { openai, getChatCompletion } from '../_lib/openai'
+import { openai, getChatCompletion } from '@/src/app/api/_lib/openai'
 
 export const runtime = 'edge'
 

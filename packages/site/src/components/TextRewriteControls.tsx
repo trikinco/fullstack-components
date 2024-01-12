@@ -2,7 +2,7 @@
 import { useState, useRef, type FormEvent } from 'react'
 import { Slider, type SliderProps } from './Slider'
 import { merge } from '@trikinco/fullstack-components/utils'
-import { TextRewrite, type TextRewriteProps } from '../modules/TextRewrite'
+import { TextRewrite, type TextRewriteProps } from '@/src/modules/TextRewrite'
 import { IconRefresh } from './Icons/IconRefresh'
 
 export interface TextRewriteControlsProps extends TextRewriteProps {

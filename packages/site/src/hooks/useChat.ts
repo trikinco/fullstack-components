@@ -2,7 +2,7 @@
 
 import { useId } from 'react'
 import { useChat as useAiChat, type UseChatOptions } from 'ai/react'
-import { useAutoSize } from '../hooks/useAutoSize'
+import { useAutoSize } from '@/src/hooks/useAutoSize'
 
 type UseAIChatProps = Omit<UseChatOptions, 'api'> & {
 	api?: string

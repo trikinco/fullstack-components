@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode, ElementType } from 'react'
 import type { AsComponent } from '@trikinco/fullstack-components'
-import type { ExtractedTypeInfo } from '../../utils/getTypeDocs'
+import type { ExtractedTypeInfo } from '@/src/utils/getTypeDocs'
 import { merge } from '@trikinco/fullstack-components/utils'
 
 export interface TypeInfoTitleProps

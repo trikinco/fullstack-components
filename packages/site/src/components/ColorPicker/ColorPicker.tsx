@@ -7,12 +7,12 @@ import {
 	useEffect,
 	type SyntheticEvent,
 } from 'react'
-import { Portal } from '../Portal'
-import { ID_DIALOG_PORTAL } from '../../utils/constants'
+import { Portal } from '@/src/components/Portal'
+import { ID_DIALOG_PORTAL } from '@/src/utils/constants'
 import { merge } from '@trikinco/fullstack-components/utils'
-import { ColorPickerButton } from './ColorPickerButton'
-import { ColorPickerDialog } from './ColorPickerDialog'
-import type { Color } from '../../utils/tailwind'
+import { ColorPickerButton } from '@/src/components/ColorPicker/ColorPickerButton'
+import { ColorPickerDialog } from '@/src/components/ColorPicker/ColorPickerDialog'
+import type { Color } from '@/src/utils/tailwind'
 
 export interface BaseColorPickerProps {
 	/**

@@ -1,6 +1,6 @@
 import '../styles/globals.css'
-import { ID_DIALOG_PORTAL } from '../utils/constants'
-import { fontClassNames } from '../utils/fonts'
+import { ID_DIALOG_PORTAL } from '@/src/utils/constants'
+import { fontClassNames } from '@/src/utils/fonts'
 
 /**
  * Uses parallel routing to only render @error/error/page,
