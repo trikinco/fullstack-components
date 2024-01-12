@@ -1,10 +1,10 @@
 import type { HTMLAttributes, ReactNode, ElementType } from 'react'
-import type { ExtractedTypeInfo } from '../../utils/getTypeDocs'
+import type { ExtractedTypeInfo } from '@/src/utils/getTypeDocs'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { TypeInfoTags } from './TypeInfoTags'
-import { IconMenuAlt } from '../Icons/IconMenuAlt'
-import { Accordion } from '../Accordion'
-import { TypeInfoTitle } from './TypeInfoTitle'
+import { IconMenuAlt } from '@/src/components/Icons/IconMenuAlt'
+import { Accordion } from '@/src/components/Accordion'
+import { TypeInfoTitle } from '@/src/components/TypeInfo/TypeInfoTitle'
 
 export interface TypeInfoDetails
 	extends Omit<

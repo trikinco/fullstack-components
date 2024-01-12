@@ -12,8 +12,8 @@ import {
 	META_AUTHORS,
 	ID_DIALOG_PORTAL,
 	ID_MAIN,
-} from '../utils/constants'
-import { fontClassNames } from '../utils/fonts'
+} from '@/src/utils/constants'
+import { fontClassNames } from '@/src/utils/fonts'
 
 export const viewport: Viewport = {
 	themeColor: '#0f172a',

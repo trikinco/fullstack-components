@@ -9,11 +9,11 @@ import {
 	URL_NPM,
 	URL_DISCUSSIONS,
 	ID_FOOTER,
-} from '../utils/constants'
+} from '@/src/utils/constants'
 import { IconGitHub } from './Icons/IconGitHub'
 import { IconNpm } from './Icons/IconNpm'
 import { Avatar } from './Avatar'
-import { routesFooterMeta } from '../utils/routes'
+import { routesFooterMeta } from '@/src/utils/routes'
 
 export interface FooterProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode

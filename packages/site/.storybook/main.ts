@@ -1,3 +1,4 @@
+import path from 'path'
 import type { StorybookConfig } from '@storybook/nextjs'
 
 const config: StorybookConfig = {
@@ -16,6 +17,21 @@ const config: StorybookConfig = {
 	},
 	docs: {
 		autodocs: 'tag',
+	},
+	webpackFinal: async (config) => {
+		config = {
+			...config,
+			resolve: {
+				...config.resolve,
+				alias: {
+					...config.resolve?.alias,
+					'@/src': path.resolve(__dirname, '../src'),
+					'@/public': path.resolve(__dirname, '../public'),
+				},
+			},
+		}
+
+		return config
 	},
 }
 export default config
