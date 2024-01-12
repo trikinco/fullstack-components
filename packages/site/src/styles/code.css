@@ -16,7 +16,7 @@
 :root:is(.dark) {
 	/* code theme: vercel-dark */
 	--shiki-color-text: hsla(0, 0%, 93%, 1);
-	--shiki-color-background: transparent;
+	--shiki-color-background: hsla(0, 0%, 0%, 0.1);
 	--shiki-token-constant: hsla(210, 100%, 66%, 1);
 	--shiki-token-string: hsla(131, 43%, 57%, 1);
 	--shiki-token-comment: hsla(215, 20.22%, 65.1%, 1);
@@ -32,7 +32,7 @@
 [data-rehype-pretty-code-figure] {
 	font-variant-ligatures: none;
 	background-color: var(--shiki-color-background);
-	@apply relative overflow-hidden my-10 font-mono rounded-lg border border-slate-300 dark:border-white/20;
+	@apply relative overflow-hidden my-10 font-mono rounded-lg border border-slate-300 dark:border-white/10;
 }
 
 .typeinfo [data-rehype-pretty-code-figure] {

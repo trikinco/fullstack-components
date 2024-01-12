@@ -16,18 +16,18 @@ Learn some of the core concepts of `fullstack-components`.
 ## Getters vs fetchers
 
 All library functionality includes one or more **getters** and **fetchers**, as prefixed by `get` and `fetch` respectively.
-The difference between the two is where they can be used, and where the third-party API request is made.
+The difference between the two is where they can be used, and where third-party API requests are made.
 
-In short:
+### server vs client:
 
 - **getters can only be used on the _server_.**
 - **fetchers can only be used on the _client_.**
 
 ### Getters: Server
 
-Getters are [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) that call the third-party API [directly on the server](https://nextjs.org/docs/app/building-your-application/data-fetching/patterns#fetching-data-on-the-server). This avoids calling the Next.js [API route handler](/docs/get-started/#setup) and reduces the back-and-forth communication between client and server.
+Getters are [Server Actions](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations) that call third-party APIs [directly on the server](https://nextjs.org/docs/app/building-your-application/data-fetching/patterns#fetching-data-on-the-server). This avoids calling the Next.js [API route handler](/docs/get-started/#setup) and reduces the back-and-forth communication between client and server.
 
-Use getters to make [Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components) and other server functionality.
+#### Use getters to make [Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components) and other server functionality.
 
 - `'use server'`
 - Third-party API requests only
@@ -39,9 +39,9 @@ import { getPrompt } from '@trikinco/fullstack-components'
 
 ### Fetchers: Client
 
-Fetchers are asynchronous functions that call the internal Next.js [API route handler](/docs/get-started/#setup), then the third-party API.
+Fetchers are asynchronous functions that call the internal Next.js [API route handler](/docs/get-started/#setup), then the third-party APIs.
 
-Use fetchers to make [Client Components](https://nextjs.org/docs/app/building-your-application/rendering/client-components) and other browser functionality.
+#### Use fetchers to make [Client Components](https://nextjs.org/docs/app/building-your-application/rendering/client-components) and other browser functionality.
 
 - `'use client'`
 - Internal Next.js API request, then third-party API requests

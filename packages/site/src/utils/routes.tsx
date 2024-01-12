@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import type { CardProps } from '@/src/types/Card'
 import { Chip } from '@/src/components/Chip'
 import imagePrompt from '../../public/images/InfinityStrip.png'
@@ -9,6 +10,9 @@ import imageImage from '../../public/images/Asterisk.png'
 import imageSelect from '../../public/images/DiamondSlim.png'
 import imageText from '../../public/images/Cube.png'
 import imageChat from '../../public/images/Wedge.png'
+import { IconBookSparkles } from '../components/Icons/IconBookSparkles'
+import { IconPile } from '../components/Icons/IconPile'
+import { IconShapes } from '../components/Icons/IconShapes'
 import { NAME_SHORT, URL_DISCUSSIONS, URL_GITHUB } from './constants'
 
 export const routes = {
@@ -40,6 +44,7 @@ export type RoutesWithMeta = Omit<CardProps, 'title'> & {
 	isTitle?: boolean
 	isFullWidth?: boolean
 	hasDivider?: boolean
+	icon?: ReactNode
 }
 
 const imageSize = {
@@ -219,17 +224,20 @@ export const routesDocsIntroMeta: RoutesWithMeta[] = [
 		isFullWidth: true,
 		children: `Install and get started with ${NAME_SHORT}.`,
 		variant: 'primary',
+		icon: <IconBookSparkles />,
 	},
 	{
 		title: 'Usage',
 		href: routes.usage,
-		children: `Quickstart usage example to learn the basics.`,
+		children: 'Styling and a quickstart usage example to learn the basics.',
+		icon: <IconShapes />,
 	},
 	{
 		title: 'Concepts',
 		href: routes.concepts,
 		hasDivider: true,
-		children: `Core concepts, getters vs fetchers and import paths.`,
+		children: 'Core concepts, data fetching patterns and import paths.',
+		icon: <IconPile />,
 	},
 ]
 

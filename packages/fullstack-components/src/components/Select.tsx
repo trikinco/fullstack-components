@@ -61,6 +61,7 @@ export async function Select(
 		label: defaultLabel,
 		...rest
 	} = props || {}
+	const { className: labelClassName, ...labelRest } = labelProps || {}
 	const selectId = useId()
 	const response = await getSelect({ prompt, context, purpose, count })
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -73,9 +74,10 @@ export async function Select(
 			<label
 				htmlFor={selectId}
 				className={merge(
-					'block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+					'block mb-2 text-sm font-medium text-gray-900 dark:text-white',
+					labelClassName
 				)}
-				{...labelProps}
+				{...labelRest}
 			>
 				{defaultLabel || label}
 			</label>
