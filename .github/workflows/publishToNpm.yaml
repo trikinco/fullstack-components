@@ -3,7 +3,8 @@ on:
   push:
     branches:
       - main
-
+env:
+  NPM_CONFIG_PROVENANCE: true
 permissions: write-all
 jobs:
   publish:
