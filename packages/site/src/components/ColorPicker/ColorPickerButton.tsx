@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'react'
 import { merge } from '@trikinco/fullstack-components/utils'
-import { IconClose } from '../Icons/IconClose'
-import type { Color } from '../../utils/tailwind'
+import { IconClose } from '@/src/components/Icons/IconClose'
+import type { Color } from '@/src/utils/tailwind'
 
 export interface ColorPickerButtonProps
 	extends HTMLAttributes<HTMLButtonElement> {

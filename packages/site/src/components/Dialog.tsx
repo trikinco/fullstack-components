@@ -5,7 +5,7 @@ import type {
 	FormHTMLAttributes,
 	ReactNode,
 } from 'react'
-import { useDialog, type UseDialogProps } from '../hooks/useDialog'
+import { useDialog, type UseDialogProps } from '@/src/hooks/useDialog'
 import { merge } from '@trikinco/fullstack-components/utils'
 
 export interface DialogProps

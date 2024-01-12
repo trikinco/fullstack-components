@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { NAME_SHORT, NAME_LONG, NAME_DESCRIPTION } from '../utils/constants'
+import { NAME_SHORT, NAME_LONG, NAME_DESCRIPTION } from '@/src/utils/constants'
 
 export default function manifest(): MetadataRoute.Manifest {
 	return {

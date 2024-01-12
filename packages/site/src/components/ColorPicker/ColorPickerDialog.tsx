@@ -1,9 +1,9 @@
 'use client'
 import dynamic from 'next/dynamic'
 import { memo, useState, Suspense, ChangeEvent } from 'react'
-import { colorsAndValuesOnly as colors, type Color } from '../../utils/tailwind'
-import { IconCheck } from '../Icons/IconCheck'
-import type { DialogProps } from '../Dialog'
+import { colorsAndValuesOnly as colors, type Color } from '@/src/utils/tailwind'
+import { IconCheck } from '@/src/components/Icons/IconCheck'
+import type { DialogProps } from '@/src/components/Dialog'
 
 const LazyDialog = dynamic(() => import('../Dialog'), { ssr: false })
 

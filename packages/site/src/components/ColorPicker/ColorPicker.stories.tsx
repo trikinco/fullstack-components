@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { ColorPicker } from './ColorPicker'
-import { Button } from '../Elements/Button'
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
+import { ColorPicker } from '@/src/components/ColorPicker/ColorPicker'
+import { Button } from '@/src/components/Elements/Button'
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
