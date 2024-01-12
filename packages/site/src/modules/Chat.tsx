@@ -1,6 +1,6 @@
 'use client'
 import { merge } from '@trikinco/fullstack-components/utils'
-import { useChat, UseChatProps } from '../hooks/useChat'
+import { useChat, UseChatProps } from '@/src/hooks/useChat'
 
 export type ChatProps = UseChatProps
 

@@ -1,9 +1,9 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import { merge } from '@trikinco/fullstack-components/utils'
 import { TypeInfo, type TypeInfoDetails } from './TypeInfo'
-import { getTypeDocs } from '../../utils/getTypeDocs'
-import { IconMenuAlt } from '../Icons/IconMenuAlt'
-import { Accordion } from '../Accordion'
+import { getTypeDocs } from '@/src/utils/getTypeDocs'
+import { IconMenuAlt } from '@/src/components/Icons/IconMenuAlt'
+import { Accordion } from '@/src/components/Accordion'
 
 export interface TypeInfoToTextProps
 	extends Omit<HTMLAttributes<HTMLDivElement>, 'title'>,

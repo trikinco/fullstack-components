@@ -1,7 +1,7 @@
 import type { DetailedHTMLProps, HTMLAttributes } from 'react'
-import type { ExtractedTypeInfo } from '../../utils/getTypeDocs'
+import type { ExtractedTypeInfo } from '@/src/utils/getTypeDocs'
 import { merge } from '@trikinco/fullstack-components/utils'
-import { isValidUrl } from '../../utils/isValidUrl'
+import { isValidUrl } from '@/src/utils/isValidUrl'
 
 export interface TypeInfoTagsProps
 	extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
