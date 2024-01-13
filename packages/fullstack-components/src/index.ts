@@ -99,6 +99,14 @@ const handleNotFoundEnhancement: HandleNotFoundEnhancement = ((
 ) =>
 	getInstance().handleNotFoundEnhancement(...args)) as HandleNotFoundEnhancement
 
+/**
+ * The API handler factory for all library features.
+ * @example Usage in `app/api/fsutils/[...fscomponents]/route.ts`
+ * ```ts
+ * const fscHandler = handleFSComponents(fscOptions)
+ * export { fscHandler as GET, fscHandler as POST }
+ * ```
+ */
 const handleFSComponents = handlerFactory({
 	handleAudio: handleAudioRequest,
 	handleText: handleTextRequest,
