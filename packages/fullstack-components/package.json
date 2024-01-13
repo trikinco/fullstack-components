@@ -59,9 +59,7 @@
 		"package.json",
 		"README.md",
 		"client.js",
-		"client.d.ts",
-		"utils.js",
-		"utils.d.ts"
+		"utils.js"
 	],
 	"engines": {
 		"node": ">=18"
