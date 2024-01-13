@@ -1,4 +1,4 @@
-import OpenAI from 'openai'
+import type OpenAI from 'openai'
 
 export type ImageGenerationOptions = Partial<OpenAI.ImageGenerateParams>
 

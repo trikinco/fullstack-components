@@ -1,5 +1,5 @@
-import OpenAI from 'openai'
-import { type ImageProps as NextImageProps } from 'next/image'
+import type OpenAI from 'openai'
+import type { ImageProps as NextImageProps } from 'next/image'
 import type { SyntheticEvent } from 'react'
 import type { ImageResponse } from '../handlers/image/models'
 

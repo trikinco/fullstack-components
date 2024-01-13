@@ -52,22 +52,19 @@ export interface AudioFileResponse extends AudioResponseBase {
 	contentType: string
 }
 
-type AudioServiceOptions = {
+export type AudioServiceOptions = (
+	| AudioSpeechModeRequestBody
+	| AudioTranscriptionModeRequestBody
+	| AudioTranslationModeRequestBody
+) & {
 	/**
 	 * @default `process.env.OPENAI_API_KEY`.
 	 */
 	openAIApiKey: string
 }
 
-export type AudioOptions = (
-	| AudioSpeechModeRequestBody
-	| AudioTranscriptionModeRequestBody
-	| AudioTranslationModeRequestBody
-) &
-	AudioServiceOptions
-
 export async function runAudioService(
-	options: AudioOptions
+	options: AudioServiceOptions
 ): Promise<AudioTextResponse | AudioFileResponse> {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const { openAIApiKey, ...request } = options
@@ -131,7 +128,7 @@ export async function runAudioService(
 	}
 }
 
-async function getAudioRequest(options: AudioOptions) {
+async function getAudioRequest(options: AudioServiceOptions) {
 	const openai = new OpenAI({
 		apiKey: options.openAIApiKey,
 	})

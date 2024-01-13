@@ -1,6 +1,6 @@
 import type { IncomingMessage } from 'http'
-import { NextApiRequest } from 'next'
-import { NextRequest } from 'next/server'
+import type { NextApiRequest } from 'next'
+import type { NextRequest } from 'next/server'
 
 type Req =
 	| IncomingMessage

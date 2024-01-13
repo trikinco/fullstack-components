@@ -7,6 +7,8 @@
 		"dist",
 		"client.js",
 		"client.d.ts",
+		"utils.js",
+		"utils.d.ts",
 		"**/*spec.ts"
 	]
 }

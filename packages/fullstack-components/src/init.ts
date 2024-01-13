@@ -1,26 +1,30 @@
 import { ErrorClient } from './handlers/errorEnhancer/errorClient'
 import errorParserHandler, {
-	HandleErrorParser,
+	type HandleErrorParser,
 } from './handlers/errorEnhancer/errorParser'
 import notFoundEnhancementHandler, {
-	HandleNotFoundEnhancement,
+	type HandleNotFoundEnhancement,
 } from './handlers/notFoundEnhancer/notFoundEnhancer'
 import { NotFoundEnhancerContentGenerator } from './handlers/notFoundEnhancer/notFoundEnhancerContentGenerator'
 import { NotFoundEnhancerSitemapSelector } from './handlers/notFoundEnhancer/notFoundEnhancerSitemapSelector'
 import { PromptClient } from './handlers/prompt/promptClient'
-import promptHandler, { HandlePrompt } from './handlers/prompt/promptHandler'
+import promptHandler, {
+	type HandlePrompt,
+} from './handlers/prompt/promptHandler'
 import { BlockClient } from './handlers/block/blockClient'
-import blockHandler, { HandleBlock } from './handlers/block/blockHandler'
-import imageHandler, { HandleImage } from './handlers/image/imageHandler'
+import blockHandler, { type HandleBlock } from './handlers/block/blockHandler'
+import imageHandler, { type HandleImage } from './handlers/image/imageHandler'
 import { ImageClient } from './handlers/image/imageClient'
-import selectHandler, { HandleSelect } from './handlers/select/selectHandler'
+import selectHandler, {
+	type HandleSelect,
+} from './handlers/select/selectHandler'
 import { SelectClient } from './handlers/select/selectClient'
-import textHandler, { HandleText } from './handlers/text/textHandler'
+import textHandler, { type HandleText } from './handlers/text/textHandler'
 import { TextClient } from './handlers/text/textClient'
-import audioHandler, { HandleAudio } from './handlers/audio/audioHandler'
+import audioHandler, { type HandleAudio } from './handlers/audio/audioHandler'
 import { AudioClient } from './handlers/audio/audioClient'
 import htmlPageHandler, {
-	HandleHtmlPage,
+	type HandleHtmlPage,
 } from './handlers/htmlPage/htmlPageHandler'
 import { HtmlPageClient } from './handlers/htmlPage/htmlPageClient'
 

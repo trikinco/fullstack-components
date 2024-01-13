@@ -1,4 +1,4 @@
-import { ApiUrlEnum } from '../enums/ApiUrlEnum'
+import type { ApiUrlEnum } from '../enums/ApiUrlEnum'
 import type { NextApiHandler } from 'next'
 import type {
 	AppRouteHandler,
@@ -28,10 +28,6 @@ export type FactoryHandlers = {
 	handleNotFoundEnhancement: HandleNotFoundEnhancement
 }
 
-// taken from auth0 nextjs
-// to use - create a route in /api/fscomponents/[futc].ts
-export type FSCOptions = ApiHandlers | ErrorHandlers
-
 /**
  * @ignore
  */
@@ -47,6 +43,12 @@ export type ApiHandlers = {
 export type ErrorHandlers = {
 	onError?: PageRouterOnError | AppRouterOnError
 }
+
+/**
+ * API route handlers and options for `handleFSComponents`,
+ * responsible for configuring and creating routes at `/api/fsutils/[...fscomponents]`
+ */
+export type FSCOptions = ApiHandlers | ErrorHandlers
 
 export type FSCApiHandler = (
 	userHandlers?: FSCOptions

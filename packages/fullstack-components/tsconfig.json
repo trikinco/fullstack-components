@@ -15,7 +15,6 @@
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
 		"moduleResolution": "node",
-		//"skipLibCheck": true,
 		"skipDefaultLibCheck": true,
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
@@ -24,6 +23,8 @@
 		"target": "ES2022",
 		"lib": ["es2022", "DOM"],
 		"sourceMap": true,
-		"outDir": "./dist"
-	}
+		"outDir": "dist"
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "dist", "client.d.ts", "utils.d.ts"]
 }

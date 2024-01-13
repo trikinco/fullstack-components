@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/naming-convention */
-import { NextApiResponse, NextApiRequest } from 'next'
-import { NextRequest, NextResponse } from 'next/server'
+import type { NextApiResponse, NextApiRequest } from 'next'
+import { type NextRequest, NextResponse } from 'next/server'
 import {
 	// eslint-disable-next-line unicorn/prevent-abbreviations
-	AppRouteHandlerContext,
-	FullstackComponentsHandler,
-	Handler,
+	type AppRouteHandlerContext,
+	type FullstackComponentsHandler,
+	type Handler,
 	assertReqRes,
 	getHandler,
 } from '../../nextjs-handlers'
-import { AudioClient } from './audioClient'
+import type { AudioClient } from './audioClient'
 import { type AudioRequestBody, type AudioOptions, AudioError } from './models'
 
 /**
