@@ -1,4 +1,5 @@
 import sitemapper from 'sitemapper'
+
 let sitemapCache: string = ''
 
 export async function sitemapFromCache(currentHost: string) {
