@@ -2,7 +2,7 @@ import type OpenAI from 'openai'
 import type { FileLike } from 'openai/uploads'
 import type { ElementType, HTMLAttributes } from 'react'
 import type { AsComponent } from '../types'
-import fs from 'fs'
+import type { ReadStream } from 'fs'
 import { getAudio } from '../handlers/audio/audioClient'
 import { getApiFile } from '../utils/getApiFile'
 
@@ -78,7 +78,7 @@ export async function transcribe(
 		prompt,
 		name,
 	} = options || {}
-	let content: fs.ReadStream | FileLike | undefined
+	let content: ReadStream | FileLike | undefined
 
 	try {
 		content = getApiFile(src, type, name)

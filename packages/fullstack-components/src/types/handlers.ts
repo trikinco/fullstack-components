@@ -1,4 +1,4 @@
-import { ApiUrlEnum } from '../enums/ApiUrlEnum'
+import type { ApiUrlEnum } from '../enums/ApiUrlEnum'
 import type { NextApiHandler } from 'next'
 import type {
 	AppRouteHandler,

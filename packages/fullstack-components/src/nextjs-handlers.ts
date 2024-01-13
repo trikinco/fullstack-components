@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-redundant-type-constituents */
 // This is all borrowed from auth0 nextjs
 
-import { NextApiRequest, NextApiResponse } from 'next'
-import { NextRequest } from 'next/server'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextRequest } from 'next/server'
 import type { IncomingMessage } from 'http'
 
 export type AppRouteHandlerContext = {

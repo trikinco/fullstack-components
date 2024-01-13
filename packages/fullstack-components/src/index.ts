@@ -1,10 +1,10 @@
 /* eslint-disable unicorn/prevent-abbreviations */
 import handlerFactory from './next-routing'
-import { _init } from './init'
+import { _init, type FullstackComponentsServer } from './init'
 
+// Handlers for each feature
 import type { HandleErrorParser } from './handlers/errorEnhancer/errorParser'
 import type { HandleNotFoundEnhancement } from './handlers/notFoundEnhancer/notFoundEnhancer'
-import type { FullstackComponentsServer } from './init'
 import type { HandlePrompt } from './handlers/prompt/promptHandler'
 import type { HandleBlock } from './handlers/block/blockHandler'
 import type { HandleImage } from './handlers/image/imageHandler'
@@ -113,7 +113,7 @@ const handleFSComponents = handlerFactory({
 
 // Server components
 export { Audio } from './components/Audio'
-export { Track, Cue } from './components/Track'
+export { Track, type Cue } from './components/Track'
 export { Transcript } from './components/Transcript'
 export { Prompt } from './components/Prompt'
 export { Image } from './components/Image/Image'
@@ -143,9 +143,9 @@ export {
 export { BlockClient, getBlock } from './handlers/block/blockClient'
 
 // Public library types
-export { ChatGptCompletionResponse } from './chatGptService'
-export { ImageGenerationResponse } from './imageGenerationService'
-export { AudioTextResponse as AudioResponse } from './audioService'
+export type { ChatGptCompletionResponse } from './chatGptService'
+export type { ImageGenerationResponse } from './imageGenerationService'
+export type { AudioTextResponse, AudioFileResponse } from './audioService'
 export * from './handlers/audio/models'
 export * from './handlers/errorEnhancer/models'
 export * from './handlers/notFoundEnhancer/models'
@@ -155,7 +155,7 @@ export * from './handlers/image/models'
 export * from './handlers/select/models'
 export * from './handlers/text/models'
 export * from './handlers/htmlPage/models'
-export { AppRouteHandlerContext } from './nextjs-handlers'
+export type { AppRouteHandlerContext } from './nextjs-handlers'
 
 export {
 	getInstance,
@@ -171,5 +171,5 @@ export {
 	handleFSComponents,
 }
 
-export { FullstackComponentsServer } from './init'
+export type { FullstackComponentsServer } from './init'
 export * from './types'

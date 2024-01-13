@@ -1,8 +1,8 @@
 import type OpenAI from 'openai'
 import type { FileLike } from 'openai/uploads'
 import type { DetailedHTMLProps, TrackHTMLAttributes } from 'react'
+import type { ReadStream } from 'fs'
 import { transformVTT, type Cue } from '../handlers/audio/audioVttParser'
-import fs from 'fs'
 import { getAudio } from '../handlers/audio/audioClient'
 import { getApiFile } from '../utils/getApiFile'
 import { toBase64Url } from '../utils/toBase64Url'
@@ -117,7 +117,7 @@ export async function caption(
 		prompt,
 		name,
 	} = options || {}
-	let content: fs.ReadStream | FileLike | undefined
+	let content: ReadStream | FileLike | undefined
 
 	try {
 		content = getApiFile(src, type, name)
