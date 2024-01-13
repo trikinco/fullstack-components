@@ -1,3 +1,6 @@
+/**
+ * All the API URLs used by fetchers, hooks and client components.
+ */
 export const ApiUrlEnum = {
 	prompt: '/api/fsutils/prompt',
 	errorEnhancer: '/api/fsutils/errorEnhancer',
