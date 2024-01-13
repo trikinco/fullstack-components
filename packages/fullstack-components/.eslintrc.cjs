@@ -3,7 +3,7 @@ module.exports = {
 	parserOptions: {
 		project: './tsconfig.json',
 		sourceType: 'module',
-		ecmaVersion: 'es2019',
+		ecmaVersion: 'ES2022',
 	},
 	plugins: [
 		'@typescript-eslint/eslint-plugin',
@@ -31,12 +31,19 @@ module.exports = {
 		node: true,
 		jest: true,
 	},
-	ignorePatterns: ['.eslintrc.cjs', 'dist'],
+	ignorePatterns: ['.eslintrc.cjs', 'dist', 'client.d.ts', 'utils.d.ts'],
 	rules: {
 		'@typescript-eslint/interface-name-prefix': 'off',
 		'@typescript-eslint/explicit-function-return-type': 'off',
 		'@typescript-eslint/explicit-module-boundary-types': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
+		'@typescript-eslint/consistent-type-imports': [
+			'error',
+			{
+				prefer: 'type-imports',
+				fixStyle: 'inline-type-imports',
+			},
+		],
 		'jest/expect-expect': [
 			'error',
 			{
