@@ -224,20 +224,20 @@ export const routesDocsIntroMeta: RoutesWithMeta[] = [
 		isFullWidth: true,
 		children: `Install and get started with ${NAME_SHORT}.`,
 		variant: 'primary',
-		icon: <IconBookSparkles />,
+		icon: <IconBookSparkles width={20} height={20} />,
 	},
 	{
 		title: 'Usage',
 		href: routes.usage,
 		children: 'Styling and a quickstart usage example to learn the basics.',
-		icon: <IconShapes />,
+		icon: <IconShapes width={20} height={20} />,
 	},
 	{
 		title: 'Concepts',
 		href: routes.concepts,
 		hasDivider: true,
 		children: 'Core concepts, data fetching patterns and import paths.',
-		icon: <IconPile />,
+		icon: <IconPile width={20} height={20} />,
 	},
 ]
 
