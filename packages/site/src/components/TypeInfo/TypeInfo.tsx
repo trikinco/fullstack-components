@@ -60,6 +60,7 @@ export const TypeInfo = ({
 	hideName,
 	description,
 	parameters,
+	properties,
 	returns,
 	children,
 	className,
@@ -95,6 +96,7 @@ export const TypeInfo = ({
 			)}
 
 			<TypeInfoTags tags={tags} />
+
 			{parameters && parameters.length > 0 && (
 				<Accordion
 					label={

@@ -17,6 +17,21 @@ Learn the basics of working with `fullstack-components`.
 
 Fullstack Components uses [Tailwind](https://www.npmjs.com/package/tailwindcss) as the default styling engine, but it's an optional dependency. This allows you to use whatever styling approach you prefer.
 
+### Configuring Tailwind source paths
+
+If you're using any of the prebuilt components as-is, you need to add `fullstack-components` as a [content source](https://tailwindcss.com/docs/content-configuration) for your project, to ensure all the Tailwind class names are included.
+
+```ts {5} title="tailwind.config.ts"
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@trikinco/fullstack-components/src/components/**/*.{js,ts,jsx,tsx}',
+  ],
+  // ...
+}
+```
+
 ### Customizing styles with Tailwind
 
 When using Tailwind to customize component styles, it's recommended to use the `merge` utility to safely combine CSS classes without style conflicts.
