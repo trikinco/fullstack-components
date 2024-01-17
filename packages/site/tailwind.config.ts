@@ -4,7 +4,14 @@ import defaultColors from 'tailwindcss/colors'
 
 const config: Config = {
 	darkMode: ['class'],
-	content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+	content: [
+		'./src/**/*.{js,ts,jsx,tsx,mdx}',
+		/**
+		 * Adds FSC as a content source to include tw classes from the lib.
+		 * @see https://tailwindcss.com/docs/content-configuration
+		 */
+		'./node_modules/@trikinco/fullstack-components/src/components/**/*.{js,ts,jsx,tsx}',
+	],
 	theme: {
 		fontFamily: {
 			sans: ['var(--font-base)', ...defaultTheme.fontFamily.sans],
