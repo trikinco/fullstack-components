@@ -120,7 +120,7 @@ const handleFSComponents = handlerFactory({
 })
 
 // Server components
-export { Audio } from './components/Audio'
+export { Audio } from './components/Audio/Audio'
 export { Track, type Cue } from './components/Track'
 export { Transcript } from './components/Transcript'
 export { Prompt } from './components/Prompt'

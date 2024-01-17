@@ -1,5 +1,10 @@
 export { useAudio } from '../handlers/audio/useAudio'
 export { useAudioSource } from '../handlers/audio/useAudioSource'
+export { useAudioContext } from '../handlers/audio/useAudioContext'
+export {
+	useAudioWaveform,
+	getPeakWaveformData,
+} from '../handlers/audio/useAudioWaveform'
 export { useNotFoundEnhancement } from '../handlers/notFoundEnhancer/useNotFoundEnhancement'
 export { usePrompt } from '../handlers/prompt/usePrompt'
 export { useRequest } from '../hooks/useRequest'
@@ -13,6 +18,10 @@ export { renderToString } from './renderToString'
 export { Block } from '../components/Block'
 export { ErrorEnhancementBoundary } from '../components/ErrorEnhancementBoundary'
 export { ErrorEnhancementFallback } from '../components/ErrorEnhancementFallback'
+export { Waveform } from '../components/Waveform'
+export { AudioWaveform } from '../components/Audio/AudioWaveform'
+export { AudioScrubber } from '../components/Audio/AudioScrubber'
+export { AudioElement } from '../components/Audio/AudioElement'
 export { fetchAudio } from '../handlers/audio/fetchers'
 export { fetchNotFoundEnhancement } from '../handlers/notFoundEnhancer/fetchers'
 export { fetchErrorEnhancement } from '../handlers/errorEnhancer/fetchers'

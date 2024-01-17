@@ -1,8 +1,9 @@
-/* eslint-disable unicorn/no-null */
 /* eslint-disable unicorn/prevent-abbreviations */
 'use client'
 
-import { useRef, useState, useEffect, type RefObject } from 'react'
+import { useState, useEffect, type RefObject } from 'react'
+import { useInterval } from '../../hooks/useInterval'
+import { useAudioContext } from './useAudioContext'
 
 /**
  * A client-side audio file handler with some basic utilities for controlling audio file playback.
@@ -12,7 +13,7 @@ export function useAudioSource(
 	/**
 	 * Enables connecting the audio source to the audio context when the audio file is loaded and the `audioRef` is set.
 	 */
-	isEnabled: boolean
+	isEnabled?: boolean
 ): {
 	/**
 	 * Plays the audio file.
@@ -23,9 +24,17 @@ export function useAudioSource(
 	 */
 	pause: () => void
 	/**
+	 * Toggles the audio file playback state between playing and paused.
+	 */
+	togglePlayPause: () => void
+	/**
 	 * Sets the audio playback rate / speed.
 	 */
 	setPlayBackRate: (playBackRate: number) => void
+	/**
+	 * Sets the current time of the audio.
+	 */
+	setCurrentTime: (time: number) => void
 	/**
 	 * Sets the audio context.
 	 * @link https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
@@ -37,39 +46,44 @@ export function useAudioSource(
 	 */
 	setAudioSource: (audioSource: MediaElementAudioSourceNode) => void
 	/**
-	 * The audio context.
+	 * Sets the audio playback state.
+	 */
+	setIsPlaying: (isPlaying: boolean) => void
+	/**
+	 * Audio context.
 	 */
 	audioContext: AudioContext | null
 	/**
-	 * The audio source.
+	 * Audio source.
 	 */
 	audioSource: MediaElementAudioSourceNode | null
 	/**
-	 * The audio element ref.
+	 * Audio element ref.
 	 */
 	audioRef: RefObject<HTMLAudioElement>
 	/**
-	 * The audio playback rate / speed.
+	 * Audio playback rate / speed.
 	 */
 	playBackRate: number
+	/**
+	 * Current audio time.
+	 */
+	currentTime: number
+	/**
+	 * Audio play state.
+	 */
+	isPlaying?: boolean
 } {
-	const audioRef = useRef<HTMLAudioElement>(null)
+	const {
+		audioRef,
+		audioSource,
+		audioContext,
+		setAudioSource,
+		setAudioContext,
+	} = useAudioContext(isEnabled)
+	const [isPlaying, setIsPlaying] = useState(false)
+	const [currentTime, setCurrentTime] = useState(0)
 	const [playBackRate, setPlayBackRate] = useState(1)
-	const [audioContext, setAudioContext] = useState<AudioContext | null>(null)
-	const [audioSource, setAudioSource] =
-		useState<MediaElementAudioSourceNode | null>(null)
-
-	// Set the audio source and context after the data is loaded and the audioRef is set
-	useEffect(() => {
-		if (audioSource || !isEnabled || !audioRef.current) return
-
-		const mediaContext = new AudioContext()
-		const mediaSource = mediaContext.createMediaElementSource(audioRef.current)
-		mediaSource.connect(mediaContext.destination)
-
-		setAudioContext(mediaContext)
-		setAudioSource(mediaSource)
-	}, [isEnabled, audioSource])
 
 	// Set the playback rate / audio speed when the `playBackRate` state changes
 	useEffect(() => {
@@ -78,8 +92,41 @@ export function useAudioSource(
 		audioRef.current.playbackRate = playBackRate
 	}, [playBackRate])
 
+	// Ensure the play state is set to false when the audio ends
+	useEffect(() => {
+		const audio = audioRef.current
+
+		if (!audio || !isEnabled) return
+
+		const handleState = () => {
+			setIsPlaying(false)
+		}
+
+		audio.addEventListener('ended', handleState)
+
+		return () => {
+			audio.removeEventListener('ended', handleState)
+		}
+	}, [isEnabled])
+
+	/**
+	 * Set the current time when the audio is playing.
+	 *
+	 * Uses an interval instead of the 'timeupdate' event to
+	 * allow for fast and smooth time updates.
+	 */
+	useInterval(
+		() => {
+			setCurrentTime(audioRef.current?.currentTime ?? 0)
+		},
+		// Delay in milliseconds or null to stop it
+		isPlaying ? 20 : null
+	)
+
 	// Play the audio when the `audioRef` is set
 	const play = () => {
+		setIsPlaying(true)
+
 		// Check if the audio context is in suspended state (autoplay policy)
 		if (audioContext?.state === 'suspended') {
 			void audioContext.resume()
@@ -90,47 +137,37 @@ export function useAudioSource(
 
 	// Pause the audio when the `audioRef` is set
 	const pause = () => {
+		setIsPlaying(false)
 		audioRef.current?.pause()
 	}
 
+	// Toggle the audio playback state between play and pause
+	const togglePlayPause = () => {
+		if (
+			audioRef.current?.currentTime === 0 ||
+			audioRef.current?.paused ||
+			audioRef.current?.ended
+		) {
+			return play()
+		}
+
+		return pause()
+	}
+
 	return {
-		/**
-		 * Starts playing the audio file.
-		 */
 		play,
-		/**
-		 * Pauses the audio file.
-		 */
 		pause,
-		/**
-		 * Sets the audio playback rate / speed.
-		 */
+		togglePlayPause,
 		setPlayBackRate,
-		/**
-		 * Sets the audio context.
-		 * @link https://developer.mozilla.org/en-US/docs/Web/API/AudioContext
-		 */
+		setIsPlaying,
+		setCurrentTime,
 		setAudioContext,
-		/**
-		 * Sets the audio source.
-		 * @link https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrackAudioSourceNode
-		 */
 		setAudioSource,
-		/**
-		 * The audio context.
-		 */
 		audioContext,
-		/**
-		 * The audio source.
-		 */
 		audioSource,
-		/**
-		 * The audio element ref.
-		 */
 		audioRef,
-		/**
-		 * The audio playback rate / speed.
-		 */
 		playBackRate,
+		currentTime,
+		isPlaying,
 	}
 }

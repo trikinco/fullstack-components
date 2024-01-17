@@ -6,12 +6,14 @@ import type {
 	DetailedHTMLProps,
 	AudioHTMLAttributes,
 } from 'react'
-import type { AsComponent } from '../types'
-import { getAudio } from '../handlers/audio/audioClient'
-import { renderTreeToString } from '../handlers/text/renderTreeToString'
-import { toBase64Url } from '../utils/toBase64Url'
-import { removeHtmlTags } from '../utils/removeHtmlTags'
-import { Track } from './Track'
+import type { AsComponent } from '../../types'
+import { getAudio } from '../../handlers/audio/audioClient'
+import { renderTreeToString } from '../../handlers/text/renderTreeToString'
+import { toBase64Url } from '../../utils/toBase64Url'
+import { removeHtmlTags } from '../../utils/removeHtmlTags'
+import { Track, type TrackProps } from '../Track'
+import { AudioWaveform, type AudioWaveformProps } from './AudioWaveform'
+import { AudioElement } from './AudioElement'
 
 /**
  * Props to pass to the `<Audio>` Server Component.
@@ -54,9 +56,28 @@ export interface AudioProps
 	 * @link https://openai.com/policies/usage-policies
 	 */
 	disclosure?: ReactNode
+	/**
+	 * Props to pass to the `<Track>` Server Component with captions for audio-only content.
+	 * @link https://www.w3.org/WAI/WCAG21/Understanding/captions-prerecorded.html
+	 */
+	trackProps?: Partial<TrackProps>
+	/**
+	 * Show an `<svg>` waveform visualization of the audio and a simple play/pause toggle button.
+	 * @note that this hides the regular audio controls.
+	 */
+	waveform?: boolean
+	/**
+	 * Props to pass to the `<AudioWaveform>` component handling the rendering of the `<svg>` waveform.
+	 * @note only used when `waveform` is `true`.
+	 * @link AudioWaveformProps
+	 */
+	waveformProps?: Partial<AudioWaveformProps>
 }
 
-const defaultElement = 'audio'
+/**
+ * `<Audio>` default element
+ */
+export const defaultElement = 'audio'
 
 /**
  * Turns text or a React tree into audio.
@@ -94,7 +115,7 @@ export async function textToSpeech(
 }
 
 /**
- * Automatically turns text into audio and creates audio captions in WebVTT format.
+ * Server Component that automatically turns text into audio and creates audio captions in WebVTT format.
  * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio
  */
 export async function Audio<C extends ElementType = typeof defaultElement>(
@@ -104,29 +125,30 @@ export async function Audio<C extends ElementType = typeof defaultElement>(
 	props: AsComponent<C, AudioProps>
 ) {
 	const {
-		disclosure = (
-			<small>This audio is AI-generated and not a human voice.</small>
-		),
-		as: Component = defaultElement,
 		noCaption,
 		content,
 		model,
 		voice,
 		children,
+		waveform,
+		waveformProps,
+		trackProps,
 		...rest
 	} = props || {}
-	const { src, type, file } = await textToSpeech(children || content || '', {
-		model,
-		voice,
-	})
 
-	return (
-		<>
-			<Component {...rest}>
-				<source src={src} type={type} />
-				{!noCaption && <Track src={file} default />}
-			</Component>
-			{disclosure}
-		</>
-	)
+	// Generate speech if `src` is not defined
+	const { src, type, file } = props?.src
+		? props
+		: await textToSpeech(children || content || '', {
+				model,
+				voice,
+			})
+
+	const track = !noCaption && <Track src={file} default {...trackProps} />
+
+	if (waveform) {
+		return <AudioWaveform src={src} track={track} {...waveformProps} />
+	}
+
+	return <AudioElement src={src} type={type} track={track} {...rest} />
 }
