@@ -21,36 +21,36 @@ export const TypeInfoTags = ({
 	...rest
 }: TypeInfoTagsProps) => {
 	const { className: listClassName, ...listRest } = listProps || {}
+
+	if (!tags || (tags && tags.length === 0)) return null
+
 	return (
 		<div {...rest}>
-			{tags && tags.length > 0 && (
-				<ul className={merge('not-prose', listClassName)} {...listRest}>
-					{tags.map(({ name, value }) => {
-						const firstWord =
-							typeof value === 'string' ? value.split(' ')[0] : ''
-						const isLinkTag = name === 'link'
-						const isUrl = isValidUrl(firstWord)
+			<ul className={merge('not-prose', listClassName)} {...listRest}>
+				{tags.map(({ name, value }) => {
+					const firstWord = typeof value === 'string' ? value.split(' ')[0] : ''
+					const isLinkTag = name === 'link'
+					const isUrl = isValidUrl(firstWord)
 
-						return (
-							<li key={name}>
-								<span className="font-bold text-[--shiki-token-keyword] mr-2">
-									{name}
-								</span>
-								{isLinkTag && !!firstWord ? (
-									<a
-										href={isUrl ? firstWord : `#${firstWord}`}
-										className="hover:underline rounded-sm focus-ring"
-									>
-										{value}
-									</a>
-								) : (
-									value
-								)}
-							</li>
-						)
-					})}
-				</ul>
-			)}
+					return (
+						<li key={name}>
+							<span className="font-bold text-[--shiki-token-keyword] mr-2">
+								{name}
+							</span>
+							{isLinkTag && !!firstWord ? (
+								<a
+									href={isUrl ? firstWord : `#${firstWord.toLowerCase()}`}
+									className="hover:underline rounded-sm focus-ring"
+								>
+									{value}
+								</a>
+							) : (
+								value
+							)}
+						</li>
+					)
+				})}
+			</ul>
 		</div>
 	)
 }
