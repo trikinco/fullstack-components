@@ -1,5 +1,8 @@
 <img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=bf43bb7d-a5a0-45ae-bacc-cfba7e7f53ce" />
 
+> [!CAUTION]
+> This package has been deprecated.
+
 ![Fullstack Components - Build websites by writing prompts](https://github.com/trikinco/fullstack-components/raw/main/packages/site/public/images/repo-header-dark.png)
 
 <p align="center" style="align: center;">
